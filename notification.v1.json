@@ -1,0 +1,2407 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "BBB.Notifications.API",
+    "version": "1.0",
+    "description": "API for modelling notifications for the BBB platform.",
+    "contact": {
+      "name": "Philip Skinner"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/notifications": {
+      "get": {
+        "summary": "Get notifications",
+        "tags": [
+          "Notifications"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "#/components/schemas/meta"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/notification"
+                      }
+                    },
+                    "links": {
+                      "$ref": "#/components/schemas/paginationLinks"
+                    }
+                  }
+                },
+                "examples": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "examples": {}
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-notifications",
+        "description": "Can be used for fetching a paginated list of all notifications.\n\nRole required: notifications_reader",
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Create a notification",
+        "operationId": "post-notifications",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "URI of the newly created resource.",
+                "required": true
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notificationResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/notificationAttributes"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Notifications"
+        ],
+        "description": "Creates a new notification.\n\nRole required: notifications_writer"
+      }
+    },
+    "/notifications/{notificationId}": {
+      "get": {
+        "summary": "Get a Notification",
+        "tags": [
+          "Notifications"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notificationResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "operationId": "get-notifications-:id",
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "description": "Fetch a single notification.\n\nRole required: notifications_reader"
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "notificationId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "Update a notification",
+        "operationId": "put-notifications-notificationId",
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notificationResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/notificationAttributes"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Notifications"
+        ],
+        "description": "Update a notification.\n\nRole required: notifications_writer"
+      },
+      "delete": {
+        "summary": "Delete a notification",
+        "operationId": "delete-notifications-notificationId",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Notifications"
+        ],
+        "description": "Remove a notification.\n\nRole required: notifications_writer"
+      }
+    },
+    "/subscriptions": {
+      "get": {
+        "summary": "Get subscriptions",
+        "tags": [
+          "Subscriptions"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "#/components/schemas/meta"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/subscription"
+                      }
+                    },
+                    "links": {
+                      "$ref": "#/components/schemas/paginationLinks"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-subscriptions",
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "description": "Get a paginated list of all subscriptions.\n\nRole required: subscriptions_reader"
+      },
+      "post": {
+        "summary": "Create a subscription",
+        "operationId": "post-subscriptions",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "URI of the newly created resource."
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/subscriptionResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/subscriptionAttributes"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Subscriptions"
+        ],
+        "description": "Create a new subscription.\n\nRole required: subscriptions_writer"
+      }
+    },
+    "/subscriptions/{subscriptionId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "subscriptionId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get a subscription",
+        "tags": [
+          "Subscriptions"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/subscriptionResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-subscriptions-id",
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "description": "Fetch a single subscription.\n\nRole required: subscriptions_reader"
+      },
+      "put": {
+        "summary": "Update a subscription",
+        "operationId": "put-subscriptions-subscriptionId",
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/subscriptionResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/subscriptionAttributes"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Subscriptions"
+        ],
+        "description": "Update a subscription.\n\nRole required: subscriptions_writer"
+      },
+      "delete": {
+        "summary": "Delete a subscription",
+        "operationId": "delete-subscriptions-subscriptionId",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Subscriptions"
+        ],
+        "description": "Delete a subscription.\n\nRole required: subscriptions_writer"
+      }
+    },
+    "/recipients": {
+      "parameters": [],
+      "get": {
+        "summary": "Get recipients",
+        "tags": [
+          "Recipients"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "#/components/schemas/meta"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/recipient"
+                      }
+                    },
+                    "links": {
+                      "$ref": "#/components/schemas/paginationLinks"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-recipients",
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "description": "Fetch a paginated list of all recipients.\n\nRole required: recipients_reader"
+      },
+      "post": {
+        "summary": "Create recipient",
+        "operationId": "post-recipients",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "URI of the newly created resource."
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recipientResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/recipientAttributes"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Recipients"
+        ],
+        "description": "Create a new recipient.\n\nRole required: recipients_writer"
+      }
+    },
+    "/recipients/{recipientId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "recipientId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get a single recipient",
+        "tags": [
+          "Recipients"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recipientResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-recipients-id",
+        "description": "Fetch a single recipient.\n\nRole required: recipients_reader",
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "put": {
+        "summary": "Update a recipient",
+        "operationId": "put-recipients-recipientId",
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recipientResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/recipientAttributes"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Recipients"
+        ],
+        "description": "Update a recipient.\n\nRole required: recipients_writer"
+      },
+      "delete": {
+        "summary": "Delete a recipient",
+        "operationId": "delete-recipients-recipientId",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Recipients"
+        ],
+        "description": "Delete a recipient.\n\nRole required: recipients_writer"
+      }
+    },
+    "/notifications/{notificationId}/receipts": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "notificationId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get receipts for a notification",
+        "tags": [
+          "Receipts"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "#/components/schemas/meta"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/receipt"
+                      }
+                    },
+                    "links": {
+                      "$ref": "#/components/schemas/paginationLinks"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-notifications-id-receipts",
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "description": "Get receipts for a notification. Receipts allow you to see when a notification was sent, received, seen or actioned.\n\nRole required: notifications_reader"
+      },
+      "post": {
+        "summary": "Create a receipt",
+        "operationId": "post-notifications-notificationId-receipts",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "URI of the newly created resource."
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/receiptResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/receiptAttributes"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Receipts"
+        ],
+        "description": "Create a new receipt to model when the notification has been sent, seen, received or actioned by a recipient.\n\nRole required: notifications_writer"
+      }
+    },
+    "/notifications/{notificationId}/receipts/{receiptId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "notificationId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "receiptId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get a single receipt",
+        "tags": [
+          "Receipts"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/receiptResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "examples": {}
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-notifications-id-receipts-id",
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "description": "Fetch a single receipt.\n\nRole required: notifications_reader"
+      },
+      "put": {
+        "summary": "Update a receipt",
+        "operationId": "put-notifications-notificationId-receipts-receiptId",
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/receiptResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/receiptAttributes"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Receipts"
+        ],
+        "description": "Update a receipt.\n\nRole required: notifications_writer"
+      },
+      "delete": {
+        "summary": "Delete a receipt",
+        "operationId": "delete-notifications-notificationId-receipts-receiptId",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Receipts"
+        ],
+        "description": "Delete a receipt.\n\nRole required: notifications_writer"
+      }
+    },
+    "/notifications/.feed/{recipientId}": {
+      "get": {
+        "summary": "Notifications feed",
+        "tags": [
+          "Notifications"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "#/components/schemas/meta"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/notification"
+                      }
+                    },
+                    "links": {
+                      "$ref": "#/components/schemas/paginationLinks"
+                    },
+                    "included": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/receipt"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-notifications-.feed",
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "description": "Fetch a feed of all notifications for a recipient. \n\nFiltering available via query parameters.\n\nRole required: notifications_reader",
+        "parameters": [
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "sent",
+            "description": "Set to true to include sent notifications, false to exclude.",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "received",
+            "description": "Set to true to include received notifications, false to exclude.",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "seen",
+            "description": "Set to true to include seen notifications, false to exclude.",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "actioned",
+            "description": "Set to true to include actioned notifications, false to exclude.",
+            "required": true
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "recipientId",
+          "in": "path",
+          "required": true
+        }
+      ]
+    },
+    "/subscriptions/{subscriptionId}/recipients": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "subscriptionId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get subscription recipients",
+        "tags": [
+          "Subscriptions"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "#/components/schemas/meta"
+                    },
+                    "data": {
+                      "type": "string"
+                    },
+                    "links": {
+                      "$ref": "#/components/schemas/paginationLinks"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-subscriptions-subscriptionId-recipients",
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "description": "Get a paginated list of all recipient links.\n\nRole required: subscriptions_reader"
+      },
+      "post": {
+        "summary": "Link subscription to recipient",
+        "operationId": "post-subscriptions-subscriptionId-recipients",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "URI of the newly created resource."
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/subscriptionRecipientResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Subscriptions"
+        ],
+        "description": "Link a recipient to a subscription.\n\nRole required: subscriptions_writer",
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/subscriptionRecipientAttributes"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/recipients/{recipientId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "subscriptionId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "recipientId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get single subscription recipient",
+        "tags": [
+          "Subscriptions"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/subscriptionRecipientResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-subscriptions-subscriptionId-recipients-recipientId",
+        "description": "Fetch a single subscription recipient relationship object.\n\nRole required: subscriptions_reader",
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete subscription recipient",
+        "operationId": "delete-subscriptions-subscriptionId-recipients-recipientId",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Subscriptions"
+        ],
+        "description": "Unlink a subscription from a recipient.\n\nRole required: subscriptions_writer",
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "put": {
+        "summary": "Update subscription recipient",
+        "operationId": "put-subscriptions-subscriptionId-recipients-recipientId",
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/subscriptionRecipientResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Subscriptions"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/subscriptionRecipientAttributes"
+              }
+            }
+          }
+        },
+        "description": "Update a subscription recipient relationship.\n\nRole required: subscriptions_writer"
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "Authorization": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "JWT token containing claims relevant to the application or user the request is on behalf of. See each endpoint for roles required to access/modify the resources."
+      }
+    },
+    "schemas": {
+      "notificationResponse": {
+        "title": "notificationResponse",
+        "type": "object",
+        "description": "Models a notification response object.",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/notification"
+          },
+          "links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "type": "string"
+              },
+              "receipts": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-tags": [
+          "Response Models"
+        ]
+      },
+      "receiptResponse": {
+        "title": "receiptResponse",
+        "type": "object",
+        "description": "",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/receipt"
+          },
+          "links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "type": "string"
+              },
+              "notification": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-tags": [
+          "Response Models"
+        ]
+      },
+      "receiptState": {
+        "title": "receiptState",
+        "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
+        "properties": {
+          "result": {
+            "type": "boolean"
+          },
+          "date": {
+            "type": "string",
+            "description": "DD/MM/YYYY format"
+          }
+        }
+      },
+      "objectPointer": {
+        "title": "objectPointer",
+        "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "GUID"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "subscriptionResponse": {
+        "title": "subscriptionResponse",
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/subscription"
+          },
+          "links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "type": "string"
+              },
+              "recipients": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-tags": [
+          "Response Models"
+        ]
+      },
+      "scope": {
+        "title": "scope",
+        "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
+        "properties": {
+          "lenderId": {
+            "type": "string",
+            "description": "GUID"
+          },
+          "facilityId": {
+            "type": "string",
+            "description": "GUID"
+          }
+        }
+      },
+      "recipientResponse": {
+        "title": "recipientResponse",
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/recipient"
+          },
+          "links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-tags": [
+          "Response Models"
+        ]
+      },
+      "meta": {
+        "title": "meta",
+        "type": "object",
+        "properties": {
+          "totalPages": {
+            "type": "number"
+          },
+          "page": {
+            "type": "number"
+          },
+          "perPage": {
+            "type": "number"
+          }
+        },
+        "x-tags": [
+          "Misc Models"
+        ]
+      },
+      "paginationLinks": {
+        "title": "paginationLinks",
+        "type": "object",
+        "properties": {
+          "self": {
+            "type": "string"
+          },
+          "first": {
+            "type": "string"
+          },
+          "last": {
+            "type": "string"
+          },
+          "prev": {
+            "type": "string"
+          },
+          "next": {
+            "type": "string"
+          }
+        },
+        "x-tags": [
+          "Misc Models"
+        ]
+      },
+      "notification": {
+        "title": "notification",
+        "type": "object",
+        "description": "",
+        "x-tags": [
+          "Misc Models"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Always \"notification\"."
+          },
+          "id": {
+            "type": "string",
+            "description": "GUID"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/notificationAttributes"
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "receipts": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/objectPointer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "receipt": {
+        "title": "receipt",
+        "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Always \"receipt\""
+          },
+          "id": {
+            "type": "string",
+            "description": "GUID"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/receiptAttributes"
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "notification": {
+                "$ref": "#/components/schemas/objectPointer"
+              }
+            }
+          }
+        }
+      },
+      "subscription": {
+        "title": "subscription",
+        "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Always \"subscription\""
+          },
+          "id": {
+            "type": "string",
+            "description": "GUID"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/subscriptionAttributes"
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "recipients": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/objectPointer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "recipient": {
+        "title": "recipient",
+        "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Always \"recipient\""
+          },
+          "id": {
+            "type": "string",
+            "description": "GUID"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/recipientAttributes"
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "subscription": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/objectPointer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "error": {
+        "title": "error",
+        "type": "object",
+        "x-examples": {
+          "Unauthenticated": {
+            "status": 401,
+            "title": "Unauthenticated request",
+            "detail": "Your request did not contain any authentication information. Refer to the API document for valid authentication schemes."
+          },
+          "Unauthorized": {
+            "status": 403,
+            "title": "Unauthorized request",
+            "detail": "Your request contained valid authentication details but you do not have the correct level of access to carry out this operation."
+          },
+          "Not Found": {
+            "status": 404,
+            "source": {
+              "parameter": "notificationId"
+            },
+            "title": "Not found",
+            "detail": "The resource could not be found."
+          },
+          "Unprocessable Entity": {
+            "status": 422,
+            "source": {
+              "pointer": "$.expected.value"
+            },
+            "title": "Expected value not valid",
+            "detail": "Could not parse value."
+          }
+        },
+        "properties": {
+          "status": {
+            "type": "number",
+            "description": "HTTP status code of error."
+          },
+          "source": {
+            "type": "object",
+            "properties": {
+              "pointer": {
+                "type": "string"
+              },
+              "parameter": {
+                "type": "string"
+              }
+            }
+          },
+          "title": {
+            "type": "string"
+          },
+          "detail": {
+            "type": "string"
+          }
+        },
+        "x-tags": [
+          "Misc Models"
+        ]
+      },
+      "errorResponse": {
+        "title": "errorResponse",
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/error"
+            }
+          }
+        },
+        "x-tags": [
+          "Response Models"
+        ]
+      },
+      "notificationAttributes": {
+        "title": "notificationAttributes",
+        "type": "object",
+        "properties": {
+          "scope": {
+            "$ref": "#/components/schemas/scope"
+          },
+          "title": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          }
+        },
+        "x-tags": [
+          "Request Models"
+        ]
+      },
+      "receiptAttributes": {
+        "title": "receiptAttributes",
+        "type": "object",
+        "x-tags": [
+          "Request Models"
+        ],
+        "properties": {
+          "subscriptionId": {
+            "type": "string",
+            "description": "GUID"
+          },
+          "recipientId": {
+            "type": "string",
+            "description": "GUID"
+          },
+          "sent": {
+            "$ref": "#/components/schemas/receiptState"
+          },
+          "received": {
+            "$ref": "#/components/schemas/receiptState"
+          },
+          "seen": {
+            "$ref": "#/components/schemas/receiptState"
+          },
+          "actioned": {
+            "$ref": "#/components/schemas/receiptState"
+          }
+        }
+      },
+      "recipientAttributes": {
+        "title": "recipientAttributes",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "email",
+              "subject"
+            ],
+            "description": "Should be email or subject."
+          },
+          "address": {
+            "type": "string",
+            "description": "Can be an email address or a subject identifier."
+          }
+        },
+        "x-tags": [
+          "Request Models"
+        ]
+      },
+      "subscriptionAttributes": {
+        "title": "subscriptionAttributes",
+        "type": "object",
+        "properties": {
+          "scope": {
+            "$ref": "#/components/schemas/scope"
+          }
+        },
+        "x-tags": [
+          "Request Models"
+        ]
+      },
+      "subscriptionRecipient": {
+        "title": "subscriptionRecipient",
+        "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Always \"subscriptionRecipient\""
+          },
+          "id": {
+            "type": "string",
+            "description": "GUID"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/subscriptionRecipientAttributes"
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "subscription": {
+                "$ref": "#/components/schemas/objectPointer"
+              },
+              "recipient": {
+                "$ref": "#/components/schemas/objectPointer"
+              }
+            }
+          }
+        }
+      },
+      "subscriptionRecipientAttributes": {
+        "title": "subscriptionRecipientAttributes",
+        "type": "object",
+        "x-tags": [
+          "Request Models"
+        ],
+        "properties": {
+          "subscriptionId": {
+            "type": "string",
+            "description": "GUID"
+          },
+          "recipientId": {
+            "type": "string",
+            "description": "GUID"
+          },
+          "active": {
+            "type": "boolean"
+          }
+        }
+      },
+      "subscriptionRecipientResponse": {
+        "title": "subscriptionRecipientResponse",
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/subscriptionRecipient"
+          },
+          "links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "type": "string"
+              },
+              "subscription": {
+                "type": "string"
+              },
+              "recipient": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-tags": [
+          "Response Models"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Notifications"
+    },
+    {
+      "name": "Receipts"
+    },
+    {
+      "name": "Subscriptions"
+    },
+    {
+      "name": "Recipients"
+    },
+    {
+      "name": "Request Models"
+    },
+    {
+      "name": "Response Models"
+    },
+    {
+      "name": "Misc Models"
+    }
+  ]
+}
