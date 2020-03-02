@@ -1,0 +1,15 @@
+{
+  "title": "productFacilityMeta.v1",
+  "type": "object",
+  "properties": {
+    "productId": {
+      "type": "string"
+    },
+    "recordCount": {
+      "type": "integer"
+    },
+    "facilityTotal": {
+      "type": "number"
+    }
+  }
+}

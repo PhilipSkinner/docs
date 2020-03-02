@@ -14,7 +14,23 @@
       "get": {
         "summary": "Your GET endpoint",
         "tags": [],
-        "responses": {},
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../models/facilityMeta.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
         "operationId": "get-products"
       },
       "post": {

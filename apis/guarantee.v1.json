@@ -16,7 +16,23 @@
         "summary": "Your GET endpoint",
         "tags": [],
         "responses": {},
-        "operationId": "get-lender-lenderId-guarantees"
+        "operationId": "get-lender-lenderId-guarantees",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "start_date"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "end_date"
+          }
+        ]
       },
       "post": {
         "summary": "",

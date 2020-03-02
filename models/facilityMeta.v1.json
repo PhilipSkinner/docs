@@ -1,0 +1,24 @@
+{
+  "title": "facilityMeta.v1",
+  "type": "object",
+  "properties": {
+    "products": {
+      "type": "array",
+      "items": {
+        "$ref": "./productFacilityMeta.v1.json"
+      }
+    },
+    "facilityTotal": {
+      "type": "number"
+    },
+    "totalPages": {
+      "type": "number"
+    },
+    "page": {
+      "type": "number"
+    },
+    "perPage": {
+      "type": "number"
+    }
+  }
+}

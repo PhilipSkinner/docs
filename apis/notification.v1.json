@@ -29,7 +29,7 @@
                   "type": "object",
                   "properties": {
                     "meta": {
-                      "$ref": "../models/meta.v1.json"
+                      "$ref": "../models/paginationMeta.v1.json"
                     },
                     "data": {
                       "type": "array",
@@ -365,7 +365,7 @@
                   "type": "object",
                   "properties": {
                     "meta": {
-                      "$ref": "../models/meta.v1.json"
+                      "$ref": "../models/paginationMeta.v1.json"
                     },
                     "data": {
                       "type": "array",
@@ -688,7 +688,7 @@
                   "type": "object",
                   "properties": {
                     "meta": {
-                      "$ref": "../models/meta.v1.json"
+                      "$ref": "../models/paginationMeta.v1.json"
                     },
                     "data": {
                       "type": "array",
@@ -1041,7 +1041,7 @@
                   "type": "object",
                   "properties": {
                     "meta": {
-                      "$ref": "../models/meta.v1.json"
+                      "$ref": "../models/paginationMeta.v1.json"
                     },
                     "data": {
                       "type": "array",
@@ -1372,7 +1372,7 @@
                   "type": "object",
                   "properties": {
                     "meta": {
-                      "$ref": "../models/meta.v1.json"
+                      "$ref": "../models/paginationMeta.v1.json"
                     },
                     "data": {
                       "type": "array",
@@ -1497,7 +1497,7 @@
                   "type": "object",
                   "properties": {
                     "meta": {
-                      "$ref": "../models/meta.v1.json"
+                      "$ref": "../models/paginationMeta.v1.json"
                     },
                     "data": {
                       "type": "string"
