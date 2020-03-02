@@ -152,7 +152,17 @@
             "in": "header",
             "name": "X-idempotency-token"
           }
-        ]
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/auditAttributes"
+              }
+            }
+          },
+          "description": ""
+        }
       }
     },
     "/records/{recordId}": {
@@ -340,7 +350,16 @@
             "name": "X-idempotency-token",
             "description": "Idempotency token"
           }
-        ]
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/auditAttributes"
+              }
+            }
+          }
+        }
       },
       "delete": {
         "summary": "",
