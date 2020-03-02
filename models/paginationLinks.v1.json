@@ -1,0 +1,24 @@
+{
+  "title": "paginationLinks",
+        "type": "object",
+        "properties": {
+          "self": {
+            "type": "string"
+          },
+          "first": {
+            "type": "string"
+          },
+          "last": {
+            "type": "string"
+          },
+          "prev": {
+            "type": "string"
+          },
+          "next": {
+            "type": "string"
+          }
+        },
+        "x-tags": [
+          "Misc Models"
+        ]
+}

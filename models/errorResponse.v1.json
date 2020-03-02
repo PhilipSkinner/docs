@@ -1,0 +1,15 @@
+{
+  "title": "errorResponse",
+        "type": "object",
+        "x-tags": [
+          "Response Models"
+        ],
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "../models/error.v1.json"
+            }
+          }
+        }
+}

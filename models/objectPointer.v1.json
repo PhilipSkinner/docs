@@ -1,0 +1,16 @@
+{
+  "title": "objectPointer",
+        "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "GUID"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+}
