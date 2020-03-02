@@ -9,5 +9,130 @@
       "url": "http://localhost:3000"
     }
   ],
-  "paths": {}
+  "paths": {
+    "/lenders": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-lenders"
+      },
+      "post": {
+        "summary": "",
+        "operationId": "post-lenders",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/lenders/{lenderId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "lenderId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-lenders-lenderId"
+      },
+      "put": {
+        "summary": "",
+        "operationId": "put-lenders-lenderId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "summary": "",
+        "operationId": "delete-lenders-lenderId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/lenders/{lenderId}/year": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "lenderId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-lenders-lenderId-year"
+      },
+      "post": {
+        "summary": "",
+        "operationId": "post-lenders-lenderId-year",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/lenders/{lenderId}/year/{year}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "lenderId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "year",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-lenders-lenderId-year-year"
+      },
+      "put": {
+        "summary": "",
+        "operationId": "put-lenders-lenderId-year-year",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "summary": "",
+        "operationId": "delete-lenders-lenderId-year-year",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
 }

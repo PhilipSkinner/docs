@@ -9,5 +9,59 @@
       "url": "http://localhost:3000"
     }
   ],
-  "paths": {}
+  "paths": {
+    "/documents": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-documents"
+      },
+      "post": {
+        "summary": "",
+        "operationId": "post-documents",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/documents/{documentId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "documentId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-documents-documentId"
+      },
+      "put": {
+        "summary": "",
+        "operationId": "put-documents-documentId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "summary": "",
+        "operationId": "delete-documents-documentId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
 }

@@ -10,35 +10,8 @@
     }
   ],
   "paths": {
-    "/lender/{lenderId}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "lenderId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
-        "responses": {},
-        "operationId": "get-lender-lenderId"
-      }
-    },
-    "/lender/{lenderId}/guarantees": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "lenderId",
-          "in": "path",
-          "required": true
-        }
-      ],
+    "/guarantees": {
+      "parameters": [],
       "get": {
         "summary": "Your GET endpoint",
         "tags": [],
@@ -55,16 +28,8 @@
         }
       }
     },
-    "/lender/{lenderId}/guarantees/{guaranteeId}": {
+    "/guarantees/{guaranteeId}": {
       "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "lenderId",
-          "in": "path",
-          "required": true
-        },
         {
           "schema": {
             "type": "string"
@@ -108,94 +73,8 @@
         }
       }
     },
-    "/lender/{lenderId}/guarantees/{guaranteeId}/validations": {
+    "/guarantees/{guaranteeId}/demands": {
       "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "lenderId",
-          "in": "path",
-          "required": true
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "guaranteeId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
-        "responses": {},
-        "operationId": "get-lender-lenderId-guarantees-guaranteeId-validations"
-      },
-      "post": {
-        "summary": "",
-        "operationId": "post-lender-lenderId-guarantees-guaranteeId-validations",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/lender/{lenderId}/guarantees/{guaranteeId}/validations/{validationId}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "lenderId",
-          "in": "path",
-          "required": true
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "guaranteeId",
-          "in": "path",
-          "required": true
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "validationId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
-        "responses": {},
-        "operationId": "get-lender-lenderId-guarantees-guaranteeId-validations-validationId"
-      },
-      "delete": {
-        "summary": "",
-        "operationId": "delete-lender-lenderId-guarantees-guaranteeId-validations-validationId",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/lender/{lenderId}/guarantees/{guaranteeId}/demands": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "lenderId",
-          "in": "path",
-          "required": true
-        },
         {
           "schema": {
             "type": "string"
@@ -221,16 +100,8 @@
         }
       }
     },
-    "/lender/{lenderId}/guarantees/{guaranteeId}/demands/{demandId}": {
+    "/guarantees/{guaranteeId}/demands/{demandId}": {
       "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "lenderId",
-          "in": "path",
-          "required": true
-        },
         {
           "schema": {
             "type": "string"
@@ -273,17 +144,8 @@
         }
       }
     },
-    "/lender/{lenderId}/demands": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "lenderId",
-          "in": "path",
-          "required": true
-        }
-      ],
+    "/demands": {
+      "parameters": [],
       "get": {
         "summary": "Your GET endpoint",
         "tags": [],
@@ -293,6 +155,42 @@
       "post": {
         "summary": "",
         "operationId": "post-lender-lenderId-demands",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/demands/{demandId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "demandId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-lender-lenderId-demands-demandId"
+      },
+      "put": {
+        "summary": "",
+        "operationId": "put-lender-lenderId-demands-demandId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "summary": "",
+        "operationId": "delete-lender-lenderId-demands-demandId",
         "responses": {
           "200": {
             "description": "OK"

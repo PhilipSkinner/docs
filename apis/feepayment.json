@@ -53,6 +53,24 @@
             }
           }
         }
+      },
+      "put": {
+        "summary": "",
+        "operationId": "put-feeSchedule-id",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "summary": "",
+        "operationId": "delete-feeSchedule-id",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/feeSchedule/{id}/facility": {
@@ -103,6 +121,15 @@
             }
           }
         }
+      },
+      "put": {
+        "summary": "",
+        "operationId": "put-feeSchedule-id-facility",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/feeSchedule/{id}/events": {
@@ -151,6 +178,15 @@
             "schema": {
               "$ref": "#/definitions/ErrorExample"
             }
+          }
+        }
+      },
+      "post": {
+        "summary": "",
+        "operationId": "post-feeSchedule-id-events",
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -209,6 +245,24 @@
             }
           }
         }
+      },
+      "put": {
+        "summary": "",
+        "operationId": "put-feeSchedule-id-events-eventId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "summary": "",
+        "operationId": "delete-feeSchedule-id-events-eventId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/feeSchedule/{id}/fees": {
@@ -257,6 +311,15 @@
             "schema": {
               "$ref": "#/definitions/ErrorExample"
             }
+          }
+        }
+      },
+      "post": {
+        "summary": "",
+        "operationId": "post-feeSchedule-id-fees",
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -315,6 +378,24 @@
             }
           }
         }
+      },
+      "put": {
+        "summary": "",
+        "operationId": "put-feeSchedule-id-fees-feeId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "summary": "",
+        "operationId": "delete-feeSchedule-id-fees-feeId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/feeSchedule": {
@@ -364,6 +445,131 @@
             "schema": {
               "$ref": "#/definitions/ErrorExample"
             }
+          }
+        }
+      },
+      "get": {
+        "summary": "",
+        "operationId": "get-feeSchedule",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/mandates": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-mandates"
+      },
+      "post": {
+        "summary": "",
+        "operationId": "post-mandates",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/mandates/{mandateId}": {
+      "parameters": [
+        {
+          "type": "string",
+          "name": "mandateId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-mandates-mandateId"
+      },
+      "put": {
+        "summary": "",
+        "operationId": "put-mandates-mandateId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "summary": "",
+        "operationId": "delete-mandates-mandateId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/mandates/{mandateId}/requests": {
+      "parameters": [
+        {
+          "type": "string",
+          "name": "mandateId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-mandates-mandateId-requests"
+      },
+      "post": {
+        "summary": "",
+        "operationId": "post-mandates-mandateId-requests",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/mandate/{mandateId}/requests/{requestId}": {
+      "parameters": [
+        {
+          "type": "string",
+          "name": "mandateId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "type": "string",
+          "name": "requestId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-mandate-mandateId-requests-requestId"
+      },
+      "put": {
+        "summary": "",
+        "operationId": "put-mandate-mandateId-requests-requestId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "summary": "",
+        "operationId": "delete-mandate-mandateId-requests-requestId",
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
