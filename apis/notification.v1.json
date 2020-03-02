@@ -374,7 +374,7 @@
                       }
                     },
                     "links": {
-                      "$ref": "#/components/schemas/paginationLinks"
+                      "$ref": "../models/paginationLinks.v1.json"
                     }
                   }
                 }
@@ -697,7 +697,7 @@
                       }
                     },
                     "links": {
-                      "$ref": "#/components/schemas/paginationLinks"
+                      "$ref": "../models/paginationLinks.v1.json"
                     }
                   }
                 }
@@ -1050,7 +1050,7 @@
                       }
                     },
                     "links": {
-                      "$ref": "#/components/schemas/paginationLinks"
+                      "$ref": "../models/paginationLinks.v1.json"
                     }
                   }
                 }
@@ -1381,7 +1381,7 @@
                       }
                     },
                     "links": {
-                      "$ref": "#/components/schemas/paginationLinks"
+                      "$ref": "../models/paginationLinks.v1.json"
                     },
                     "included": {
                       "type": "array",
@@ -1503,7 +1503,7 @@
                       "type": "string"
                     },
                     "links": {
-                      "$ref": "#/components/schemas/paginationLinks"
+                      "$ref": "../models/paginationLinks.v1.json"
                     }
                   }
                 }
@@ -1988,7 +1988,7 @@
               "receipts": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/objectPointer"
+                  "$ref": "../models/objectPointer.v1.json"
                 }
               }
             }
@@ -2017,7 +2017,7 @@
             "type": "object",
             "properties": {
               "notification": {
-                "$ref": "#/components/schemas/objectPointer"
+                "$ref": "../models/objectPointer.v1.json"
               }
             }
           }
@@ -2047,7 +2047,7 @@
               "recipients": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/objectPointer"
+                  "$ref": "../models/objectPointer.v1.json"
                 }
               }
             }
@@ -2078,7 +2078,7 @@
               "subscription": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/objectPointer"
+                  "$ref": "../models/objectPointer.v1.json"
                 }
               }
             }
@@ -2193,10 +2193,10 @@
             "type": "object",
             "properties": {
               "subscription": {
-                "$ref": "#/components/schemas/objectPointer"
+                "$ref": "../models/objectPointer.v1.json"
               },
               "recipient": {
-                "$ref": "#/components/schemas/objectPointer"
+                "$ref": "../models/objectPointer.v1.json"
               }
             }
           }
