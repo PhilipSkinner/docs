@@ -259,130 +259,6 @@
         }
       }
     },
-    "/statement/{statementId}/settlements": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "statementId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
-        "responses": {},
-        "operationId": "get-statement-statementId-settlements"
-      },
-      "post": {
-        "summary": "",
-        "operationId": "post-statement-statementId-settlements",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/statement/{statementId}/recoveries": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "statementId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
-        "responses": {},
-        "operationId": "get-statement-statementId-recoveries"
-      },
-      "post": {
-        "summary": "",
-        "operationId": "post-statement-statementId-recoveries",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/statement/{statementId}/recoveries/{recoveryId}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "statementId",
-          "in": "path",
-          "required": true
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "recoveryId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
-        "responses": {},
-        "operationId": "get-statement-statementId-recoveries-recoveryId"
-      },
-      "delete": {
-        "summary": "",
-        "operationId": "delete-statement-statementId-recoveries-recoveryId",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/statement/{statementId}/settlements/{settlementId}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "statementId",
-          "in": "path",
-          "required": true
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "settlementId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
-        "responses": {},
-        "operationId": "get-statement-statementId-settlements-settlementId"
-      },
-      "delete": {
-        "summary": "",
-        "operationId": "delete-statement-statementId-settlements-settlementId",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/invoices": {
       "parameters": [],
       "get": {
@@ -417,7 +293,25 @@
           "in": "path",
           "required": true
         }
-      ]
+      ],
+      "put": {
+        "summary": "",
+        "operationId": "put-invoices-invoiceId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "summary": "",
+        "operationId": "delete-invoices-invoiceId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   }
 }
