@@ -10,7 +10,7 @@
     }
   ],
   "paths": {
-    "/lender/{lenderId}/requests": {
+    "/claims": {
       "get": {
         "summary": "Your GET endpoint",
         "tags": [],
@@ -26,24 +26,15 @@
           }
         }
       },
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "lenderId",
-          "in": "path",
-          "required": true
-        }
-      ]
+      "parameters": []
     },
-    "/requests/{requestId}": {
+    "/claims/{claimId}": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "requestId",
+          "name": "claimId",
           "in": "path",
           "required": true
         }
@@ -73,7 +64,7 @@
         }
       }
     },
-    "/settlements": {
+    "/claims/{claimId}/settlements": {
       "get": {
         "summary": "Your GET endpoint",
         "tags": [],
@@ -88,15 +79,33 @@
             "description": "OK"
           }
         }
-      }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "claimId",
+          "in": "path",
+          "required": true
+        }
+      ]
     },
-    "/settlements/{settlementId}": {
+    "/claims/{claimId}/settlements/{settlementId}": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
           "name": "settlementId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "claimId",
           "in": "path",
           "required": true
         }
@@ -126,7 +135,7 @@
         }
       }
     },
-    "/recoveries": {
+    "/claims/{claimId}/recoveries": {
       "get": {
         "summary": "Your GET endpoint",
         "tags": [],
@@ -141,15 +150,33 @@
             "description": "OK"
           }
         }
-      }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "claimId",
+          "in": "path",
+          "required": true
+        }
+      ]
     },
-    "/recoveries/{recoveryId}": {
+    "/claims/{claimId}/recoveries/{recoveryId}": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
           "name": "recoveryId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "claimId",
           "in": "path",
           "required": true
         }
@@ -231,6 +258,166 @@
           }
         }
       }
+    },
+    "/statement/{statementId}/settlements": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "statementId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-statement-statementId-settlements"
+      },
+      "post": {
+        "summary": "",
+        "operationId": "post-statement-statementId-settlements",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/statement/{statementId}/recoveries": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "statementId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-statement-statementId-recoveries"
+      },
+      "post": {
+        "summary": "",
+        "operationId": "post-statement-statementId-recoveries",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/statement/{statementId}/recoveries/{recoveryId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "statementId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "recoveryId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-statement-statementId-recoveries-recoveryId"
+      },
+      "delete": {
+        "summary": "",
+        "operationId": "delete-statement-statementId-recoveries-recoveryId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/statement/{statementId}/settlements/{settlementId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "statementId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "settlementId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-statement-statementId-settlements-settlementId"
+      },
+      "delete": {
+        "summary": "",
+        "operationId": "delete-statement-statementId-settlements-settlementId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/invoices": {
+      "parameters": [],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-statement-statementId-invoices"
+      },
+      "post": {
+        "summary": "",
+        "operationId": "post-invoices",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/invoices/{invoiceId}": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-invoices-invoiceid"
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "invoiceId",
+          "in": "path",
+          "required": true
+        }
+      ]
     }
   }
 }

@@ -151,15 +151,6 @@
         "tags": [],
         "responses": {},
         "operationId": "get-lender-lenderId-demands"
-      },
-      "post": {
-        "summary": "",
-        "operationId": "post-lender-lenderId-demands",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
       }
     },
     "/demands/{demandId}": {
@@ -178,24 +169,6 @@
         "tags": [],
         "responses": {},
         "operationId": "get-lender-lenderId-demands-demandId"
-      },
-      "put": {
-        "summary": "",
-        "operationId": "put-lender-lenderId-demands-demandId",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "delete": {
-        "summary": "",
-        "operationId": "delete-lender-lenderId-demands-demandId",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
       }
     }
   }

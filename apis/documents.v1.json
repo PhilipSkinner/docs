@@ -10,7 +10,7 @@
     }
   ],
   "paths": {
-    "/documents": {
+    "/envelope/{envelopeId}/documents": {
       "get": {
         "summary": "Your GET endpoint",
         "tags": [],
@@ -25,15 +25,33 @@
             "description": "OK"
           }
         }
-      }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "envelopeId",
+          "in": "path",
+          "required": true
+        }
+      ]
     },
-    "/documents/{documentId}": {
+    "/envelope/{envelopeId}/documents/{documentId}": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
           "name": "documentId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "envelopeId",
           "in": "path",
           "required": true
         }
@@ -56,6 +74,59 @@
       "delete": {
         "summary": "",
         "operationId": "delete-documents-documentId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/envelope": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-envelope"
+      },
+      "post": {
+        "summary": "",
+        "operationId": "post-envelope",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/envelope/{envelopeId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "envelopeId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-envelope-envelopeId"
+      },
+      "put": {
+        "summary": "",
+        "operationId": "put-envelope-envelopeId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "summary": "",
+        "operationId": "delete-envelope-envelopeId",
         "responses": {
           "200": {
             "description": "OK"
