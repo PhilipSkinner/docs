@@ -1,32 +1,55 @@
 {
   "title": "error",
-        "type": "object",
-        "x-examples": {
-          "Unauthenticated": {
-            "status": 401,
-            "title": "Unauthenticated request",
-            "detail": "Your request did not contain any authentication information. Refer to the API document for valid authentication schemes."
-          },
-          "Unauthorized": {
-            "status": 403,
-            "title": "Unauthorized request",
-            "detail": "Your request contained valid authentication details but you do not have the correct level of access to carry out this operation."
-          },
-          "Not Found": {
-            "status": 404,
-            "source": {
-              "parameter": "notificationId"
-            },
-            "title": "Not found",
-            "detail": "The resource could not be found."
-          },
-          "Unprocessable Entity": {
-            "status": 422,
-            "source": {
-              "pointer": "$.expected.value"
-            },
-            "title": "Expected value not valid",
-            "detail": "Could not parse value."
-          }
+  "type": "object",
+  "x-examples": {
+    "Unauthenticated": {
+      "status": 401,
+      "title": "Unauthenticated request",
+      "detail": "Your request did not contain any authentication information. Refer to the API document for valid authentication schemes."
+    },
+    "Unauthorized": {
+      "status": 403,
+      "title": "Unauthorized request",
+      "detail": "Your request contained valid authentication details but you do not have the correct level of access to carry out this operation."
+    },
+    "Not Found": {
+      "status": 404,
+      "source": {
+        "parameter": "notificationId"
+      },
+      "title": "Not found",
+      "detail": "The resource could not be found."
+    },
+    "Unprocessable Entity": {
+      "status": 422,
+      "source": {
+        "pointer": "$.expected.value"
+      },
+      "title": "Expected value not valid",
+      "detail": "Could not parse value."
+    }
+  },
+  "properties": {
+    "status": {
+      "type": "number"
+    },
+    "title": {
+      "type": "string"
+    },
+    "detail": {
+      "type": "string"
+    },
+    "source": {
+      "type": "object",
+      "properties": {
+        "parameter": {
+          "type": "string"
+        },
+        "pointer": {
+          "type": "string"
         }
+      }
+    }
+  },
+  "description": ""
 }

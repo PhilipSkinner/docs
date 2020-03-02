@@ -1,9 +1,4 @@
 {
   "title": "individualMeta.v1",
-  "type": "object",
-  "properties": {
-    "etag": {
-      "type": "string"
-    }
-  }
+  "type": "object"
 }

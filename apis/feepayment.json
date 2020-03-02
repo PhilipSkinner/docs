@@ -540,7 +540,50 @@
       "get": {
         "summary": "Your GET endpoint",
         "tags": [],
-        "responses": {},
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "meta": {
+                  "$ref": "../models/paginationMeta.v1.json"
+                },
+                "links": {
+                  "$ref": "../models/paginationLinks.v1.json"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "string"
+                      },
+                      "attributes": {
+                        "type": "object",
+                        "properties": {
+                          "sortCode": {
+                            "type": "string"
+                          },
+                          "accountNumber": {
+                            "type": "string"
+                          },
+                          "externalId": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
         "operationId": "get-mandates",
         "description": "Throws 422 when lender does not have an API key set."
       },
@@ -846,12 +889,18 @@
             "items": {
               "$ref": "#/definitions/Relationship"
             }
+          },
+          "properties": {
+            "mandate": {
+              "$ref": "../models/objectPointer.v1.json"
+            }
           }
         },
         "scheduleId": {
           "type": "string"
         }
-      }
+      },
+      "description": ""
     },
     "FeeScheduleAttributes": {
       "type": "object",
@@ -1119,6 +1168,12 @@
         },
         "lastChecked": {
           "type": "string"
+        },
+        "amountPaid": {
+          "type": "number"
+        },
+        "paidDate": {
+          "type": "string"
         }
       }
     },
@@ -1161,6 +1216,9 @@
           }
         },
         "scheduleId": {
+          "type": "string"
+        },
+        "requestedOn": {
           "type": "string"
         }
       }
