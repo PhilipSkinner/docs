@@ -14,8 +14,33 @@
       "get": {
         "summary": "Your GET endpoint",
         "tags": [],
-        "responses": {},
-        "operationId": "get-lenders"
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../models/paginationMeta.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-lenders",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "type"
+          }
+        ]
       },
       "post": {
         "summary": "",
@@ -41,7 +66,23 @@
       "get": {
         "summary": "Your GET endpoint",
         "tags": [],
-        "responses": {},
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../models/individualMeta.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
         "operationId": "get-lenders-lenderId"
       },
       "put": {
@@ -77,7 +118,23 @@
       "get": {
         "summary": "Your GET endpoint",
         "tags": [],
-        "responses": {},
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../models/paginationMeta.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
         "operationId": "get-lenders-lenderId-year",
         "parameters": [
           {
@@ -122,7 +179,23 @@
       "get": {
         "summary": "Your GET endpoint",
         "tags": [],
-        "responses": {},
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../models/individualMeta.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
         "operationId": "get-lenders-lenderId-year-year"
       },
       "put": {
@@ -137,6 +210,190 @@
       "delete": {
         "summary": "",
         "operationId": "delete-lenders-lenderId-year-year",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/type": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-type"
+      },
+      "post": {
+        "summary": "",
+        "operationId": "post-type",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../models/paginationMeta.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/type/{typeId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "typeId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../models/individualMeta.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-type-typeId"
+      },
+      "put": {
+        "summary": "",
+        "operationId": "put-type-typeId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "summary": "",
+        "operationId": "delete-type-typeId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/type/{typeId}/bandings": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "typeId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../models/paginationMeta.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-type-typeId-bandings"
+      },
+      "post": {
+        "summary": "",
+        "operationId": "post-type-typeId-bandings",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/type/{typeId}/bandings/{bandingId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "typeId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "bandingId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../models/individualMeta.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-type-typeId-bandings-bandingId"
+      },
+      "put": {
+        "summary": "",
+        "operationId": "put-type-typeId-bandings-bandingId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "summary": "",
+        "operationId": "delete-type-typeId-bandings-bandingId",
         "responses": {
           "200": {
             "description": "OK"
