@@ -19,7 +19,7 @@
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "scheduleId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -95,7 +95,7 @@
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "scheduleId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -162,7 +162,7 @@
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "scheduleId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -229,7 +229,7 @@
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "scheduleId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -317,7 +317,7 @@
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "scheduleId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -384,7 +384,7 @@
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "scheduleId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -566,7 +566,69 @@
       "get": {
         "summary": "Your GET endpoint",
         "tags": [],
-        "responses": {},
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string"
+                    },
+                    "attributes": {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "enum": [
+                            "new",
+                            "pending",
+                            "failed",
+                            "amend",
+                            "resubmit",
+                            "cancel",
+                            "cancelled",
+                            "deleted",
+                            "live"
+                          ]
+                        },
+                        "history": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "date": {
+                                "type": "string"
+                              },
+                              "eventType": {
+                                "type": "string"
+                              },
+                              "description": {
+                                "type": "string"
+                              },
+                              "status": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "lastChecked": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
         "operationId": "get-mandates-mandateId"
       },
       "put": {
@@ -773,9 +835,6 @@
         "type": {
           "type": "string"
         },
-        "id": {
-          "type": "string"
-        },
         "attributes": {
           "$ref": "#/definitions/FeeScheduleAttributes"
         },
@@ -788,6 +847,9 @@
               "$ref": "#/definitions/Relationship"
             }
           }
+        },
+        "scheduleId": {
+          "type": "string"
         }
       }
     },
@@ -803,10 +865,10 @@
     "Relationship": {
       "type": "object",
       "properties": {
-        "id": {
+        "type": {
           "type": "string"
         },
-        "type": {
+        "scheduleId": {
           "type": "string"
         }
       }
@@ -842,9 +904,6 @@
         "type": {
           "type": "string"
         },
-        "id": {
-          "type": "string"
-        },
         "attributes": {
           "$ref": "#/definitions/FacilityRequestAttributes"
         },
@@ -857,6 +916,9 @@
               "$ref": "#/definitions/Relationship"
             }
           }
+        },
+        "scheduleId": {
+          "type": "string"
         }
       }
     },
@@ -905,9 +967,6 @@
         "type": {
           "type": "string"
         },
-        "id": {
-          "type": "string"
-        },
         "attributes": {
           "$ref": "#/definitions/EventAttributes"
         },
@@ -920,6 +979,9 @@
               "$ref": "#/definitions/Relationship"
             }
           }
+        },
+        "scheduleId": {
+          "type": "string"
         }
       }
     },
@@ -991,9 +1053,6 @@
         "type": {
           "type": "string"
         },
-        "id": {
-          "type": "string"
-        },
         "attributes": {
           "$ref": "#/definitions/FeeAttributes"
         },
@@ -1006,6 +1065,9 @@
               "$ref": "#/definitions/Relationship"
             }
           }
+        },
+        "scheduleId": {
+          "type": "string"
         }
       }
     },
@@ -1048,9 +1110,15 @@
               },
               "description": {
                 "type": "string"
+              },
+              "status": {
+                "type": "string"
               }
             }
           }
+        },
+        "lastChecked": {
+          "type": "string"
         }
       }
     },
@@ -1082,9 +1150,6 @@
     "FeeRequest": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string"
-        },
         "facility": {
           "$ref": "#/definitions/FacilityRequest"
         },
@@ -1094,6 +1159,9 @@
           "items": {
             "$ref": "#/definitions/EventRequest"
           }
+        },
+        "scheduleId": {
+          "type": "string"
         }
       }
     },
