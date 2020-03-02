@@ -396,8 +396,61 @@
       "get": {
         "summary": "Your GET endpoint",
         "tags": [],
-        "responses": {},
-        "operationId": "get-rules"
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../models/paginationMeta.v1.json"
+                    },
+                    "data": {
+                      "type": [
+                        "string",
+                        "array"
+                      ],
+                      "items": {
+                        "$ref": "#/components/schemas/ruleResponse"
+                      }
+                    },
+                    "links": {
+                      "$ref": "../models/paginationLinks.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-rules",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ]
       },
       "post": {
         "summary": "",
@@ -977,6 +1030,10 @@
           },
           "updatedDate": {
             "type": "string"
+          },
+          "validationSchema": {
+            "type": "object",
+            "description": "JSON schema for validating data contract to guarantees API."
           }
         }
       },
@@ -1046,6 +1103,57 @@
       },
       "productSicCodeAttributes": {
         "title": "productSicCodeAttributes",
+        "type": "object",
+        "properties": {
+          "createdBy": {
+            "type": "string"
+          },
+          "createdDate": {
+            "type": "string"
+          },
+          "updatedBy": {
+            "type": "string"
+          },
+          "updatedDate": {
+            "type": "string"
+          }
+        }
+      },
+      "rule": {
+        "title": "rule",
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "../models/individualMeta.v1.json"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ruleResponse"
+          },
+          "links": {
+            "type": "object"
+          }
+        }
+      },
+      "ruleResponse": {
+        "title": "ruleResponse",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "etag": {
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/ruleResponseAttributes"
+          }
+        }
+      },
+      "ruleResponseAttributes": {
+        "title": "ruleResponseAttributes",
         "type": "object",
         "properties": {
           "createdBy": {
