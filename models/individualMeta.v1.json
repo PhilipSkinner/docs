@@ -1,4 +1,21 @@
 {
   "title": "individualMeta.v1",
-  "type": "object"
+  "type": "object",
+  "properties": {
+    "versions": {
+      "type": "array",
+      "description": "Only returned on objects that support versioned resources.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string"
+          },
+          "etag": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
 }

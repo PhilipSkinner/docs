@@ -65,6 +65,15 @@
           {
             "Bearer Token": []
           }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          }
         ]
       },
       "post": {
@@ -105,6 +114,11 @@
                   "type": "string"
                 },
                 "description": "URI of newly created resource."
+              },
+              "Etag": {
+                "schema": {
+                  "type": "string"
+                }
               }
             }
           },
@@ -254,113 +268,6 @@
           }
         ]
       },
-      "put": {
-        "summary": "",
-        "operationId": "put-records-recordId",
-        "responses": {
-          "202": {
-            "description": "Accepted",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "meta": {
-                      "$ref": "../models/individualMeta.v1.json"
-                    },
-                    "links": {
-                      "type": "object",
-                      "properties": {
-                        "self": {
-                          "type": "string"
-                        },
-                        "records": {
-                          "type": "string"
-                        }
-                      }
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/auditResponse"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Unprocessable Entity",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "Bearer Token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match",
-            "description": "Etag or wildcard (*) operator for version control."
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "X-idempotency-token",
-            "description": "Idempotency token"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/auditAttributes"
-              }
-            }
-          }
-        }
-      },
       "delete": {
         "summary": "",
         "operationId": "delete-records-recordId",
@@ -411,13 +318,6 @@
               "type": "string"
             },
             "in": "header",
-            "name": "If-match"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
             "name": "X-idempotency-token"
           }
         ]
@@ -451,17 +351,23 @@
           "system": {
             "type": "string"
           },
-          "type": {
+          "eventType": {
             "type": "string"
           },
-          "payload": {
-            "type": "string"
+          "details": {
+            "type": "object"
           },
           "createdDate": {
             "type": "string"
           },
           "createdBy": {
             "type": "string"
+          },
+          "scope": {
+            "type": "array",
+            "items": {
+              "$ref": "../models/objectPointer.v1.json"
+            }
           }
         }
       }

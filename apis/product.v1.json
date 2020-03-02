@@ -24,6 +24,15 @@
                   "properties": {
                     "meta": {
                       "$ref": "../models/facilityMeta.v1.json"
+                    },
+                    "links": {
+                      "$ref": "../models/paginationLinks.v1.json"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/productResponse"
+                      }
                     }
                   }
                 }
@@ -31,7 +40,12 @@
             }
           }
         },
-        "operationId": "get-products"
+        "operationId": "get-products",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ]
       },
       "post": {
         "summary": "",
@@ -57,8 +71,59 @@
       "get": {
         "summary": "Your GET endpoint",
         "tags": [],
-        "responses": {},
-        "operationId": "get-products-productId"
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../models/individualMeta.v1.json"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/productResponse"
+                    },
+                    "links": {
+                      "type": "object",
+                      "properties": {
+                        "self": {
+                          "type": "string"
+                        },
+                        "products": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Etag": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-products-productId",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          }
+        ]
       },
       "put": {
         "summary": "",
@@ -254,6 +319,52 @@
             "description": "OK"
           }
         }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "productResponse": {
+        "title": "productResponse",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "etag": {
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/productAttributes"
+          }
+        }
+      },
+      "productAttributes": {
+        "title": "productAttributes",
+        "type": "object",
+        "properties": {
+          "createdBy": {
+            "type": "string"
+          },
+          "createdDate": {
+            "type": "string"
+          },
+          "updatedBy": {
+            "type": "string"
+          },
+          "updatedDate": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Bearer token": {
+        "type": "http",
+        "scheme": "bearer"
       }
     }
   }
