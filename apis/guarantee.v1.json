@@ -32,7 +32,8 @@
             "in": "query",
             "name": "end_date"
           }
-        ]
+        ],
+        "description": "has a canCollect property for the fee payment API to be able to determine if the service can collect payments."
       },
       "post": {
         "summary": "",

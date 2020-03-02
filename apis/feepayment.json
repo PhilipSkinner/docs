@@ -5,7 +5,7 @@
     "title": "Fee Payment API"
   },
   "paths": {
-    "/feeSchedule/{id}": {
+    "/feeSchedule/{scheduleId}": {
       "get": {
         "tags": [
           "FeePaymentSchedule"
@@ -71,9 +71,17 @@
             "description": "OK"
           }
         }
-      }
+      },
+      "parameters": [
+        {
+          "type": "string",
+          "name": "scheduleId",
+          "in": "path",
+          "required": true
+        }
+      ]
     },
-    "/feeSchedule/{id}/facility": {
+    "/feeSchedule/{scheduleId}/facility": {
       "get": {
         "tags": [
           "FeePaymentSchedule"
@@ -130,9 +138,17 @@
             "description": "OK"
           }
         }
-      }
+      },
+      "parameters": [
+        {
+          "type": "string",
+          "name": "scheduleId",
+          "in": "path",
+          "required": true
+        }
+      ]
     },
-    "/feeSchedule/{id}/events": {
+    "/feeSchedule/{scheduleId}/events": {
       "get": {
         "tags": [
           "FeePaymentSchedule"
@@ -189,9 +205,17 @@
             "description": "OK"
           }
         }
-      }
+      },
+      "parameters": [
+        {
+          "type": "string",
+          "name": "scheduleId",
+          "in": "path",
+          "required": true
+        }
+      ]
     },
-    "/feeSchedule/{id}/events/{eventId}": {
+    "/feeSchedule/{scheduleId}/events/{eventId}": {
       "get": {
         "tags": [
           "FeePaymentSchedule"
@@ -263,9 +287,23 @@
             "description": "OK"
           }
         }
-      }
+      },
+      "parameters": [
+        {
+          "type": "string",
+          "name": "scheduleId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "type": "string",
+          "name": "eventId",
+          "in": "path",
+          "required": true
+        }
+      ]
     },
-    "/feeSchedule/{id}/fees": {
+    "/feeSchedule/{scheduleId}/fees": {
       "get": {
         "tags": [
           "FeePaymentSchedule"
@@ -322,9 +360,17 @@
             "description": "OK"
           }
         }
-      }
+      },
+      "parameters": [
+        {
+          "type": "string",
+          "name": "scheduleId",
+          "in": "path",
+          "required": true
+        }
+      ]
     },
-    "/feeSchedule/{id}/fees/{feeId}": {
+    "/feeSchedule/{scheduleId}/fees/{feeId}": {
       "get": {
         "tags": [
           "FeePaymentSchedule"
@@ -396,7 +442,21 @@
             "description": "OK"
           }
         }
-      }
+      },
+      "parameters": [
+        {
+          "type": "string",
+          "name": "scheduleId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "type": "string",
+          "name": "feeId",
+          "in": "path",
+          "required": true
+        }
+      ]
     },
     "/feeSchedule": {
       "post": {
@@ -453,9 +513,27 @@
         "operationId": "get-feeSchedule",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "meta": {
+                  "$ref": "../models/paginationMeta.v1.json"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/SimpleObjectExample[ResourceBase[FeeScheduleAttributes]]"
+                  }
+                },
+                "links": {
+                  "$ref": "../models/paginationLinks.v1.json"
+                }
+              }
+            }
           }
-        }
+        },
+        "description": "Links to mandate Id"
       }
     },
     "/mandates": {
@@ -463,7 +541,8 @@
         "summary": "Your GET endpoint",
         "tags": [],
         "responses": {},
-        "operationId": "get-mandates"
+        "operationId": "get-mandates",
+        "description": "Throws 422 when lender does not have an API key set."
       },
       "post": {
         "summary": "",
@@ -509,24 +588,16 @@
         }
       }
     },
-    "/mandates/{mandateId}/requests": {
-      "parameters": [
-        {
-          "type": "string",
-          "name": "mandateId",
-          "in": "path",
-          "required": true
-        }
-      ],
+    "/lenders": {
       "get": {
         "summary": "Your GET endpoint",
         "tags": [],
         "responses": {},
-        "operationId": "get-mandates-mandateId-requests"
+        "operationId": "get-lenders"
       },
       "post": {
         "summary": "",
-        "operationId": "post-mandates-mandateId-requests",
+        "operationId": "post-lenders",
         "responses": {
           "200": {
             "description": "OK"
@@ -534,17 +605,11 @@
         }
       }
     },
-    "/mandate/{mandateId}/requests/{requestId}": {
+    "/lenders/{lenderId}": {
       "parameters": [
         {
           "type": "string",
-          "name": "mandateId",
-          "in": "path",
-          "required": true
-        },
-        {
-          "type": "string",
-          "name": "requestId",
+          "name": "lenderId",
           "in": "path",
           "required": true
         }
@@ -553,11 +618,11 @@
         "summary": "Your GET endpoint",
         "tags": [],
         "responses": {},
-        "operationId": "get-mandate-mandateId-requests-requestId"
+        "operationId": "get-lenders-lenderId"
       },
       "put": {
         "summary": "",
-        "operationId": "put-mandate-mandateId-requests-requestId",
+        "operationId": "put-lenders-lenderId",
         "responses": {
           "200": {
             "description": "OK"
@@ -566,7 +631,7 @@
       },
       "delete": {
         "summary": "",
-        "operationId": "delete-mandate-mandateId-requests-requestId",
+        "operationId": "delete-lenders-lenderId",
         "responses": {
           "200": {
             "description": "OK"
@@ -696,6 +761,9 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "meta": {
+          "$ref": "../models/individualMeta.v1.json"
         }
       }
     },
@@ -753,7 +821,18 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
+          },
+          "properties": {
+            "self": {
+              "type": "string"
+            },
+            "feeSchedule": {
+              "type": "string"
+            }
           }
+        },
+        "meta": {
+          "$ref": "../models/individualMeta.v1.json"
         }
       }
     },
@@ -813,10 +892,10 @@
           }
         },
         "links": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "../models/paginationLinks.v1.json"
+        },
+        "meta": {
+          "$ref": "../models/paginationMeta.v1.json"
         }
       }
     },
@@ -870,7 +949,21 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
+          },
+          "properties": {
+            "self": {
+              "type": "string"
+            },
+            "events": {
+              "type": "string"
+            },
+            "feeSchedule": {
+              "type": "string"
+            }
           }
+        },
+        "meta": {
+          "$ref": "../models/individualMeta.v1.json"
         }
       }
     },
@@ -885,10 +978,10 @@
           }
         },
         "links": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "../models/paginationMeta.v1.json"
+        },
+        "meta": {
+          "$ref": "../models/paginationMeta.v1.json"
         }
       }
     },
@@ -918,6 +1011,7 @@
     },
     "FeeAttributes": {
       "type": "object",
+      "description": "",
       "properties": {
         "balance": {
           "format": "double",
@@ -930,6 +1024,33 @@
         "amount": {
           "format": "double",
           "type": "number"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "pending",
+            "requested",
+            "received",
+            "failure",
+            "retried"
+          ]
+        },
+        "history": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string"
+              },
+              "eventType": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              }
+            }
+          }
         }
       }
     },
@@ -939,10 +1060,21 @@
         "data": {
           "$ref": "#/definitions/ResourceBase[FeeAttributes]"
         },
+        "meta": {
+          "$ref": "../models/individualMeta.v1.json"
+        },
         "links": {
           "type": "object",
-          "additionalProperties": {
-            "type": "string"
+          "properties": {
+            "self": {
+              "type": "string"
+            },
+            "fees": {
+              "type": "string"
+            },
+            "feeSchedule": {
+              "type": "string"
+            }
           }
         }
       }
