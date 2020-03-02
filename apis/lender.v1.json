@@ -24,8 +24,17 @@
                   "properties": {
                     "meta": {
                       "$ref": "../models/paginationMeta.v1.json"
+                    },
+                    "links": {
+                      "$ref": "../models/paginationLinks.v1.json"
                     }
                   }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
                 }
               }
             }
@@ -76,6 +85,17 @@
                   "properties": {
                     "meta": {
                       "$ref": "../models/individualMeta.v1.json"
+                    },
+                    "links": {
+                      "type": "object",
+                      "properties": {
+                        "self": {
+                          "type": "string"
+                        },
+                        "allocations": {
+                          "type": "string"
+                        }
+                      }
                     }
                   }
                 }
@@ -128,6 +148,9 @@
                   "properties": {
                     "meta": {
                       "$ref": "../models/paginationMeta.v1.json"
+                    },
+                    "links": {
+                      "$ref": "../models/paginationLinks.v1.json"
                     }
                   }
                 }
@@ -189,6 +212,17 @@
                   "properties": {
                     "meta": {
                       "$ref": "../models/individualMeta.v1.json"
+                    },
+                    "links": {
+                      "type": "object",
+                      "properties": {
+                        "self": {
+                          "type": "string"
+                        },
+                        "lender": {
+                          "type": "string"
+                        }
+                      }
                     }
                   }
                 }
@@ -221,7 +255,26 @@
       "get": {
         "summary": "Your GET endpoint",
         "tags": [],
-        "responses": {},
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../models/paginationMeta.v1.json"
+                    },
+                    "links": {
+                      "$ref": "../models/paginationLinks.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
         "operationId": "get-type"
       },
       "post": {
@@ -270,6 +323,20 @@
                   "properties": {
                     "meta": {
                       "$ref": "../models/individualMeta.v1.json"
+                    },
+                    "links": {
+                      "type": "object",
+                      "properties": {
+                        "self": {
+                          "type": "string"
+                        },
+                        "bandings": {
+                          "type": "string"
+                        },
+                        "lenders": {
+                          "type": "string"
+                        }
+                      }
                     }
                   }
                 }
@@ -322,6 +389,9 @@
                   "properties": {
                     "meta": {
                       "$ref": "../models/paginationMeta.v1.json"
+                    },
+                    "links": {
+                      "$ref": "../models/paginationLinks.v1.json"
                     }
                   }
                 }
@@ -373,6 +443,17 @@
                   "properties": {
                     "meta": {
                       "$ref": "../models/individualMeta.v1.json"
+                    },
+                    "links": {
+                      "type": "object",
+                      "properties": {
+                        "self": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
                     }
                   }
                 }
