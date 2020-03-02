@@ -168,6 +168,77 @@
           }
         }
       }
+    },
+    "/products/{productId}/sicCodes": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "productId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-products-productId-sicCodes"
+      },
+      "post": {
+        "summary": "",
+        "operationId": "post-products-productId-sicCodes",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/products/{productId}/sicCodes/{sicCode}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "productId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "sicCode",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-products-productId-sicCodes-sicCode"
+      },
+      "put": {
+        "summary": "",
+        "operationId": "put-products-productId-sicCodes-sicCode",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "summary": "",
+        "operationId": "delete-products-productId-sicCodes-sicCode",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   }
 }
