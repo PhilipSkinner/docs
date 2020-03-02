@@ -512,17 +512,171 @@
       "get": {
         "summary": "Your GET endpoint",
         "tags": [],
-        "responses": {},
-        "operationId": "get-products-productId-sicCodes"
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../models/paginationMeta.v1.json"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/productSicCode"
+                      }
+                    },
+                    "links": {
+                      "$ref": "../models/paginationLinks.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-products-productId-sicCodes",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          }
+        ]
       },
       "post": {
         "summary": "",
         "operationId": "post-products-productId-sicCodes",
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/productSicCode"
+                }
+              }
+            },
+            "headers": {
+              "Etag": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-idempotency-key"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          }
+        ]
       }
     },
     "/products/{productId}/sicCodes/{sicCode}": {
@@ -547,26 +701,244 @@
       "get": {
         "summary": "Your GET endpoint",
         "tags": [],
-        "responses": {},
-        "operationId": "get-products-productId-sicCodes-sicCode"
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/productSicCode"
+                }
+              }
+            },
+            "headers": {
+              "Etag": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-products-productId-sicCodes-sicCode",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          }
+        ]
       },
       "put": {
         "summary": "",
         "operationId": "put-products-productId-sicCodes-sicCode",
         "responses": {
-          "200": {
-            "description": "OK"
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/productSicCode"
+                }
+              }
+            },
+            "headers": {
+              "Etag": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
           }
+        },
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-idempotency-key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/productSicCodeAttributes"
+              }
+            }
+          },
+          "description": ""
         }
       },
       "delete": {
         "summary": "",
         "operationId": "delete-products-productId-sicCodes-sicCode",
         "responses": {
-          "200": {
-            "description": "OK"
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-idempotency-key"
+          }
+        ]
       }
     }
   },
@@ -628,6 +1000,65 @@
                 "type": "string"
               }
             }
+          }
+        }
+      },
+      "productSicCode": {
+        "title": "productSicCode",
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "../models/individualMeta.v1.json"
+          },
+          "data": {
+            "$ref": "#/components/schemas/productSicCodeResponse"
+          },
+          "links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "type": "string"
+              },
+              "sicCodes": {
+                "type": "string"
+              },
+              "product": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "productSicCodeResponse": {
+        "title": "productSicCodeResponse",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/productSicCodeAttributes"
+          }
+        }
+      },
+      "productSicCodeAttributes": {
+        "title": "productSicCodeAttributes",
+        "type": "object",
+        "properties": {
+          "createdBy": {
+            "type": "string"
+          },
+          "createdDate": {
+            "type": "string"
+          },
+          "updatedBy": {
+            "type": "string"
+          },
+          "updatedDate": {
+            "type": "string"
           }
         }
       }
