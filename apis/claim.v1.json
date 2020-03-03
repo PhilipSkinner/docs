@@ -446,7 +446,10 @@
             "name": "If-match"
           }
         ],
-        "description": "Delete a claim.\n\nRequires the claims_remover role to access."
+        "description": "Delete a claim.\n\nRequires the claims_remover role to access.",
+        "tags": [
+          "Claims"
+        ]
       }
     },
     "/claims/{claimId}/settlements": {
@@ -2670,5 +2673,22 @@
         "scheme": "bearer"
       }
     }
-  }
+  },
+  "tags": [
+    {
+      "name": "Claims"
+    },
+    {
+      "name": "Settlements"
+    },
+    {
+      "name": "Recoveries"
+    },
+    {
+      "name": "Invoices"
+    },
+    {
+      "name": "Statements"
+    }
+  ]
 }
