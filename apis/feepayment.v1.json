@@ -39,16 +39,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/SimpleObjectExample_ResourceBase_FeeScheduleAttributes_"
                 }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SimpleObjectExample_ResourceBase_FeeScheduleAttributes_"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SimpleObjectExample_ResourceBase_FeeScheduleAttributes_"
-                }
               }
             },
             "headers": {
@@ -75,16 +65,6 @@
           "404": {
             "description": "Not Found",
             "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              },
               "application/json": {
                 "schema": {
                   "$ref": "../models/errorResponse.v1.json"
@@ -203,7 +183,10 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "FeePaymentSchedule"
+        ]
       },
       "delete": {
         "summary": "",
@@ -274,6 +257,9 @@
             "in": "header",
             "name": "If-match"
           }
+        ],
+        "tags": [
+          "FeePaymentSchedule"
         ]
       },
       "parameters": [
@@ -318,16 +304,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/SimpleObjectExample_ResourceBase_FacilityRequestAttributes_"
                 }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SimpleObjectExample_ResourceBase_FacilityRequestAttributes_"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SimpleObjectExample_ResourceBase_FacilityRequestAttributes_"
-                }
               }
             },
             "headers": {
@@ -365,16 +341,6 @@
                 "schema": {
                   "$ref": "../models/errorResponse.v1.json"
                 }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
               }
             }
           }
@@ -387,7 +353,7 @@
         ]
       },
       "put": {
-        "summary": "",
+        "summary": "Update fee schedule facility",
         "operationId": "put-feeSchedule-id-facility",
         "responses": {
           "202": {
@@ -488,7 +454,10 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "FeePaymentSchedule"
+        ]
       },
       "parameters": [
         {
@@ -506,7 +475,7 @@
         "tags": [
           "FeePaymentSchedule"
         ],
-        "operationId": "GetScheduleEvents",
+        "operationId": "get-schedule-events",
         "parameters": [
           {
             "name": "scheduleId",
@@ -517,14 +486,11 @@
             }
           },
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Bearer token",
-            "required": false,
             "schema": {
-              "type": "string",
-              "default": "Bearer "
-            }
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
           }
         ],
         "responses": {
@@ -535,15 +501,32 @@
                 "schema": {
                   "$ref": "#/components/schemas/SimpleObjectExample_List_ResourceBase_EventAttributes_"
                 }
-              },
-              "application/json": {
+              }
+            },
+            "headers": {
+              "Etag": {
                 "schema": {
-                  "$ref": "#/components/schemas/SimpleObjectExample_List_ResourceBase_EventAttributes_"
+                  "type": "string"
                 }
-              },
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SimpleObjectExample_List_ResourceBase_EventAttributes_"
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
                 }
               }
             }
@@ -555,12 +538,77 @@
                 "schema": {
                   "$ref": "../models/errorResponse.v1.json"
                 }
+              }
+            }
+          }
+        },
+        "summary": "Get fee schedule events",
+        "description": "Get the events for a fee schedule.\n\nRequires the feeschedule_reader role to access.",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Add event to schedule",
+        "operationId": "post-feeSchedule-id-events",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "headers": {
+              "Etag": {
+                "schema": {
+                  "type": "string"
+                }
               },
+              "Location": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleObjectExample_ResourceBase_EventAttributes_"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
               "application/json": {
                 "schema": {
                   "$ref": "../models/errorResponse.v1.json"
                 }
-              },
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
               "application/json": {
                 "schema": {
                   "$ref": "../models/errorResponse.v1.json"
@@ -569,18 +617,8 @@
             }
           },
           "422": {
-            "description": "Client Error",
+            "description": "Unprocessable Entity",
             "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              },
               "application/json": {
                 "schema": {
                   "$ref": "../models/errorResponse.v1.json"
@@ -588,15 +626,41 @@
               }
             }
           }
-        }
-      },
-      "post": {
-        "summary": "",
-        "operationId": "post-feeSchedule-id-events",
-        "responses": {
-          "200": {
-            "description": "OK"
+        },
+        "tags": [
+          "FeePaymentSchedule"
+        ],
+        "description": "Add a new event onto the fee payment schedule.\n\nRequires the feepayment_writer role to access.",
+        "security": [
+          {
+            "Bearer token": []
           }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-idempotency-key"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventAttributes"
+              }
+            }
+          },
+          "description": ""
         }
       },
       "parameters": [
@@ -615,7 +679,7 @@
         "tags": [
           "FeePaymentSchedule"
         ],
-        "operationId": "GetScheduleEvents",
+        "operationId": "get-schedule-single-event",
         "parameters": [
           {
             "name": "scheduleId",
@@ -634,14 +698,11 @@
             }
           },
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Bearer token",
-            "required": false,
             "schema": {
-              "type": "string",
-              "default": "Bearer "
-            }
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
           }
         ],
         "responses": {
@@ -652,15 +713,32 @@
                 "schema": {
                   "$ref": "#/components/schemas/SimpleObjectExample_ResourceBase_EventAttributes_"
                 }
-              },
-              "application/json": {
+              }
+            },
+            "headers": {
+              "Etag": {
                 "schema": {
-                  "$ref": "#/components/schemas/SimpleObjectExample_ResourceBase_EventAttributes_"
+                  "type": "string"
                 }
-              },
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SimpleObjectExample_ResourceBase_EventAttributes_"
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
                 }
               }
             }
@@ -672,12 +750,72 @@
                 "schema": {
                   "$ref": "../models/errorResponse.v1.json"
                 }
-              },
+              }
+            }
+          }
+        },
+        "description": "Get a single event on a fee schedule.\n\nRequires the feeschedule_reader role to access.",
+        "summary": "Get an event",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ]
+      },
+      "put": {
+        "summary": "Update an event",
+        "operationId": "put-feeSchedule-id-events-eventId",
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Etag": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleObjectExample_ResourceBase_EventAttributes_"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
               "application/json": {
                 "schema": {
                   "$ref": "../models/errorResponse.v1.json"
                 }
-              },
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
               "application/json": {
                 "schema": {
                   "$ref": "../models/errorResponse.v1.json"
@@ -686,18 +824,8 @@
             }
           },
           "422": {
-            "description": "Client Error",
+            "description": "Unprocessable Entity",
             "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              },
               "application/json": {
                 "schema": {
                   "$ref": "../models/errorResponse.v1.json"
@@ -705,15 +833,41 @@
               }
             }
           }
-        }
-      },
-      "put": {
-        "summary": "",
-        "operationId": "put-feeSchedule-id-events-eventId",
-        "responses": {
-          "200": {
-            "description": "OK"
+        },
+        "tags": [
+          "FeePaymentSchedule"
+        ],
+        "description": "Updates an event on a feeschedule.\n\nRequires the feeschedule_writer role to access.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-idempotency-key"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
           }
+        ],
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventAttributes"
+              }
+            }
+          },
+          "description": ""
         }
       },
       "delete": {
@@ -778,16 +932,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/SimpleObjectExample_List_ResourceBase_FeeAttributes_"
                 }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SimpleObjectExample_List_ResourceBase_FeeAttributes_"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SimpleObjectExample_List_ResourceBase_FeeAttributes_"
-                }
               }
             }
           },
@@ -798,32 +942,12 @@
                 "schema": {
                   "$ref": "../models/errorResponse.v1.json"
                 }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
               }
             }
           },
           "422": {
             "description": "Client Error",
             "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              },
               "application/json": {
                 "schema": {
                   "$ref": "../models/errorResponse.v1.json"
@@ -895,16 +1019,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/SimpleObjectExample_ResourceBase_FeeAttributes_"
                 }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SimpleObjectExample_ResourceBase_FeeAttributes_"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SimpleObjectExample_ResourceBase_FeeAttributes_"
-                }
               }
             }
           },
@@ -915,32 +1029,12 @@
                 "schema": {
                   "$ref": "../models/errorResponse.v1.json"
                 }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
               }
             }
           },
           "422": {
             "description": "Client Error",
             "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              },
               "application/json": {
                 "schema": {
                   "$ref": "../models/errorResponse.v1.json"
@@ -1013,32 +1107,12 @@
                 "schema": {
                   "$ref": "../models/errorResponse.v1.json"
                 }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
               }
             }
           },
           "500": {
             "description": "Server Error",
             "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              },
               "application/json": {
                 "schema": {
                   "$ref": "../models/errorResponse.v1.json"
@@ -1050,11 +1124,6 @@
         "requestBody": {
           "content": {
             "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/FeeRequest"
-              }
-            },
-            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/FeeRequest"
               }
