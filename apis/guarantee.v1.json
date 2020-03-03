@@ -696,6 +696,9 @@
       "guaranteeAttributes": {
         "title": "guaranteeAttributes",
         "type": "object",
+        "x-tags": [
+          "Guarantees"
+        ],
         "properties": {
           "createdBy": {
             "type": "string"
@@ -708,11 +711,61 @@
           },
           "updatedDate": {
             "type": "string"
+          },
+          "dataProtection": {
+            "type": "string"
+          },
+          "applicationDetials": {
+            "type": "string"
+          },
+          "lender": {
+            "$ref": "../models/objectPointer.v1.json"
+          },
+          "facilityDetails": {
+            "type": "string"
+          },
+          "predictedDrawDowns": {
+            "type": "string"
+          },
+          "drawDowns": {
+            "type": "array",
+            "items": {
+              "$ref": ""
+            }
+          },
+          "repaymentHolidays": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "startDate": {
+                  "type": "string"
+                },
+                "endDate": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "stateAid": {
+            "type": "string"
+          },
+          "feesAndSecurity": {
+            "type": "string"
           }
-        },
-        "x-tags": [
-          "Guarantees"
-        ]
+        }
+      },
+      "drawDown": {
+        "title": "drawDown",
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          }
+        }
       }
     },
     "securitySchemes": {
