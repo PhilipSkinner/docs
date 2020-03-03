@@ -547,104 +547,6 @@
           }
         ]
       }
-    },
-    "/guarantees/{guaranteeId}/demands": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "guaranteeId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
-        "responses": {},
-        "operationId": "get-lender-lenderId-guarantees-guaranteeId-demands"
-      },
-      "post": {
-        "summary": "",
-        "operationId": "post-lender-lenderId-guarantees-guaranteeId-demands",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/guarantees/{guaranteeId}/demands/{demandId}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "guaranteeId",
-          "in": "path",
-          "required": true
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "demandId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
-        "responses": {},
-        "operationId": "get-lender-lenderId-guarantees-guaranteeId-demands-demandId"
-      },
-      "put": {
-        "summary": "",
-        "operationId": "put-lender-lenderId-guarantees-guaranteeId-demands-demandId",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "delete": {
-        "summary": "",
-        "operationId": "delete-lender-lenderId-guarantees-guaranteeId-demands-demandId",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/demands": {
-      "parameters": [],
-      "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
-        "responses": {},
-        "operationId": "get-lender-lenderId-demands"
-      }
-    },
-    "/demands/{demandId}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "demandId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
-        "responses": {},
-        "operationId": "get-lender-lenderId-demands-demandId"
-      }
     }
   },
   "components": {
@@ -725,12 +627,15 @@
             "type": "string"
           },
           "predictedDrawDowns": {
-            "type": "string"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/drawDown"
+            }
           },
           "drawDowns": {
             "type": "array",
             "items": {
-              "$ref": ""
+              "$ref": "#/components/schemas/drawDown"
             }
           },
           "repaymentHolidays": {
