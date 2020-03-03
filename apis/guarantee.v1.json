@@ -601,6 +601,7 @@
         "x-tags": [
           "Guarantees"
         ],
+        "description": "",
         "properties": {
           "createdBy": {
             "type": "string"
@@ -608,23 +609,233 @@
           "createdDate": {
             "type": "string"
           },
-          "updatdBy": {
+          "updatedBy": {
             "type": "string"
           },
           "updatedDate": {
             "type": "string"
           },
-          "dataProtection": {
-            "type": "string"
+          "dataProtectionAgreed": {
+            "type": "boolean"
           },
-          "applicationDetials": {
-            "type": "string"
+          "facilityDetails": {
+            "type": "object",
+            "properties": {
+              "product": {
+                "$ref": "../models/objectPointer.v1.json"
+              },
+              "facilityType": {
+                "type": "string",
+                "enum": [
+                  "Term Loan",
+                  "Asset Finance",
+                  "Invoice Finance",
+                  "Revolving Credit"
+                ]
+              },
+              "repaymentType": {
+                "type": "object",
+                "properties": {
+                  "paymentType": {
+                    "type": "string",
+                    "enum": [
+                      "Amount",
+                      "Term"
+                    ]
+                  },
+                  "fixedRepaymentAmount": {
+                    "type": "number"
+                  },
+                  "term": {
+                    "type": "object",
+                    "properties": {
+                      "years": {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      "months": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 11
+                      }
+                    }
+                  },
+                  "paymentFrequency": {
+                    "type": "string",
+                    "enum": [
+                      "Annually",
+                      "6-monthly",
+                      "Quarterly",
+                      "Monthly",
+                      "Weekly",
+                      "Seasonal",
+                      "Bullet - Interest only"
+                    ]
+                  },
+                  "seasonalMonths": {
+                    "type": "array",
+                    "items": {}
+                  }
+                }
+              },
+              "principalPurpose": {
+                "type": "string",
+                "enum": [
+                  "Start-up costs",
+                  "General working capital requirements",
+                  "Purchasing specific equipment or machinery",
+                  "Purchasing licences quotas or other entitlements to trade",
+                  "Research and Development activities",
+                  "Acquiring another business within the UK",
+                  "Acquiring another business outside the UK - Ineligible",
+                  "Expanding an existing business within the UK",
+                  "Expanding an existing business outside the UK - Ineligible",
+                  "Financing an export order - Ineligible",
+                  "Replacing existing internal finance",
+                  "Replacing existing external finance"
+                ]
+              },
+              "facilityTotalAmount": {
+                "type": "number"
+              },
+              "interest": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "Variable",
+                      "Fixed"
+                    ]
+                  },
+                  "rateMargin": {
+                    "type": "number",
+                    "minimum": 0
+                  }
+                }
+              },
+              "assetFinanceDetails": {
+                "type": "object",
+                "properties": {
+                  "balloonAmount": {
+                    "type": "number"
+                  },
+                  "details": {
+                    "type": "object",
+                    "properties": {
+                      "category": {
+                        "type": "string",
+                        "enum": [
+                          "Furniture and fittings",
+                          "Cars / taxis",
+                          "Construction equipment (incl scaffolding, portacabins)",
+                          "Light commercial vehicles",
+                          "Materials handling",
+                          "Garage equipment",
+                          "Engineering equipment",
+                          "Refrigeration",
+                          "Catering / cleaning",
+                          "Hair and beauty equipment",
+                          "Agricultural / Farming / Livestock",
+                          "Gymnasium / Sports / Leisure equipment",
+                          "Vending equipment",
+                          "Heavy commercial vehicles / Trailers",
+                          "Buses / Coaches",
+                          "Cranes",
+                          "Industrial Plant and Machinery",
+                          "Computer Equipment / Technology / Telecoms (hardware / software)",
+                          "Dental / Medical / Optical Equipment / Scientific/ Health / Veterinary",
+                          "Broadcast and Media equipment",
+                          "Printing Equipment and Reprography",
+                          "Other"
+                        ]
+                      },
+                      "cashPrice": {
+                        "type": "number"
+                      },
+                      "installCost": {
+                        "type": "number"
+                      },
+                      "deposit": {
+                        "type": "number"
+                      },
+                      "partExchange": {
+                        "type": "number"
+                      },
+                      "originalBalance": {
+                        "type": "number"
+                      },
+                      "residualValue": {
+                        "type": "number"
+                      },
+                      "coverPercent": {
+                        "type": "number"
+                      },
+                      "totalGuaranteesFacilityAmount": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "category",
+                      "cashPrice",
+                      "installCost",
+                      "deposit",
+                      "partExchange",
+                      "residualValue",
+                      "coverPercent"
+                    ]
+                  },
+                  "agreementType": {
+                    "type": "string",
+                    "enum": [
+                      "Hiring Purchase",
+                      "Finance Lease",
+                      "Sale and LeaseBack"
+                    ]
+                  }
+                }
+              }
+            }
           },
           "lender": {
             "$ref": "../models/objectPointer.v1.json"
           },
-          "facilityDetails": {
-            "type": "string"
+          "applicationDetails": {
+            "type": "object",
+            "properties": {
+              "legalForm": {
+                "type": "string",
+                "enum": [
+                  "Limited Liability Partnership (LLP)",
+                  "Private Limited Company (LTD)",
+                  "Public Limited Company (PLC)"
+                ]
+              },
+              "companyRegistrationNumber": {
+                "type": "string"
+              },
+              "businessLegalName": {
+                "type": "string"
+              },
+              "businessTradingName": {
+                "type": "string"
+              },
+              "sicCode": {
+                "type": "string"
+              },
+              "companyTurnover": {
+                "type": "number"
+              },
+              "turnoverAboveFiftyPercent": {
+                "type": "boolean"
+              },
+              "tradingStartDate": {
+                "type": "string"
+              },
+              "tradingPostcode": {
+                "type": "string"
+              }
+            }
           },
           "predictedDrawDowns": {
             "type": "array",
@@ -653,10 +864,37 @@
             }
           },
           "stateAid": {
-            "type": "string"
+            "type": "object",
+            "properties": {
+              "calculatedAmount": {
+                "type": "number"
+              },
+              "applicantMinimusStateAidPastThreeYears": {
+                "type": "boolean"
+              }
+            }
           },
           "feesAndSecurity": {
-            "type": "string"
+            "type": "object",
+            "properties": {
+              "totalVaue": {
+                "type": "number"
+              },
+              "security": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "additionalSecurityValue": {
+                      "type": "number"
+                    },
+                    "principalTypeofAsset": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
