@@ -1376,12 +1376,15 @@
       "sicCode": {
         "title": "sicCode",
         "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
         "properties": {
           "meta": {
             "$ref": "../models/individualMeta.v1.json"
           },
           "data": {
-            "$ref": "#/components/schemas/productSicCodeResponse"
+            "$ref": "#/components/schemas/sicCodeResponse"
           },
           "links": {
             "type": "object",
@@ -1394,10 +1397,7 @@
               }
             }
           }
-        },
-        "x-tags": [
-          "Misc Models"
-        ]
+        }
       },
       "sicCodeResponse": {
         "title": "sicCodeResponse",
