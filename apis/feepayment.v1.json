@@ -871,13 +871,79 @@
         }
       },
       "delete": {
-        "summary": "",
+        "summary": "Delete an event",
         "operationId": "delete-feeSchedule-id-events-eventId",
         "responses": {
-          "200": {
-            "description": "OK"
+          "204": {
+            "description": "No Content",
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
           }
-        }
+        },
+        "tags": [
+          "FeePaymentSchedule"
+        ],
+        "description": "Remove an event from a fee schedule.\n\nRequires the feeschedule_writer role to access.",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-idempotency-key"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          }
+        ]
       },
       "parameters": [
         {
@@ -903,7 +969,7 @@
         "tags": [
           "FeePaymentSchedule"
         ],
-        "operationId": "GetScheduleFees",
+        "operationId": "get-schedule-fees",
         "parameters": [
           {
             "name": "scheduleId",
@@ -911,16 +977,6 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Bearer token",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "default": "Bearer "
             }
           }
         ],
@@ -935,6 +991,91 @@
               }
             }
           },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get schedule fees",
+        "description": "Get all fees for a schedule.\n\nRequires the feeschedule_reader role to access.",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Add a fee",
+        "operationId": "post-feeSchedule-id-fees",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "headers": {
+              "Etag": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Location": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleObjectExample_ResourceBase_FeeScheduleAttributes_"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
           "404": {
             "description": "Not Found",
             "content": {
@@ -945,8 +1086,18 @@
               }
             }
           },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
           "422": {
-            "description": "Client Error",
+            "description": "Unprocessable Entity",
             "content": {
               "application/json": {
                 "schema": {
@@ -955,14 +1106,36 @@
               }
             }
           }
-        }
-      },
-      "post": {
-        "summary": "",
-        "operationId": "post-feeSchedule-id-fees",
-        "responses": {
-          "200": {
-            "description": "OK"
+        },
+        "description": "Adds a fee onto the schedule.\n\nRequires the feeschedule_writer role to access.",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-idempotency-key"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeeAttributes"
+              }
+            }
           }
         }
       },
