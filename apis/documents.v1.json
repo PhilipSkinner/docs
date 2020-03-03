@@ -1,16 +1,18 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "documents",
+    "title": "Documents API",
     "version": "1.0",
     "contact": {
       "name": "Philip Skinner",
       "email": "philip.skinner@cds.co.uk"
-    }
+    },
+    "description": "Manages the creation of envelopes and documents.\n\nEvery document belongs in an envelope, and an envelope can contain more than 1 document.\n\nThis API fronts the async process that will generate the binary for a document, or the API may be used to insert pregenerated binary documents.\n\nThe following roles are required to access this API:\n\n* documents_reader\n* documents_writer\n* documents_remover"
   },
   "servers": [
     {
-      "url": "http://localhost:3000"
+      "url": "http://localhost:3000",
+      "description": "Mock"
     }
   ],
   "paths": {
@@ -94,7 +96,8 @@
             "in": "query",
             "name": "perpage"
           }
-        ]
+        ],
+        "description": "Gets a paginated list of all documents held within an envelope.\n\nRequires the document_reader role to access."
       },
       "post": {
         "summary": "Add a document to an envelope",
@@ -205,7 +208,8 @@
               }
             }
           }
-        }
+        },
+        "description": "Create a document and add it to the envelope.\n\nCan either be a request to generate a document of a specific type or the operation may contain a multipart payload that contains the binary document.\n\nIf the request is multipart then the JSON payload must be sent under the name of \"payload\" and the document binary must be sent under the name \"document\".\n\nRequires the role of document_writer to access."
       },
       "parameters": [
         {
@@ -239,7 +243,9 @@
       ],
       "get": {
         "summary": "Get a single envelope document",
-        "tags": [],
+        "tags": [
+          "Documents"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -303,10 +309,11 @@
             "in": "header",
             "name": "If-match"
           }
-        ]
+        ],
+        "description": "Fetches a single document within an envelope.\n\nRequires the role documents_reader to access."
       },
       "put": {
-        "summary": "",
+        "summary": "Update a document",
         "operationId": "put-documents-documentId",
         "responses": {
           "202": {
@@ -406,10 +413,14 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Documents"
+        ],
+        "description": "Updates a document within the envelope.\n\nCan contain the binary blob of the document.\n\nIf the request is multipart then the JSON payload must be sent under the name of \"payload\" and the document binary must be sent under the name \"document\".\n\nRequires the role of document_writer to access."
       },
       "delete": {
-        "summary": "",
+        "summary": "Delete a document",
         "operationId": "delete-documents-documentId",
         "responses": {
           "204": {
@@ -476,13 +487,19 @@
             "in": "header",
             "name": "If-match"
           }
-        ]
+        ],
+        "tags": [
+          "Documents"
+        ],
+        "description": "Hard deletes a document from an envelope, including the binary.\n\nRequires a role of document_remover to access."
       }
     },
     "/envelope": {
       "get": {
         "summary": "Get all envelopes",
-        "tags": [],
+        "tags": [
+          "Envelopes"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -549,8 +566,16 @@
             },
             "in": "query",
             "name": "perpage"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "scope"
           }
-        ]
+        ],
+        "description": "Get a paginated list of all envelopes.\n\nThe scope of the envelope can be queried.\n\nRequires the role document_reader to access."
       },
       "post": {
         "summary": "Create an envelope",
@@ -627,7 +652,11 @@
             }
           },
           "description": ""
-        }
+        },
+        "tags": [
+          "Envelopes"
+        ],
+        "description": "Creates a new envelope to hold one or more documents.\n\nRequires the role document_writer to access."
       }
     },
     "/envelope/{envelopeId}": {
@@ -643,7 +672,9 @@
       ],
       "get": {
         "summary": "Fetch an envelope",
-        "tags": [],
+        "tags": [
+          "Envelopes"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -707,10 +738,11 @@
             "in": "header",
             "name": "If-match"
           }
-        ]
+        ],
+        "description": "Fetch a single envelope. This request also returns all documents held within the envelope within the included section.\n\nRequires the role document_reader to access."
       },
       "put": {
-        "summary": "",
+        "summary": "Update an envelope",
         "operationId": "put-envelope-envelopeId",
         "responses": {
           "202": {
@@ -791,10 +823,14 @@
             }
           },
           "description": ""
-        }
+        },
+        "tags": [
+          "Envelopes"
+        ],
+        "description": "Updates an envelope.\n\nRequires the role document_writer to access."
       },
       "delete": {
-        "summary": "",
+        "summary": "Delete an envelope",
         "operationId": "delete-envelope-envelopeId",
         "responses": {
           "204": {
@@ -851,7 +887,11 @@
             "in": "header",
             "name": "If-match"
           }
-        ]
+        ],
+        "tags": [
+          "Envelopes"
+        ],
+        "description": "Deletes an envelope and all documents held within it.\n\nRequires the role document_remover to access."
       }
     }
   },
@@ -882,7 +922,10 @@
             }
           }
         },
-        "description": ""
+        "description": "",
+        "x-tags": [
+          "Misc Models"
+        ]
       },
       "documentResponse": {
         "title": "documentResponse",
@@ -900,7 +943,10 @@
           "attributes": {
             "$ref": "#/components/schemas/documentAttributes"
           }
-        }
+        },
+        "x-tags": [
+          "Misc Models"
+        ]
       },
       "documentAttributes": {
         "title": "documentAttributes",
@@ -954,7 +1000,10 @@
               "$ref": "#/components/schemas/documentResponse"
             }
           }
-        }
+        },
+        "x-tags": [
+          "Misc Models"
+        ]
       },
       "envelopeResponse": {
         "title": "envelopeResponse",
@@ -972,11 +1021,17 @@
           "attributes": {
             "$ref": "#/components/schemas/envelopeAttributes"
           }
-        }
+        },
+        "x-tags": [
+          "Misc Models"
+        ]
       },
       "envelopeAttributes": {
         "title": "envelopeAttributes",
         "type": "object",
+        "x-tags": [
+          "Envelopes"
+        ],
         "properties": {
           "createdBy": {
             "type": "string"
@@ -989,6 +1044,12 @@
           },
           "updatedDate": {
             "type": "string"
+          },
+          "scope": {
+            "type": "array",
+            "items": {
+              "$ref": "../models/objectPointer.v1.json"
+            }
           }
         }
       }
@@ -999,5 +1060,13 @@
         "scheme": "bearer"
       }
     }
-  }
+  },
+  "tags": [
+    {
+      "name": "Documents"
+    },
+    {
+      "name": "Envelopes"
+    }
+  ]
 }
