@@ -6,7 +6,8 @@
     "contact": {
       "name": "Philip Skinner",
       "email": "philip.skinner@cds.co.uk"
-    }
+    },
+    "description": "Manages the lifecycle of guarantees."
   },
   "servers": [
     {
@@ -892,6 +893,29 @@
                       "type": "number"
                     }
                   }
+                }
+              }
+            }
+          },
+          "currentStatus": {
+            "type": "string"
+          },
+          "statusHistory": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "from": {
+                  "type": "string"
+                },
+                "to": {
+                  "type": "string"
+                },
+                "date": {
+                  "type": "string"
+                },
+                "by": {
+                  "type": "string"
                 }
               }
             }
