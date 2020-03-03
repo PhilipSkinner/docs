@@ -481,6 +481,13 @@
                   }
                 }
               }
+            },
+            "headers": {
+              "Etag": {
+                "schema": {
+                  "type": "string"
+                }
+              }
             }
           },
           "401": {
@@ -560,6 +567,11 @@
             },
             "headers": {
               "Etag": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Location": {
                 "schema": {
                   "type": "string"
                 }
@@ -866,7 +878,14 @@
         "operationId": "delete-settlements-settlementId",
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "No Content",
+            "headers": {
+              "Etag": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized",
@@ -965,6 +984,13 @@
                   }
                 }
               }
+            },
+            "headers": {
+              "Etag": {
+                "schema": {
+                  "type": "string"
+                }
+              }
             }
           },
           "401": {
@@ -1037,6 +1063,11 @@
             "description": "Created",
             "headers": {
               "Etag": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Location": {
                 "schema": {
                   "type": "string"
                 }
@@ -1350,7 +1381,14 @@
         "operationId": "delete-recoveries-recoveryId",
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "No Content",
+            "headers": {
+              "Etag": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized",
@@ -1511,6 +1549,11 @@
             "description": "Created",
             "headers": {
               "Etag": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Location": {
                 "schema": {
                   "type": "string"
                 }
@@ -1943,6 +1986,11 @@
                 "schema": {
                   "type": "string"
                 }
+              },
+              "Location": {
+                "schema": {
+                  "type": "string"
+                }
               }
             },
             "content": {
@@ -2369,6 +2417,11 @@
                 "schema": {
                   "type": "string"
                 }
+              },
+              "Location": {
+                "schema": {
+                  "type": "string"
+                }
               }
             },
             "content": {
@@ -2531,7 +2584,14 @@
         "operationId": "delete-invoices-invoiceId-settlements-settlementId",
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "No Content",
+            "headers": {
+              "Etag": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized",
@@ -2696,7 +2756,14 @@
         "operationId": "delete-invoices-invoiceId-recoveries-recoveryId",
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "No Content",
+            "headers": {
+              "Etag": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized",
@@ -3268,7 +3335,14 @@
         "operationId": "delete-statements-statementId-settlements-settlementId",
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "No Content",
+            "headers": {
+              "Etag": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized",
@@ -3634,7 +3708,14 @@
         "operationId": "delete-statements-statementId-recoveries-recoveryId",
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "No Content",
+            "headers": {
+              "Etag": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized",

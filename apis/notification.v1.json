@@ -1742,7 +1742,8 @@
         "operationId": "delete-notifications-notificationId-receipts-receiptId",
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "No Content",
+            "headers": {}
           },
           "401": {
             "description": "Unauthorized",
@@ -1849,6 +1850,13 @@
                       "$ref": "../models/paginationLinks.v1.json"
                     }
                   }
+                }
+              }
+            },
+            "headers": {
+              "Etag": {
+                "schema": {
+                  "type": "string"
                 }
               }
             }
@@ -2110,7 +2118,14 @@
         "operationId": "delete-subscriptions-subscriptionId-recipients-recipientId",
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "No Content",
+            "headers": {
+              "Etag": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized",
