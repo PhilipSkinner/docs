@@ -898,8 +898,7 @@
             "in": "header",
             "name": "If-match"
           }
-        ],
-        "requestBody": {}
+        ]
       }
     },
     "/recipients": {
@@ -1335,8 +1334,7 @@
             "in": "header",
             "name": "If-match"
           }
-        ],
-        "requestBody": {}
+        ]
       }
     },
     "/notifications/{notificationId}/receipts": {
