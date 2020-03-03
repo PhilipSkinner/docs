@@ -2290,17 +2290,164 @@
         }
       ],
       "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
-        "responses": {},
-        "operationId": "get-invoices-invoiceId-settlements"
-      },
-      "post": {
-        "summary": "",
-        "operationId": "post-invoices-invoiceId-settlements",
+        "summary": "Get all settlements in an invoice",
+        "tags": [
+          "Invoices"
+        ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "headers": {
+              "Etag": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../models/paginationMeta.v1.json"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/settlementResponse"
+                      }
+                    },
+                    "links": {
+                      "$ref": "../models/paginationLinks.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-invoices-invoiceId-settlements",
+        "description": "Returns a paginated response including settlements for the given invoice.\n\nRequires the claims_reader role to access.",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          }
+        ]
+      },
+      "post": {
+        "summary": "Add settlement to invoice",
+        "operationId": "post-invoices-invoiceId-settlements",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "headers": {
+              "Etag": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/settlementResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          }
+        },
+        "description": "Add a settlement into an invoice.\n\nRequires the claims_writer role to access.",
+        "tags": [
+          "Invoices"
+        ],
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-idempotency-key"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../models/objectPointer.v1.json"
+              }
+            }
           }
         }
       }
@@ -2325,10 +2472,116 @@
         }
       ],
       "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
-        "responses": {},
-        "operationId": "get-invoices-invoiceId-settlements-settlementId"
+        "summary": "Get a settlement on an invoice",
+        "tags": [
+          "Invoices"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Etag": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/settlement"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-invoices-invoiceId-settlements-settlementId",
+        "description": "Fetch a single settlement on an invoice.\n\nRequires the claims_reader role to access.",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          }
+        ]
+      },
+      "delete": {
+        "summary": "",
+        "operationId": "delete-invoices-invoiceId-settlements-settlementId",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          }
+        },
+        "description": "Remove a settlement from an invoice.\n\nRequires the claims_writer role to access.",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-idempotency-key"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          }
+        ]
       }
     },
     "/invoices/{invoiceId}/recoveries/{recoveryId}": {
@@ -2355,6 +2608,15 @@
         "tags": [],
         "responses": {},
         "operationId": "get-invoices-invoiceId-recoveries-recoveryId"
+      },
+      "delete": {
+        "summary": "",
+        "operationId": "delete-invoices-invoiceId-recoveries-recoveryId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/invoices/{invoiceId}/recoveries": {
@@ -2373,6 +2635,15 @@
         "tags": [],
         "responses": {},
         "operationId": "get-invoices-invoiceId-recoveries"
+      },
+      "post": {
+        "summary": "",
+        "operationId": "post-invoices-invoiceId-recoveries",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/statements/{statementId}/settlements": {
@@ -2391,6 +2662,15 @@
         "tags": [],
         "responses": {},
         "operationId": "get-statements-statementId-settlements"
+      },
+      "post": {
+        "summary": "",
+        "operationId": "post-statements-statementId-settlements",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/statements/{statementId}/settlements/{settlementId}": {
@@ -2417,6 +2697,15 @@
         "tags": [],
         "responses": {},
         "operationId": "get-statements-statementId-settlements-settlementId"
+      },
+      "delete": {
+        "summary": "",
+        "operationId": "delete-statements-statementId-settlements-settlementId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/statements/{statementId}/recoveries": {
@@ -2435,6 +2724,15 @@
         "tags": [],
         "responses": {},
         "operationId": "get-statements-statementId-recoveries"
+      },
+      "post": {
+        "summary": "",
+        "operationId": "post-statements-statementId-recoveries",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/statements/{statementId}/recoveries/{recoveryId}": {
@@ -2461,6 +2759,15 @@
         "tags": [],
         "responses": {},
         "operationId": "get-statements-statementId-recoveries-recoveryId"
+      },
+      "delete": {
+        "summary": "",
+        "operationId": "delete-statements-statementId-recoveries-recoveryId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     }
   },
