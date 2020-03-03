@@ -1,19 +1,27 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "claim",
-    "version": "1.0"
+    "title": "Claims API",
+    "version": "1.0",
+    "description": "Manages all claims based resources, including:\n\n* Claims\n* Settlements\n* Recoveries\n* Statements\n* Invoices\n\nRequires the following roles to use:\n\n* claims_reader\n* claims_writer\n* claims_remover",
+    "contact": {
+      "name": "Philip Skinner",
+      "email": "philip.skinner@cds.co.uk"
+    }
   },
   "servers": [
     {
-      "url": "http://localhost:3000"
+      "url": "http://localhost:3000",
+      "description": "Mock"
     }
   ],
   "paths": {
     "/claims": {
       "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
+        "summary": "Get all claims",
+        "tags": [
+          "Claims"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -65,10 +73,34 @@
           {
             "Bearer token": []
           }
+        ],
+        "description": "Get a paginated list of claims. Can be filtered by scope.\n\nRequires the claims_reader role to access.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "page"
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "perpage"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "scope"
+          }
         ]
       },
       "post": {
-        "summary": "",
+        "summary": "Create a claim",
         "operationId": "post-requests",
         "responses": {
           "201": {
@@ -147,7 +179,11 @@
             }
           },
           "description": ""
-        }
+        },
+        "description": "Create a new claim.\n\nRequires the claim_writer role to access.",
+        "tags": [
+          "Claims"
+        ]
       },
       "parameters": []
     },
@@ -163,8 +199,10 @@
         }
       ],
       "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
+        "summary": "Get a claim",
+        "tags": [
+          "Claims"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -228,10 +266,11 @@
             "in": "header",
             "name": "If-match"
           }
-        ]
+        ],
+        "description": "Fetches a single claim.\n\nRequires the claims_reader role to access."
       },
       "put": {
-        "summary": "",
+        "summary": "Update a claim",
         "operationId": "put-requests-requestId",
         "responses": {
           "202": {
@@ -332,7 +371,11 @@
             }
           },
           "description": ""
-        }
+        },
+        "description": "Updates a claim.\n\nRequires the claims_writer role to access.",
+        "tags": [
+          "Claims"
+        ]
       },
       "delete": {
         "summary": "",
@@ -402,13 +445,16 @@
             "in": "header",
             "name": "If-match"
           }
-        ]
+        ],
+        "description": "Delete a claim.\n\nRequires the claims_remover role to access."
       }
     },
     "/claims/{claimId}/settlements": {
       "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
+        "summary": "Get all settlements",
+        "tags": [
+          "Settlements"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -478,11 +524,26 @@
             },
             "in": "header",
             "name": "If-match"
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "page"
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "perpage"
           }
-        ]
+        ],
+        "description": "Get a paginated list of all settlements for a claim.\n\nRequires the claims_reader role to access."
       },
       "post": {
-        "summary": "",
+        "summary": "Create a settlement",
         "operationId": "post-settlements",
         "responses": {
           "201": {
@@ -582,7 +643,11 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Settlements"
+        ],
+        "description": "Create a new settlement on a claim.\n\nRequires the claims_writer role to access."
       },
       "parameters": [
         {
@@ -615,8 +680,10 @@
         }
       ],
       "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
+        "summary": "Get a settlement",
+        "tags": [
+          "Settlements"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -680,10 +747,11 @@
             "in": "header",
             "name": "If-match"
           }
-        ]
+        ],
+        "description": "Fetch a single settlement on a claim.\n\nRequires the claims_reader role to access."
       },
       "put": {
-        "summary": "",
+        "summary": "Update a settlement",
         "operationId": "put-settlements-settlementId",
         "responses": {
           "202": {
@@ -784,7 +852,11 @@
             }
           },
           "description": ""
-        }
+        },
+        "tags": [
+          "Settlements"
+        ],
+        "description": "Update a settlement on a claim.\n\nRequires the claims_writer role to access."
       },
       "delete": {
         "summary": "",
@@ -854,7 +926,11 @@
             "in": "header",
             "name": "If-match"
           }
-        ]
+        ],
+        "tags": [
+          "Settlements"
+        ],
+        "description": "Delete a settlement from a claim.\n\nRequires the claims_remover role to access."
       }
     },
     "/claims/{claimId}/recoveries": {
@@ -862,7 +938,8 @@
         "summary": "Your GET endpoint",
         "tags": [],
         "responses": {},
-        "operationId": "get-recoveries"
+        "operationId": "get-recoveries",
+        "description": ""
       },
       "post": {
         "summary": "",
@@ -1057,7 +1134,10 @@
           "attributes": {
             "$ref": "#/components/schemas/claimAttributes"
           }
-        }
+        },
+        "x-tags": [
+          "Misc Models"
+        ]
       },
       "claimAttributes": {
         "title": "claimAttributes",
@@ -1074,8 +1154,17 @@
           },
           "updatedDate": {
             "type": "string"
+          },
+          "scope": {
+            "type": "array",
+            "items": {
+              "$ref": "../models/objectPointer.v1.json"
+            }
           }
-        }
+        },
+        "x-tags": [
+          "Claims"
+        ]
       },
       "claim": {
         "title": "claim",
@@ -1098,7 +1187,10 @@
               }
             }
           }
-        }
+        },
+        "x-tags": [
+          "Misc Models"
+        ]
       },
       "settlementAttributes": {
         "title": "settlementAttributes",
@@ -1116,7 +1208,10 @@
           "updatedDate": {
             "type": "string"
           }
-        }
+        },
+        "x-tags": [
+          "Settlements"
+        ]
       },
       "settlementResponse": {
         "title": "settlementResponse",
@@ -1134,7 +1229,10 @@
           "attributes": {
             "$ref": "#/components/schemas/settlementAttributes"
           }
-        }
+        },
+        "x-tags": [
+          "Misc Models"
+        ]
       },
       "settlement": {
         "title": "settlement",
@@ -1159,6 +1257,36 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-tags": [
+          "Misc Models"
+        ]
+      },
+      "recovery": {
+        "title": "recovery",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "recoveryResponse": {
+        "title": "recoveryResponse",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "recoveryAttributes": {
+        "title": "recoveryAttributes",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
           }
         }
       }
