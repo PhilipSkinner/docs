@@ -2277,6 +2277,191 @@
           }
         ]
       }
+    },
+    "/invoices/{invoiceId}/settlements": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "invoiceId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-invoices-invoiceId-settlements"
+      },
+      "post": {
+        "summary": "",
+        "operationId": "post-invoices-invoiceId-settlements",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/invoices/{invoiceId}/settlements/{settlementId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "invoiceId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "settlementId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-invoices-invoiceId-settlements-settlementId"
+      }
+    },
+    "/invoices/{invoiceId}/recoveries/{recoveryId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "invoiceId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "recoveryId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-invoices-invoiceId-recoveries-recoveryId"
+      }
+    },
+    "/invoices/{invoiceId}/recoveries": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "invoiceId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-invoices-invoiceId-recoveries"
+      }
+    },
+    "/statements/{statementId}/settlements": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "statementId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-statements-statementId-settlements"
+      }
+    },
+    "/statements/{statementId}/settlements/{settlementId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "statementId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "settlementId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-statements-statementId-settlements-settlementId"
+      }
+    },
+    "/statements/{statementId}/recoveries": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "statementId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-statements-statementId-recoveries"
+      }
+    },
+    "/statements/{statementId}/recoveries/{recoveryId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "statementId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "recoveryId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-statements-statementId-recoveries-recoveryId"
+      }
     }
   },
   "components": {
@@ -2308,6 +2493,9 @@
       "claimAttributes": {
         "title": "claimAttributes",
         "type": "object",
+        "x-tags": [
+          "Claims"
+        ],
         "properties": {
           "createdBy": {
             "type": "string"
@@ -2321,20 +2509,75 @@
           "updatedDate": {
             "type": "string"
           },
-          "scope": {
+          "lender": {
+            "$ref": "../models/objectPointer.v1.json"
+          },
+          "guarantee": {
+            "$ref": "../models/objectPointer.v1.json"
+          },
+          "standardProcessesCompleted": {
+            "type": "boolean"
+          },
+          "dateOfClaim": {
+            "type": "string"
+          },
+          "outstandingCapitalPreRecovery": {
+            "type": "number"
+          },
+          "reasonForFailure": {
+            "type": "string"
+          },
+          "principalPrivateResidenceRecoveries": {
+            "type": "boolean"
+          },
+          "notes": {
+            "type": "string"
+          },
+          "claimValue": {
+            "type": "number"
+          },
+          "currentStatus": {
+            "type": "string"
+          },
+          "statusHistory": {
             "type": "array",
-            "items": {
-              "$ref": "../models/objectPointer.v1.json"
-            }
+            "items": {}
+          },
+          "approved": {
+            "type": "boolean",
+            "description": "Cannot be true at the same time as rejected."
+          },
+          "rejected": {
+            "type": "boolean",
+            "description": "Cannot be true at the same time as approved."
+          },
+          "settlementDate": {
+            "type": "string"
+          },
+          "rejectionReason": {
+            "type": "string"
+          },
+          "enhancedAuditRequired": {
+            "type": "boolean"
+          },
+          "approvedAmount": {
+            "type": "number"
+          },
+          "approvalComments": {
+            "type": "string"
           }
         },
-        "x-tags": [
-          "Claims"
+        "required": [
+          "lender",
+          "guarantee"
         ]
       },
       "claim": {
         "title": "claim",
         "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
         "properties": {
           "meta": {
             "$ref": "../models/individualMeta.v1.json"
@@ -2353,10 +2596,7 @@
               }
             }
           }
-        },
-        "x-tags": [
-          "Misc Models"
-        ]
+        }
       },
       "settlementAttributes": {
         "title": "settlementAttributes",
@@ -2378,6 +2618,39 @@
             "type": "string"
           },
           "invoiceId": {
+            "type": "string"
+          },
+          "datePaid": {
+            "type": "string"
+          },
+          "amountPaid": {
+            "type": "number"
+          },
+          "isAdjustment": {
+            "type": "boolean"
+          },
+          "adjustmentDate": {
+            "type": "string"
+          },
+          "adjustmentValue": {
+            "type": "string"
+          },
+          "adjustmentComments": {
+            "type": "string"
+          },
+          "approved": {
+            "type": "boolean"
+          },
+          "rejected": {
+            "type": "boolean"
+          },
+          "approvedAmount": {
+            "type": "number"
+          },
+          "approvalComment": {
+            "type": "string"
+          },
+          "rejectedComment": {
             "type": "string"
           }
         }
@@ -2503,6 +2776,56 @@
           },
           "invoiceId": {
             "type": "string"
+          },
+          "recoveryDate": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "EFG Specific",
+              "Shared",
+              "Other Net Proceeds"
+            ]
+          },
+          "amountRecovered": {
+            "type": "number"
+          },
+          "amountRepayable": {
+            "type": "number"
+          },
+          "priorSimultaneousExposureAmount": {
+            "type": "number"
+          },
+          "subsequentExposure": {
+            "type": "number"
+          },
+          "personalGuarantee": {
+            "type": "boolean"
+          },
+          "guarantees": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "amount": {
+                  "type": "number"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "EFG Facility",
+                    "None EFG Facility"
+                  ]
+                }
+              }
+            }
+          },
+          "dateRecieved": {
+            "type": "string"
+          },
+          "amountReceived": {
+            "type": "number"
           }
         }
       },
@@ -2556,6 +2879,9 @@
       "invoiceAttributes": {
         "title": "invoiceAttributes",
         "type": "object",
+        "x-tags": [
+          "Invoices"
+        ],
         "properties": {
           "createdBy": {
             "type": "string"
@@ -2581,10 +2907,7 @@
           "document": {
             "$ref": "../models/objectPointer.v1.json"
           }
-        },
-        "x-tags": [
-          "Invoices"
-        ]
+        }
       },
       "statement": {
         "title": "statement",
