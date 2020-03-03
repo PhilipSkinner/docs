@@ -951,6 +951,10 @@
       "documentAttributes": {
         "title": "documentAttributes",
         "type": "object",
+        "x-tags": [
+          "Documents"
+        ],
+        "description": "",
         "properties": {
           "createdBy": {
             "type": "string"
@@ -963,12 +967,17 @@
           },
           "updatedDate": {
             "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "blobUrl": {
+            "type": "string"
           }
-        },
-        "x-tags": [
-          "Documents"
-        ],
-        "description": ""
+        }
       },
       "envelope": {
         "title": "envelope",
@@ -1050,6 +1059,9 @@
             "items": {
               "$ref": "../models/objectPointer.v1.json"
             }
+          },
+          "data": {
+            "type": "object"
           }
         }
       }

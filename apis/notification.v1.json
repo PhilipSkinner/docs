@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "BBB.Notifications.API",
+    "title": "Notifications API",
     "version": "1.0",
     "description": "API for modelling notifications for the BBB platform.",
     "contact": {
@@ -69,10 +69,73 @@
           }
         },
         "operationId": "get-notifications",
-        "description": "Can be used for fetching a paginated list of all notifications.\n\nRole required: notifications_reader",
+        "description": "Can be used for fetching a paginated list of notifications.\n\nAllows for simple searching, and if a token is presented, the system will automatically filter by its scope.\n\nRole required: notifications_reader",
         "security": [
           {
             "Authorization": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "subject"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "sent",
+            "description": "Set to true to include sent notifications, false to exclude."
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "received",
+            "description": "Set to true to include received notifications, false to exclude."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "email",
+            "description": ""
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "seen",
+            "description": "Set to true to include seen notifications, false to exclude."
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "actioned",
+            "description": "Set to true to include actioned notifications, false to exclude."
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "page"
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "perpage"
           }
         ]
       },
@@ -89,6 +152,11 @@
                 },
                 "description": "URI of the newly created resource.",
                 "required": true
+              },
+              "Etag": {
+                "schema": {
+                  "type": "string"
+                }
               }
             },
             "content": {
@@ -147,7 +215,16 @@
         "tags": [
           "Notifications"
         ],
-        "description": "Creates a new notification.\n\nRole required: notifications_writer"
+        "description": "Creates a new notification.\n\nRole required: notifications_writer",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-idempotency-key"
+          }
+        ]
       }
     },
     "/notifications/{notificationId}": {
@@ -163,6 +240,13 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/notificationResponse"
+                }
+              }
+            },
+            "headers": {
+              "Etag": {
+                "schema": {
+                  "type": "string"
                 }
               }
             }
@@ -205,7 +289,16 @@
             "Authorization": []
           }
         ],
-        "description": "Fetch a single notification.\n\nRole required: notifications_reader"
+        "description": "Fetch a single notification.\n\nRole required: notifications_reader",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          }
+        ]
       },
       "parameters": [
         {
@@ -261,6 +354,16 @@
               }
             }
           },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
           "422": {
             "description": "Unprocessable Entity",
             "content": {
@@ -289,7 +392,23 @@
         "tags": [
           "Notifications"
         ],
-        "description": "Update a notification.\n\nRole required: notifications_writer"
+        "description": "Update a notification.\n\nRole required: notifications_writer",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-idempotency-key"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          }
+        ]
       },
       "delete": {
         "summary": "Delete a notification",
@@ -328,6 +447,16 @@
               }
             }
           },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
           "422": {
             "description": "Unprocessable Entity",
             "content": {
@@ -347,7 +476,23 @@
         "tags": [
           "Notifications"
         ],
-        "description": "Remove a notification.\n\nRole required: notifications_writer"
+        "description": "Remove a notification.\n\nRole required: notifications_remover",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-idempotency-key"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          }
+        ]
       }
     },
     "/subscriptions": {
@@ -480,7 +625,16 @@
         "tags": [
           "Subscriptions"
         ],
-        "description": "Create a new subscription.\n\nRole required: subscriptions_writer"
+        "description": "Create a new subscription.\n\nRole required: subscriptions_writer",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-idempotency-key"
+          }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}": {
@@ -506,6 +660,13 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/subscriptionResponse"
+                }
+              }
+            },
+            "headers": {
+              "Etag": {
+                "schema": {
+                  "type": "string"
                 }
               }
             }
@@ -547,7 +708,16 @@
             "Authorization": []
           }
         ],
-        "description": "Fetch a single subscription.\n\nRole required: subscriptions_reader"
+        "description": "Fetch a single subscription.\n\nRole required: subscriptions_reader",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          }
+        ]
       },
       "put": {
         "summary": "Update a subscription",
@@ -559,6 +729,13 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/subscriptionResponse"
+                }
+              }
+            },
+            "headers": {
+              "Etag": {
+                "schema": {
+                  "type": "string"
                 }
               }
             }
@@ -585,6 +762,16 @@
           },
           "404": {
             "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
             "content": {
               "application/json": {
                 "schema": {
@@ -621,7 +808,23 @@
         "tags": [
           "Subscriptions"
         ],
-        "description": "Update a subscription.\n\nRole required: subscriptions_writer"
+        "description": "Update a subscription.\n\nRole required: subscriptions_writer",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-idempotency-key"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          }
+        ]
       },
       "delete": {
         "summary": "Delete a subscription",
@@ -659,6 +862,16 @@
                 }
               }
             }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -669,7 +882,24 @@
         "tags": [
           "Subscriptions"
         ],
-        "description": "Delete a subscription.\n\nRole required: subscriptions_writer"
+        "description": "Delete a subscription.\n\nRole required: subscriptions_writer",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-idempotency-key"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          }
+        ],
+        "requestBody": {}
       }
     },
     "/recipients": {
@@ -755,6 +985,11 @@
                   "type": "string"
                 },
                 "description": "URI of the newly created resource."
+              },
+              "Etag": {
+                "schema": {
+                  "type": "string"
+                }
               }
             },
             "content": {
@@ -795,6 +1030,16 @@
               }
             }
           },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
           "422": {
             "description": "Unprocessable Entity",
             "content": {
@@ -823,7 +1068,16 @@
         "tags": [
           "Recipients"
         ],
-        "description": "Create a new recipient.\n\nRole required: recipients_writer"
+        "description": "Create a new recipient.\n\nRole required: recipients_writer",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-idempotency-key"
+          }
+        ]
       }
     },
     "/recipients/{recipientId}": {
@@ -849,6 +1103,13 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/recipientResponse"
+                }
+              }
+            },
+            "headers": {
+              "Etag": {
+                "schema": {
+                  "type": "string"
                 }
               }
             }
@@ -889,6 +1150,15 @@
         "security": [
           {
             "Authorization": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
           }
         ]
       },
@@ -936,6 +1206,16 @@
               }
             }
           },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
           "422": {
             "description": "Unprocessable Entity",
             "content": {
@@ -965,7 +1245,23 @@
         "tags": [
           "Recipients"
         ],
-        "description": "Update a recipient.\n\nRole required: recipients_writer"
+        "description": "Update a recipient.\n\nRole required: recipients_writer",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-idempotency-key"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          }
+        ]
       },
       "delete": {
         "summary": "Delete a recipient",
@@ -1003,6 +1299,16 @@
                 }
               }
             }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -1013,7 +1319,24 @@
         "tags": [
           "Recipients"
         ],
-        "description": "Delete a recipient.\n\nRole required: recipients_writer"
+        "description": "Delete a recipient.\n\nRole required: recipients_remover",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-idempotency-key"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          }
+        ],
+        "requestBody": {}
       }
     },
     "/notifications/{notificationId}/receipts": {
@@ -1084,7 +1407,16 @@
             "Authorization": []
           }
         ],
-        "description": "Get receipts for a notification. Receipts allow you to see when a notification was sent, received, seen or actioned.\n\nRole required: notifications_reader"
+        "description": "Get receipts for a notification. Receipts allow you to see when a notification was sent, received, seen or actioned.\n\nRole required: notifications_reader",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          }
+        ]
       },
       "post": {
         "summary": "Create a receipt",
@@ -1098,6 +1430,11 @@
                   "type": "string"
                 },
                 "description": "URI of the newly created resource."
+              },
+              "Etag": {
+                "schema": {
+                  "type": "string"
+                }
               }
             },
             "content": {
@@ -1120,6 +1457,16 @@
           },
           "403": {
             "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
             "content": {
               "application/json": {
                 "schema": {
@@ -1156,7 +1503,23 @@
         "tags": [
           "Receipts"
         ],
-        "description": "Create a new receipt to model when the notification has been sent, seen, received or actioned by a recipient.\n\nRole required: notifications_writer"
+        "description": "Create a new receipt to model when the notification has been sent, seen, received or actioned by a recipient.\n\nRole required: notifications_writer",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-idempotency-key"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          }
+        ]
       }
     },
     "/notifications/{notificationId}/receipts/{receiptId}": {
@@ -1190,6 +1553,13 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/receiptResponse"
+                }
+              }
+            },
+            "headers": {
+              "Etag": {
+                "schema": {
+                  "type": "string"
                 }
               }
             }
@@ -1232,7 +1602,16 @@
             "Authorization": []
           }
         ],
-        "description": "Fetch a single receipt.\n\nRole required: notifications_reader"
+        "description": "Fetch a single receipt.\n\nRole required: notifications_reader",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          }
+        ]
       },
       "put": {
         "summary": "Update a receipt",
@@ -1278,6 +1657,16 @@
               }
             }
           },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
           "422": {
             "description": "Unprocessable Entity",
             "content": {
@@ -1306,7 +1695,23 @@
         "tags": [
           "Receipts"
         ],
-        "description": "Update a receipt.\n\nRole required: notifications_writer"
+        "description": "Update a receipt.\n\nRole required: notifications_writer",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-idempotency-key"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          }
+        ]
       },
       "delete": {
         "summary": "Delete a receipt",
@@ -1344,6 +1749,16 @@
                 }
               }
             }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -1354,123 +1769,24 @@
         "tags": [
           "Receipts"
         ],
-        "description": "Delete a receipt.\n\nRole required: notifications_writer"
-      }
-    },
-    "/notifications/.feed/{recipientId}": {
-      "get": {
-        "summary": "Notifications feed",
-        "tags": [
-          "Notifications"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "meta": {
-                      "$ref": "../models/paginationMeta.v1.json"
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/notification"
-                      }
-                    },
-                    "links": {
-                      "$ref": "../models/paginationLinks.v1.json"
-                    },
-                    "included": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/receipt"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-notifications-.feed",
-        "security": [
-          {
-            "Authorization": []
-          }
-        ],
-        "description": "Fetch a feed of all notifications for a recipient. \n\nFiltering available via query parameters.\n\nRole required: notifications_reader",
+        "description": "Delete a receipt.\n\nRole required: notifications_remover",
         "parameters": [
           {
             "schema": {
-              "type": "boolean"
+              "type": "string"
             },
-            "in": "query",
-            "name": "sent",
-            "description": "Set to true to include sent notifications, false to exclude.",
-            "required": true
+            "in": "header",
+            "name": "X-idempotency-key"
           },
           {
             "schema": {
-              "type": "boolean"
+              "type": "string"
             },
-            "in": "query",
-            "name": "received",
-            "description": "Set to true to include received notifications, false to exclude.",
-            "required": true
-          },
-          {
-            "schema": {
-              "type": "boolean"
-            },
-            "in": "query",
-            "name": "seen",
-            "description": "Set to true to include seen notifications, false to exclude.",
-            "required": true
-          },
-          {
-            "schema": {
-              "type": "boolean"
-            },
-            "in": "query",
-            "name": "actioned",
-            "description": "Set to true to include actioned notifications, false to exclude.",
-            "required": true
+            "in": "header",
+            "name": "If-match"
           }
         ]
-      },
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "recipientId",
-          "in": "path",
-          "required": true
-        }
-      ]
+      }
     },
     "/subscriptions/{subscriptionId}/recipients": {
       "parameters": [
@@ -1500,7 +1816,10 @@
                       "$ref": "../models/paginationMeta.v1.json"
                     },
                     "data": {
-                      "type": "string"
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/recipientResponse"
+                      }
                     },
                     "links": {
                       "$ref": "../models/paginationLinks.v1.json"
@@ -1547,7 +1866,16 @@
             "Authorization": []
           }
         ],
-        "description": "Get a paginated list of all recipient links.\n\nRole required: subscriptions_reader"
+        "description": "Get a paginated list of all recipient links.\n\nRole required: subscriptions_reader",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          }
+        ]
       },
       "post": {
         "summary": "Link subscription to recipient",
@@ -1601,6 +1929,16 @@
               }
             }
           },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
           "422": {
             "description": "Unprocessable Entity",
             "content": {
@@ -1629,7 +1967,23 @@
               }
             }
           }
-        }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-idempotency-key"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/recipients/{recipientId}": {
@@ -1704,6 +2058,15 @@
           {
             "Authorization": []
           }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          }
         ]
       },
       "delete": {
@@ -1742,6 +2105,16 @@
                 }
               }
             }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -1751,6 +2124,22 @@
         "security": [
           {
             "Authorization": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-idempotency-key"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
           }
         ]
       },
@@ -1798,6 +2187,16 @@
               }
             }
           },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
           "422": {
             "description": "Unprocessable Entity",
             "content": {
@@ -1826,7 +2225,23 @@
             }
           }
         },
-        "description": "Update a subscription recipient relationship.\n\nRole required: subscriptions_writer"
+        "description": "Update a subscription recipient relationship.\n\nRole required: subscriptions_writer",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-idempotency-key"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          }
+        ]
       }
     }
   },
