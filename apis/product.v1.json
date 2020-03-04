@@ -878,8 +878,10 @@
     },
     "/sicCodes": {
       "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
+        "summary": "Get all SIC codes",
+        "tags": [
+          "SIC Codes"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -931,10 +933,28 @@
           {
             "Bearer token": []
           }
+        ],
+        "description": "Fetches a paginated list of all SIC codes.\n\nRequires the product_reader role to access.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "page"
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "perpage",
+            "description": "Set to -1 to return all SIC codes."
+          }
         ]
       },
       "post": {
-        "summary": "",
+        "summary": "Create a SIC code",
         "operationId": "post-sicCodes",
         "responses": {
           "201": {
@@ -1008,7 +1028,11 @@
             }
           },
           "description": ""
-        }
+        },
+        "tags": [
+          "SIC Codes"
+        ],
+        "description": "Add a new SIC code to the system.\n\nRequires the product_writer role to access."
       }
     },
     "/sicCodes/{codeId}": {
@@ -1023,8 +1047,10 @@
         }
       ],
       "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
+        "summary": "Fetch a SIC code",
+        "tags": [
+          "SIC Codes"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -1088,10 +1114,11 @@
             "in": "header",
             "name": "If-match"
           }
-        ]
+        ],
+        "description": "Fetch a single SIC code.\n\nRequires the product_reader role to access."
       },
       "put": {
-        "summary": "",
+        "summary": "Update a SIC code",
         "operationId": "put-sicCodes-codeId",
         "responses": {
           "202": {
@@ -1191,10 +1218,14 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "SIC Codes"
+        ],
+        "description": "Updates a SIC code.\n\nRequires the product_writer role to access."
       },
       "delete": {
-        "summary": "",
+        "summary": "Delete a SIC code",
         "operationId": "delete-sicCodes-codeId",
         "responses": {
           "204": {
@@ -1261,7 +1292,11 @@
             "in": "header",
             "name": "If-match"
           }
-        ]
+        ],
+        "tags": [
+          "SIC Codes"
+        ],
+        "description": "Removes a SIC code from the system.\n\nRequires the product_remover role to access."
       }
     },
     "/sicCodes/{codeId}/rules": {
