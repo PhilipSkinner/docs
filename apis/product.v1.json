@@ -684,7 +684,7 @@
         "description": "Fetch a single rule set.\n\nRequires the product_reader role to access."
       },
       "put": {
-        "summary": "",
+        "summary": "Update a rule",
         "operationId": "put-rules-ruleId",
         "responses": {
           "202": {
@@ -785,10 +785,14 @@
             }
           },
           "description": ""
-        }
+        },
+        "tags": [
+          "Rules"
+        ],
+        "description": "Update a rule.\n\nRequires the product_writer role to access."
       },
       "delete": {
-        "summary": "",
+        "summary": "Delete a rule set",
         "operationId": "delete-rules-ruleId",
         "responses": {
           "204": {
@@ -865,7 +869,11 @@
             "in": "header",
             "name": "If-match"
           }
-        ]
+        ],
+        "tags": [
+          "Rules"
+        ],
+        "description": "Deletes a rule set.\n\nRequires the product_remover role to access."
       }
     },
     "/sicCodes": {
