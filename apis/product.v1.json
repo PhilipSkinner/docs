@@ -67,10 +67,28 @@
           {
             "Bearer token": []
           }
+        ],
+        "description": "Fetch a paginated list of all products.\n\nRequires the products_reader role to access.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "page"
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "perpage",
+            "description": "Setting to -1 returns all products."
+          }
         ]
       },
       "post": {
-        "summary": "",
+        "summary": "Create a product",
         "operationId": "post-products",
         "responses": {
           "201": {
@@ -137,7 +155,11 @@
             }
           },
           "description": ""
-        }
+        },
+        "tags": [
+          "Products"
+        ],
+        "description": "Create a new product.\n\nRequires the products_writer role to access."
       }
     },
     "/products/{productId}": {
@@ -152,8 +174,10 @@
         }
       ],
       "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
+        "summary": "Fetch a product",
+        "tags": [
+          "Products"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -217,10 +241,11 @@
             "in": "header",
             "name": "If-match"
           }
-        ]
+        ],
+        "description": "Fetches a single product, including its currently active set of rules.\n\nRequires the product_reader role to access."
       },
       "put": {
-        "summary": "",
+        "summary": "Update a product",
         "operationId": "put-products-productId",
         "responses": {
           "202": {
@@ -321,10 +346,14 @@
             }
           },
           "description": ""
-        }
+        },
+        "description": "Updates a products definition.\n\nRequires the products_writer role to access.",
+        "tags": [
+          "Products"
+        ]
       },
       "delete": {
-        "summary": "",
+        "summary": "Delete a product",
         "operationId": "delete-products-productId",
         "responses": {
           "204": {
@@ -391,7 +420,11 @@
             "in": "header",
             "name": "If-match"
           }
-        ]
+        ],
+        "tags": [
+          "Products"
+        ],
+        "description": "Deletes a product from the system.\n\nRequires the product_remover role to access."
       }
     },
     "/rules": {
@@ -1202,10 +1235,210 @@
         }
       ],
       "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
-        "responses": {},
-        "operationId": "get-products-productId-rules"
+        "summary": "Get product rules",
+        "tags": [
+          "Products"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../models/paginationMeta.v1.json"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/productRuleResponse"
+                      }
+                    },
+                    "links": {
+                      "$ref": "../models/paginationLinks.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-products-productId-rules",
+        "description": "Fetches a paginated list of rules for the product.\n\nRequires the product_reader role to access.",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "page"
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "perpage",
+            "description": "Set to -1 to return all rules."
+          }
+        ]
+      },
+      "post": {
+        "summary": "Create a product rule set",
+        "operationId": "post-products-productId-rules",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "headers": {
+              "Etag": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Location": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/productRule"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          }
+        },
+        "description": "Creates a new set of rules on a product.\n\nRequires the product_writer role to access.",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-idempotency-key"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/productRuleAttributes"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Products"
+        ]
       }
     },
     "/products/{productId}/rules/{ruleId}": {
@@ -1228,10 +1461,161 @@
         }
       ],
       "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
-        "responses": {},
-        "operationId": "get-products-productId-rules-ruleId"
+        "summary": "Get a product rule set",
+        "tags": [
+          "Products"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Etag": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/productRule"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-products-productId-rules-ruleId",
+        "description": "Fetch a single ruleset for a product.\n\nRequires the product_reader role to access.",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          }
+        ]
+      },
+      "put": {
+        "summary": "Update a product rule set",
+        "operationId": "put-products-productId-rules-ruleId",
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Etag": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/productRule"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          }
+        },
+        "description": "Updates a product rule set.\n\nRequires the product_writer role to access.",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-idempotency-key"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/productRule"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a product rule set",
+        "operationId": "delete-products-productId-rules-ruleId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "Products"
+        ]
       }
     }
   },
@@ -1446,6 +1830,59 @@
         "type": "object",
         "properties": {
           "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "etag": {
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/productRuleAttributes"
+          }
+        }
+      },
+      "productRule": {
+        "title": "productRule",
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "../models/individualMeta.v1.json"
+          },
+          "data": {
+            "$ref": "#/components/schemas/productRuleResponse"
+          },
+          "links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "type": "string"
+              },
+              "product": {
+                "type": "string"
+              },
+              "rules": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "productRuleAttributes": {
+        "title": "productRuleAttributes",
+        "type": "object",
+        "properties": {
+          "createdBy": {
+            "type": "string"
+          },
+          "createdDate": {
+            "type": "string"
+          },
+          "updatedBy": {
+            "type": "string"
+          },
+          "updatedDate": {
             "type": "string"
           }
         }
