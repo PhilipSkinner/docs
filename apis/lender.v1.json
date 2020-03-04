@@ -1,19 +1,27 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "lender",
-    "version": "1.0"
+    "title": "Lender API",
+    "version": "1.0",
+    "description": "Manages lenders and their related rules.",
+    "contact": {
+      "name": "Philip Skinner",
+      "email": "philip.skinner@cds.co.uk"
+    }
   },
   "servers": [
     {
-      "url": "http://localhost:3000"
+      "url": "http://localhost:3000",
+      "description": "Mock"
     }
   ],
   "paths": {
     "/lenders": {
       "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
+        "summary": "Get all lenders",
+        "tags": [
+          "Lenders"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -27,6 +35,12 @@
                     },
                     "links": {
                       "$ref": "../models/paginationLinks.v1.json"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/lenderResponse"
+                      }
                     }
                   }
                 }
@@ -44,19 +58,99 @@
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "integer"
             },
             "in": "query",
-            "name": "type"
+            "name": "page"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "perpage",
+            "description": "Set to -1 to return all lenders."
+          }
+        ],
+        "description": "Fetch a paginated list of all lenders.\n\nRequires the lender_reader role to access.",
+        "security": [
+          {
+            "Bearer token": []
           }
         ]
       },
       "post": {
-        "summary": "",
+        "summary": "Create a lender",
         "operationId": "post-lenders",
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Created",
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Etag": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/lender"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Lenders"
+        ],
+        "description": "Create a new lender.\n\nRequires the lender_writer role to access.",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-idempotency-key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/lenderAttributes"
+              }
+            }
           }
         }
       }
@@ -73,55 +167,256 @@
         }
       ],
       "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
+        "summary": "Fetch a lender",
+        "tags": [
+          "Lenders"
+        ],
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "meta": {
-                      "$ref": "../models/individualMeta.v1.json"
-                    },
-                    "links": {
-                      "type": "object",
-                      "properties": {
-                        "self": {
-                          "type": "string"
-                        },
-                        "allocations": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/lender"
+                }
+              }
+            },
+            "headers": {
+              "Etag": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
                 }
               }
             }
           }
         },
-        "operationId": "get-lenders-lenderId"
+        "operationId": "get-lenders-lenderId",
+        "description": "Get the details for a single lender.\n\nRequires the lender_reader role to access.",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          }
+        ]
       },
       "put": {
-        "summary": "",
+        "summary": "Update a lender",
         "operationId": "put-lenders-lenderId",
         "responses": {
-          "200": {
-            "description": "OK"
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Etag": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/lender"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Lenders"
+        ],
+        "description": "Update a lenders information.\n\nRequires the lender_writer role to access.",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-idempotency-key"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/lenderAttributes"
+              }
+            }
           }
         }
       },
       "delete": {
-        "summary": "",
+        "summary": "Delete a lender",
         "operationId": "delete-lenders-lenderId",
         "responses": {
-          "200": {
-            "description": "OK"
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
           }
-        }
+        },
+        "tags": [
+          "Lenders"
+        ],
+        "description": "Remove a lender from the system.\n\nRequires the lender_remover role to access.",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-idempotency-key"
+          }
+        ]
       }
     },
     "/lenders/{lenderId}/allocations": {
@@ -478,6 +773,75 @@
         "responses": {
           "200": {
             "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "Bearer token": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "lender": {
+        "title": "lender",
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "../models/individualMeta.v1.json"
+          },
+          "data": {
+            "$ref": "#/components/schemas/lenderResponse"
+          },
+          "links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "type": "string"
+              },
+              "lenders": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "lenderResponse": {
+        "title": "lenderResponse",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "etag": {
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/lenderAttributes"
+          }
+        }
+      },
+      "lenderAttributes": {
+        "title": "lenderAttributes",
+        "type": "object",
+        "properties": {
+          "createdBy": {
+            "type": "string"
+          },
+          "createdDate": {
+            "type": "string"
+          },
+          "updatedBy": {
+            "type": "string"
+          },
+          "updatedDate": {
+            "type": "string"
           }
         }
       }

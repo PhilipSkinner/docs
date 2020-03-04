@@ -2251,7 +2251,8 @@
               }
             }
           }
-        }
+        },
+        "description": ""
       },
       "product": {
         "title": "product",
