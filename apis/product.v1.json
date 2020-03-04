@@ -2214,6 +2214,9 @@
       "productAttributes": {
         "title": "productAttributes",
         "type": "object",
+        "x-tags": [
+          "Products"
+        ],
         "properties": {
           "createdBy": {
             "type": "string"
@@ -2230,11 +2233,25 @@
           "validationSchema": {
             "type": "object",
             "description": "JSON schema for validating data contract to guarantees API."
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "programme": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
+            }
           }
-        },
-        "x-tags": [
-          "Products"
-        ]
+        }
       },
       "product": {
         "title": "product",
@@ -2308,6 +2325,9 @@
       "ruleResponseAttributes": {
         "title": "ruleResponseAttributes",
         "type": "object",
+        "x-tags": [
+          "Rules"
+        ],
         "properties": {
           "createdBy": {
             "type": "string"
@@ -2320,11 +2340,31 @@
           },
           "updatedDate": {
             "type": "string"
+          },
+          "maxTradingActivityPercentOfTurnover": {
+            "type": "integer"
+          },
+          "stateAid": {
+            "type": "object",
+            "properties": {
+              "periodInMonths": {
+                "type": "integer"
+              },
+              "currency": {
+                "type": "string"
+              },
+              "maxAmount": {
+                "type": "integer"
+              }
+            }
+          },
+          "active": {
+            "$ref": "#/components/schemas/activityRange"
+          },
+          "name": {
+            "type": "string"
           }
-        },
-        "x-tags": [
-          "Rules"
-        ]
+        }
       },
       "sicCode": {
         "title": "sicCode",
@@ -2349,6 +2389,9 @@
                 "type": "string"
               }
             }
+          },
+          "included": {
+            "$ref": "#/components/schemas/sicCodeRuleResponse"
           }
         }
       },
@@ -2376,6 +2419,9 @@
       "sicCodeAttributes": {
         "title": "sicCodeAttributes",
         "type": "object",
+        "x-tags": [
+          "SIC Codes"
+        ],
         "properties": {
           "createdBy": {
             "type": "string"
@@ -2388,11 +2434,11 @@
           },
           "updatedDate": {
             "type": "string"
+          },
+          "description": {
+            "type": "string"
           }
-        },
-        "x-tags": [
-          "SIC Codes"
-        ]
+        }
       },
       "productRuleResponse": {
         "title": "productRuleResponse",
@@ -2427,6 +2473,83 @@
           },
           "updatedDate": {
             "type": "string"
+          },
+          "efgLimits": {
+            "type": "object",
+            "properties": {
+              "minFacilityAmount": {
+                "type": "integer"
+              },
+              "maxFacilityAmount": {
+                "type": "integer"
+              },
+              "maxBorrowerTurnover": {
+                "type": "integer"
+              },
+              "iAurLenderDrawDownContributionPercent": {
+                "type": "integer"
+              },
+              "LenderDrawDownContributionPercent": {
+                "type": "integer"
+              },
+              "baseEuroExchangeRate": {
+                "type": "integer"
+              },
+              "annualExchangeRateInterest": {
+                "type": "integer"
+              },
+              "stateAidLimit": {
+                "type": "integer"
+              }
+            }
+          },
+          "loanTypeLimits": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "minimumTermMonths": {
+                  "type": "integer"
+                },
+                "maximumTermMonths": {
+                  "type": "integer"
+                },
+                "minimumFacilityValue": {
+                  "type": "integer"
+                },
+                "maximumFacilityValue": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "loanTypeGuaranteeLimits": {
+            "type": "object",
+            "properties": {
+              "guaranteeFacilityPercent": {
+                "type": "integer"
+              },
+              "refinanceGuaranteeFacilityPercent": {
+                "type": "integer"
+              }
+            }
+          },
+          "feePaymentRules": {
+            "type": "object",
+            "properties": {
+              "annualfeePercent": {
+                "type": "integer"
+              },
+              "iAurRuleApplies": {
+                "type": "boolean"
+              },
+              "amountFieldToUse": {
+                "type": "string"
+              }
+            }
+          },
+          "active": {
+            "$ref": "#/components/schemas/activityRange"
           }
         }
       },
@@ -2515,6 +2638,48 @@
           },
           "updatedDate": {
             "type": "string"
+          },
+          "stateAid": {
+            "type": "object",
+            "properties": {
+              "ineligible": {
+                "type": "boolean"
+              },
+              "maxAmount": {
+                "type": "integer"
+              },
+              "facilityLimits": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "termYears": {
+                      "type": "integer"
+                    },
+                    "facilityValue": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "active": {
+            "$ref": "#/components/schemas/activityRange"
+          }
+        }
+      },
+      "activityRange": {
+        "title": "activityRange",
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "to": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       }
