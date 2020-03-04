@@ -68,7 +68,6 @@
             "Bearer token": []
           }
         ],
-        "description": "Fetch a paginated list of all products.\n\nRequires the products_reader role to access.",
         "parameters": [
           {
             "schema": {
@@ -85,7 +84,8 @@
             "name": "perpage",
             "description": "Setting to -1 returns all products."
           }
-        ]
+        ],
+        "description": "Fetch a paginated list of all products.\n\nRequires the products_reader role to access."
       },
       "post": {
         "summary": "Create a product",
@@ -156,10 +156,10 @@
           },
           "description": ""
         },
+        "description": "Create a new product.\n\nRequires the products_writer role to access.",
         "tags": [
           "Products"
-        ],
-        "description": "Create a new product.\n\nRequires the products_writer role to access."
+        ]
       }
     },
     "/products/{productId}": {
@@ -347,10 +347,10 @@
           },
           "description": ""
         },
-        "description": "Updates a products definition.\n\nRequires the products_writer role to access.",
         "tags": [
           "Products"
-        ]
+        ],
+        "description": "Updates a products definition.\n\nRequires the products_writer role to access."
       },
       "delete": {
         "summary": "Delete a product",
@@ -421,10 +421,10 @@
             "name": "If-match"
           }
         ],
+        "description": "Deletes a product from the system.\n\nRequires the product_remover role to access.",
         "tags": [
           "Products"
-        ],
-        "description": "Deletes a product from the system.\n\nRequires the product_remover role to access."
+        ]
       }
     },
     "/rules": {
@@ -1297,12 +1297,6 @@
           }
         },
         "operationId": "get-products-productId-rules",
-        "description": "Fetches a paginated list of rules for the product.\n\nRequires the product_reader role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
         "parameters": [
           {
             "schema": {
@@ -1326,7 +1320,13 @@
             "name": "perpage",
             "description": "Set to -1 to return all rules."
           }
-        ]
+        ],
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "description": "Fetches a paginated list of rules for the product.\n\nRequires the product_reader role to access."
       },
       "post": {
         "summary": "Create a product rule set",
@@ -1485,13 +1485,87 @@
           }
         },
         "operationId": "get-products-productId-rules-ruleId",
-        "description": "Fetch a single ruleset for a product.\n\nRequires the product_reader role to access.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          }
+        ],
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "description": "Fetch a single ruleset for a product.\n\nRequires the product_reader role to access."
+      },
+      "delete": {
+        "summary": "Delete a product rule set",
+        "operationId": "delete-products-productId-rules-ruleId",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Products"
+        ],
+        "description": "Deletes a rule set from a product.\n\nRequires the product_remover role to access.",
         "security": [
           {
             "Bearer token": []
           }
         ],
         "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-idempotency-key"
+          },
           {
             "schema": {
               "type": "string"
@@ -1604,18 +1678,6 @@
             }
           }
         }
-      },
-      "delete": {
-        "summary": "Delete a product rule set",
-        "operationId": "delete-products-productId-rules-ruleId",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "tags": [
-          "Products"
-        ]
       }
     }
   },
@@ -1832,14 +1894,32 @@
           "id": {
             "type": "string"
           },
-          "type": {
-            "type": "string"
+          "attributes": {
+            "$ref": "#/components/schemas/productRuleAttributes"
           },
           "etag": {
             "type": "string"
           },
-          "attributes": {
-            "$ref": "#/components/schemas/productRuleAttributes"
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "productRuleAttributes": {
+        "title": "productRuleAttributes",
+        "type": "object",
+        "properties": {
+          "createdBy": {
+            "type": "string"
+          },
+          "createdDate": {
+            "type": "string"
+          },
+          "updatedBy": {
+            "type": "string"
+          },
+          "updatedDate": {
+            "type": "string"
           }
         }
       },
@@ -1866,24 +1946,6 @@
                 "type": "string"
               }
             }
-          }
-        }
-      },
-      "productRuleAttributes": {
-        "title": "productRuleAttributes",
-        "type": "object",
-        "properties": {
-          "createdBy": {
-            "type": "string"
-          },
-          "createdDate": {
-            "type": "string"
-          },
-          "updatedBy": {
-            "type": "string"
-          },
-          "updatedDate": {
-            "type": "string"
           }
         }
       }
