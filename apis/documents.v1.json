@@ -84,17 +84,18 @@
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "number"
             },
             "in": "query",
             "name": "page"
           },
           {
             "schema": {
-              "type": "string"
+              "type": "number"
             },
             "in": "query",
-            "name": "perpage"
+            "name": "perpage",
+            "description": "Setting to -1 will return all documents within an envelope."
           }
         ],
         "description": "Gets a paginated list of all documents held within an envelope.\n\nRequires the document_reader role to access."
