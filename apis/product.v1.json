@@ -1,12 +1,18 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "product",
-    "version": "1.0"
+    "title": "Product API",
+    "version": "1.0",
+    "description": "Handles all product definitions and rule sets related to products, SIC codes and global rules.",
+    "contact": {
+      "name": "Philip Skinner",
+      "email": "philip.skinner@cds.co.uk"
+    }
   },
   "servers": [
     {
-      "url": "http://localhost:3000"
+      "url": "http://localhost:3000",
+      "description": "Mock"
     }
   ],
   "paths": {
@@ -445,10 +451,7 @@
                       "$ref": "../models/paginationMeta.v1.json"
                     },
                     "data": {
-                      "type": [
-                        "string",
-                        "array"
-                      ],
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/ruleResponse"
                       }
@@ -1650,13 +1653,78 @@
         }
       },
       "delete": {
-        "summary": "",
+        "summary": "Delete a SIC code rule set",
         "operationId": "delete-sicCodes-codeId-rules-ruleId",
         "responses": {
-          "200": {
-            "description": "OK"
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
           }
-        }
+        },
+        "tags": [
+          "SIC Codes"
+        ],
+        "description": "Remove a SIC code rule set.\n\nRequires the product_remover role to access.",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-idempotency-key"
+          }
+        ]
       }
     },
     "/products/{productId}/rules": {
@@ -2113,7 +2181,10 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Products"
+        ]
       }
     }
   },
@@ -2454,5 +2525,16 @@
         "scheme": "bearer"
       }
     }
-  }
+  },
+  "tags": [
+    {
+      "name": "Products"
+    },
+    {
+      "name": "Rules"
+    },
+    {
+      "name": "SIC Codes"
+    }
+  ]
 }
