@@ -429,8 +429,10 @@
     },
     "/rules": {
       "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
+        "summary": "Get all rules",
+        "tags": [
+          "Rules"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -485,10 +487,36 @@
           {
             "Bearer token": []
           }
+        ],
+        "description": "Get a paginated list of all rule sets in the system. Can use a date to search for the active rule sets.\n\nRequires the product_reader role to access.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "page"
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "perpage",
+            "description": "Set to -1 to return all rule sets."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "date",
+            "description": "The date to use to query for active rule sets on that date."
+          }
         ]
       },
       "post": {
-        "summary": "",
+        "summary": "Create a rule set",
         "operationId": "post-rules",
         "responses": {
           "201": {
@@ -497,6 +525,18 @@
               "Etag": {
                 "schema": {
                   "type": "string"
+                }
+              },
+              "Location": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rule"
                 }
               }
             }
@@ -554,7 +594,11 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Rules"
+        ],
+        "description": "Create a new rule set.\n\nRequires the product_writer role to access."
       }
     },
     "/rules/{ruleId}": {
@@ -569,8 +613,10 @@
         }
       ],
       "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
+        "summary": "Fetch a rule set",
+        "tags": [
+          "Rules"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -585,6 +631,36 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/rule"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
                 }
               }
             }
@@ -604,7 +680,8 @@
             "in": "header",
             "name": "If-match"
           }
-        ]
+        ],
+        "description": "Fetch a single rule set.\n\nRequires the product_reader role to access."
       },
       "put": {
         "summary": "",
