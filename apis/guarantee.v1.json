@@ -617,7 +617,7 @@
             "type": "string"
           },
           "dataProtectionAgreed": {
-            "type": "boolean"
+            "$ref": "#/components/schemas/booleanAnswer"
           },
           "facilityDetails": {
             "type": "object",
@@ -645,7 +645,7 @@
                     ]
                   },
                   "fixedRepaymentAmount": {
-                    "type": "number"
+                    "$ref": ""
                   },
                   "term": {
                     "type": "object",
@@ -828,7 +828,7 @@
                 "type": "number"
               },
               "turnoverAboveFiftyPercent": {
-                "type": "boolean"
+                "$ref": "#/components/schemas/booleanAnswer"
               },
               "tradingStartDate": {
                 "type": "string"
@@ -871,7 +871,7 @@
                 "type": "number"
               },
               "applicantMinimusStateAidPastThreeYears": {
-                "type": "boolean"
+                "$ref": "#/components/schemas/booleanAnswer"
               }
             }
           },
@@ -931,6 +931,39 @@
           },
           "amount": {
             "type": "number"
+          }
+        }
+      },
+      "booleanAnswer": {
+        "title": "booleanAnswer",
+        "type": "object",
+        "properties": {
+          "answer": {
+            "type": "boolean"
+          },
+          "question": {
+            "$ref": "#/components/schemas/question"
+          }
+        }
+      },
+      "question": {
+        "title": "question",
+        "type": "object",
+        "properties": {
+          "questionText": {
+            "type": "string"
+          }
+        }
+      },
+      "integerAnswer": {
+        "title": "integerAnswer",
+        "type": "object",
+        "properties": {
+          "answer": {
+            "type": "integer"
+          },
+          "question": {
+            "$ref": "#/components/schemas/question"
           }
         }
       }
