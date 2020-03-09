@@ -3794,9 +3794,13 @@
       "claimResponse": {
         "title": "claimResponse",
         "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           "type": {
             "type": "string",
@@ -3810,10 +3814,7 @@
           "attributes": {
             "$ref": "#/components/schemas/claimAttributes"
           }
-        },
-        "x-tags": [
-          "Misc Models"
-        ]
+        }
       },
       "claimAttributes": {
         "title": "claimAttributes",
@@ -4061,6 +4062,9 @@
       "recovery": {
         "title": "recovery",
         "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
         "properties": {
           "meta": {
             "$ref": "../models/individualMeta.v1.json"
@@ -4072,20 +4076,20 @@
             "type": "object",
             "properties": {
               "self": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "recoveries": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "claim": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               }
             }
           }
-        },
-        "x-tags": [
-          "Misc Models"
-        ]
+        }
       },
       "recoveryResponse": {
         "title": "recoveryResponse",
@@ -4114,24 +4118,32 @@
         "x-tags": [
           "Recoveries"
         ],
+        "description": "",
         "properties": {
           "createdBy": {
-            "type": "string"
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "createdDate": {
-            "type": "string"
+            "type": "string",
+            "format": "date-time",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "updatedBy": {
-            "type": "string"
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "updatedDate": {
-            "type": "string"
+            "type": "string",
+            "format": "date-time",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "invoiceId": {
             "type": "string"
           },
           "recoveryDate": {
-            "type": "string"
+            "type": "string",
+            "format": "date"
           },
           "type": {
             "type": "string",
@@ -4142,16 +4154,16 @@
             ]
           },
           "amountRecovered": {
-            "type": "number"
+            "type": "integer"
           },
           "amountRepayable": {
-            "type": "number"
+            "type": "integer"
           },
           "priorSimultaneousExposureAmount": {
-            "type": "number"
+            "type": "integer"
           },
           "subsequentExposure": {
-            "type": "number"
+            "type": "integer"
           },
           "personalGuarantee": {
             "type": "boolean"
@@ -4162,7 +4174,7 @@
               "type": "object",
               "properties": {
                 "amount": {
-                  "type": "number"
+                  "type": "integer"
                 },
                 "type": {
                   "type": "string",
@@ -4175,10 +4187,11 @@
             }
           },
           "dateRecieved": {
-            "type": "string"
+            "type": "string",
+            "format": "date"
           },
           "amountReceived": {
-            "type": "number"
+            "type": "integer"
           }
         }
       },
@@ -4199,10 +4212,12 @@
             "type": "object",
             "properties": {
               "self": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "invoices": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               }
             }
           }
@@ -4211,12 +4226,19 @@
       "invoiceResponse": {
         "title": "invoiceResponse",
         "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "invoice"
+            ]
           },
           "etag": {
             "type": "string"
@@ -4224,10 +4246,7 @@
           "attributes": {
             "$ref": "#/components/schemas/invoiceAttributes"
           }
-        },
-        "x-tags": [
-          "Misc Models"
-        ]
+        }
       },
       "invoiceAttributes": {
         "title": "invoiceAttributes",
