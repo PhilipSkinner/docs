@@ -626,26 +626,16 @@
                 "$ref": "../models/objectPointer.v1.json"
               },
               "facilityType": {
-                "enum": [
-                  "Term Loan",
-                  "Asset Finance",
-                  "Invoice Finance",
-                  "Revolving Credit"
-                ],
-                "$ref": ""
+                "$ref": "#/components/schemas/stringAnswer"
               },
               "repaymentType": {
                 "type": "object",
                 "properties": {
                   "paymentType": {
-                    "type": "string",
-                    "enum": [
-                      "Amount",
-                      "Term"
-                    ]
+                    "$ref": "#/components/schemas/stringAnswer"
                   },
                   "fixedRepaymentAmount": {
-                    "$ref": ""
+                    "$ref": "#/components/schemas/integerAnswer"
                   },
                   "term": {
                     "type": "object",
@@ -659,16 +649,7 @@
                     }
                   },
                   "paymentFrequency": {
-                    "type": "string",
-                    "enum": [
-                      "Annually",
-                      "6-monthly",
-                      "Quarterly",
-                      "Monthly",
-                      "Weekly",
-                      "Seasonal",
-                      "Bullet - Interest only"
-                    ]
+                    "$ref": "#/components/schemas/stringAnswer"
                   },
                   "seasonalMonths": {
                     "type": "array",
@@ -677,21 +658,7 @@
                 }
               },
               "principalPurpose": {
-                "type": "string",
-                "enum": [
-                  "Start-up costs",
-                  "General working capital requirements",
-                  "Purchasing specific equipment or machinery",
-                  "Purchasing licences quotas or other entitlements to trade",
-                  "Research and Development activities",
-                  "Acquiring another business within the UK",
-                  "Acquiring another business outside the UK - Ineligible",
-                  "Expanding an existing business within the UK",
-                  "Expanding an existing business outside the UK - Ineligible",
-                  "Financing an export order - Ineligible",
-                  "Replacing existing internal finance",
-                  "Replacing existing external finance"
-                ]
+                "$ref": "#/components/schemas/stringAnswer"
               },
               "facilityTotalAmount": {
                 "$ref": "#/components/schemas/integerAnswer"
@@ -700,11 +667,7 @@
                 "type": "object",
                 "properties": {
                   "type": {
-                    "type": "string",
-                    "enum": [
-                      "Variable",
-                      "Fixed"
-                    ]
+                    "$ref": "#/components/schemas/stringAnswer"
                   },
                   "rateMargin": {
                     "type": "number",
@@ -722,31 +685,7 @@
                     "type": "object",
                     "properties": {
                       "category": {
-                        "type": "string",
-                        "enum": [
-                          "Furniture and fittings",
-                          "Cars / taxis",
-                          "Construction equipment (incl scaffolding, portacabins)",
-                          "Light commercial vehicles",
-                          "Materials handling",
-                          "Garage equipment",
-                          "Engineering equipment",
-                          "Refrigeration",
-                          "Catering / cleaning",
-                          "Hair and beauty equipment",
-                          "Agricultural / Farming / Livestock",
-                          "Gymnasium / Sports / Leisure equipment",
-                          "Vending equipment",
-                          "Heavy commercial vehicles / Trailers",
-                          "Buses / Coaches",
-                          "Cranes",
-                          "Industrial Plant and Machinery",
-                          "Computer Equipment / Technology / Telecoms (hardware / software)",
-                          "Dental / Medical / Optical Equipment / Scientific/ Health / Veterinary",
-                          "Broadcast and Media equipment",
-                          "Printing Equipment and Reprography",
-                          "Other"
-                        ]
+                        "$ref": "#/components/schemas/stringAnswer"
                       },
                       "cashPrice": {
                         "$ref": "#/components/schemas/integerAnswer"
@@ -784,12 +723,7 @@
                     ]
                   },
                   "agreementType": {
-                    "type": "string",
-                    "enum": [
-                      "Hiring Purchase",
-                      "Finance Lease",
-                      "Sale and LeaseBack"
-                    ]
+                    "$ref": "#/components/schemas/stringAnswer"
                   }
                 }
               }
@@ -802,21 +736,16 @@
             "type": "object",
             "properties": {
               "legalForm": {
-                "type": "string",
-                "enum": [
-                  "Limited Liability Partnership (LLP)",
-                  "Private Limited Company (LTD)",
-                  "Public Limited Company (PLC)"
-                ]
+                "$ref": "#/components/schemas/stringAnswer"
               },
               "companyRegistrationNumber": {
-                "type": "string"
+                "$ref": "#/components/schemas/stringAnswer"
               },
               "businessLegalName": {
-                "type": "string"
+                "$ref": "#/components/schemas/stringAnswer"
               },
               "businessTradingName": {
-                "type": "string"
+                "$ref": "#/components/schemas/stringAnswer"
               },
               "sicCode": {
                 "$ref": "../models/objectPointer.v1.json"
@@ -828,10 +757,10 @@
                 "$ref": "#/components/schemas/booleanAnswer"
               },
               "tradingStartDate": {
-                "type": "string"
+                "$ref": "#/components/schemas/stringAnswer"
               },
               "tradingPostcode": {
-                "type": "string"
+                "$ref": "#/components/schemas/stringAnswer"
               }
             }
           },
@@ -970,6 +899,19 @@
         "properties": {
           "answer": {
             "type": "string"
+          },
+          "question": {
+            "$ref": "#/components/schemas/question"
+          }
+        }
+      },
+      "dateAnswer": {
+        "title": "dateAnswer",
+        "type": "object",
+        "properties": {
+          "answer": {
+            "type": "string",
+            "format": "date-time"
           },
           "question": {
             "$ref": "#/components/schemas/question"
