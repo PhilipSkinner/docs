@@ -3856,7 +3856,7 @@
             "format": "date"
           },
           "outstandingCapitalPreRecovery": {
-            "type": "integer"
+            "type": "number"
           },
           "reasonForFailure": {
             "type": "string"
@@ -3868,7 +3868,7 @@
             "type": "string"
           },
           "claimValue": {
-            "type": "integer"
+            "type": "number"
           },
           "currentStatus": {
             "type": "string"
@@ -3913,7 +3913,7 @@
             "type": "boolean"
           },
           "approvedAmount": {
-            "type": "integer"
+            "type": "number"
           },
           "approvalComments": {
             "type": "string"
@@ -3960,22 +3960,29 @@
         ],
         "properties": {
           "createdBy": {
-            "type": "string"
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "createdDate": {
-            "type": "string"
+            "type": "string",
+            "format": "date-time",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "updatedBy": {
-            "type": "string"
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "updatedDate": {
-            "type": "string"
+            "type": "string",
+            "format": "date-time",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "invoiceId": {
             "type": "string"
           },
           "datePaid": {
-            "type": "string"
+            "type": "string",
+            "format": "date"
           },
           "amountPaid": {
             "type": "number"
@@ -3984,7 +3991,8 @@
             "type": "boolean"
           },
           "adjustmentDate": {
-            "type": "string"
+            "type": "string",
+            "format": "date"
           },
           "adjustmentValue": {
             "type": "string"
@@ -4012,12 +4020,19 @@
       "settlementResponse": {
         "title": "settlementResponse",
         "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "settlement"
+            ]
           },
           "etag": {
             "type": "string"
@@ -4025,14 +4040,14 @@
           "attributes": {
             "$ref": "#/components/schemas/settlementAttributes"
           }
-        },
-        "x-tags": [
-          "Misc Models"
-        ]
+        }
       },
       "settlement": {
         "title": "settlement",
         "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
         "properties": {
           "meta": {
             "$ref": "../models/individualMeta.v1.json"
@@ -4044,20 +4059,20 @@
             "type": "object",
             "properties": {
               "self": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "claim": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "settlements": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               }
             }
           }
-        },
-        "x-tags": [
-          "Misc Models"
-        ]
+        }
       },
       "recovery": {
         "title": "recovery",
@@ -4094,12 +4109,19 @@
       "recoveryResponse": {
         "title": "recoveryResponse",
         "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "recovery"
+            ]
           },
           "etag": {
             "type": "string"
@@ -4107,10 +4129,7 @@
           "attributes": {
             "$ref": "#/components/schemas/recoveryAttributes"
           }
-        },
-        "x-tags": [
-          "Misc Models"
-        ]
+        }
       },
       "recoveryAttributes": {
         "title": "recoveryAttributes",
@@ -4154,16 +4173,16 @@
             ]
           },
           "amountRecovered": {
-            "type": "integer"
+            "type": "number"
           },
           "amountRepayable": {
-            "type": "integer"
+            "type": "number"
           },
           "priorSimultaneousExposureAmount": {
-            "type": "integer"
+            "type": "number"
           },
           "subsequentExposure": {
-            "type": "integer"
+            "type": "number"
           },
           "personalGuarantee": {
             "type": "boolean"
@@ -4174,7 +4193,7 @@
               "type": "object",
               "properties": {
                 "amount": {
-                  "type": "integer"
+                  "type": "number"
                 },
                 "type": {
                   "type": "string",
@@ -4191,7 +4210,7 @@
             "format": "date"
           },
           "amountReceived": {
-            "type": "integer"
+            "type": "number"
           }
         }
       },
@@ -4284,6 +4303,9 @@
       "statement": {
         "title": "statement",
         "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
         "properties": {
           "meta": {
             "$ref": "../models/individualMeta.v1.json"
@@ -4295,27 +4317,33 @@
             "type": "object",
             "properties": {
               "self": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "statements": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               }
             }
           }
-        },
-        "x-tags": [
-          "Misc Models"
-        ]
+        }
       },
       "statementResponse": {
         "title": "statementResponse",
         "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "statement"
+            ]
           },
           "etag": {
             "type": "string"
@@ -4323,43 +4351,48 @@
           "attributes": {
             "$ref": "#/components/schemas/statementAttributes"
           }
-        },
-        "x-tags": [
-          "Misc Models"
-        ]
+        }
       },
       "statementAttributes": {
         "title": "statementAttributes",
         "type": "object",
+        "x-tags": [
+          "Statements"
+        ],
         "properties": {
           "createdBy": {
-            "type": "string"
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "createdDate": {
-            "type": "string"
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH.",
+            "format": "date-time"
           },
           "updatedBy": {
-            "type": "string"
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "updatedDate": {
-            "type": "string"
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH.",
+            "format": "date-time"
           },
           "lender": {
             "$ref": "../models/objectPointer.v1.json"
           },
           "startDate": {
-            "type": "string"
+            "type": "string",
+            "format": "date"
           },
           "endDate": {
-            "type": "string"
+            "type": "string",
+            "format": "date"
           },
           "document": {
             "$ref": "../models/objectPointer.v1.json"
           }
-        },
-        "x-tags": [
-          "Statements"
-        ]
+        }
       }
     },
     "securitySchemes": {
