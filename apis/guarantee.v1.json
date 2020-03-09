@@ -594,7 +594,10 @@
             "format": "uuid"
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "guarantee"
+            ]
           },
           "etag": {
             "type": "string"
