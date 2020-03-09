@@ -9,7 +9,8 @@
         "type": "object",
         "properties": {
           "date": {
-            "type": "string"
+            "type": "string",
+            "format": "date-time"
           },
           "etag": {
             "type": "string"

@@ -2,14 +2,19 @@
   "title": "productFacilityMeta.v1",
   "type": "object",
   "properties": {
-    "productId": {
-      "type": "string"
+    "product": {
+      "$ref": "./objectPointer.v1.json"
     },
     "recordCount": {
       "type": "integer"
     },
     "facilityTotal": {
-      "type": "number"
+      "type": "integer"
     }
-  }
+  },
+  "required": [
+    "product",
+    "recordCount",
+    "facilityTotal"
+  ]
 }

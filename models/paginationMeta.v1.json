@@ -1,18 +1,18 @@
 {
   "title": "paginationMeta",
   "type": "object",
-  "properties": {
-    "totalPages": {
-      "type": "number"
-    },
-    "page": {
-      "type": "number"
-    },
-    "perPage": {
-      "type": "number"
-    }
-  },
   "x-tags": [
     "Misc Models"
-  ]
+  ],
+  "properties": {
+    "totalPages": {
+      "type": "integer"
+    },
+    "page": {
+      "type": "integer"
+    },
+    "perPage": {
+      "type": "integer"
+    }
+  }
 }

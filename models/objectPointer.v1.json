@@ -7,7 +7,8 @@
   "properties": {
     "id": {
       "type": "string",
-      "description": "GUID"
+      "description": "GUID",
+      "format": "uuid"
     },
     "type": {
       "type": "string"
@@ -18,6 +19,7 @@
   },
   "required": [
     "id",
-    "type"
+    "type",
+    "etag"
   ]
 }

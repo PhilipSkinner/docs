@@ -9,16 +9,23 @@
       }
     },
     "facilityTotal": {
-      "type": "number"
+      "type": "integer"
     },
     "totalPages": {
-      "type": "number"
+      "type": "integer"
     },
     "page": {
-      "type": "number"
+      "type": "integer"
     },
     "perPage": {
-      "type": "number"
+      "type": "integer"
     }
-  }
+  },
+  "required": [
+    "products",
+    "facilityTotal",
+    "totalPages",
+    "page",
+    "perPage"
+  ]
 }

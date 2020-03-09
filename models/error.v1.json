@@ -29,9 +29,10 @@
       "detail": "Could not parse value."
     }
   },
+  "description": "",
   "properties": {
     "status": {
-      "type": "number"
+      "type": "integer"
     },
     "title": {
       "type": "string"
@@ -50,6 +51,5 @@
         }
       }
     }
-  },
-  "description": ""
+  }
 }

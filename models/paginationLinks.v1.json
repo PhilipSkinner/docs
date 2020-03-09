@@ -1,24 +1,29 @@
 {
   "title": "paginationLinks",
-        "type": "object",
-        "properties": {
-          "self": {
-            "type": "string"
-          },
-          "first": {
-            "type": "string"
-          },
-          "last": {
-            "type": "string"
-          },
-          "prev": {
-            "type": "string"
-          },
-          "next": {
-            "type": "string"
-          }
-        },
-        "x-tags": [
-          "Misc Models"
-        ]
+  "type": "object",
+  "x-tags": [
+    "Misc Models"
+  ],
+  "properties": {
+    "self": {
+      "type": "string",
+      "format": "uri"
+    },
+    "first": {
+      "type": "string",
+      "format": "uri"
+    },
+    "last": {
+      "type": "string",
+      "format": "uri"
+    },
+    "prev": {
+      "type": "string",
+      "format": "uri"
+    },
+    "next": {
+      "type": "string",
+      "format": "uri"
+    }
+  }
 }
