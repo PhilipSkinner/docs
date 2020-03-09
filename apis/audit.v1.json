@@ -263,10 +263,12 @@
                       "type": "object",
                       "properties": {
                         "self": {
-                          "type": "string"
+                          "type": "string",
+                          "format": "uri"
                         },
                         "records": {
-                          "type": "string"
+                          "type": "string",
+                          "format": "uri"
                         }
                       }
                     },

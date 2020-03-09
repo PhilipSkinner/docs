@@ -3930,10 +3930,12 @@
             "type": "object",
             "properties": {
               "self": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "claims": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               }
             }
           }
