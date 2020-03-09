@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.0",
-  "tags" : [
+  "tags": [
     {
-      "name" : "Audit Records"
+      "name": "Audit Records"
     }
   ],
   "info": {
@@ -397,12 +397,18 @@
       "auditResponse": {
         "title": "auditResponse",
         "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
         "properties": {
           "id": {
             "type": "string"
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "auditRecord"
+            ]
           },
           "attributes": {
             "$ref": "#/components/schemas/auditAttributes"
@@ -410,14 +416,14 @@
           "etag": {
             "type": "string"
           }
-        },
-        "x-tags": [
-          "Misc Models"
-        ]
+        }
       },
       "auditAttributes": {
         "title": "auditAttributes",
         "type": "object",
+        "x-tags": [
+          "Audit Records"
+        ],
         "properties": {
           "system": {
             "type": "string"
@@ -426,10 +432,12 @@
             "type": "string"
           },
           "details": {
-            "type": "object"
+            "type": "object",
+            "description": "Can be of any structure."
           },
           "createdDate": {
-            "type": "string"
+            "type": "string",
+            "format": "date-time"
           },
           "createdBy": {
             "type": "string"
@@ -440,10 +448,7 @@
               "$ref": "../models/objectPointer.v1.json"
             }
           }
-        },
-        "x-tags": [
-          "Audit Records"
-        ]
+        }
       }
     },
     "securitySchemes": {
