@@ -989,6 +989,27 @@
           },
           "blobUrl": {
             "type": "string"
+          },
+          "fileDetails": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Name of the file"
+              },
+              "extension": {
+                "type": "string",
+                "description": "Extension of the file"
+              },
+              "mimeType": {
+                "type": "string",
+                "description": "Detected file mime type."
+              },
+              "size": {
+                "type": "integer",
+                "description": "Size of the file in bytes."
+              }
+            }
           }
         }
       },

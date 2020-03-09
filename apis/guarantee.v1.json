@@ -573,6 +573,12 @@
                 "format": "uri"
               }
             }
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "../models/error.v1.json"
+            }
           }
         }
       },
