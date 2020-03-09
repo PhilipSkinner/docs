@@ -228,7 +228,7 @@
           }
         },
         "operationId": "get-lenders-lenderId",
-        "description": "Get the details for a single lender.\n\nRequires the lender_reader role to access.",
+        "description": "Get the details for a single lender, also returns the current allocation based upon todays date and the list of expert users for the lender.\n\nRequires the lender_reader role to access.",
         "security": [
           {
             "Bearer token": []
@@ -2244,7 +2244,20 @@
             }
           },
           "included": {
-            "$ref": "#/components/schemas/allocationResponse"
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/allocationResponse"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/userResponse"
+                  }
+                }
+              ]
+            }
           }
         }
       },
@@ -2731,8 +2744,9 @@
           "expertUser": {
             "type": "boolean"
           },
-          "amendInvoiceDetails": {
-            "type": "boolean"
+          "email": {
+            "type": "string",
+            "format": "email"
           }
         }
       }
