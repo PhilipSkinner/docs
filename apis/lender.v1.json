@@ -2220,6 +2220,9 @@
       "lender": {
         "title": "lender",
         "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
         "properties": {
           "meta": {
             "$ref": "../models/individualMeta.v1.json"
@@ -2231,30 +2234,36 @@
             "type": "object",
             "properties": {
               "self": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "lenders": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               }
             }
           },
           "included": {
             "$ref": "#/components/schemas/allocationResponse"
           }
-        },
-        "x-tags": [
-          "Misc Models"
-        ]
+        }
       },
       "lenderResponse": {
         "title": "lenderResponse",
         "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "lender"
+            ]
           },
           "etag": {
             "type": "string"
@@ -2262,10 +2271,7 @@
           "attributes": {
             "$ref": "#/components/schemas/lenderAttributes"
           }
-        },
-        "x-tags": [
-          "Misc Models"
-        ]
+        }
       },
       "lenderAttributes": {
         "title": "lenderAttributes",
@@ -2273,18 +2279,25 @@
         "x-tags": [
           "Lenders"
         ],
+        "description": "",
         "properties": {
           "createdBy": {
-            "type": "string"
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "createdDate": {
-            "type": "string"
+            "type": "string",
+            "format": "date-time",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "updatedBy": {
-            "type": "string"
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "updatedDate": {
-            "type": "string"
+            "type": "string",
+            "format": "date-time",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "name": {
             "type": "string"
@@ -2299,7 +2312,8 @@
                 "type": "string"
               },
               "email": {
-                "type": "string"
+                "type": "string",
+                "format": "email"
               }
             }
           },
@@ -2329,6 +2343,9 @@
       "allocation": {
         "title": "allocation",
         "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
         "properties": {
           "meta": {
             "$ref": "../models/individualMeta.v1.json"
@@ -2340,30 +2357,37 @@
             "type": "object",
             "properties": {
               "self": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "allocations": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "lender": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               }
             }
           }
-        },
-        "x-tags": [
-          "Misc Models"
-        ]
+        }
       },
       "allocationResponse": {
         "title": "allocationResponse",
         "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "allocation"
+            ]
           },
           "etag": {
             "type": "string"
@@ -2371,10 +2395,7 @@
           "attributes": {
             "$ref": "#/components/schemas/allocationAttributes"
           }
-        },
-        "x-tags": [
-          "Misc Models"
-        ]
+        }
       },
       "allocationAttributes": {
         "title": "allocationAttributes",
@@ -2385,23 +2406,27 @@
         "properties": {
           "createdDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "createdBy": {
-            "type": "string"
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "updatedDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "updatedBy": {
-            "type": "string"
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "active": {
             "$ref": "#/components/schemas/activeRange"
           },
           "IAURPercentRate": {
-            "type": "integer"
+            "type": "number"
           }
         }
       },
@@ -2422,10 +2447,12 @@
             "type": "object",
             "properties": {
               "self": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "types": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               }
             }
           }
@@ -2439,10 +2466,14 @@
         ],
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "lenderType"
+            ]
           },
           "etag": {
             "type": "string"
@@ -2461,17 +2492,21 @@
         "properties": {
           "createdDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "createdBy": {
-            "type": "string"
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "updatedDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "updatedBy": {
-            "type": "string"
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "name": {
             "type": "string"
@@ -2484,6 +2519,9 @@
       "banding": {
         "title": "banding",
         "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
         "properties": {
           "meta": {
             "$ref": "../models/individualMeta.v1.json"
@@ -2495,30 +2533,37 @@
             "type": "object",
             "properties": {
               "self": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "bandings": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "type": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               }
             }
           }
-        },
-        "x-tags": [
-          "Misc Models"
-        ]
+        }
       },
       "bandingResponse": {
         "title": "bandingResponse",
         "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "banding"
+            ]
           },
           "etag": {
             "type": "string"
@@ -2526,10 +2571,7 @@
           "attributes": {
             "$ref": "#/components/schemas/bandingAttributes"
           }
-        },
-        "x-tags": [
-          "Misc Models"
-        ]
+        }
       },
       "bandingAttributes": {
         "title": "bandingAttributes",
@@ -2540,17 +2582,21 @@
         "properties": {
           "createdDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "createdBy": {
-            "type": "string"
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "updatedDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "updatedBy": {
-            "type": "string"
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "active": {
             "$ref": "#/components/schemas/activeRange"
@@ -2581,7 +2627,7 @@
                   }
                 },
                 "percentage": {
-                  "type": "integer"
+                  "type": "number"
                 }
               }
             }
@@ -2616,13 +2662,16 @@
             "type": "object",
             "properties": {
               "self": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "users": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "lender": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               }
             }
           }
@@ -2633,10 +2682,14 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "user"
+            ]
           },
           "etag": {
             "type": "string"
@@ -2652,20 +2705,25 @@
         "properties": {
           "createdDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "createdBy": {
-            "type": "string"
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "updatedDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "updatedBy": {
-            "type": "string"
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "subject": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           "username": {
             "type": "string"
