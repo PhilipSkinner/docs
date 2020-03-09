@@ -913,6 +913,10 @@
       "document": {
         "title": "document",
         "type": "object",
+        "description": "",
+        "x-tags": [
+          "Misc Models"
+        ],
         "properties": {
           "meta": {
             "$ref": "../models/individualMeta.v1.json"
@@ -924,31 +928,37 @@
             "type": "object",
             "properties": {
               "self": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "envelope": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "documents": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               }
             }
           }
-        },
-        "description": "",
-        "x-tags": [
-          "Misc Models"
-        ]
+        }
       },
       "documentResponse": {
         "title": "documentResponse",
         "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "document"
+            ]
           },
           "etag": {
             "type": "string"
@@ -956,10 +966,7 @@
           "attributes": {
             "$ref": "#/components/schemas/documentAttributes"
           }
-        },
-        "x-tags": [
-          "Misc Models"
-        ]
+        }
       },
       "documentAttributes": {
         "title": "documentAttributes",
@@ -970,16 +977,22 @@
         "description": "",
         "properties": {
           "createdBy": {
-            "type": "string"
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "createdDate": {
-            "type": "string"
+            "type": "string",
+            "format": "date-time",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "updatedBy": {
-            "type": "string"
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "updatedDate": {
-            "type": "string"
+            "type": "string",
+            "format": "date-time",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "type": {
             "type": "string"
@@ -988,7 +1001,8 @@
             "type": "string"
           },
           "blobUrl": {
-            "type": "string"
+            "type": "string",
+            "format": "uri"
           },
           "fileDetails": {
             "type": "object",
@@ -1016,6 +1030,9 @@
       "envelope": {
         "title": "envelope",
         "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
         "properties": {
           "meta": {
             "$ref": "../models/individualMeta.v1.json"
@@ -1027,13 +1044,16 @@
             "type": "object",
             "properties": {
               "self": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "envelopes": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "documents": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               }
             }
           },
@@ -1043,20 +1063,24 @@
               "$ref": "#/components/schemas/documentResponse"
             }
           }
-        },
-        "x-tags": [
-          "Misc Models"
-        ]
+        }
       },
       "envelopeResponse": {
         "title": "envelopeResponse",
         "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "envelope"
+            ]
           },
           "etag": {
             "type": "string"
@@ -1064,10 +1088,7 @@
           "attributes": {
             "$ref": "#/components/schemas/envelopeAttributes"
           }
-        },
-        "x-tags": [
-          "Misc Models"
-        ]
+        }
       },
       "envelopeAttributes": {
         "title": "envelopeAttributes",
@@ -1077,16 +1098,22 @@
         ],
         "properties": {
           "createdBy": {
-            "type": "string"
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "createdDate": {
-            "type": "string"
+            "type": "string",
+            "format": "date-time",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "updatedBy": {
-            "type": "string"
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "updatedDate": {
-            "type": "string"
+            "type": "string",
+            "format": "date-time",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "scope": {
             "type": "array",
@@ -1095,7 +1122,8 @@
             }
           },
           "data": {
-            "type": "object"
+            "type": "object",
+            "description": "Can be of any structure, these are the values required for the document templates."
           }
         }
       }
