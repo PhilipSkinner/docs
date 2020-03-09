@@ -555,6 +555,9 @@
       "guarantee": {
         "title": "guarantee",
         "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
         "properties": {
           "meta": {
             "$ref": "../models/individualMeta.v1.json"
@@ -566,21 +569,23 @@
             "type": "object",
             "properties": {
               "self": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               }
             }
           }
-        },
-        "x-tags": [
-          "Misc Models"
-        ]
+        }
       },
       "guaranteeResponse": {
         "title": "guaranteeResponse",
         "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           "type": {
             "type": "string"
@@ -591,10 +596,7 @@
           "attributes": {
             "$ref": "#/components/schemas/guaranteeAttributes"
           }
-        },
-        "x-tags": [
-          "Misc Models"
-        ]
+        }
       },
       "guaranteeAttributes": {
         "title": "guaranteeAttributes",
@@ -605,16 +607,22 @@
         "description": "",
         "properties": {
           "createdBy": {
-            "type": "string"
+            "type": "string",
+            "description": "Not to be sent in POST/PUT/PATCH."
           },
           "createdDate": {
-            "type": "string"
+            "type": "string",
+            "format": "date-time",
+            "description": "Not to be sent in POST/PUT/PATCH."
           },
           "updatedBy": {
-            "type": "string"
+            "type": "string",
+            "description": "Not to be sent in POST/PUT/PATCH."
           },
           "updatedDate": {
-            "type": "string"
+            "type": "string",
+            "format": "date-time",
+            "description": "Not to be sent in POST/PUT/PATCH."
           },
           "dataProtectionAgreed": {
             "$ref": "#/components/schemas/booleanAnswer"
@@ -622,10 +630,73 @@
           "facilityDetails": {
             "type": "object",
             "properties": {
-              "product": {
-                "$ref": "../models/objectPointer.v1.json"
+              "assetFinanceDetails": {
+                "type": "object",
+                "properties": {
+                  "balloonAmount": {
+                    "$ref": "#/components/schemas/integerAnswer"
+                  },
+                  "details": {
+                    "type": "object",
+                    "properties": {
+                      "category": {
+                        "$ref": "#/components/schemas/stringAnswer"
+                      },
+                      "cashPrice": {
+                        "$ref": "../models/objectPointer.v1.json"
+                      },
+                      "installCost": {
+                        "$ref": "#/components/schemas/integerAnswer"
+                      },
+                      "deposit": {
+                        "$ref": "#/components/schemas/integerAnswer"
+                      },
+                      "partExchange": {
+                        "$ref": "#/components/schemas/integerAnswer"
+                      },
+                      "originalBalance": {
+                        "$ref": "#/components/schemas/integerAnswer"
+                      },
+                      "residualValue": {
+                        "$ref": "#/components/schemas/integerAnswer"
+                      },
+                      "coverPercent": {
+                        "$ref": "#/components/schemas/numberAnswer"
+                      },
+                      "totalGuaranteesFacilityAmount": {
+                        "$ref": "#/components/schemas/integerAnswer"
+                      }
+                    },
+                    "required": [
+                      "category",
+                      "cashPrice",
+                      "installCost",
+                      "deposit",
+                      "partExchange",
+                      "residualValue",
+                      "coverPercent"
+                    ]
+                  },
+                  "agreementType": {
+                    "$ref": "#/components/schemas/stringAnswer"
+                  }
+                }
               },
-              "facilityType": {
+              "interest": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "$ref": "#/components/schemas/stringAnswer"
+                  },
+                  "rateMargin": {
+                    "$ref": "#/components/schemas/numberAnswer"
+                  }
+                }
+              },
+              "facilityTotalAmount": {
+                "$ref": "#/components/schemas/integerAnswer"
+              },
+              "principalPurpose": {
                 "$ref": "#/components/schemas/stringAnswer"
               },
               "repaymentType": {
@@ -657,75 +728,11 @@
                   }
                 }
               },
-              "principalPurpose": {
+              "facilityType": {
                 "$ref": "#/components/schemas/stringAnswer"
               },
-              "facilityTotalAmount": {
-                "$ref": "#/components/schemas/integerAnswer"
-              },
-              "interest": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "$ref": "#/components/schemas/stringAnswer"
-                  },
-                  "rateMargin": {
-                    "type": "number",
-                    "minimum": 0
-                  }
-                }
-              },
-              "assetFinanceDetails": {
-                "type": "object",
-                "properties": {
-                  "balloonAmount": {
-                    "$ref": "#/components/schemas/integerAnswer"
-                  },
-                  "details": {
-                    "type": "object",
-                    "properties": {
-                      "category": {
-                        "$ref": "#/components/schemas/stringAnswer"
-                      },
-                      "cashPrice": {
-                        "$ref": "#/components/schemas/integerAnswer"
-                      },
-                      "installCost": {
-                        "$ref": "#/components/schemas/integerAnswer"
-                      },
-                      "deposit": {
-                        "$ref": "#/components/schemas/integerAnswer"
-                      },
-                      "partExchange": {
-                        "$ref": "#/components/schemas/integerAnswer"
-                      },
-                      "originalBalance": {
-                        "$ref": "#/components/schemas/integerAnswer"
-                      },
-                      "residualValue": {
-                        "$ref": "#/components/schemas/integerAnswer"
-                      },
-                      "coverPercent": {
-                        "type": "number"
-                      },
-                      "totalGuaranteesFacilityAmount": {
-                        "$ref": "#/components/schemas/integerAnswer"
-                      }
-                    },
-                    "required": [
-                      "category",
-                      "cashPrice",
-                      "installCost",
-                      "deposit",
-                      "partExchange",
-                      "residualValue",
-                      "coverPercent"
-                    ]
-                  },
-                  "agreementType": {
-                    "$ref": "#/components/schemas/stringAnswer"
-                  }
-                }
+              "product": {
+                "$ref": "../models/objectPointer.v1.json"
               }
             }
           },
@@ -782,10 +789,10 @@
               "type": "object",
               "properties": {
                 "startDate": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/dateAnswer"
                 },
                 "endDate": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/dateAnswer"
                 }
               }
             }
@@ -838,7 +845,8 @@
                   "type": "string"
                 },
                 "date": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "date-time"
                 },
                 "by": {
                   "type": "string"
@@ -853,12 +861,17 @@
         "type": "object",
         "properties": {
           "date": {
-            "type": "string"
+            "type": "string",
+            "format": "date"
           },
           "amount": {
-            "type": "number"
+            "type": "integer"
           }
-        }
+        },
+        "required": [
+          "date",
+          "amount"
+        ]
       },
       "booleanAnswer": {
         "title": "booleanAnswer",
@@ -870,16 +883,27 @@
           "question": {
             "$ref": "#/components/schemas/question"
           }
-        }
+        },
+        "required": [
+          "answer",
+          "question"
+        ]
       },
       "question": {
         "title": "question",
         "type": "object",
         "properties": {
           "questionText": {
+            "type": "string",
+            "description": "Text that was shown to the user to capture this information."
+          },
+          "relatedText": {
             "type": "string"
           }
-        }
+        },
+        "required": [
+          "questionText"
+        ]
       },
       "integerAnswer": {
         "title": "integerAnswer",
@@ -891,7 +915,11 @@
           "question": {
             "$ref": "#/components/schemas/question"
           }
-        }
+        },
+        "required": [
+          "answer",
+          "question"
+        ]
       },
       "stringAnswer": {
         "title": "stringAnswer",
@@ -903,7 +931,11 @@
           "question": {
             "$ref": "#/components/schemas/question"
           }
-        }
+        },
+        "required": [
+          "answer",
+          "question"
+        ]
       },
       "dateAnswer": {
         "title": "dateAnswer",
@@ -916,7 +948,27 @@
           "question": {
             "$ref": "#/components/schemas/question"
           }
-        }
+        },
+        "required": [
+          "answer",
+          "question"
+        ]
+      },
+      "numberAnswer": {
+        "title": "numberAnswer",
+        "type": "object",
+        "properties": {
+          "answer": {
+            "type": "number"
+          },
+          "question": {
+            "$ref": "#/components/schemas/question"
+          }
+        },
+        "required": [
+          "answer",
+          "question"
+        ]
       }
     },
     "securitySchemes": {
