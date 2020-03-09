@@ -77,18 +77,26 @@
         "parameters": [
           {
             "schema": {
-              "type": "number"
+              "type": "integer"
             },
             "in": "query",
             "name": "page"
           },
           {
             "schema": {
-              "type": "number"
+              "type": "integer"
             },
             "in": "query",
             "name": "perpage",
             "description": "Setting to -1 returns all products."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "productid",
+            "description": "Supports multiple values."
           }
         ],
         "description": "Fetch a paginated list of all products.\n\nRequires the products_reader role to access."
