@@ -626,13 +626,13 @@
                 "$ref": "../models/objectPointer.v1.json"
               },
               "facilityType": {
-                "type": "string",
                 "enum": [
                   "Term Loan",
                   "Asset Finance",
                   "Invoice Finance",
                   "Revolving Credit"
-                ]
+                ],
+                "$ref": ""
               },
               "repaymentType": {
                 "type": "object",
@@ -651,13 +651,10 @@
                     "type": "object",
                     "properties": {
                       "years": {
-                        "type": "number",
-                        "minimum": 0
+                        "$ref": "#/components/schemas/integerAnswer"
                       },
                       "months": {
-                        "type": "number",
-                        "minimum": 0,
-                        "maximum": 11
+                        "$ref": "#/components/schemas/integerAnswer"
                       }
                     }
                   },
@@ -697,7 +694,7 @@
                 ]
               },
               "facilityTotalAmount": {
-                "type": "number"
+                "$ref": "#/components/schemas/integerAnswer"
               },
               "interest": {
                 "type": "object",
@@ -719,7 +716,7 @@
                 "type": "object",
                 "properties": {
                   "balloonAmount": {
-                    "type": "number"
+                    "$ref": "#/components/schemas/integerAnswer"
                   },
                   "details": {
                     "type": "object",
@@ -752,28 +749,28 @@
                         ]
                       },
                       "cashPrice": {
-                        "type": "number"
+                        "$ref": "#/components/schemas/integerAnswer"
                       },
                       "installCost": {
-                        "type": "number"
+                        "$ref": "#/components/schemas/integerAnswer"
                       },
                       "deposit": {
-                        "type": "number"
+                        "$ref": "#/components/schemas/integerAnswer"
                       },
                       "partExchange": {
-                        "type": "number"
+                        "$ref": "#/components/schemas/integerAnswer"
                       },
                       "originalBalance": {
-                        "type": "number"
+                        "$ref": "#/components/schemas/integerAnswer"
                       },
                       "residualValue": {
-                        "type": "number"
+                        "$ref": "#/components/schemas/integerAnswer"
                       },
                       "coverPercent": {
                         "type": "number"
                       },
                       "totalGuaranteesFacilityAmount": {
-                        "type": "number"
+                        "$ref": "#/components/schemas/integerAnswer"
                       }
                     },
                     "required": [
@@ -822,10 +819,10 @@
                 "type": "string"
               },
               "sicCode": {
-                "type": "string"
+                "$ref": "../models/objectPointer.v1.json"
               },
               "companyTurnover": {
-                "type": "number"
+                "$ref": "#/components/schemas/integerAnswer"
               },
               "turnoverAboveFiftyPercent": {
                 "$ref": "#/components/schemas/booleanAnswer"
@@ -868,7 +865,7 @@
             "type": "object",
             "properties": {
               "calculatedAmount": {
-                "type": "number"
+                "$ref": "#/components/schemas/integerAnswer"
               },
               "applicantMinimusStateAidPastThreeYears": {
                 "$ref": "#/components/schemas/booleanAnswer"
@@ -879,7 +876,7 @@
             "type": "object",
             "properties": {
               "totalVaue": {
-                "type": "number"
+                "$ref": "#/components/schemas/integerAnswer"
               },
               "security": {
                 "type": "array",
@@ -887,10 +884,10 @@
                   "type": "object",
                   "properties": {
                     "additionalSecurityValue": {
-                      "type": "number"
+                      "$ref": "#/components/schemas/integerAnswer"
                     },
                     "principalTypeofAsset": {
-                      "type": "number"
+                      "$ref": "#/components/schemas/integerAnswer"
                     }
                   }
                 }
@@ -961,6 +958,18 @@
         "properties": {
           "answer": {
             "type": "integer"
+          },
+          "question": {
+            "$ref": "#/components/schemas/question"
+          }
+        }
+      },
+      "stringAnswer": {
+        "title": "stringAnswer",
+        "type": "object",
+        "properties": {
+          "answer": {
+            "type": "string"
           },
           "question": {
             "$ref": "#/components/schemas/question"
