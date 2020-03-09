@@ -3851,10 +3851,11 @@
             "type": "boolean"
           },
           "dateOfClaim": {
-            "type": "string"
+            "type": "string",
+            "format": "date"
           },
           "outstandingCapitalPreRecovery": {
-            "type": "number"
+            "type": "integer"
           },
           "reasonForFailure": {
             "type": "string"
@@ -3866,7 +3867,7 @@
             "type": "string"
           },
           "claimValue": {
-            "type": "number"
+            "type": "integer"
           },
           "currentStatus": {
             "type": "string"
@@ -3883,7 +3884,8 @@
                   "type": "string"
                 },
                 "date": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "date-time"
                 },
                 "by": {
                   "type": "string"
@@ -3900,7 +3902,8 @@
             "description": "Cannot be true at the same time as approved."
           },
           "settlementDate": {
-            "type": "string"
+            "type": "string",
+            "format": "date"
           },
           "rejectionReason": {
             "type": "string"
@@ -3909,7 +3912,7 @@
             "type": "boolean"
           },
           "approvedAmount": {
-            "type": "number"
+            "type": "integer"
           },
           "approvalComments": {
             "type": "string"
