@@ -2323,12 +2323,19 @@
       "ruleResponse": {
         "title": "ruleResponse",
         "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "rule"
+            ]
           },
           "etag": {
             "type": "string"
@@ -2336,10 +2343,7 @@
           "attributes": {
             "$ref": "#/components/schemas/ruleResponseAttributes"
           }
-        },
-        "x-tags": [
-          "Misc Models"
-        ]
+        }
       },
       "ruleResponseAttributes": {
         "title": "ruleResponseAttributes",
@@ -2349,16 +2353,22 @@
         ],
         "properties": {
           "createdBy": {
-            "type": "string"
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "createdDate": {
-            "type": "string"
+            "type": "string",
+            "format": "date-time",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "updatedBy": {
-            "type": "string"
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "updatedDate": {
-            "type": "string"
+            "type": "string",
+            "format": "date-time",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "maxTradingActivityPercentOfTurnover": {
             "type": "integer"
@@ -2402,10 +2412,12 @@
             "type": "object",
             "properties": {
               "self": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "sicCodes": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               }
             }
           },
@@ -2417,12 +2429,19 @@
       "sicCodeResponse": {
         "title": "sicCodeResponse",
         "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "sicCode"
+            ]
           },
           "etag": {
             "type": "string"
@@ -2430,10 +2449,7 @@
           "attributes": {
             "$ref": "#/components/schemas/sicCodeAttributes"
           }
-        },
-        "x-tags": [
-          "Misc Models"
-        ]
+        }
       },
       "sicCodeAttributes": {
         "title": "sicCodeAttributes",
@@ -2443,16 +2459,22 @@
         ],
         "properties": {
           "createdBy": {
-            "type": "string"
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "createdDate": {
-            "type": "string"
+            "type": "string",
+            "format": "date-time",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "updatedBy": {
-            "type": "string"
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "updatedDate": {
-            "type": "string"
+            "type": "string",
+            "format": "date-time",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "description": {
             "type": "string"
@@ -2626,13 +2648,16 @@
             "type": "object",
             "properties": {
               "self": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "rules": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "siccode": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               }
             }
           }
@@ -2643,10 +2668,14 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "sicCodeRuleSet"
+            ]
           },
           "etag": {
             "type": "string"
@@ -2661,16 +2690,22 @@
         "type": "object",
         "properties": {
           "createdBy": {
-            "type": "string"
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "createdDate": {
-            "type": "string"
+            "type": "string",
+            "format": "date-time",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "updatedBy": {
-            "type": "string"
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "updatedDate": {
-            "type": "string"
+            "type": "string",
+            "format": "date-time",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "stateAid": {
             "type": "object",
