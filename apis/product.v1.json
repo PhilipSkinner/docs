@@ -2193,12 +2193,19 @@
       "productResponse": {
         "title": "productResponse",
         "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "product"
+            ]
           },
           "etag": {
             "type": "string"
@@ -2206,10 +2213,7 @@
           "attributes": {
             "$ref": "#/components/schemas/productAttributes"
           }
-        },
-        "x-tags": [
-          "Misc Models"
-        ]
+        }
       },
       "productAttributes": {
         "title": "productAttributes",
@@ -2217,22 +2221,25 @@
         "x-tags": [
           "Products"
         ],
+        "description": "",
         "properties": {
           "createdBy": {
-            "type": "string"
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "createdDate": {
-            "type": "string"
+            "type": "string",
+            "format": "date-time",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "updatedBy": {
-            "type": "string"
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "updatedDate": {
-            "type": "string"
-          },
-          "validationSchema": {
-            "type": "object",
-            "description": "JSON schema for validating data contract to guarantees API."
+            "type": "string",
+            "format": "date-time",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "name": {
             "type": "string"
@@ -2251,8 +2258,7 @@
               }
             }
           }
-        },
-        "description": ""
+        }
       },
       "product": {
         "title": "product",
@@ -2272,10 +2278,12 @@
             "type": "object",
             "properties": {
               "self": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "products": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               }
             }
           },
@@ -2287,6 +2295,9 @@
       "rule": {
         "title": "rule",
         "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
         "properties": {
           "meta": {
             "$ref": "../models/individualMeta.v1.json"
@@ -2295,12 +2306,19 @@
             "$ref": "#/components/schemas/ruleResponse"
           },
           "links": {
-            "type": "object"
+            "type": "object",
+            "properties": {
+              "self": {
+                "type": "string",
+                "format": "uri"
+              },
+              "rules": {
+                "type": "string",
+                "format": "uri"
+              }
+            }
           }
-        },
-        "x-tags": [
-          "Misc Models"
-        ]
+        }
       },
       "ruleResponse": {
         "title": "ruleResponse",
@@ -2446,7 +2464,8 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           "attributes": {
             "$ref": "#/components/schemas/productRuleAttributes"
@@ -2455,25 +2474,35 @@
             "type": "string"
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "productRuleset"
+            ]
           }
         }
       },
       "productRuleAttributes": {
         "title": "productRuleAttributes",
         "type": "object",
+        "description": "",
         "properties": {
           "createdBy": {
-            "type": "string"
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "createdDate": {
-            "type": "string"
+            "type": "string",
+            "format": "date-time",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "updatedBy": {
-            "type": "string"
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "updatedDate": {
-            "type": "string"
+            "type": "string",
+            "format": "date-time",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
           "efgLimits": {
             "type": "object",
@@ -2568,13 +2597,16 @@
             "type": "object",
             "properties": {
               "self": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "product": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "rules": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               }
             }
           }
