@@ -2316,6 +2316,9 @@
         "title": "notificationResponse",
         "type": "object",
         "description": "Models a notification response object.",
+        "x-tags": [
+          "Response Models"
+        ],
         "properties": {
           "data": {
             "$ref": "#/components/schemas/notification"
@@ -2324,22 +2327,24 @@
             "type": "object",
             "properties": {
               "self": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "receipts": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               }
             }
           }
-        },
-        "x-tags": [
-          "Response Models"
-        ]
+        }
       },
       "receiptResponse": {
         "title": "receiptResponse",
         "type": "object",
         "description": "",
+        "x-tags": [
+          "Response Models"
+        ],
         "properties": {
           "data": {
             "$ref": "#/components/schemas/receipt"
@@ -2348,17 +2353,16 @@
             "type": "object",
             "properties": {
               "self": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "notification": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               }
             }
           }
-        },
-        "x-tags": [
-          "Response Models"
-        ]
+        }
       },
       "receiptState": {
         "title": "receiptState",
@@ -2372,13 +2376,17 @@
           },
           "date": {
             "type": "string",
-            "description": "DD/MM/YYYY format"
+            "description": "DD/MM/YYYY format",
+            "format": "date-time"
           }
         }
       },
       "subscriptionResponse": {
         "title": "subscriptionResponse",
         "type": "object",
+        "x-tags": [
+          "Response Models"
+        ],
         "properties": {
           "data": {
             "$ref": "#/components/schemas/subscription"
@@ -2387,17 +2395,16 @@
             "type": "object",
             "properties": {
               "self": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "recipients": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               }
             }
           }
-        },
-        "x-tags": [
-          "Response Models"
-        ]
+        }
       },
       "scope": {
         "title": "scope",
@@ -2406,19 +2413,20 @@
           "Misc Models"
         ],
         "properties": {
-          "lenderId": {
-            "type": "string",
-            "description": "GUID"
+          "lender": {
+            "$ref": "../models/objectPointer.v1.json"
           },
-          "facilityId": {
-            "type": "string",
-            "description": "GUID"
+          "facility": {
+            "$ref": "../models/objectPointer.v1.json"
           }
         }
       },
       "recipientResponse": {
         "title": "recipientResponse",
         "type": "object",
+        "x-tags": [
+          "Response Models"
+        ],
         "properties": {
           "data": {
             "$ref": "#/components/schemas/recipient"
@@ -2427,14 +2435,12 @@
             "type": "object",
             "properties": {
               "self": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               }
             }
           }
-        },
-        "x-tags": [
-          "Response Models"
-        ]
+        }
       },
       "notification": {
         "title": "notification",
@@ -2446,11 +2452,15 @@
         "properties": {
           "type": {
             "type": "string",
-            "description": "Always \"notification\"."
+            "description": "Always \"notification\".",
+            "enum": [
+              "notification"
+            ]
           },
           "id": {
             "type": "string",
-            "description": "GUID"
+            "description": "GUID",
+            "format": "uuid"
           },
           "attributes": {
             "$ref": "#/components/schemas/notificationAttributes"
@@ -2477,11 +2487,15 @@
         "properties": {
           "type": {
             "type": "string",
-            "description": "Always \"receipt\""
+            "description": "Always \"receipt\"",
+            "enum": [
+              "receipt"
+            ]
           },
           "id": {
             "type": "string",
-            "description": "GUID"
+            "description": "GUID",
+            "format": "uuid"
           },
           "attributes": {
             "$ref": "#/components/schemas/receiptAttributes"
@@ -2505,11 +2519,15 @@
         "properties": {
           "type": {
             "type": "string",
-            "description": "Always \"subscription\""
+            "description": "Always \"subscription\"",
+            "enum": [
+              "subscription"
+            ]
           },
           "id": {
             "type": "string",
-            "description": "GUID"
+            "description": "GUID",
+            "format": "uuid"
           },
           "attributes": {
             "$ref": "#/components/schemas/subscriptionAttributes"
@@ -2536,11 +2554,15 @@
         "properties": {
           "type": {
             "type": "string",
-            "description": "Always \"recipient\""
+            "description": "Always \"recipient\"",
+            "enum": [
+              "recipient"
+            ]
           },
           "id": {
             "type": "string",
-            "description": "GUID"
+            "description": "GUID",
+            "format": "uuid"
           },
           "attributes": {
             "$ref": "#/components/schemas/recipientAttributes"
@@ -2561,6 +2583,9 @@
       "notificationAttributes": {
         "title": "notificationAttributes",
         "type": "object",
+        "x-tags": [
+          "Request Models"
+        ],
         "properties": {
           "scope": {
             "$ref": "#/components/schemas/scope"
@@ -2571,13 +2596,25 @@
           "body": {
             "type": "string"
           },
-          "date": {
-            "type": "string"
+          "createdBy": {
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Not to be sent on POST/PUT/PATCH."
+          },
+          "updatedBy": {
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
+          },
+          "updatedDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Not to be sent on POST/PUT/PATCH."
           }
-        },
-        "x-tags": [
-          "Request Models"
-        ]
+        }
       },
       "receiptAttributes": {
         "title": "receiptAttributes",
@@ -2586,13 +2623,11 @@
           "Request Models"
         ],
         "properties": {
-          "subscriptionId": {
-            "type": "string",
-            "description": "GUID"
+          "subscription": {
+            "$ref": "../models/objectPointer.v1.json"
           },
-          "recipientId": {
-            "type": "string",
-            "description": "GUID"
+          "recipient": {
+            "$ref": "../models/objectPointer.v1.json"
           },
           "sent": {
             "$ref": "#/components/schemas/receiptState"
@@ -2653,11 +2688,15 @@
         "properties": {
           "type": {
             "type": "string",
-            "description": "Always \"subscriptionRecipient\""
+            "description": "Always \"subscriptionRecipient\"",
+            "enum": [
+              "subscriptionRecipient"
+            ]
           },
           "id": {
             "type": "string",
-            "description": "GUID"
+            "description": "GUID",
+            "format": "uuid"
           },
           "attributes": {
             "$ref": "#/components/schemas/subscriptionRecipientAttributes"
@@ -2682,13 +2721,11 @@
           "Request Models"
         ],
         "properties": {
-          "subscriptionId": {
-            "type": "string",
-            "description": "GUID"
+          "subscription": {
+            "$ref": "../models/objectPointer.v1.json"
           },
-          "recipientId": {
-            "type": "string",
-            "description": "GUID"
+          "recipient": {
+            "$ref": "../models/objectPointer.v1.json"
           },
           "active": {
             "type": "boolean"
@@ -2698,6 +2735,9 @@
       "subscriptionRecipientResponse": {
         "title": "subscriptionRecipientResponse",
         "type": "object",
+        "x-tags": [
+          "Response Models"
+        ],
         "properties": {
           "data": {
             "$ref": "#/components/schemas/subscriptionRecipient"
@@ -2706,20 +2746,20 @@
             "type": "object",
             "properties": {
               "self": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "subscription": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "recipient": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               }
             }
           }
-        },
-        "x-tags": [
-          "Response Models"
-        ]
+        }
       }
     }
   },
