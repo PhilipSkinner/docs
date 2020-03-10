@@ -196,6 +196,9 @@
               }
             }
           },
+          "304": {
+            "description": "Not Modified"
+          },
           "401": {
             "description": "Unauthorized",
             "content": {
@@ -228,7 +231,7 @@
           }
         },
         "operationId": "get-lenders-lenderId",
-        "description": "Get the details for a single lender, also returns the current allocation based upon todays date and the list of expert users for the lender.\n\nRequires the lender_reader role to access.",
+        "description": "Get the details for a single lender, also returns the current allocation based upon todays date and the list of expert users for the lender. Includes any sub lenders and if this is a sub lender, its parent lender.\n\nRequires the lender_reader role to access.",
         "security": [
           {
             "Bearer token": []
@@ -634,6 +637,9 @@
                 }
               }
             }
+          },
+          "304": {
+            "description": "Not Modified"
           },
           "401": {
             "description": "Unauthorized",
@@ -1044,6 +1050,9 @@
                 }
               }
             }
+          },
+          "304": {
+            "description": "Not Modified"
           },
           "401": {
             "description": "Unauthorized",
@@ -1513,6 +1522,9 @@
               }
             }
           },
+          "304": {
+            "description": "Not Modified"
+          },
           "401": {
             "description": "Unauthorized",
             "content": {
@@ -1977,6 +1989,9 @@
                 }
               }
             }
+          },
+          "304": {
+            "description": "Not Modified"
           },
           "401": {
             "description": "Unauthorized",

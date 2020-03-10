@@ -251,6 +251,9 @@
               }
             }
           },
+          "304": {
+            "description": "Not Modified"
+          },
           "401": {
             "description": "Unauthorized",
             "content": {
@@ -298,7 +301,8 @@
             "in": "header",
             "name": "If-match"
           }
-        ]
+        ],
+        "requestBody": {}
       },
       "parameters": [
         {
@@ -682,6 +686,9 @@
                 }
               }
             }
+          },
+          "304": {
+            "description": "Not Modified"
           },
           "401": {
             "description": "Unauthorized",
@@ -1124,6 +1131,9 @@
                 }
               }
             }
+          },
+          "304": {
+            "description": "Not Modified"
           },
           "401": {
             "description": "Unauthorized",
@@ -1580,6 +1590,9 @@
                 }
               }
             }
+          },
+          "304": {
+            "description": "Not Modified"
           },
           "401": {
             "description": "Unauthorized",
@@ -2064,6 +2077,9 @@
                 }
               }
             }
+          },
+          "304": {
+            "description": "Not Modified"
           },
           "401": {
             "description": "Unauthorized",

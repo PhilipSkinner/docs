@@ -210,6 +210,9 @@
               }
             }
           },
+          "304": {
+            "description": "Not Modified"
+          },
           "401": {
             "description": "Unauthorized",
             "content": {
@@ -646,6 +649,9 @@
               }
             }
           },
+          "304": {
+            "description": "Not Modified"
+          },
           "401": {
             "description": "Unauthorized",
             "content": {
@@ -1080,6 +1086,9 @@
               }
             }
           },
+          "304": {
+            "description": "Not Modified"
+          },
           "401": {
             "description": "Unauthorized",
             "content": {
@@ -1504,6 +1513,9 @@
                 }
               }
             }
+          },
+          "304": {
+            "description": "Not Modified"
           },
           "401": {
             "description": "Unauthorized",
@@ -1991,6 +2003,39 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/productRule"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Not Modified"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
                 }
               }
             }

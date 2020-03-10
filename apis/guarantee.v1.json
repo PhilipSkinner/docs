@@ -212,6 +212,9 @@
               }
             }
           },
+          "304": {
+            "description": "Not Modified"
+          },
           "401": {
             "description": "Unauthorized",
             "content": {
