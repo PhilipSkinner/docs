@@ -749,7 +749,18 @@
             }
           },
           "lender": {
-            "$ref": "../models/objectPointer.v1.json"
+            "type": "object",
+            "properties": {
+              "lenderId": {
+                "$ref": "../models/objectPointer.v1.json"
+              },
+              "sortCode": {
+                "$ref": "#/components/schemas/numberAnswer"
+              },
+              "name": {
+                "type": "string"
+              }
+            }
           },
           "applicationDetails": {
             "type": "object",
@@ -905,9 +916,6 @@
                 }
               }
             }
-          },
-          "lenderSortCode": {
-            "$ref": "#/components/schemas/numberAnswer"
           },
           "additionalSecurity": {
             "type": "array",
