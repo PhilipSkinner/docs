@@ -2255,6 +2255,12 @@
                   "items": {
                     "$ref": "#/components/schemas/userResponse"
                   }
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/lenderResponse"
+                  }
                 }
               ]
             }
@@ -2283,6 +2289,20 @@
           },
           "attributes": {
             "$ref": "#/components/schemas/lenderAttributes"
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "parentLender": {
+                "$ref": "../models/objectPointer.v1.json"
+              },
+              "subLenders": {
+                "type": "array",
+                "items": {
+                  "$ref": "../models/objectPointer.v1.json"
+                }
+              }
+            }
           }
         }
       },
