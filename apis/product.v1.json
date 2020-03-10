@@ -2695,7 +2695,7 @@
             "$ref": "../models/individualMeta.v1.json"
           },
           "data": {
-            "$ref": "#/components/schemas/sicCodeResponse"
+            "$ref": "#/components/schemas/sicCodeRuleResponse"
           },
           "links": {
             "type": "object",
