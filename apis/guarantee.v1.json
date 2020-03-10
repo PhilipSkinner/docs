@@ -922,6 +922,12 @@
                 }
               }
             }
+          },
+          "documentsEnvelope": {
+            "$ref": "../models/objectPointer.v1.json"
+          },
+          "feeSchedule": {
+            "$ref": "../models/objectPointer.v1.json"
           }
         }
       },
