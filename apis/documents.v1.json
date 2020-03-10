@@ -265,6 +265,9 @@
               }
             }
           },
+          "304": {
+            "description": "Not Modified"
+          },
           "401": {
             "description": "Unauthorized",
             "content": {
@@ -311,7 +314,17 @@
             "name": "If-match"
           }
         ],
-        "description": "Fetches a single document within an envelope.\n\nRequires the role documents_reader to access."
+        "description": "Fetches a single document within an envelope.\n\nRequires the role documents_reader to access.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        }
       },
       "put": {
         "summary": "Update a document",
@@ -705,6 +718,9 @@
                 }
               }
             }
+          },
+          "304": {
+            "description": "Not Modified"
           },
           "401": {
             "description": "Unauthorized",
