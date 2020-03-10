@@ -780,6 +780,12 @@
               },
               "tradingPostcode": {
                 "$ref": "#/components/schemas/stringAnswer"
+              },
+              "bankAccount": {
+                "$ref": "#/components/schemas/integerAnswer"
+              },
+              "bankSortCode": {
+                "$ref": "#/components/schemas/integerAnswer"
               }
             }
           },
@@ -862,6 +868,57 @@
                 },
                 "by": {
                   "type": "string"
+                }
+              }
+            }
+          },
+          "expectedRepayments": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "date": {
+                  "$ref": "#/components/schemas/dateAnswer"
+                },
+                "amount": {
+                  "$ref": "#/components/schemas/numberAnswer"
+                },
+                "balance": {
+                  "$ref": "#/components/schemas/numberAnswer"
+                }
+              }
+            }
+          },
+          "repayments": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "date": {
+                  "$ref": "#/components/schemas/dateAnswer"
+                },
+                "amount": {
+                  "$ref": "#/components/schemas/numberAnswer"
+                },
+                "balance": {
+                  "$ref": "#/components/schemas/numberAnswer"
+                }
+              }
+            }
+          },
+          "lenderSortCode": {
+            "$ref": "#/components/schemas/numberAnswer"
+          },
+          "additionalSecurity": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "amount": {
+                  "$ref": "#/components/schemas/numberAnswer"
+                },
+                "principalTypeOfAsset": {
+                  "$ref": "#/components/schemas/stringAnswer"
                 }
               }
             }
