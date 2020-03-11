@@ -773,8 +773,46 @@
                     "$ref": "#/components/schemas/stringAnswer"
                   },
                   "seasonalMonths": {
-                    "type": "array",
-                    "items": {}
+                    "enum": [
+                      "January",
+                      "February",
+                      "March",
+                      "April",
+                      "May",
+                      "June",
+                      "July",
+                      "August",
+                      "September",
+                      "October",
+                      "November",
+                      "December"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "answer": {
+                        "type": "array",
+                        "enum": [
+                          "January",
+                          "February",
+                          "March",
+                          "April",
+                          "May",
+                          "June",
+                          "July",
+                          "August",
+                          "September",
+                          "October",
+                          "November",
+                          "December"
+                        ],
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "question": {
+                        "$ref": "#/components/schemas/question"
+                      }
+                    }
                   }
                 }
               },
