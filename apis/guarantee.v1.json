@@ -737,7 +737,23 @@
                 "type": "object",
                 "properties": {
                   "paymentType": {
-                    "$ref": "#/components/schemas/stringAnswer"
+                    "type": "object",
+                    "properties": {
+                      "answer": {
+                        "type": "string",
+                        "enum": [
+                          "Annually",
+                          "6-monthly",
+                          "Quarterly",
+                          "Monthly",
+                          "Weekly",
+                          "Seasonal"
+                        ]
+                      },
+                      "question": {
+                        "$ref": "#/components/schemas/question"
+                      }
+                    }
                   },
                   "fixedRepaymentAmount": {
                     "$ref": "#/components/schemas/integerAnswer"
