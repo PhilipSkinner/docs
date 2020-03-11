@@ -698,7 +698,19 @@
                 "type": "object",
                 "properties": {
                   "type": {
-                    "$ref": "#/components/schemas/stringAnswer"
+                    "type": "object",
+                    "properties": {
+                      "answer": {
+                        "type": "string",
+                        "enum": [
+                          "Variable",
+                          "Fixed"
+                        ]
+                      },
+                      "question": {
+                        "$ref": "#/components/schemas/question"
+                      }
+                    }
                   },
                   "rateMargin": {
                     "$ref": "#/components/schemas/numberAnswer"
