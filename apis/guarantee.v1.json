@@ -770,7 +770,23 @@
                     }
                   },
                   "paymentFrequency": {
-                    "$ref": "#/components/schemas/stringAnswer"
+                    "type": "object",
+                    "properties": {
+                      "answer": {
+                        "type": "string",
+                        "enum": [
+                          "Annually",
+                          "6-monthly",
+                          "Quarterly",
+                          "Monthly",
+                          "Weekly",
+                          "Bullet – Interest only"
+                        ]
+                      },
+                      "question": {
+                        "$ref": "#/components/schemas/question"
+                      }
+                    }
                   },
                   "seasonalMonths": {
                     "enum": [
