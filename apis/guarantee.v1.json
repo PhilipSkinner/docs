@@ -766,7 +766,23 @@
             "type": "object",
             "properties": {
               "legalForm": {
-                "$ref": "#/components/schemas/stringAnswer"
+                "type": "object",
+                "properties": {
+                  "answer": {
+                    "type": "string",
+                    "enum": [
+                      "Sole Trader",
+                      "Partnership",
+                      "Limited Liability Partnership (LLP)",
+                      "Private Limited Company (LTD)",
+                      "Public Limited Company (PLC)",
+                      "Other"
+                    ]
+                  },
+                  "question": {
+                    "$ref": "#/components/schemas/question"
+                  }
+                }
               },
               "companyRegistrationNumber": {
                 "$ref": "#/components/schemas/stringAnswer"
