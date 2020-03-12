@@ -2233,7 +2233,7 @@
         "tags": [
           "Lenders"
         ],
-        "description": "Removes a user from a lender.\n\nRequires the lender_remover role to access.",
+        "description": "Removes a user from a lender.\n\nRequires the lender_writer role to access.",
         "security": [
           {
             "Bearer token": []
