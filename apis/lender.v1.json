@@ -532,7 +532,12 @@
             "description": "Date to filter allocations by."
           }
         ],
-        "description": "Returns a paginated list of all allocations for a lender. Can be filtered by date to return the currently active allocation.\n\nRequires the lender_reader role to access."
+        "description": "Returns a paginated list of all allocations for a lender. Can be filtered by date to return the currently active allocation.\n\nRequires the lender_reader role to access.",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ]
       },
       "post": {
         "summary": "Create a lender allocation",
