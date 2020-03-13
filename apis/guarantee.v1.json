@@ -985,7 +985,20 @@
             }
           },
           "currentStatus": {
-            "type": "string"
+            "type": "string",
+            "default": "ineligible",
+            "enum": [
+              "ineligible",
+              "eligible",
+              "offered",
+              "auto_cancelled",
+              "guaranteed",
+              "lender_demand",
+              "repaid",
+              "auto_removed",
+              "removed",
+              "noclaim"
+            ]
           },
           "statusHistory": {
             "type": "array",
