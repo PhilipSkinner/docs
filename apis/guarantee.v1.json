@@ -848,6 +848,12 @@
               },
               "product": {
                 "$ref": "../models/objectPointer.v1.json"
+              },
+              "productRuleset": {
+                "$ref": "../models/objectPointer.v1.json"
+              },
+              "programmeRuleset": {
+                "$ref": "../models/objectPointer.v1.json"
               }
             }
           },
