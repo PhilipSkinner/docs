@@ -444,11 +444,11 @@
         ]
       }
     },
-    "/rules": {
+    "/programmes/{programmeId}/rules": {
       "get": {
-        "summary": "Get all rules",
+        "summary": "Get all rules for a programme",
         "tags": [
-          "Rules"
+          "Programmes"
         ],
         "responses": {
           "200": {
@@ -502,7 +502,7 @@
             "Bearer token": []
           }
         ],
-        "description": "Get a paginated list of all rule sets in the system. Can use a date to search for the active rule sets.\n\nRequires the product_reader role to access.",
+        "description": "Get a paginated list of all rule sets in the system for a programme. Can use a date to search for the active rule sets.\n\nRequires the product_reader role to access.",
         "parameters": [
           {
             "schema": {
@@ -530,7 +530,7 @@
         ]
       },
       "post": {
-        "summary": "Create a rule set",
+        "summary": "Create a programme rule set",
         "operationId": "post-rules",
         "responses": {
           "201": {
@@ -610,12 +610,22 @@
           }
         },
         "tags": [
-          "Rules"
+          "Programmes"
         ],
         "description": "Create a new rule set.\n\nRequires the product_writer role to access."
-      }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "programmeId",
+          "in": "path",
+          "required": true
+        }
+      ]
     },
-    "/rules/{ruleId}": {
+    "/programmes/{programmeId}/rules/{ruleId}": {
       "parameters": [
         {
           "schema": {
@@ -624,12 +634,20 @@
           "name": "ruleId",
           "in": "path",
           "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "programmeId",
+          "in": "path",
+          "required": true
         }
       ],
       "get": {
-        "summary": "Fetch a rule set",
+        "summary": "Fetch a programme rule set",
         "tags": [
-          "Rules"
+          "Programmes"
         ],
         "responses": {
           "200": {
@@ -698,10 +716,10 @@
             "name": "If-match"
           }
         ],
-        "description": "Fetch a single rule set.\n\nRequires the product_reader role to access."
+        "description": "Fetch a single rule set from a programme.\n\nRequires the product_reader role to access."
       },
       "put": {
-        "summary": "Update a rule",
+        "summary": "Update a programme rule",
         "operationId": "put-rules-ruleId",
         "responses": {
           "202": {
@@ -804,12 +822,12 @@
           "description": ""
         },
         "tags": [
-          "Rules"
+          "Programmes"
         ],
         "description": "Update a rule.\n\nRequires the product_writer role to access."
       },
       "delete": {
-        "summary": "Delete a rule set",
+        "summary": "Delete a programme rule set",
         "operationId": "delete-rules-ruleId",
         "responses": {
           "204": {
@@ -888,7 +906,7 @@
           }
         ],
         "tags": [
-          "Rules"
+          "Programmes"
         ],
         "description": "Deletes a rule set.\n\nRequires the product_remover role to access."
       }
@@ -2239,6 +2257,412 @@
           "Products"
         ]
       }
+    },
+    "/programmes": {
+      "get": {
+        "summary": "Get all programmes",
+        "tags": [
+          "Programmes"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../models/paginationMeta.v1.json"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/programmeResponse"
+                      }
+                    },
+                    "links": {
+                      "$ref": "../models/paginationLinks.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-programmes",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "description": "Fetch a paginated list of all programmes.\n\nRequires the product_reader role to access.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "page"
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "perpage",
+            "description": "Set to -1 to return all results."
+          }
+        ]
+      },
+      "post": {
+        "summary": "Create a programme",
+        "operationId": "post-programmes",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Etag": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/programme"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        },
+        "tags": [
+          "Programmes"
+        ],
+        "description": "Create a new programme on the system.\n\nRequires the products_writer role to access.",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-Idempotency-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/programmeAttributes"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/programmes/{programmeId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "programmeId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get a programme",
+        "tags": [
+          "Programmes"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Etag": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/programme"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-programmes-programmeId",
+        "description": "Get a single programme.\n\nRequires the products_reader role to access.",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          }
+        ]
+      },
+      "put": {
+        "summary": "Update a programme",
+        "operationId": "put-programmes-programmeId",
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/programme"
+                }
+              }
+            },
+            "headers": {
+              "Etag": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Programmes"
+        ],
+        "description": "Updates a programme.\n\nRequires the product_writer role to access.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-idempotency-key"
+          }
+        ],
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/programmeAttributes"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a programme",
+        "operationId": "delete-programmes-programmeId",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Programmes"
+        ],
+        "description": "Delete a programme.\n\nRequires the product_remover role to access.",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-match"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-idempotency-key"
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -2301,15 +2725,7 @@
             "type": "string"
           },
           "programme": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              }
-            }
+            "$ref": "../models/objectPointer.v1.json"
           }
         }
       },
@@ -2368,6 +2784,9 @@
               "rules": {
                 "type": "string",
                 "format": "uri"
+              },
+              "programme": {
+                "type": "string"
               }
             }
           }
@@ -2402,7 +2821,7 @@
         "title": "ruleResponseAttributes",
         "type": "object",
         "x-tags": [
-          "Rules"
+          "Programmes"
         ],
         "properties": {
           "createdBy": {
@@ -2803,6 +3222,87 @@
             "format": "date-time"
           }
         }
+      },
+      "programme": {
+        "title": "programme",
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "../models/individualMeta.v1.json"
+          },
+          "data": {
+            "$ref": "#/components/schemas/programmeResponse"
+          },
+          "links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "type": "string"
+              },
+              "programmes": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-tags": [
+          "Misc Models"
+        ]
+      },
+      "programmeResponse": {
+        "title": "programmeResponse",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "programme"
+            ]
+          },
+          "etag": {
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/programmeAttributes"
+          }
+        },
+        "x-tags": [
+          "Misc Models"
+        ]
+      },
+      "programmeAttributes": {
+        "title": "programmeAttributes",
+        "type": "object",
+        "properties": {
+          "createdBy": {
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Not to be sent on POST/PUT/PATCH."
+          },
+          "updatedBy": {
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
+          },
+          "updatedDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Not to be sent on POST/PUT/PATCH."
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "x-tags": [
+          "Programmes"
+        ]
       }
     },
     "securitySchemes": {
@@ -2817,7 +3317,7 @@
       "name": "Products"
     },
     {
-      "name": "Rules"
+      "name": "Programmes"
     },
     {
       "name": "SIC Codes"
