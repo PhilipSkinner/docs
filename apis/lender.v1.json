@@ -530,6 +530,21 @@
             "in": "query",
             "name": "date",
             "description": "Date to filter allocations by."
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "page"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "perpage",
+            "description": "Set to -1 to retrieve all results."
           }
         ],
         "description": "Returns a paginated list of all allocations for a lender. Can be filtered by date to return the currently active allocation.\n\nRequires the lender_reader role to access.",
