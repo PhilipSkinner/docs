@@ -976,6 +976,23 @@
           {
             "Bearer token": []
           }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "page"
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "pagesize",
+            "description": "Set to -1 to retrieve all results."
+          }
         ]
       },
       "post": {
