@@ -1442,6 +1442,13 @@
             "in": "query",
             "name": "perpage",
             "description": "Set to -1 to return all bandings."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "date"
           }
         ]
       },
@@ -2573,6 +2580,16 @@
                 "type": "string",
                 "format": "uri"
               }
+            }
+          },
+          "included": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/bandingResponse"
+                }
+              ]
             }
           }
         }
