@@ -654,7 +654,7 @@
                         "$ref": "#/components/schemas/stringAnswer"
                       },
                       "cashPrice": {
-                        "$ref": "../models/objectPointer.v1.json"
+                        "$ref": "#/components/schemas/integerAnswer"
                       },
                       "installCost": {
                         "$ref": "#/components/schemas/integerAnswer"
