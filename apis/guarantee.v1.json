@@ -82,6 +82,21 @@
             },
             "in": "query",
             "name": "enddate"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "page"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "pagesize",
+            "description": "Set to -1 to retrieve all items."
           }
         ],
         "description": "Fetches a paginated list of guarantees.\n\nRequires the guarantee_reader role to access.",
