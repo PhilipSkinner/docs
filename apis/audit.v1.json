@@ -8,7 +8,7 @@
   "info": {
     "title": "audit",
     "version": "1.0",
-    "description": "Manages the creation & visibility of audit records on the system. All APIs should use this API to record audit trails for:\n\n* Data creation\n* Data deletion\n* Data modification\n\nThe API has the following roles defined:\n\n* audit_reader\n* audit_writer\n* audit_remover",
+    "description": "Manages the creation & visibility of audit records on the system. All APIs should use this API to record audit trails for:\n\n* Data creation\n* Data deletion\n* Data modification\n\nThe API has the following roles defined:\n\n* audit_reader\n* audit_writer\n* audit_remover\n\nsjp",
     "contact": {
       "name": "Philip Skinner",
       "email": "philip.skinner@cds.co.uk"
