@@ -2793,9 +2793,6 @@
               "products": {
                 "type": "string",
                 "format": "uri"
-              },
-              "test": {
-                "type": "string"
               }
             }
           },
