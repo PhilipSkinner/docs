@@ -918,7 +918,7 @@
         ]
       }
     },
-    "/type": {
+    "/types": {
       "get": {
         "summary": "Get all lender types",
         "tags": [
@@ -1079,9 +1079,10 @@
             }
           }
         }
-      }
+      },
+      "parameters": []
     },
-    "/type/{typeId}": {
+    "/types/{typeId}": {
       "parameters": [
         {
           "schema": {
@@ -1348,7 +1349,7 @@
         ]
       }
     },
-    "/type/{typeId}/bandings": {
+    "/types/{typeId}/bandings": {
       "parameters": [
         {
           "schema": {
@@ -1558,7 +1559,7 @@
         }
       }
     },
-    "/type/{typeId}/bandings/{bandingId}": {
+    "/types/{typeId}/bandings/{bandingId}": {
       "parameters": [
         {
           "schema": {
