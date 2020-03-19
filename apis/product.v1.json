@@ -2739,6 +2739,9 @@
           "Products"
         ],
         "description": "",
+        "x-examples": {
+          "example-1": {}
+        },
         "properties": {
           "createdBy": {
             "type": "string",
@@ -2766,6 +2769,69 @@
           },
           "programme": {
             "$ref": "../models/objectPointer.v1.json"
+          },
+          "facilityType": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "facilityCalculator": {
+                "type": "string",
+                "enum": [
+                  "Include Interest",
+                  "Exclude Interest"
+                ]
+              },
+              "termOptions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/termRule"
+                }
+              },
+              "principalPurposeOptions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/principalPurpose"
+                }
+              },
+              "facilityFeeRules": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/facilityFeeRule"
+                }
+              },
+              "assetFinance": {
+                "$ref": "#/components/schemas/assetFinance"
+              },
+              "repaymentTypeOptions": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "borrowerDetails": {
+            "type": "object",
+            "properties": {
+              "maxTurnover": {
+                "type": "number"
+              },
+              "maxTradingTurnoverGenerated": {
+                "type": "number"
+              }
+            }
+          },
+          "programmeRuleSet": {
+            "$ref": "#/components/schemas/programmeRuleset"
+          },
+          "productQuestions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/questionText"
+            }
           }
         }
       },
@@ -3117,35 +3183,6 @@
           }
         }
       },
-      "productRule": {
-        "title": "productRule",
-        "type": "object",
-        "properties": {
-          "meta": {
-            "$ref": "../models/individualMeta.v1.json"
-          },
-          "data": {
-            "$ref": "#/components/schemas/productRuleResponse"
-          },
-          "links": {
-            "type": "object",
-            "properties": {
-              "self": {
-                "type": "string",
-                "format": "uri"
-              },
-              "product": {
-                "type": "string",
-                "format": "uri"
-              },
-              "rules": {
-                "type": "string",
-                "format": "uri"
-              }
-            }
-          }
-        }
-      },
       "sicCodeRule": {
         "title": "sicCodeRule",
         "type": "object",
@@ -3168,8 +3205,7 @@
                 "format": "uri"
               },
               "siccode": {
-                "type": "string",
-                "format": "uri"
+                "type": "string"
               }
             }
           }
@@ -3222,10 +3258,7 @@
           "stateAid": {
             "type": "object",
             "properties": {
-              "ineligible": {
-                "type": "boolean"
-              },
-              "maxAmount": {
+              "maxStateAidAmount": {
                 "type": "integer"
               },
               "facilityLimits": {
@@ -3233,11 +3266,17 @@
                 "items": {
                   "type": "object",
                   "properties": {
-                    "termYears": {
+                    "maxTermMonths": {
                       "type": "integer"
                     },
-                    "facilityValue": {
+                    "maxFacilityAmount": {
                       "type": "integer"
+                    },
+                    "minFacilityAmount": {
+                      "type": "number"
+                    },
+                    "minTermMonths": {
+                      "type": "number"
                     }
                   }
                 }
@@ -3317,6 +3356,9 @@
       "programmeAttributes": {
         "title": "programmeAttributes",
         "type": "object",
+        "x-tags": [
+          "Programmes"
+        ],
         "properties": {
           "createdBy": {
             "type": "string",
@@ -3338,11 +3380,244 @@
           },
           "name": {
             "type": "string"
+          },
+          "activeRuleset": {
+            "$ref": "#/components/schemas/programmeRuleset"
+          },
+          "ruleSets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/programmeRuleset"
+            }
+          },
+          "sicCodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/sicCode"
+            }
           }
-        },
-        "x-tags": [
-          "Programmes"
-        ]
+        }
+      },
+      "questionText": {
+        "title": "questionText",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "fieldName": {
+            "type": "string"
+          },
+          "fieldPath": {
+            "type": "string"
+          },
+          "questionText": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "label": {
+            "type": "string"
+          },
+          "fieldType": {
+            "type": "string"
+          },
+          "responseOptionValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/questionResponseOption"
+            }
+          }
+        }
+      },
+      "questionResponseOption": {
+        "title": "questionResponseOption",
+        "type": "object",
+        "properties": {
+          "responseValue": {
+            "type": "string"
+          }
+        }
+      },
+      "termRule": {
+        "title": "termRule",
+        "type": "object",
+        "properties": {
+          "minMonths": {
+            "type": "integer"
+          },
+          "maxMonths": {
+            "type": "integer"
+          },
+          "lendingFacilityMaxAmount": {
+            "type": "number"
+          },
+          "lendingFacilityMinAmount": {
+            "type": "number"
+          }
+        }
+      },
+      "assetFinance": {
+        "title": "assetFinance",
+        "type": "object",
+        "properties": {
+          "baloonAmountAllowed": {
+            "type": "boolean"
+          },
+          "agreementTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "assetCategory": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "facilityFeeRule": {
+        "title": "facilityFeeRule",
+        "type": "object",
+        "properties": {
+          "amountUsedForfeeCalc": {
+            "type": "string",
+            "enum": [
+              "\"Facility Guaranteed Amount\"",
+              "\"Facility Outstanding Balance\"\""
+            ]
+          },
+          "facilityTotalFixedFee": {
+            "type": "boolean"
+          }
+        }
+      },
+      "programmeRuleset": {
+        "title": "programmeRuleset",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "IAURPercent": {
+            "type": "number"
+          },
+          "euroBaseExchangeRate": {
+            "type": "number"
+          },
+          "euroExchangeInterestRate": {
+            "type": "number"
+          },
+          "annualFeePercent": {
+            "type": "number"
+          },
+          "startDate": {
+            "type": "string"
+          },
+          "endDate": {
+            "type": "string"
+          },
+          "borrowerDetailRules": {
+            "type": "object",
+            "properties": {
+              "maxBorrrowerTradingActivityTurnoverGenerated": {
+                "type": "number"
+              },
+              "maxBorrowerTurnOver": {
+                "type": "number"
+              }
+            }
+          },
+          "facilityRules": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "productIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "termRule": {
+                  "$ref": "#/components/schemas/termRule"
+                }
+              }
+            }
+          },
+          "paymentFeeRules": {
+            "type": "object",
+            "properties": {
+              "annualFeePercent": {
+                "type": "number"
+              },
+              "facilityFeeRules": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "facilityType": {
+                      "type": "string"
+                    },
+                    "facilityFeeRule": {
+                      "$ref": "#/components/schemas/facilityFeeRule"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "sicCodeRules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/sicCodeRule"
+            }
+          },
+          "stateAidRules": {
+            "type": "array",
+            "items": {
+              "$ref": ""
+            }
+          },
+          "principalPurposeRules": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "principalPurpose": {
+                  "type": "string"
+                },
+                "rule": {
+                  "$ref": ""
+                }
+              }
+            }
+          }
+        }
+      },
+      "principalPurpose": {
+        "title": "principalPurpose",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "drawDownPercentPerFiscalYear": {
+            "type": "number"
+          }
+        }
+      },
+      "productRule": {
+        "title": "productRule",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        }
       }
     },
     "securitySchemes": {
