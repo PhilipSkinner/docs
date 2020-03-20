@@ -1809,9 +1809,6 @@
           "description": {
             "type": "string"
           },
-          "programme": {
-            "$ref": "../models/objectPointer.v1.json"
-          },
           "facilityType": {
             "type": "object",
             "properties": {
@@ -1929,6 +1926,10 @@
                 "format": "uri"
               },
               "products": {
+                "type": "string",
+                "format": "uri"
+              },
+              "programme": {
                 "type": "string",
                 "format": "uri"
               }
