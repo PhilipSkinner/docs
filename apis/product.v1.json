@@ -1771,6 +1771,96 @@
           },
           "attributes": {
             "$ref": "#/components/schemas/productAttributes"
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "facilityTypeRules": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "\"facilityRule\""
+                          ]
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "guaranteeFeeRules": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "guaranteeFeeRule"
+                          ]
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "borrowerDetailRules": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "borrowerDetailsRules"
+                        ]
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "principalPurposeRules": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "\"principalPurposeRules\""
+                          ]
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -1822,22 +1912,10 @@
                   "Exclude Interest"
                 ]
               },
-              "facilityRules": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/facilityRule"
-                }
-              },
               "principalPurposeOptions": {
                 "type": "array",
                 "items": {
                   "$ref": "#/components/schemas/principalPurpose"
-                }
-              },
-              "guaranteeFeeRules": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/guaranteeFeeRule"
                 }
               },
               "assetFinance": {
@@ -1876,17 +1954,6 @@
                     "type": "boolean"
                   }
                 }
-              }
-            }
-          },
-          "borrowerDetails": {
-            "type": "object",
-            "properties": {
-              "maxTurnover": {
-                "type": "number"
-              },
-              "maxTradingTurnoverGenerated": {
-                "type": "number"
               }
             }
           },
@@ -1932,11 +1999,40 @@
               "programme": {
                 "type": "string",
                 "format": "uri"
+              },
+              "ruleSet": {
+                "type": "string",
+                "format": "uri"
               }
             }
           },
           "included": {
-            "$ref": "#/components/schemas/ruleSet"
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/facilityRule"
+                  }
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/guaranteeFeeRule"
+                  }
+                },
+                {
+                  "$ref": "#/components/schemas/borrowerDetailRules"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/principalPurpose"
+                  }
+                }
+              ]
+            }
           }
         }
       },
@@ -2065,11 +2161,7 @@
           "included": {
             "type": "array",
             "items": {
-              "anyOf": [
-                {
-                  "$ref": "#/components/schemas/ruleSet"
-                }
-              ]
+              "$ref": "#/components/schemas/ruleSet"
             }
           }
         }
@@ -2264,7 +2356,7 @@
             "items": {
               "type": "object",
               "properties": {
-                "productIds": {
+                "facilityTypes": {
                   "type": "array",
                   "items": {
                     "type": "string"
@@ -2463,6 +2555,18 @@
           },
           "description": {
             "type": "string"
+          }
+        }
+      },
+      "borrowerDetailRules": {
+        "title": "borrowerDetailRules",
+        "type": "object",
+        "properties": {
+          "maxBorrowerTurnover": {
+            "type": "number"
+          },
+          "maxBorrrowerTradingActivityTurnoverGenerated": {
+            "type": "number"
           }
         }
       }
