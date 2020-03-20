@@ -2038,6 +2038,9 @@
       "programme": {
         "title": "programme",
         "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
         "properties": {
           "meta": {
             "$ref": "../models/individualMeta.v1.json"
@@ -2053,17 +2056,30 @@
               },
               "programmes": {
                 "type": "string"
+              },
+              "ruleSets": {
+                "type": "string"
               }
             }
+          },
+          "included": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/ruleSet"
+                }
+              ]
+            }
           }
-        },
-        "x-tags": [
-          "Misc Models"
-        ]
+        }
       },
       "programmeResponse": {
         "title": "programmeResponse",
         "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -2080,11 +2096,29 @@
           },
           "attributes": {
             "$ref": "#/components/schemas/programmeAttributes"
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "currentRuleSet": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
-        },
-        "x-tags": [
-          "Misc Models"
-        ]
+        }
       },
       "programmeAttributes": {
         "title": "programmeAttributes",
@@ -2113,15 +2147,6 @@
           },
           "name": {
             "type": "string"
-          },
-          "activeRuleset": {
-            "$ref": "#/components/schemas/ruleSet"
-          },
-          "ruleSets": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ruleSet"
-            }
           }
         }
       },
