@@ -444,7 +444,7 @@
         ]
       }
     },
-    "/programmes/{programmeId}/rules": {
+    "/programmes/{programmeId}/rulesets": {
       "get": {
         "summary": "Get all rules for a programme",
         "tags": [
@@ -464,7 +464,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/ruleResponse"
+                        "$ref": "#/components/schemas/ruleSet"
                       }
                     },
                     "links": {
@@ -550,7 +550,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/rule"
+                  "$ref": "#/components/schemas/ruleSet"
                 }
               }
             }
@@ -604,7 +604,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ruleResponseAttributes"
+                "$ref": "#/components/schemas/ruleSet"
               }
             }
           }
@@ -625,13 +625,13 @@
         }
       ]
     },
-    "/programmes/{programmeId}/rules/{ruleId}": {
+    "/programmes/{programmeId}/rulesets/{rulesetId}": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "ruleId",
+          "name": "programmeId",
           "in": "path",
           "required": true
         },
@@ -639,7 +639,7 @@
           "schema": {
             "type": "string"
           },
-          "name": "programmeId",
+          "name": "rulesetId",
           "in": "path",
           "required": true
         }
@@ -662,7 +662,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/rule"
+                  "$ref": "#/components/schemas/ruleSet"
                 }
               }
             }
@@ -734,7 +734,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/rule"
+                  "$ref": "#/components/schemas/ruleSet"
                 }
               }
             }
@@ -815,7 +815,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ruleResponseAttributes"
+                "$ref": "#/components/schemas/ruleSet"
               }
             }
           },
@@ -938,6 +938,9 @@
                       "$ref": "../models/paginationLinks.v1.json"
                     }
                   }
+                },
+                "examples": {
+                  "example-1": {}
                 }
               }
             }
@@ -1335,967 +1338,6 @@
           "SIC Codes"
         ],
         "description": "Removes a SIC code from the system.\n\nRequires the product_remover role to access."
-      }
-    },
-    "/sicCodes/{codeId}/rules": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "codeId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Get all rule sets for a SIC code",
-        "tags": [
-          "SIC Codes"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "meta": {
-                      "$ref": "../models/paginationMeta.v1.json"
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/sicCodeRuleResponse"
-                      }
-                    },
-                    "links": {
-                      "$ref": "../models/paginationLinks.v1.json"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-sicCodes-codeId-rules",
-        "description": "Fetches a paginated list of rulesets for a SIC code. Can pass in a date to filter rulesets to those that were active at that date.\n\nRequires the product_reader role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "number"
-            },
-            "in": "query",
-            "name": "page"
-          },
-          {
-            "schema": {
-              "type": "number"
-            },
-            "in": "query",
-            "name": "perpage",
-            "description": "Set to -1 to return all rule sets."
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "date"
-          }
-        ]
-      },
-      "post": {
-        "summary": "Create a SIC code rule set",
-        "operationId": "post-sicCodes-codeId-rules",
-        "responses": {
-          "201": {
-            "description": "Created",
-            "headers": {
-              "Etag": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Location": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/sicCodeRule"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Unprocessable Entity (WebDAV)",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "SIC Codes"
-        ],
-        "description": "Creates a new SIC code rule set.\n\nRequires the product_writer role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "X-idempotency-key"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/sicCodeRuleAttributes"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/sicCodes/{codeId}/rules/{ruleId}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "codeId",
-          "in": "path",
-          "required": true
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "ruleId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Get a single SIC code rule set",
-        "tags": [
-          "SIC Codes"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/sicCodeRule"
-                }
-              }
-            }
-          },
-          "304": {
-            "description": "Not Modified"
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-sicCodes-codeId-rules-ruleId",
-        "description": "Fetch a single SIC code rule set.\n\nRequires the product_reader role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match"
-          }
-        ]
-      },
-      "put": {
-        "summary": "Update SIC code rule set",
-        "operationId": "put-sicCodes-codeId-rules-ruleId",
-        "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Etag": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/sicCodeRule"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Unprocessable Entity",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "SIC Codes"
-        ],
-        "description": "Updates a single SIC code rule set.\n\nRequires the product_writer role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "X-idempotency-key"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/sicCodeRuleAttributes"
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "summary": "Delete a SIC code rule set",
-        "operationId": "delete-sicCodes-codeId-rules-ruleId",
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "SIC Codes"
-        ],
-        "description": "Remove a SIC code rule set.\n\nRequires the product_remover role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "X-idempotency-key"
-          }
-        ]
-      }
-    },
-    "/products/{productId}/rules": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "productId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Get product rules",
-        "tags": [
-          "Products"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "headers": {},
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "meta": {
-                      "$ref": "../models/paginationMeta.v1.json"
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/productRuleResponse"
-                      }
-                    },
-                    "links": {
-                      "$ref": "../models/paginationLinks.v1.json"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-products-productId-rules",
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match"
-          },
-          {
-            "schema": {
-              "type": "number"
-            },
-            "in": "query",
-            "name": "page"
-          },
-          {
-            "schema": {
-              "type": "number"
-            },
-            "in": "query",
-            "name": "perpage",
-            "description": "Set to -1 to return all rules."
-          }
-        ],
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "description": "Fetches a paginated list of rules for the product.\n\nRequires the product_reader role to access."
-      },
-      "post": {
-        "summary": "Create a product rule set",
-        "operationId": "post-products-productId-rules",
-        "responses": {
-          "201": {
-            "description": "Created",
-            "headers": {
-              "Etag": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Location": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/productRule"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Unprocessable Entity",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "description": "Creates a new set of rules on a product.\n\nRequires the product_writer role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "X-idempotency-key"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/productRuleAttributes"
-              }
-            }
-          }
-        },
-        "tags": [
-          "Products"
-        ]
-      }
-    },
-    "/products/{productId}/rules/{ruleId}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "productId",
-          "in": "path",
-          "required": true
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "ruleId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Get a product rule set",
-        "tags": [
-          "Products"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "headers": {
-              "Etag": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/productRule"
-                }
-              }
-            }
-          },
-          "304": {
-            "description": "Not Modified"
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-products-productId-rules-ruleId",
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match"
-          }
-        ],
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "description": "Fetch a single ruleset for a product.\n\nRequires the product_reader role to access."
-      },
-      "delete": {
-        "summary": "Delete a product rule set",
-        "operationId": "delete-products-productId-rules-ruleId",
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Products"
-        ],
-        "description": "Deletes a rule set from a product.\n\nRequires the product_remover role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "X-idempotency-key"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match"
-          }
-        ]
-      },
-      "put": {
-        "summary": "Update a product rule set",
-        "operationId": "put-products-productId-rules-ruleId",
-        "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Etag": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/productRule"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Unprocessable Entity",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "description": "Updates a product rule set.\n\nRequires the product_writer role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "X-idempotency-key"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/productRule"
-              }
-            }
-          }
-        },
-        "tags": [
-          "Products"
-        ]
       }
     },
     "/programmes": {
@@ -2783,10 +1825,10 @@
                   "Exclude Interest"
                 ]
               },
-              "termOptions": {
+              "facilityRules": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/termRule"
+                  "$ref": "#/components/schemas/facilityRule"
                 }
               },
               "principalPurposeOptions": {
@@ -2795,10 +1837,10 @@
                   "$ref": "#/components/schemas/principalPurpose"
                 }
               },
-              "facilityFeeRules": {
+              "guaranteeFeeRules": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/facilityFeeRule"
+                  "$ref": "#/components/schemas/guaranteeFeeRule"
                 }
               },
               "assetFinance": {
@@ -2806,9 +1848,36 @@
               },
               "repaymentTypeOptions": {
                 "type": "array",
+                "enum": [
+                  "\"fixedRepaymentAmount\"",
+                  "\"fixedTerm\""
+                ],
                 "uniqueItems": true,
                 "items": {
                   "type": "string"
+                }
+              },
+              "paymentFrequency": {
+                "type": "array",
+                "enum": [
+                  "\"Monthly\"",
+                  "\"Quarterly\"",
+                  "\"Yearly\"",
+                  "\"Weekly\"",
+                  "\"Bullet - Interest Only\"",
+                  "\"Seasonal\""
+                ],
+                "uniqueItems": true,
+                "items": {
+                  "type": "string"
+                }
+              },
+              "lenderDrawDownContribution": {
+                "type": "object",
+                "properties": {
+                  "IAUR-Percent-Applies": {
+                    "type": "boolean"
+                  }
                 }
               }
             }
@@ -2824,13 +1893,16 @@
               }
             }
           },
-          "programmeRuleSet": {
-            "$ref": "#/components/schemas/programmeRuleset"
-          },
           "productQuestions": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/questionText"
+              "$ref": "#/components/schemas/questionField"
+            }
+          },
+          "documents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/documentType"
             }
           }
         }
@@ -2863,113 +1935,7 @@
             }
           },
           "included": {
-            "$ref": "#/components/schemas/productRuleResponse"
-          }
-        }
-      },
-      "rule": {
-        "title": "rule",
-        "type": "object",
-        "x-tags": [
-          "Misc Models"
-        ],
-        "properties": {
-          "meta": {
-            "$ref": "../models/individualMeta.v1.json"
-          },
-          "data": {
-            "$ref": "#/components/schemas/ruleResponse"
-          },
-          "links": {
-            "type": "object",
-            "properties": {
-              "self": {
-                "type": "string",
-                "format": "uri"
-              },
-              "rules": {
-                "type": "string",
-                "format": "uri"
-              },
-              "programme": {
-                "type": "string"
-              }
-            }
-          }
-        }
-      },
-      "ruleResponse": {
-        "title": "ruleResponse",
-        "type": "object",
-        "x-tags": [
-          "Misc Models"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "rule"
-            ]
-          },
-          "etag": {
-            "type": "string"
-          },
-          "attributes": {
-            "$ref": "#/components/schemas/ruleResponseAttributes"
-          }
-        }
-      },
-      "ruleResponseAttributes": {
-        "title": "ruleResponseAttributes",
-        "type": "object",
-        "x-tags": [
-          "Programmes"
-        ],
-        "properties": {
-          "createdBy": {
-            "type": "string",
-            "description": "Not to be sent on POST/PUT/PATCH."
-          },
-          "createdDate": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Not to be sent on POST/PUT/PATCH."
-          },
-          "updatedBy": {
-            "type": "string",
-            "description": "Not to be sent on POST/PUT/PATCH."
-          },
-          "updatedDate": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Not to be sent on POST/PUT/PATCH."
-          },
-          "maxTradingActivityPercentOfTurnover": {
-            "type": "integer"
-          },
-          "stateAid": {
-            "type": "object",
-            "properties": {
-              "periodInMonths": {
-                "type": "integer"
-              },
-              "currency": {
-                "type": "string"
-              },
-              "maxAmount": {
-                "type": "integer"
-              }
-            }
-          },
-          "active": {
-            "$ref": "#/components/schemas/activityRange"
-          },
-          "name": {
-            "type": "string"
+            "$ref": "#/components/schemas/ruleSet"
           }
         }
       },
@@ -2998,9 +1964,6 @@
                 "format": "uri"
               }
             }
-          },
-          "included": {
-            "$ref": "#/components/schemas/sicCodeRuleResponse"
           }
         }
       },
@@ -3013,7 +1976,8 @@
         "properties": {
           "id": {
             "type": "string",
-            "format": "uuid"
+            "minLength": 6,
+            "maxLength": 6
           },
           "type": {
             "type": "string",
@@ -3036,150 +2000,8 @@
           "SIC Codes"
         ],
         "properties": {
-          "createdBy": {
-            "type": "string",
-            "description": "Not to be sent on POST/PUT/PATCH."
-          },
-          "createdDate": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Not to be sent on POST/PUT/PATCH."
-          },
-          "updatedBy": {
-            "type": "string",
-            "description": "Not to be sent on POST/PUT/PATCH."
-          },
-          "updatedDate": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Not to be sent on POST/PUT/PATCH."
-          },
           "description": {
             "type": "string"
-          }
-        }
-      },
-      "productRuleResponse": {
-        "title": "productRuleResponse",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "attributes": {
-            "$ref": "#/components/schemas/productRuleAttributes"
-          },
-          "etag": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "productRuleset"
-            ]
-          }
-        }
-      },
-      "productRuleAttributes": {
-        "title": "productRuleAttributes",
-        "type": "object",
-        "description": "",
-        "properties": {
-          "createdBy": {
-            "type": "string",
-            "description": "Not to be sent on POST/PUT/PATCH."
-          },
-          "createdDate": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Not to be sent on POST/PUT/PATCH."
-          },
-          "updatedBy": {
-            "type": "string",
-            "description": "Not to be sent on POST/PUT/PATCH."
-          },
-          "updatedDate": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Not to be sent on POST/PUT/PATCH."
-          },
-          "efgLimits": {
-            "type": "object",
-            "properties": {
-              "minFacilityAmount": {
-                "type": "integer"
-              },
-              "maxFacilityAmount": {
-                "type": "integer"
-              },
-              "maxBorrowerTurnover": {
-                "type": "integer"
-              },
-              "iAurLenderDrawDownContributionPercent": {
-                "type": "integer"
-              },
-              "LenderDrawDownContributionPercent": {
-                "type": "integer"
-              },
-              "baseEuroExchangeRate": {
-                "type": "integer"
-              },
-              "annualExchangeRateInterest": {
-                "type": "integer"
-              },
-              "stateAidLimit": {
-                "type": "integer"
-              }
-            }
-          },
-          "loanTypeLimits": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "minimumTermMonths": {
-                  "type": "integer"
-                },
-                "maximumTermMonths": {
-                  "type": "integer"
-                },
-                "minimumFacilityValue": {
-                  "type": "integer"
-                },
-                "maximumFacilityValue": {
-                  "type": "integer"
-                }
-              }
-            }
-          },
-          "loanTypeGuaranteeLimits": {
-            "type": "object",
-            "properties": {
-              "guaranteeFacilityPercent": {
-                "type": "integer"
-              },
-              "refinanceGuaranteeFacilityPercent": {
-                "type": "integer"
-              }
-            }
-          },
-          "feePaymentRules": {
-            "type": "object",
-            "properties": {
-              "annualfeePercent": {
-                "type": "integer"
-              },
-              "iAurRuleApplies": {
-                "type": "boolean"
-              },
-              "amountFieldToUse": {
-                "type": "string"
-              }
-            }
-          },
-          "active": {
-            "$ref": "#/components/schemas/activityRange"
           }
         }
       },
@@ -3187,109 +2009,19 @@
         "title": "sicCodeRule",
         "type": "object",
         "properties": {
-          "meta": {
-            "$ref": "../models/individualMeta.v1.json"
-          },
-          "data": {
-            "$ref": "#/components/schemas/sicCodeRuleResponse"
-          },
-          "links": {
-            "type": "object",
-            "properties": {
-              "self": {
-                "type": "string",
-                "format": "uri"
-              },
-              "rules": {
-                "type": "string",
-                "format": "uri"
-              },
-              "siccode": {
-                "type": "string"
-              }
-            }
-          }
-        }
-      },
-      "sicCodeRuleResponse": {
-        "title": "sicCodeRuleResponse",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "sicCodeRuleSet"
-            ]
-          },
-          "etag": {
-            "type": "string"
-          },
-          "attributes": {
-            "$ref": "#/components/schemas/sicCodeRuleAttributes"
-          }
-        }
-      },
-      "sicCodeRuleAttributes": {
-        "title": "sicCodeRuleAttributes",
-        "type": "object",
-        "properties": {
-          "createdBy": {
-            "type": "string",
-            "description": "Not to be sent on POST/PUT/PATCH."
-          },
-          "createdDate": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Not to be sent on POST/PUT/PATCH."
-          },
-          "updatedBy": {
-            "type": "string",
-            "description": "Not to be sent on POST/PUT/PATCH."
-          },
-          "updatedDate": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Not to be sent on POST/PUT/PATCH."
-          },
           "stateAid": {
-            "type": "object",
-            "properties": {
-              "maxStateAidAmount": {
-                "type": "integer"
-              },
-              "facilityLimits": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "maxTermMonths": {
-                      "type": "integer"
-                    },
-                    "maxFacilityAmount": {
-                      "type": "integer"
-                    },
-                    "minFacilityAmount": {
-                      "type": "number"
-                    },
-                    "minTermMonths": {
-                      "type": "number"
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/schemas/stateAidRule"
           },
-          "active": {
-            "$ref": "#/components/schemas/activityRange"
+          "facilityLimits": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/facilityRule"
+            }
           }
         }
       },
       "activityRange": {
-        "title": "activityRange",
+        "title": "activeRange",
         "type": "object",
         "properties": {
           "from": {
@@ -3382,24 +2114,18 @@
             "type": "string"
           },
           "activeRuleset": {
-            "$ref": "#/components/schemas/programmeRuleset"
+            "$ref": "#/components/schemas/ruleSet"
           },
           "ruleSets": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/programmeRuleset"
-            }
-          },
-          "sicCodes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/sicCode"
+              "$ref": "#/components/schemas/ruleSet"
             }
           }
         }
       },
-      "questionText": {
-        "title": "questionText",
+      "questionField": {
+        "title": "questionField",
         "type": "object",
         "properties": {
           "id": {
@@ -3440,24 +2166,6 @@
           }
         }
       },
-      "termRule": {
-        "title": "termRule",
-        "type": "object",
-        "properties": {
-          "minMonths": {
-            "type": "integer"
-          },
-          "maxMonths": {
-            "type": "integer"
-          },
-          "lendingFacilityMaxAmount": {
-            "type": "number"
-          },
-          "lendingFacilityMinAmount": {
-            "type": "number"
-          }
-        }
-      },
       "assetFinance": {
         "title": "assetFinance",
         "type": "object",
@@ -3479,7 +2187,7 @@
           }
         }
       },
-      "facilityFeeRule": {
+      "guaranteeFeeRule": {
         "title": "facilityFeeRule",
         "type": "object",
         "properties": {
@@ -3495,8 +2203,8 @@
           }
         }
       },
-      "programmeRuleset": {
-        "title": "programmeRuleset",
+      "ruleSetAttributes": {
+        "title": "ruleSetAttributes",
         "type": "object",
         "properties": {
           "id": {
@@ -3513,12 +2221,6 @@
           },
           "annualFeePercent": {
             "type": "number"
-          },
-          "startDate": {
-            "type": "string"
-          },
-          "endDate": {
-            "type": "string"
           },
           "borrowerDetailRules": {
             "type": "object",
@@ -3542,8 +2244,11 @@
                     "type": "string"
                   }
                 },
-                "termRule": {
-                  "$ref": "#/components/schemas/termRule"
+                "facilityLimits": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/facilityRule"
+                  }
                 }
               }
             }
@@ -3554,18 +2259,10 @@
               "annualFeePercent": {
                 "type": "number"
               },
-              "facilityFeeRules": {
+              "guaranteeFeeRules": {
                 "type": "array",
                 "items": {
-                  "type": "object",
-                  "properties": {
-                    "facilityType": {
-                      "type": "string"
-                    },
-                    "facilityFeeRule": {
-                      "$ref": "#/components/schemas/facilityFeeRule"
-                    }
-                  }
+                  "$ref": "#/components/schemas/guaranteeFeeRule"
                 }
               }
             }
@@ -3579,22 +2276,46 @@
           "stateAidRules": {
             "type": "array",
             "items": {
-              "$ref": ""
+              "$ref": "#/components/schemas/stateAidRule"
             }
           },
           "principalPurposeRules": {
             "type": "array",
             "items": {
+              "$ref": "#/components/schemas/principalPurpose"
+            }
+          },
+          "ineligibleSicCodes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "lenderRules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/lenderRule"
+            }
+          },
+          "product-LenderLimited-DrawDownContrbution": {
+            "type": "array",
+            "items": {
               "type": "object",
               "properties": {
-                "principalPurpose": {
-                  "type": "string"
+                "facilityTypes": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 },
-                "rule": {
-                  "$ref": ""
+                "IAUR-Percent-Applies": {
+                  "type": "boolean"
                 }
               }
             }
+          },
+          "activeRange": {
+            "$ref": "#/components/schemas/activityRange"
           }
         }
       },
@@ -3605,16 +2326,116 @@
           "name": {
             "type": "string"
           },
-          "drawDownPercentPerFiscalYear": {
+          "drawDownPercentLimitPerFiscalYear": {
             "type": "number"
           }
         }
       },
-      "productRule": {
-        "title": "productRule",
+      "stateAidRule": {
+        "title": "stateAidRule",
+        "type": "object",
+        "properties": {
+          "currency": {
+            "type": "string"
+          },
+          "maxStateAidAmount": {
+            "type": "number"
+          }
+        }
+      },
+      "facilityRule": {
+        "title": "facilityRule",
+        "type": "object",
+        "properties": {
+          "maxTermMonths": {
+            "type": "integer"
+          },
+          "minTermMonths": {
+            "type": "integer"
+          },
+          "maxFacilityAmount": {
+            "type": "number"
+          },
+          "minFacilityAmount": {
+            "type": "number"
+          }
+        }
+      },
+      "lenderRule": {
+        "title": "lenderRule",
+        "type": "object",
+        "properties": {
+          "lenderType": {
+            "type": "string"
+          },
+          "claimLimit-Percent-Of-Drawdown": {
+            "type": "number"
+          },
+          "annualDrawDown-LessThan-Amount": {
+            "type": "number"
+          },
+          "annualDrawDown-MoreThan-Amount": {
+            "type": "number"
+          },
+          "": {
+            "type": "string"
+          }
+        }
+      },
+      "ruleSet": {
+        "title": "ruleSet",
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": ""
+          },
+          "data": {
+            "$ref": "#/components/schemas/ruleSetResponse"
+          },
+          "links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "type": "string",
+                "format": "uri"
+              },
+              "rulesets": {
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          }
+        }
+      },
+      "ruleSetResponse": {
+        "title": "ruleSetResponse",
         "type": "object",
         "properties": {
           "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "etag": {
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/ruleSetAttributes"
+          }
+        }
+      },
+      "documentType": {
+        "title": "documentType",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
             "type": "string"
           }
         }
