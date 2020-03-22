@@ -1899,74 +1899,211 @@
           "description": {
             "type": "string"
           },
-          "facilityType": {
+          "facilityDetails": {
             "type": "object",
             "properties": {
-              "name": {
-                "type": "string"
-              },
-              "facilityCalculator": {
-                "type": "string",
-                "enum": [
-                  "Include Interest",
-                  "Exclude Interest"
-                ]
-              },
-              "principalPurposeOptions": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/principalPurpose"
-                }
-              },
-              "assetFinance": {
-                "$ref": "#/components/schemas/assetFinance"
-              },
-              "repaymentTypeOptions": {
-                "type": "array",
-                "enum": [
-                  "\"fixedRepaymentAmount\"",
-                  "\"fixedTerm\""
-                ],
-                "uniqueItems": true,
-                "items": {
-                  "type": "string"
-                }
-              },
-              "paymentFrequency": {
-                "type": "array",
-                "enum": [
-                  "\"Monthly\"",
-                  "\"Quarterly\"",
-                  "\"Yearly\"",
-                  "\"Weekly\"",
-                  "\"Bullet - Interest Only\"",
-                  "\"Seasonal\""
-                ],
-                "uniqueItems": true,
-                "items": {
-                  "type": "string"
-                }
-              },
-              "lenderDrawDownContribution": {
+              "facilityType": {
                 "type": "object",
                 "properties": {
-                  "IAUR-Percent-Applies": {
-                    "type": "boolean"
+                  "name": {
+                    "type": "string"
+                  },
+                  "lenderDrawDownContribution": {
+                    "type": "object",
+                    "properties": {
+                      "IAUR-Percent-Applies": {
+                        "type": "boolean"
+                      }
+                    }
+                  },
+                  "paymentFrequency": {
+                    "type": "array",
+                    "enum": [
+                      "\"Monthly\"",
+                      "\"Quarterly\"",
+                      "\"Yearly\"",
+                      "\"Weekly\"",
+                      "\"Bullet - Interest Only\"",
+                      "\"Seasonal\""
+                    ],
+                    "uniqueItems": true,
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "repaymentTypeOptions": {
+                    "type": "array",
+                    "enum": [
+                      "\"fixedRepaymentAmount\"",
+                      "\"fixedTerm\""
+                    ],
+                    "uniqueItems": true,
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "assetFinance": {
+                    "$ref": "#/components/schemas/assetFinance"
+                  },
+                  "principalPurposeOptions": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/principalPurpose"
+                    }
+                  },
+                  "facilityCalculator": {
+                    "type": "string",
+                    "enum": [
+                      "Include Interest",
+                      "Exclude Interest"
+                    ]
                   }
+                }
+              },
+              "questions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/questionField"
                 }
               }
             }
           },
-          "productQuestions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/questionField"
+          "dataProtection": {
+            "type": "object",
+            "properties": {
+              "questions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/questionField"
+                }
+              }
             }
           },
-          "documents": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/documentType"
+          "applicationDetails": {
+            "type": "object",
+            "properties": {
+              "questions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/questionField"
+                }
+              }
+            }
+          },
+          "lenderInformation": {
+            "type": "object",
+            "properties": {
+              "questions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/questionField"
+                }
+              }
+            }
+          },
+          "stateAid": {
+            "type": "object",
+            "properties": {
+              "questions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/questionField"
+                }
+              }
+            }
+          },
+          "fees": {
+            "type": "object",
+            "properties": {
+              "questions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/questionField"
+                }
+              }
+            }
+          },
+          "security": {
+            "type": "object",
+            "properties": {
+              "questions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/questionField"
+                }
+              }
+            }
+          },
+          "additionalLenderInformation": {
+            "type": "object",
+            "properties": {
+              "questions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/questionField"
+                }
+              }
+            }
+          },
+          "repaymentHolidays": {
+            "type": "object",
+            "properties": {
+              "questions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/questionField"
+                }
+              }
+            }
+          },
+          "drawDownEvents": {
+            "type": "object",
+            "properties": {
+              "questions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/questionField"
+                }
+              }
+            }
+          },
+          "applicationComplete": {
+            "type": "object",
+            "properties": {
+              "documents": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/documentType"
+                }
+              },
+              "questions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/questionField"
+                }
+              }
+            }
+          },
+          "applicationOffered": {
+            "type": "object",
+            "properties": {
+              "questions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/questionField"
+                }
+              }
+            }
+          },
+          "applicationGuaranteed": {
+            "type": "object",
+            "properties": {
+              "questions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/questionField"
+                }
+              }
             }
           }
         }
