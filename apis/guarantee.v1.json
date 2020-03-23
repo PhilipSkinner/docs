@@ -631,7 +631,7 @@
           "Guarantees"
         ],
         "description": "",
-                "properties": {
+        "properties": {
           "createdBy": {
             "type": "string",
             "description": "Not to be sent in POST/PUT/PATCH."
@@ -649,6 +649,12 @@
             "type": "string",
             "format": "date-time",
             "description": "Not to be sent in POST/PUT/PATCH."
+          },
+          "productRuleset": {
+                "$ref": "../models/objectPointer.v1.json"
+          },
+          "programmeRuleset": {
+                "$ref": "../models/objectPointer.v1.json"
           },
           "facilityDetails": {
             "type": "object",
@@ -861,12 +867,41 @@
               "product": {
                 "$ref": "../models/objectPointer.v1.json"
               },
-              "productRuleset": {
-                "$ref": "../models/objectPointer.v1.json"
+              "expectedRepayments": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "date": {
+                      "$ref": "#/components/schemas/dateAnswer"
+                    },
+                    "amount": {
+                      "$ref": "#/components/schemas/numberAnswer"
+                    },
+                    "balance": {
+                      "$ref": "#/components/schemas/numberAnswer"
+                    }
+                  }
+                }
               },
-              "programmeRuleset": {
-                "$ref": "../models/objectPointer.v1.json"
+              "repayments": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "date": {
+                      "$ref": "#/components/schemas/dateAnswer"
+                    },
+                    "amount": {
+                      "$ref": "#/components/schemas/numberAnswer"
+                    },
+                    "balance": {
+                      "$ref": "#/components/schemas/numberAnswer"
+                    }
+                  }
+                }
               }
+
             }
           },
           "lenderInformation": {
@@ -974,33 +1009,6 @@
               }
             }
           },
-          "fees": {
-            "type": "object",
-            "properties": {
-              "totalVaue": {
-                "$ref": "#/components/schemas/integerAnswer"
-              }
-            }
-          },
-          "security": {
-            "type": "object",
-            "properties": {
-              "securityItems": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "additionalSecurityValue": {
-                      "$ref": "#/components/schemas/integerAnswer"
-                    },
-                    "principalTypeofAsset": {
-                      "$ref": "#/components/schemas/integerAnswer"
-                    }
-                  }
-                }
-              }
-            }
-          },
           "currentStatus": {
             "type": "string",
             "default": "ineligible",
@@ -1034,40 +1042,6 @@
                 },
                 "by": {
                   "type": "string"
-                }
-              }
-            }
-          },
-          "expectedRepayments": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "date": {
-                  "$ref": "#/components/schemas/dateAnswer"
-                },
-                "amount": {
-                  "$ref": "#/components/schemas/numberAnswer"
-                },
-                "balance": {
-                  "$ref": "#/components/schemas/numberAnswer"
-                }
-              }
-            }
-          },
-          "repayments": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "date": {
-                  "$ref": "#/components/schemas/dateAnswer"
-                },
-                "amount": {
-                  "$ref": "#/components/schemas/numberAnswer"
-                },
-                "balance": {
-                  "$ref": "#/components/schemas/numberAnswer"
                 }
               }
             }
@@ -1116,7 +1090,7 @@
           "documents": {
             "$ref": "../models/objectPointer.v1.json"
           },
-          "feeSchedule": {
+          "feePaymentSchedule": {
             "$ref": "../models/objectPointer.v1.json"
           },
           "dataProtection": {
@@ -1137,25 +1111,35 @@
                 }
               }
             }
+          },
+          "applicationComplete": {
+            "type": "object",
+            "properties": {
+              "CompletedDate": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          },
+          "applicationOffered": {
+            "type": "object",
+            "properties": {
+              "offeredDate": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          },
+          "applicationGuaranteed": {
+            "type": "object",
+            "properties": {
+              "guaranteedDate": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
           }
         }
-      },
-      "drawDown": {
-        "title": "drawDown",
-        "type": "object",
-        "properties": {
-          "date": {
-            "type": "string",
-            "format": "date"
-          },
-          "amount": {
-            "type": "integer"
-          }
-        },
-        "required": [
-          "date",
-          "amount"
-        ]
       },
       "booleanAnswer": {
         "title": "booleanAnswer",
@@ -1252,6 +1236,23 @@
         "required": [
           "answer",
           "question"
+        ]
+      },
+      "drawDown": {
+        "title": "drawDown",
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "amount": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "date",
+          "amount"
         ]
       }
     },
