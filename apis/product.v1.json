@@ -1771,6 +1771,96 @@
           },
           "attributes": {
             "$ref": "#/components/schemas/productAttributes"
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "facilityTypeRules": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "\"facilityRule\""
+                          ]
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "guaranteeFeeRules": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "guaranteeFeeRule"
+                          ]
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "borrowerDetailRules": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "borrowerDetailsRules"
+                        ]
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "principalPurposeRules": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "\"principalPurposeRules\""
+                          ]
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -1809,100 +1899,211 @@
           "description": {
             "type": "string"
           },
-          "programme": {
-            "$ref": "../models/objectPointer.v1.json"
-          },
-          "facilityType": {
+          "facilityDetails": {
             "type": "object",
             "properties": {
-              "name": {
-                "type": "string"
-              },
-              "facilityCalculator": {
-                "type": "string",
-                "enum": [
-                  "Include Interest",
-                  "Exclude Interest"
-                ]
-              },
-              "facilityRules": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/facilityRule"
-                }
-              },
-              "principalPurposeOptions": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/principalPurpose"
-                }
-              },
-              "guaranteeFeeRules": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/guaranteeFeeRule"
-                }
-              },
-              "assetFinance": {
-                "$ref": "#/components/schemas/assetFinance"
-              },
-              "repaymentTypeOptions": {
-                "type": "array",
-                "enum": [
-                  "\"fixedRepaymentAmount\"",
-                  "\"fixedTerm\""
-                ],
-                "uniqueItems": true,
-                "items": {
-                  "type": "string"
-                }
-              },
-              "paymentFrequency": {
-                "type": "array",
-                "enum": [
-                  "\"Monthly\"",
-                  "\"Quarterly\"",
-                  "\"Yearly\"",
-                  "\"Weekly\"",
-                  "\"Bullet - Interest Only\"",
-                  "\"Seasonal\""
-                ],
-                "uniqueItems": true,
-                "items": {
-                  "type": "string"
-                }
-              },
-              "lenderDrawDownContribution": {
+              "facilityType": {
                 "type": "object",
                 "properties": {
-                  "IAUR-Percent-Applies": {
-                    "type": "boolean"
+                  "name": {
+                    "type": "string"
+                  },
+                  "lenderDrawDownContribution": {
+                    "type": "object",
+                    "properties": {
+                      "IAUR-Percent-Applies": {
+                        "type": "boolean"
+                      }
+                    }
+                  },
+                  "paymentFrequency": {
+                    "type": "array",
+                    "enum": [
+                      "\"Monthly\"",
+                      "\"Quarterly\"",
+                      "\"Yearly\"",
+                      "\"Weekly\"",
+                      "\"Bullet - Interest Only\"",
+                      "\"Seasonal\""
+                    ],
+                    "uniqueItems": true,
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "repaymentTypeOptions": {
+                    "type": "array",
+                    "enum": [
+                      "\"fixedRepaymentAmount\"",
+                      "\"fixedTerm\""
+                    ],
+                    "uniqueItems": true,
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "assetFinance": {
+                    "$ref": "#/components/schemas/assetFinance"
+                  },
+                  "principalPurposeOptions": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/principalPurpose"
+                    }
+                  },
+                  "facilityCalculator": {
+                    "type": "string",
+                    "enum": [
+                      "Include Interest",
+                      "Exclude Interest"
+                    ]
                   }
+                }
+              },
+              "questions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/questionField"
                 }
               }
             }
           },
-          "borrowerDetails": {
+          "dataProtection": {
             "type": "object",
             "properties": {
-              "maxTurnover": {
-                "type": "number"
-              },
-              "maxTradingTurnoverGenerated": {
-                "type": "number"
+              "questions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/questionField"
+                }
               }
             }
           },
-          "productQuestions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/questionField"
+          "applicationDetails": {
+            "type": "object",
+            "properties": {
+              "questions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/questionField"
+                }
+              }
             }
           },
-          "documents": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/documentType"
+          "lenderInformation": {
+            "type": "object",
+            "properties": {
+              "questions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/questionField"
+                }
+              }
+            }
+          },
+          "stateAid": {
+            "type": "object",
+            "properties": {
+              "questions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/questionField"
+                }
+              }
+            }
+          },
+          "fees": {
+            "type": "object",
+            "properties": {
+              "questions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/questionField"
+                }
+              }
+            }
+          },
+          "security": {
+            "type": "object",
+            "properties": {
+              "questions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/questionField"
+                }
+              }
+            }
+          },
+          "additionalLenderInformation": {
+            "type": "object",
+            "properties": {
+              "questions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/questionField"
+                }
+              }
+            }
+          },
+          "repaymentHolidays": {
+            "type": "object",
+            "properties": {
+              "questions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/questionField"
+                }
+              }
+            }
+          },
+          "drawDownEvents": {
+            "type": "object",
+            "properties": {
+              "questions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/questionField"
+                }
+              }
+            }
+          },
+          "applicationComplete": {
+            "type": "object",
+            "properties": {
+              "documents": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/documentType"
+                }
+              },
+              "questions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/questionField"
+                }
+              }
+            }
+          },
+          "applicationOffered": {
+            "type": "object",
+            "properties": {
+              "questions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/questionField"
+                }
+              }
+            }
+          },
+          "applicationGuaranteed": {
+            "type": "object",
+            "properties": {
+              "questions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/questionField"
+                }
+              }
             }
           }
         }
@@ -1931,11 +2132,44 @@
               "products": {
                 "type": "string",
                 "format": "uri"
+              },
+              "programme": {
+                "type": "string",
+                "format": "uri"
+              },
+              "ruleSet": {
+                "type": "string",
+                "format": "uri"
               }
             }
           },
           "included": {
-            "$ref": "#/components/schemas/ruleSet"
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/facilityRule"
+                  }
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/guaranteeFeeRule"
+                  }
+                },
+                {
+                  "$ref": "#/components/schemas/borrowerDetailRules"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/principalPurpose"
+                  }
+                }
+              ]
+            }
           }
         }
       },
@@ -2037,6 +2271,9 @@
       "programme": {
         "title": "programme",
         "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
         "properties": {
           "meta": {
             "$ref": "../models/individualMeta.v1.json"
@@ -2052,17 +2289,26 @@
               },
               "programmes": {
                 "type": "string"
+              },
+              "ruleSets": {
+                "type": "string"
               }
             }
+          },
+          "included": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ruleSet"
+            }
           }
-        },
-        "x-tags": [
-          "Misc Models"
-        ]
+        }
       },
       "programmeResponse": {
         "title": "programmeResponse",
         "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -2079,11 +2325,29 @@
           },
           "attributes": {
             "$ref": "#/components/schemas/programmeAttributes"
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "currentRuleSet": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
-        },
-        "x-tags": [
-          "Misc Models"
-        ]
+        }
       },
       "programmeAttributes": {
         "title": "programmeAttributes",
@@ -2112,15 +2376,6 @@
           },
           "name": {
             "type": "string"
-          },
-          "activeRuleset": {
-            "$ref": "#/components/schemas/ruleSet"
-          },
-          "ruleSets": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ruleSet"
-            }
           }
         }
       },
@@ -2238,7 +2493,7 @@
             "items": {
               "type": "object",
               "properties": {
-                "productIds": {
+                "facilityTypes": {
                   "type": "array",
                   "items": {
                     "type": "string"
@@ -2437,6 +2692,18 @@
           },
           "description": {
             "type": "string"
+          }
+        }
+      },
+      "borrowerDetailRules": {
+        "title": "borrowerDetailRules",
+        "type": "object",
+        "properties": {
+          "maxBorrowerTurnover": {
+            "type": "number"
+          },
+          "maxBorrrowerTradingActivityTurnoverGenerated": {
+            "type": "number"
           }
         }
       }
