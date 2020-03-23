@@ -1809,108 +1809,6 @@
           "description": {
             "type": "string"
           },
-          "facilityDetails": {
-            "type": "object",
-            "properties": {
-              "facilityType": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "lenderDrawDownContribution": {
-                    "type": "object",
-                    "properties": {
-                      "IAUR-Percent-Applies": {
-                        "type": "boolean"
-                      }
-                    }
-                  },
-                  "paymentFrequency": {
-                    "type": "array",
-                    "enum": [
-                      "\"Monthly\"",
-                      "\"Quarterly\"",
-                      "\"Yearly\"",
-                      "\"Weekly\"",
-                      "\"Bullet - Interest Only\"",
-                      "\"Seasonal\""
-                    ],
-                    "uniqueItems": true,
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "repaymentTypeOptions": {
-                    "type": "array",
-                    "enum": [
-                      "\"fixedRepaymentAmount\"",
-                      "\"fixedTerm\""
-                    ],
-                    "uniqueItems": true,
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "assetFinance": {
-                    "$ref": "#/components/schemas/assetFinance"
-                  },
-                  "principalPurposeOptions": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/principalPurpose"
-                    }
-                  },
-                  "facilityCalculator": {
-                    "type": "string",
-                    "enum": [
-                      "Include Interest",
-                      "Exclude Interest"
-                    ]
-                  }
-                }
-              },
-              "questions": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/questionField"
-                }
-              }
-            }
-          },
-          "dataProtection": {
-            "type": "object",
-            "properties": {
-              "questions": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/questionField"
-                }
-              }
-            }
-          },
-          "lenderInformation": {
-            "type": "object",
-            "properties": {
-              "questions": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/questionField"
-                }
-              }
-            }
-          },
-          "applicationDetails": {
-            "type": "object",
-            "properties": {
-              "questions": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/questionField"
-                }
-              }
-            }
-          },
           "applicationGuaranteed": {
             "type": "object",
             "properties": {
@@ -2015,6 +1913,108 @@
                 }
               }
             }
+          },
+          "lenderInformation": {
+            "type": "object",
+            "properties": {
+              "questions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/questionField"
+                }
+              }
+            }
+          },
+          "applicationDetails": {
+            "type": "object",
+            "properties": {
+              "questions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/questionField"
+                }
+              }
+            }
+          },
+          "dataProtection": {
+            "type": "object",
+            "properties": {
+              "questions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/questionField"
+                }
+              }
+            }
+          },
+          "facilityDetails": {
+            "type": "object",
+            "properties": {
+              "facilityType": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "lenderDrawDownContribution": {
+                    "type": "object",
+                    "properties": {
+                      "IAUR-Percent-Applies": {
+                        "type": "boolean"
+                      }
+                    }
+                  },
+                  "paymentFrequency": {
+                    "type": "array",
+                    "enum": [
+                      "\"Monthly\"",
+                      "\"Quarterly\"",
+                      "\"Yearly\"",
+                      "\"Weekly\"",
+                      "\"Bullet - Interest Only\"",
+                      "\"Seasonal\""
+                    ],
+                    "uniqueItems": true,
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "repaymentTypeOptions": {
+                    "type": "array",
+                    "enum": [
+                      "\"fixedRepaymentAmount\"",
+                      "\"fixedTerm\""
+                    ],
+                    "uniqueItems": true,
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "assetFinance": {
+                    "$ref": "#/components/schemas/assetFinance"
+                  },
+                  "principalPurposeOptions": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/principalPurpose"
+                    }
+                  },
+                  "facilityCalculator": {
+                    "type": "string",
+                    "enum": [
+                      "Include Interest",
+                      "Exclude Interest"
+                    ]
+                  }
+                }
+              },
+              "questions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/questionField"
+                }
+              }
+            }
           }
         }
       },
@@ -2043,11 +2043,11 @@
                 "type": "string",
                 "format": "uri"
               },
-              "programme": {
+              "ruleSet": {
                 "type": "string",
                 "format": "uri"
               },
-              "ruleSet": {
+              "programme": {
                 "type": "string",
                 "format": "uri"
               },
@@ -2058,7 +2058,14 @@
             }
           },
           "included": {
-            "$ref": "#/components/schemas/ruleSet"
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/ruleSetResponse"
+                }
+              ]
+            }
           }
         }
       },
@@ -2163,9 +2170,6 @@
       "programme": {
         "title": "programme",
         "type": "object",
-        "x-tags": [
-          "Misc Models"
-        ],
         "properties": {
           "meta": {
             "$ref": "../models/individualMeta.v1.json"
@@ -2193,14 +2197,14 @@
               "$ref": "#/components/schemas/ruleSet"
             }
           }
-        }
+        },
+        "x-tags": [
+          "Misc Models"
+        ]
       },
       "programmeResponse": {
         "title": "programmeResponse",
         "type": "object",
-        "x-tags": [
-          "Misc Models"
-        ],
         "properties": {
           "id": {
             "type": "string",
@@ -2239,7 +2243,10 @@
               }
             }
           }
-        }
+        },
+        "x-tags": [
+          "Misc Models"
+        ]
       },
       "programmeAttributes": {
         "title": "programmeAttributes",
@@ -2275,13 +2282,13 @@
         "title": "questionField",
         "type": "object",
         "properties": {
-          "fieldCode": {
-            "type": "string"
-          },
           "questionText": {
             "type": "string"
           },
-          "helpText": {
+          "required": {
+            "type": "boolean"
+          },
+          "label": {
             "type": "string"
           },
           "fieldType": {
@@ -2293,10 +2300,10 @@
               "$ref": "#/components/schemas/questionResponseOption"
             }
           },
-          "required": {
-            "type": "boolean"
+          "helpText": {
+            "type": "string"
           },
-          "label": {
+          "fieldCode": {
             "type": "string"
           }
         }
@@ -2374,16 +2381,16 @@
             "items": {
               "type": "object",
               "properties": {
-                "facilityTypes": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
                 "facilityLimits": {
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/facilityRule"
+                  }
+                },
+                "facilityTypes": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
                   }
                 }
               }
