@@ -257,6 +257,13 @@
             },
             "in": "header",
             "name": "If-match"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "rulesetId"
           }
         ],
         "description": "Fetches a single product, including its currently active set of rules.\n\nRequires the product_reader role to access."
