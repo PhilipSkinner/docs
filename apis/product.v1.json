@@ -92,7 +92,7 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "array"
             },
             "in": "query",
             "name": "productid",
@@ -257,6 +257,13 @@
             },
             "in": "header",
             "name": "If-match"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "rulesetId"
           }
         ],
         "description": "Fetches a single product, including its currently active set of rules.\n\nRequires the product_reader role to access."
@@ -2058,7 +2065,14 @@
             }
           },
           "included": {
-            "$ref": "#/components/schemas/ruleSet"
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/ruleSetResponse"
+                }
+              ]
+            },
+            "type": "array"
           }
         }
       },
@@ -2278,7 +2292,7 @@
           "fieldCode": {
             "type": "string"
           },
-          "questionText": {
+          "fieldText": {
             "type": "string"
           },
           "helpText": {
@@ -2418,7 +2432,7 @@
           "principalPurposeRules": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/principalPurpose"
+              "$ref": "#/components/schemas/principalPurposeRule"
             }
           },
           "ineligibleSicCodes": {
@@ -2455,12 +2469,15 @@
           }
         }
       },
-      "principalPurpose": {
-        "title": "principalPurpose",
+      "principalPurposeRule": {
+        "title": "principalPurposeRule",
         "type": "object",
         "properties": {
-          "name": {
-            "type": "string"
+          "principalPurposeIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "drawDownPercentLimitPerFiscalYear": {
             "type": "number"
@@ -2586,6 +2603,18 @@
           },
           "maxBorrrowerTradingActivityTurnoverGenerated": {
             "type": "number"
+          }
+        }
+      },
+      "principalPurpose": {
+        "title": "principalPurpose",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
           }
         }
       }

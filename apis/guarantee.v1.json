@@ -650,8 +650,11 @@
             "format": "date-time",
             "description": "Not to be sent in POST/PUT/PATCH."
           },
-          "dataProtectionAgreed": {
-            "$ref": "#/components/schemas/booleanAnswer"
+          "productRuleset": {
+                "$ref": "../models/objectPointer.v1.json"
+          },
+          "programmeRuleset": {
+                "$ref": "../models/objectPointer.v1.json"
           },
           "facilityDetails": {
             "type": "object",
@@ -864,15 +867,44 @@
               "product": {
                 "$ref": "../models/objectPointer.v1.json"
               },
-              "productRuleset": {
-                "$ref": "../models/objectPointer.v1.json"
+              "expectedRepayments": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "date": {
+                      "$ref": "#/components/schemas/dateAnswer"
+                    },
+                    "amount": {
+                      "$ref": "#/components/schemas/numberAnswer"
+                    },
+                    "balance": {
+                      "$ref": "#/components/schemas/numberAnswer"
+                    }
+                  }
+                }
               },
-              "programmeRuleset": {
-                "$ref": "../models/objectPointer.v1.json"
+              "repayments": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "date": {
+                      "$ref": "#/components/schemas/dateAnswer"
+                    },
+                    "amount": {
+                      "$ref": "#/components/schemas/numberAnswer"
+                    },
+                    "balance": {
+                      "$ref": "#/components/schemas/numberAnswer"
+                    }
+                  }
+                }
               }
+
             }
           },
-          "lender": {
+          "lenderInformation": {
             "type": "object",
             "properties": {
               "lenderId": {
@@ -946,7 +978,7 @@
               "$ref": "#/components/schemas/drawDown"
             }
           },
-          "drawDowns": {
+          "drawDownEvents": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/drawDown"
@@ -974,28 +1006,6 @@
               },
               "applicantMinimusStateAidPastThreeYears": {
                 "$ref": "#/components/schemas/booleanAnswer"
-              }
-            }
-          },
-          "feesAndSecurity": {
-            "type": "object",
-            "properties": {
-              "totalVaue": {
-                "$ref": "#/components/schemas/integerAnswer"
-              },
-              "security": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "additionalSecurityValue": {
-                      "$ref": "#/components/schemas/integerAnswer"
-                    },
-                    "principalTypeofAsset": {
-                      "$ref": "#/components/schemas/integerAnswer"
-                    }
-                  }
-                }
               }
             }
           },
@@ -1036,48 +1046,11 @@
               }
             }
           },
-          "expectedRepayments": {
+          "security": {
             "type": "array",
             "items": {
               "type": "object",
               "properties": {
-                "date": {
-                  "$ref": "#/components/schemas/dateAnswer"
-                },
-                "amount": {
-                  "$ref": "#/components/schemas/numberAnswer"
-                },
-                "balance": {
-                  "$ref": "#/components/schemas/numberAnswer"
-                }
-              }
-            }
-          },
-          "repayments": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "date": {
-                  "$ref": "#/components/schemas/dateAnswer"
-                },
-                "amount": {
-                  "$ref": "#/components/schemas/numberAnswer"
-                },
-                "balance": {
-                  "$ref": "#/components/schemas/numberAnswer"
-                }
-              }
-            }
-          },
-          "additionalSecurity": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "amount": {
-                  "$ref": "#/components/schemas/numberAnswer"
-                },
                 "principalTypeOfAsset": {
                   "type": "object",
                   "properties": {
@@ -1106,30 +1079,67 @@
               }
             }
           },
-          "documentsEnvelope": {
+          "fees": {
+            "type": "object",
+            "properties": {
+              "totalFees": {
+                "type": "number"
+              }
+            }
+          },
+          "documents": {
             "$ref": "../models/objectPointer.v1.json"
           },
-          "feeSchedule": {
+          "feePaymentSchedule": {
             "$ref": "../models/objectPointer.v1.json"
+          },
+          "dataProtection": {
+            "type": "object",
+            "properties": {
+              "dataProtectionAgreed": {
+                "$ref": "#/components/schemas/booleanAnswer"
+              }
+            }
+          },
+          "additionalLenderInformation": {
+            "type": "object",
+            "properties": {
+              "Information": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "applicationComplete": {
+            "type": "object",
+            "properties": {
+              "CompletedDate": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          },
+          "applicationOffered": {
+            "type": "object",
+            "properties": {
+              "offeredDate": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          },
+          "applicationGuaranteed": {
+            "type": "object",
+            "properties": {
+              "guaranteedDate": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
           }
         }
-      },
-      "drawDown": {
-        "title": "drawDown",
-        "type": "object",
-        "properties": {
-          "date": {
-            "type": "string",
-            "format": "date"
-          },
-          "amount": {
-            "type": "integer"
-          }
-        },
-        "required": [
-          "date",
-          "amount"
-        ]
       },
       "booleanAnswer": {
         "title": "booleanAnswer",
@@ -1226,6 +1236,23 @@
         "required": [
           "answer",
           "question"
+        ]
+      },
+      "drawDown": {
+        "title": "drawDown",
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "amount": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "date",
+          "amount"
         ]
       }
     },
