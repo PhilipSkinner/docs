@@ -720,7 +720,7 @@
                     ]
                   },
                   "rateMargin": {
-                    "$ref": "#/components/schemas/numberAnswer"
+                    "type": "number"
                   }
                 }
               },
@@ -792,53 +792,46 @@
             "type": "object",
             "properties": {
               "legalForm": {
-                "type": "object",
-                "properties": {
-                  "answer": {
-                    "type": "string",
-                    "enum": [
-                      "Sole Trader",
-                      "Partnership",
-                      "Limited Liability Partnership (LLP)",
-                      "Private Limited Company (LTD)",
-                      "Public Limited Company (PLC)",
-                      "Other"
-                    ]
-                  },
-                  "question": {
-                    "$ref": "#/components/schemas/question"
-                  }
-                }
+                "type": "string",
+                "enum": [
+                  "Sole Trader",
+                  "Partnership",
+                  "Limited Liability Partnership (LLP)",
+                  "Private Limited Company (LTD)",
+                  "Public Limited Company (PLC)",
+                  "Other"
+                ]
               },
               "companyRegistrationNumber": {
-                "$ref": "#/components/schemas/stringAnswer"
+                "type": "string"
               },
               "businessLegalName": {
-                "$ref": "#/components/schemas/stringAnswer"
+                "type": "string"
               },
               "businessTradingName": {
-                "$ref": "#/components/schemas/stringAnswer"
+                "type": "string"
               },
               "sicCode": {
                 "$ref": "../models/objectPointer.v1.json"
               },
               "companyTurnover": {
-                "$ref": "#/components/schemas/integerAnswer"
+                "type": "integer"
               },
               "turnoverAboveFiftyPercent": {
-                "$ref": "#/components/schemas/booleanAnswer"
+                "type": "boolean"
               },
               "tradingStartDate": {
-                "$ref": "#/components/schemas/stringAnswer"
+                "type": "string",
+                "format": "date"
               },
               "tradingPostcode": {
-                "$ref": "#/components/schemas/stringAnswer"
+                "type": "string"
               },
               "bankAccount": {
-                "$ref": "#/components/schemas/integerAnswer"
+                "type": "integer"
               },
               "bankSortCode": {
-                "$ref": "#/components/schemas/integerAnswer"
+                "type": "integer"
               }
             }
           },
@@ -874,10 +867,10 @@
             "type": "object",
             "properties": {
               "calculatedAmount": {
-                "$ref": "#/components/schemas/integerAnswer"
+                "type": "integer"
               },
               "applicantMinimusStateAidPastThreeYears": {
-                "$ref": "#/components/schemas/booleanAnswer"
+                "type": "boolean"
               }
             }
           },
