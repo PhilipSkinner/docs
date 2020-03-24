@@ -2065,14 +2065,14 @@
             }
           },
           "included": {
+            "type": "array",
             "items": {
               "anyOf": [
                 {
                   "$ref": "#/components/schemas/ruleSetResponse"
                 }
               ]
-            },
-            "type": "array"
+            }
           }
         }
       },
@@ -2292,9 +2292,6 @@
           "fieldCode": {
             "type": "string"
           },
-          "fieldText": {
-            "type": "string"
-          },
           "helpText": {
             "type": "string"
           },
@@ -2311,6 +2308,9 @@
             "type": "boolean"
           },
           "label": {
+            "type": "string"
+          },
+          "fieldText": {
             "type": "string"
           }
         }
@@ -2447,7 +2447,7 @@
               "$ref": "#/components/schemas/lenderRule"
             }
           },
-          "product-LenderLimited-DrawDownContrbution": {
+          "productLenderLimitedDrawDownContribution": {
             "type": "array",
             "items": {
               "type": "object",
@@ -2458,7 +2458,7 @@
                     "type": "string"
                   }
                 },
-                "IAUR-Percent-Applies": {
+                "IAURPercentApplies": {
                   "type": "boolean"
                 }
               }
@@ -2469,18 +2469,15 @@
           }
         }
       },
-      "principalPurposeRule": {
-        "title": "principalPurposeRule",
+      "principalPurpose": {
+        "title": "principalPurpose",
         "type": "object",
         "properties": {
-          "principalPurposeIds": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+          "description": {
+            "type": "string"
           },
-          "drawDownPercentLimitPerFiscalYear": {
-            "type": "number"
+          "id": {
+            "type": "string"
           }
         }
       },
@@ -2606,15 +2603,18 @@
           }
         }
       },
-      "principalPurpose": {
-        "title": "principalPurpose",
+      "principalPurposeRule": {
+        "title": "principalPurposeRule",
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string"
+          "principalPurposeIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
-          "description": {
-            "type": "string"
+          "drawDownPercentLimitPerFiscalYear": {
+            "type": "number"
           }
         }
       }
