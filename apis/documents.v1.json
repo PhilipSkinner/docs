@@ -16,7 +16,7 @@
     }
   ],
   "paths": {
-    "/envelope/{envelopeId}/documents": {
+    "/documents": {
       "get": {
         "summary": "Get documents in envelope",
         "tags": [
@@ -96,6 +96,27 @@
             "in": "query",
             "name": "perpage",
             "description": "Setting to -1 will return all documents within an envelope."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "guaranteeId"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "lenderId"
+          },
+          {
+            "schema": {
+              "type": "array"
+            },
+            "in": "query",
+            "name": "documentId"
           }
         ],
         "description": "Gets a paginated list of all documents held within an envelope.\n\nRequires the document_reader role to access."
@@ -212,32 +233,15 @@
         },
         "description": "Create a document and add it to the envelope.\n\nCan either be a request to generate a document of a specific type or the operation may contain a multipart payload that contains the binary document.\n\nIf the request is multipart then the JSON payload must be sent under the name of \"payload\" and the document binary must be sent under the name \"document\".\n\nRequires the role of document_writer to access."
       },
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "envelopeId",
-          "in": "path",
-          "required": true
-        }
-      ]
+      "parameters": []
     },
-    "/envelope/{envelopeId}/documents/{documentId}": {
+    "/documents/{documentId}": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
           "name": "documentId",
-          "in": "path",
-          "required": true
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "envelopeId",
           "in": "path",
           "required": true
         }
@@ -922,6 +926,14 @@
         ],
         "description": "Deletes an envelope and all documents held within it.\n\nRequires the role document_remover to access."
       }
+    },
+    "/documenttypes": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-documenttypes"
+      }
     }
   },
   "components": {
@@ -1010,7 +1022,13 @@
             "format": "date-time",
             "description": "Not to be sent on POST/PUT/PATCH."
           },
-          "type": {
+          "documentType": {
+            "type": "string"
+          },
+          "lenderRef": {
+            "type": "string"
+          },
+          "guaranteeRef": {
             "type": "string"
           },
           "status": {
@@ -1140,6 +1158,33 @@
           "data": {
             "type": "object",
             "description": "Can be of any structure, these are the values required for the document templates."
+          }
+        }
+      },
+      "documentType": {
+        "title": "documentType",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "documentTypeResponse": {
+        "title": "documentTypeResponse",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "documentTypeAttributes": {
+        "title": "documentTypeAttributes",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
           }
         }
       }
