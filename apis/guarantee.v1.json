@@ -661,7 +661,7 @@
                 "type": "object",
                 "properties": {
                   "balloonAmount": {
-                    "type": "integer"
+                    "type": "number"
                   },
                   "details": {
                     "type": "object",
@@ -670,22 +670,22 @@
                         "type": "string"
                       },
                       "cashPrice": {
-                        "type": "integer"
+                        "type": "number"
                       },
                       "installCost": {
-                        "type": "integer"
+                        "type": "number"
                       },
                       "deposit": {
-                        "type": "integer"
+                        "type": "number"
                       },
                       "partExchange": {
-                        "type": "integer"
+                        "type": "number"
                       },
                       "originalBalance": {
-                        "type": "integer"
+                        "type": "number"
                       },
                       "residualValue": {
-                        "type": "integer"
+                        "type": "number"
                       },
                       "coverPercent": {
                         "type": "number"
@@ -725,7 +725,7 @@
                 }
               },
               "facilityTotalAmount": {
-                "type": "integer"
+                "type": "number"
               },
               "principalPurpose": {
                 "type": "string"
@@ -815,7 +815,7 @@
                 "$ref": "../models/objectPointer.v1.json"
               },
               "companyTurnover": {
-                "type": "integer"
+                "type": "number"
               },
               "turnoverAboveFiftyPercent": {
                 "type": "boolean"
@@ -867,7 +867,7 @@
             "type": "object",
             "properties": {
               "calculatedAmount": {
-                "type": "integer"
+                "type": "number"
               },
               "applicantMinimusStateAidPastThreeYears": {
                 "type": "boolean"
