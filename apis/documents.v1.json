@@ -931,8 +931,81 @@
       "get": {
         "summary": "Your GET endpoint",
         "tags": [],
-        "responses": {},
-        "operationId": "get-documenttypes"
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "operationId": "get-documenttypes",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Etag"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "meta": {
+                    "$ref": "../models/paginationMeta.v1.json"
+                  },
+                  "data": {
+                    "$ref": "#/components/schemas/documentTypeResponse"
+                  },
+                  "links": {
+                    "$ref": "../models/paginationLinks.v1.json"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Get all document types"
+      }
+    },
+    "/documentTypes/{documentTypeId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "documentTypeId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "operationId": "get-documentTypes-documentTypeId",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/documentType"
+              }
+            }
+          },
+          "description": "Get a document type by id"
+        },
+        "description": "Get a document type by Id"
       }
     }
   },
@@ -1032,7 +1105,12 @@
             "type": "string"
           },
           "status": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "queued",
+              "available",
+              "archived"
+            ]
           },
           "blobUrl": {
             "type": "string",
@@ -1058,6 +1136,10 @@
                 "description": "Size of the file in bytes."
               }
             }
+          },
+          "requestDate": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       },
@@ -1165,8 +1247,20 @@
         "title": "documentType",
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string"
+          "meta": {
+            "$ref": "../models/individualMeta.v1.json"
+          },
+          "data": {
+            "$ref": "#/components/schemas/documentTypeResponse"
+          },
+          "links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "type": "string",
+                "format": "uri"
+              }
+            }
           }
         }
       },
@@ -1176,6 +1270,15 @@
         "properties": {
           "id": {
             "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "etag": {
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/documentTypeAttributes"
           }
         }
       },
@@ -1183,8 +1286,19 @@
         "title": "documentTypeAttributes",
         "type": "object",
         "properties": {
-          "id": {
+          "createdBy": {
             "type": "string"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedBy": {
+            "type": "string"
+          },
+          "updatedDate": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       }
