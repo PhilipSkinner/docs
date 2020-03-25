@@ -519,7 +519,7 @@
         "description": "Hard deletes a document from an envelope, including the binary.\n\nRequires a role of document_remover to access."
       }
     },
-    "/envelope": {
+    "/documentRequest": {
       "get": {
         "summary": "Get all envelopes",
         "tags": [
@@ -687,15 +687,16 @@
           "Envelopes"
         ],
         "description": "Creates a new envelope to hold one or more documents.\n\nRequires the role document_writer to access."
-      }
+      },
+      "parameters": []
     },
-    "/envelope/{envelopeId}": {
+    "/documentRequest/{documentRequestId}": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "envelopeId",
+          "name": "documentRequestId",
           "in": "path",
           "required": true
         }
