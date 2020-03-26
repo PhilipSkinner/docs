@@ -588,6 +588,10 @@
               "self": {
                 "type": "string",
                 "format": "uri"
+              },
+              "guarantees": {
+                "type": "string",
+                "format": "uri"
               }
             }
           },
@@ -650,12 +654,6 @@
             "format": "date-time",
             "description": "Not to be sent in POST/PUT/PATCH."
           },
-          "productRuleset": {
-                "$ref": "../models/objectPointer.v1.json"
-          },
-          "programmeRuleset": {
-                "$ref": "../models/objectPointer.v1.json"
-          },
           "facilityDetails": {
             "type": "object",
             "properties": {
@@ -663,37 +661,37 @@
                 "type": "object",
                 "properties": {
                   "balloonAmount": {
-                    "$ref": "#/components/schemas/integerAnswer"
+                    "type": "number"
                   },
                   "details": {
                     "type": "object",
                     "properties": {
                       "category": {
-                        "$ref": "#/components/schemas/stringAnswer"
+                        "type": "string"
                       },
                       "cashPrice": {
-                        "$ref": "#/components/schemas/integerAnswer"
+                        "type": "number"
                       },
                       "installCost": {
-                        "$ref": "#/components/schemas/integerAnswer"
+                        "type": "number"
                       },
                       "deposit": {
-                        "$ref": "#/components/schemas/integerAnswer"
+                        "type": "number"
                       },
                       "partExchange": {
-                        "$ref": "#/components/schemas/integerAnswer"
+                        "type": "number"
                       },
                       "originalBalance": {
-                        "$ref": "#/components/schemas/integerAnswer"
+                        "type": "number"
                       },
                       "residualValue": {
-                        "$ref": "#/components/schemas/integerAnswer"
+                        "type": "number"
                       },
                       "coverPercent": {
-                        "$ref": "#/components/schemas/numberAnswer"
+                        "type": "number"
                       },
                       "totalGuaranteesFacilityAmount": {
-                        "$ref": "#/components/schemas/integerAnswer"
+                        "type": "number"
                       }
                     },
                     "required": [
@@ -707,7 +705,7 @@
                     ]
                   },
                   "agreementType": {
-                    "$ref": "#/components/schemas/stringAnswer"
+                    "type": "string"
                   }
                 }
               },
@@ -715,174 +713,28 @@
                 "type": "object",
                 "properties": {
                   "type": {
-                    "type": "object",
-                    "properties": {
-                      "answer": {
-                        "type": "string",
-                        "enum": [
-                          "Variable",
-                          "Fixed"
-                        ]
-                      },
-                      "question": {
-                        "$ref": "#/components/schemas/question"
-                      }
-                    }
+                    "type": "string",
+                    "enum": [
+                      "fixed",
+                      "variable"
+                    ]
                   },
                   "rateMargin": {
-                    "$ref": "#/components/schemas/numberAnswer"
+                    "type": "number"
                   }
                 }
               },
               "facilityTotalAmount": {
-                "$ref": "#/components/schemas/integerAnswer"
+                "type": "number"
               },
               "principalPurpose": {
-                "type": "object",
-                "properties": {
-                  "answer": {
-                    "type": "string",
-                    "enum": [
-                      "Start-up costs",
-                      "General working capital requirements",
-                      "Purchasing specific equipment or machinery",
-                      "Purchasing licences quotas or other entitlements to trade",
-                      "Research and Development activities",
-                      "Acquiring another business within the UK",
-                      "Acquiring another business outside the UK – Ineligible",
-                      "Expanding an existing business within the UK",
-                      "Expanding an existing business outside the UK – Ineligible",
-                      "Financing an export order – Ineligible",
-                      "Replacing existing internal finance",
-                      "Replacing existing external finance"
-                    ]
-                  },
-                  "question": {
-                    "$ref": "#/components/schemas/question"
-                  }
-                }
+                "type": "string"
               },
               "repaymentType": {
-                "type": "object",
-                "properties": {
-                  "paymentType": {
-                    "type": "object",
-                    "properties": {
-                      "answer": {
-                        "type": "string",
-                        "enum": [
-                          "Annually",
-                          "6-monthly",
-                          "Quarterly",
-                          "Monthly",
-                          "Weekly",
-                          "Seasonal"
-                        ]
-                      },
-                      "question": {
-                        "$ref": "#/components/schemas/question"
-                      }
-                    }
-                  },
-                  "fixedRepaymentAmount": {
-                    "$ref": "#/components/schemas/integerAnswer"
-                  },
-                  "term": {
-                    "type": "object",
-                    "properties": {
-                      "years": {
-                        "$ref": "#/components/schemas/integerAnswer"
-                      },
-                      "months": {
-                        "$ref": "#/components/schemas/integerAnswer"
-                      }
-                    }
-                  },
-                  "paymentFrequency": {
-                    "type": "object",
-                    "properties": {
-                      "answer": {
-                        "type": "string",
-                        "enum": [
-                          "Annually",
-                          "6-monthly",
-                          "Quarterly",
-                          "Monthly",
-                          "Weekly",
-                          "Bullet – Interest only"
-                        ]
-                      },
-                      "question": {
-                        "$ref": "#/components/schemas/question"
-                      }
-                    }
-                  },
-                  "seasonalMonths": {
-                    "enum": [
-                      "January",
-                      "February",
-                      "March",
-                      "April",
-                      "May",
-                      "June",
-                      "July",
-                      "August",
-                      "September",
-                      "October",
-                      "November",
-                      "December"
-                    ],
-                    "type": "object",
-                    "properties": {
-                      "answer": {
-                        "type": "array",
-                        "enum": [
-                          "January",
-                          "February",
-                          "March",
-                          "April",
-                          "May",
-                          "June",
-                          "July",
-                          "August",
-                          "September",
-                          "October",
-                          "November",
-                          "December"
-                        ],
-                        "items": {
-                          "type": "string"
-                        }
-                      },
-                      "question": {
-                        "$ref": "#/components/schemas/question"
-                      }
-                    }
-                  }
-                }
+                "type": "string"
               },
               "facilityType": {
-                "$ref": "#/components/schemas/stringAnswer"
-              },
-              "product": {
-                "$ref": "../models/objectPointer.v1.json"
-              },
-              "expectedRepayments": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "date": {
-                      "$ref": "#/components/schemas/dateAnswer"
-                    },
-                    "amount": {
-                      "$ref": "#/components/schemas/numberAnswer"
-                    },
-                    "balance": {
-                      "$ref": "#/components/schemas/numberAnswer"
-                    }
-                  }
-                }
+                "type": "string"
               },
               "repayments": {
                 "type": "array",
@@ -890,18 +742,36 @@
                   "type": "object",
                   "properties": {
                     "date": {
-                      "$ref": "#/components/schemas/dateAnswer"
+                      "type": "string",
+                      "format": "date"
                     },
                     "amount": {
-                      "$ref": "#/components/schemas/numberAnswer"
+                      "type": "number"
                     },
                     "balance": {
-                      "$ref": "#/components/schemas/numberAnswer"
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              "expectedRepayments": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "date": {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "amount": {
+                      "type": "number"
+                    },
+                    "balance": {
+                      "type": "number"
                     }
                   }
                 }
               }
-
             }
           },
           "lenderInformation": {
@@ -911,7 +781,7 @@
                 "$ref": "../models/objectPointer.v1.json"
               },
               "sortCode": {
-                "$ref": "#/components/schemas/numberAnswer"
+                "type": "number"
               },
               "name": {
                 "type": "string"
@@ -922,53 +792,46 @@
             "type": "object",
             "properties": {
               "legalForm": {
-                "type": "object",
-                "properties": {
-                  "answer": {
-                    "type": "string",
-                    "enum": [
-                      "Sole Trader",
-                      "Partnership",
-                      "Limited Liability Partnership (LLP)",
-                      "Private Limited Company (LTD)",
-                      "Public Limited Company (PLC)",
-                      "Other"
-                    ]
-                  },
-                  "question": {
-                    "$ref": "#/components/schemas/question"
-                  }
-                }
+                "type": "string",
+                "enum": [
+                  "Sole Trader",
+                  "Partnership",
+                  "Limited Liability Partnership (LLP)",
+                  "Private Limited Company (LTD)",
+                  "Public Limited Company (PLC)",
+                  "Other"
+                ]
               },
               "companyRegistrationNumber": {
-                "$ref": "#/components/schemas/stringAnswer"
+                "type": "string"
               },
               "businessLegalName": {
-                "$ref": "#/components/schemas/stringAnswer"
+                "type": "string"
               },
               "businessTradingName": {
-                "$ref": "#/components/schemas/stringAnswer"
+                "type": "string"
               },
               "sicCode": {
                 "$ref": "../models/objectPointer.v1.json"
               },
               "companyTurnover": {
-                "$ref": "#/components/schemas/integerAnswer"
+                "type": "number"
               },
               "turnoverAboveFiftyPercent": {
-                "$ref": "#/components/schemas/booleanAnswer"
+                "type": "boolean"
               },
               "tradingStartDate": {
-                "$ref": "#/components/schemas/stringAnswer"
+                "type": "string",
+                "format": "date"
               },
               "tradingPostcode": {
-                "$ref": "#/components/schemas/stringAnswer"
+                "type": "string"
               },
               "bankAccount": {
-                "$ref": "#/components/schemas/integerAnswer"
+                "type": "integer"
               },
               "bankSortCode": {
-                "$ref": "#/components/schemas/integerAnswer"
+                "type": "integer"
               }
             }
           },
@@ -990,10 +853,12 @@
               "type": "object",
               "properties": {
                 "startDate": {
-                  "$ref": "#/components/schemas/dateAnswer"
+                  "type": "string",
+                  "format": "date"
                 },
                 "endDate": {
-                  "$ref": "#/components/schemas/dateAnswer"
+                  "type": "string",
+                  "format": "date"
                 }
               }
             }
@@ -1002,10 +867,10 @@
             "type": "object",
             "properties": {
               "calculatedAmount": {
-                "$ref": "#/components/schemas/integerAnswer"
+                "type": "number"
               },
               "applicantMinimusStateAidPastThreeYears": {
-                "$ref": "#/components/schemas/booleanAnswer"
+                "type": "boolean"
               }
             }
           },
@@ -1031,12 +896,14 @@
               "type": "object",
               "properties": {
                 "from": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "date"
                 },
                 "to": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "date"
                 },
-                "date": {
+                "transitionDate": {
                   "type": "string",
                   "format": "date-time"
                 },
@@ -1054,7 +921,7 @@
                 "principalTypeOfAsset": {
                   "type": "object",
                   "properties": {
-                    "answer": {
+                    "name": {
                       "type": "string",
                       "enum": [
                         "Residential Property other than a principal private residence",
@@ -1071,8 +938,8 @@
                         "Other"
                       ]
                     },
-                    "question": {
-                      "$ref": "#/components/schemas/question"
+                    "value": {
+                      "type": "number"
                     }
                   }
                 }
@@ -1097,7 +964,7 @@
             "type": "object",
             "properties": {
               "dataProtectionAgreed": {
-                "$ref": "#/components/schemas/booleanAnswer"
+                "type": "boolean"
               }
             }
           },
@@ -1138,105 +1005,14 @@
                 "format": "date-time"
               }
             }
+          },
+          "ruleSet": {
+            "$ref": "../models/objectPointer.v1.json"
+          },
+          "product": {
+            "$ref": "../models/objectPointer.v1.json"
           }
         }
-      },
-      "booleanAnswer": {
-        "title": "booleanAnswer",
-        "type": "object",
-        "properties": {
-          "answer": {
-            "type": "boolean"
-          },
-          "question": {
-            "$ref": "#/components/schemas/question"
-          }
-        },
-        "required": [
-          "answer",
-          "question"
-        ]
-      },
-      "question": {
-        "title": "question",
-        "type": "object",
-        "properties": {
-          "questionText": {
-            "type": "string",
-            "description": "Text that was shown to the user to capture this information."
-          },
-          "relatedText": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "questionText"
-        ]
-      },
-      "integerAnswer": {
-        "title": "integerAnswer",
-        "type": "object",
-        "properties": {
-          "answer": {
-            "type": "integer"
-          },
-          "question": {
-            "$ref": "#/components/schemas/question"
-          }
-        },
-        "required": [
-          "answer",
-          "question"
-        ]
-      },
-      "stringAnswer": {
-        "title": "stringAnswer",
-        "type": "object",
-        "properties": {
-          "answer": {
-            "type": "string"
-          },
-          "question": {
-            "$ref": "#/components/schemas/question"
-          }
-        },
-        "required": [
-          "answer",
-          "question"
-        ]
-      },
-      "dateAnswer": {
-        "title": "dateAnswer",
-        "type": "object",
-        "properties": {
-          "answer": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "question": {
-            "$ref": "#/components/schemas/question"
-          }
-        },
-        "required": [
-          "answer",
-          "question"
-        ]
-      },
-      "numberAnswer": {
-        "title": "numberAnswer",
-        "type": "object",
-        "properties": {
-          "answer": {
-            "type": "number"
-          },
-          "question": {
-            "$ref": "#/components/schemas/question"
-          }
-        },
-        "required": [
-          "answer",
-          "question"
-        ]
       },
       "drawDown": {
         "title": "drawDown",
