@@ -625,6 +625,44 @@
           },
           "attributes": {
             "$ref": "#/components/schemas/guaranteeAttributes"
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "feePaymentProfile": {
+                "type": "object",
+                "format": "uri",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "\"self\"": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    }
+                  }
+                }
+              },
+              "documents": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "offerDocuments": {
+                        "type": "string",
+                        "format": "uri"
+                      },
+                      "feePaymentScheduleDocument": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -957,7 +995,8 @@
           "documents": {
             "type": "array",
             "items": {
-              "type": "string","format": "uri"
+              "type": "string",
+              "format": "uri"
             }
           },
           "feePaymentSchedule": {
