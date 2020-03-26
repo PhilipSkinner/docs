@@ -957,8 +957,7 @@
           "documents": {
             "type": "array",
             "items": {
-              "type": "string",
-              "format": {"uri"}
+              "type": "string","format": "uri"
             }
           },
           "feePaymentSchedule": {
