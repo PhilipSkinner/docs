@@ -955,7 +955,11 @@
             }
           },
           "documents": {
-            "$ref": "../models/objectPointer.v1.json"
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": {"uri"}
+            }
           },
           "feePaymentSchedule": {
             "$ref": "../models/objectPointer.v1.json"
