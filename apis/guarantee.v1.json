@@ -35,7 +35,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/guaranteeResponse"
+                        "$ref": "#/components/schemas/guaranteeData"
                       }
                     },
                     "links": {
@@ -108,7 +108,7 @@
       },
       "post": {
         "summary": "Create a guarantee",
-        "operationId": "post-lender-lenderId-guarantees",
+        "operationId": "post-guarantees",
         "responses": {
           "201": {
             "description": "Created",
@@ -565,6 +565,55 @@
           }
         ]
       }
+    },
+    "/guarantee/{guaranteeId}/inLifeEvents": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "guaranteeId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "In Life Events",
+        "operationId": "post-guarantee-guaranteeId-inLifeEvents",
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inLifeEvent"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "412": {
+            "description": "Precondition Failed"
+          },
+          "422": {
+            "description": "Unprocessable Entity (WebDAV)"
+          }
+        },
+        "tags": [
+          "Guarantees"
+        ],
+        "description": "This endpoint allows the client to try changes before comitting them to guarantee. Changes will be validated and returned with any errors. Clients should not comit changes to the guarantee resource until the in life event response returns no errors. In life events are not currently saved.",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -580,7 +629,7 @@
             "$ref": "../models/individualMeta.v1.json"
           },
           "data": {
-            "$ref": "#/components/schemas/guaranteeResponse"
+            "$ref": "#/components/schemas/guaranteeData"
           },
           "links": {
             "type": "object",
@@ -590,6 +639,10 @@
                 "format": "uri"
               },
               "guarantees": {
+                "type": "string",
+                "format": "uri"
+              },
+              "inLifeEvent": {
                 "type": "string",
                 "format": "uri"
               }
@@ -603,8 +656,8 @@
           }
         }
       },
-      "guaranteeResponse": {
-        "title": "guaranteeResponse",
+      "guaranteeData": {
+        "title": "guaranteeData",
         "type": "object",
         "x-tags": [
           "Misc Models"
@@ -661,6 +714,15 @@
                     }
                   }
                 }
+              }
+            }
+          },
+          "links": {
+            "type": "object",
+            "properties": {
+              "inLifeEvents": {
+                "type": "string",
+                "format": "uri"
               }
             }
           }
@@ -1045,6 +1107,12 @@
               "guaranteedDate": {
                 "type": "string",
                 "format": "date-time"
+              },
+              "signedInformationDeclaration": {
+                "type": "boolean"
+              },
+              "guaranteeFeePaymentCanBeMade": {
+                "type": "boolean"
               }
             }
           },
@@ -1072,6 +1140,49 @@
           "date",
           "amount"
         ]
+      },
+      "inLifeEvent": {
+        "title": "inLifeEvent",
+        "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
+        "description": "represents the potential guarantee message response to an in life event change on a guarantee.",
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "../models/error.v1.json"
+            }
+          },
+          "links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "type": "string",
+                "format": "uri"
+              },
+              "guarantees": {
+                "type": "string",
+                "format": "uri"
+              },
+              "inLifeEvent": {
+                "type": "string",
+                "format": "uri"
+              },
+              "currentGuarantee": {
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/guaranteeData"
+          },
+          "meta": {
+            "$ref": "../models/individualMeta.v1.json"
+          }
+        }
       }
     },
     "securitySchemes": {

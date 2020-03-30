@@ -39,7 +39,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/productResponse"
+                        "$ref": "#/components/schemas/productData"
                       }
                     }
                   }
@@ -938,7 +938,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/sicCodeResponse"
+                        "$ref": "#/components/schemas/sicCodeData"
                       }
                     },
                     "links": {
@@ -1367,7 +1367,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/programmeResponse"
+                        "$ref": "#/components/schemas/programmeData"
                       }
                     },
                     "links": {
@@ -1756,8 +1756,8 @@
   },
   "components": {
     "schemas": {
-      "productResponse": {
-        "title": "productResponse",
+      "productData": {
+        "title": "productData",
         "type": "object",
         "x-tags": [
           "Misc Models"
@@ -1778,6 +1778,19 @@
           },
           "attributes": {
             "$ref": "#/components/schemas/productAttributes"
+          },
+          "links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "guaranteesResource": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
           }
         }
       },
@@ -2037,7 +2050,7 @@
             "$ref": "../models/individualMeta.v1.json"
           },
           "data": {
-            "$ref": "#/components/schemas/productResponse"
+            "$ref": "#/components/schemas/productData"
           },
           "links": {
             "type": "object",
@@ -2069,7 +2082,7 @@
             "items": {
               "anyOf": [
                 {
-                  "$ref": "#/components/schemas/ruleSetResponse"
+                  "$ref": "#/components/schemas/ruleSetData"
                 }
               ]
             }
@@ -2087,7 +2100,7 @@
             "$ref": "../models/individualMeta.v1.json"
           },
           "data": {
-            "$ref": "#/components/schemas/sicCodeResponse"
+            "$ref": "#/components/schemas/sicCodeData"
           },
           "links": {
             "type": "object",
@@ -2104,7 +2117,7 @@
           }
         }
       },
-      "sicCodeResponse": {
+      "sicCodeData": {
         "title": "sicCodeResponse",
         "type": "object",
         "x-tags": [
@@ -2185,7 +2198,7 @@
             "$ref": "../models/individualMeta.v1.json"
           },
           "data": {
-            "$ref": "#/components/schemas/programmeResponse"
+            "$ref": "#/components/schemas/programmeData"
           },
           "links": {
             "type": "object",
@@ -2209,7 +2222,7 @@
           }
         }
       },
-      "programmeResponse": {
+      "programmeData": {
         "title": "programmeResponse",
         "type": "object",
         "x-tags": [
@@ -2537,7 +2550,7 @@
             "$ref": ""
           },
           "data": {
-            "$ref": "#/components/schemas/ruleSetResponse"
+            "$ref": "#/components/schemas/ruleSetData"
           },
           "links": {
             "type": "object",
@@ -2554,8 +2567,8 @@
           }
         }
       },
-      "ruleSetResponse": {
-        "title": "ruleSetResponse",
+      "ruleSetData": {
+        "title": "ruleSetData",
         "type": "object",
         "properties": {
           "id": {

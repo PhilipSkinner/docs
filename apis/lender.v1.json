@@ -39,7 +39,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/lenderResponse"
+                        "$ref": "#/components/schemas/lenderData"
                       }
                     }
                   }
@@ -482,7 +482,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/allocationResponse"
+                        "$ref": "#/components/schemas/allocationData"
                       }
                     }
                   }
@@ -941,7 +941,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/lenderTypeResponse"
+                        "$ref": "#/components/schemas/lenderTypeData"
                       }
                     }
                   }
@@ -1382,7 +1382,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/bandingResponse"
+                        "$ref": "#/components/schemas/bandingData"
                       }
                     }
                   }
@@ -1857,7 +1857,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/userResponse"
+                        "$ref": "#/components/schemas/userData"
                       }
                     },
                     "links": {
@@ -2301,6 +2301,61 @@
           }
         ]
       }
+    },
+    "/lenders/{lenderId}/accreditedProducts": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "lenderId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "GET Accredited Products",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/accreditedProductData"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-lenders-lenderId-accreditedProducts",
+        "description": "Get accredited products for a lender"
+      },
+      "post": {
+        "summary": "Add Accredited Products",
+        "operationId": "post-lenders-lenderId-accreditedProducts",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "description": "add accredited product to a lender",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-idempotency-key"
+          }
+        ],
+        "tags": [
+          "Accredited Products"
+        ]
+      }
     }
   },
   "components": {
@@ -2322,15 +2377,11 @@
             "$ref": "../models/individualMeta.v1.json"
           },
           "data": {
-            "$ref": "#/components/schemas/lenderResponse"
+            "$ref": "#/components/schemas/lenderData"
           },
           "links": {
             "type": "object",
             "properties": {
-              "self": {
-                "type": "string",
-                "format": "uri"
-              },
               "lenders": {
                 "type": "string",
                 "format": "uri"
@@ -2342,18 +2393,55 @@
             "items": {
               "anyOf": [
                 {
-                  "$ref": "#/components/schemas/allocationResponse"
+                  "$ref": "#/components/schemas/lenderTypeData"
                 },
                 {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/userResponse"
+                    "$ref": "#/components/schemas/userData"
                   }
                 },
                 {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/lenderResponse"
+                    "$ref": "#/components/schemas/lenderData"
+                  }
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "accreditedProduct"
+                        ]
+                      },
+                      "attributes": {
+                        "type": "object",
+                        "properties": {
+                          "accreditationDate": {
+                            "type": "string"
+                          },
+                          "productName": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "links": {
+                        "type": "object",
+                        "properties": {
+                          "product": {
+                            "type": "string",
+                            "format": "uri"
+                          }
+                        }
+                      }
+                    }
                   }
                 }
               ]
@@ -2361,8 +2449,8 @@
           }
         }
       },
-      "lenderResponse": {
-        "title": "lenderResponse",
+      "lenderData": {
+        "title": "lenderData",
         "type": "object",
         "x-tags": [
           "Misc Models"
@@ -2388,13 +2476,75 @@
             "type": "object",
             "properties": {
               "parentLender": {
-                "$ref": "../models/objectPointer.v1.json"
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "lenderData"
+                        ]
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
               },
               "subLenders": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "lenderData"
+                          ]
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "accreditedProducts": {
                 "type": "array",
                 "items": {
-                  "$ref": "../models/objectPointer.v1.json"
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "accreditedProduct"
+                          ]
+                        }
+                      }
+                    }
+                  }
                 }
+              }
+            }
+          },
+          "links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "type": "string"
               }
             }
           }
@@ -2478,7 +2628,7 @@
             "$ref": "../models/individualMeta.v1.json"
           },
           "data": {
-            "$ref": "#/components/schemas/allocationResponse"
+            "$ref": "#/components/schemas/allocationData"
           },
           "links": {
             "type": "object",
@@ -2499,8 +2649,8 @@
           }
         }
       },
-      "allocationResponse": {
-        "title": "allocationResponse",
+      "allocationData": {
+        "title": "allocationData",
         "type": "object",
         "x-tags": [
           "Misc Models"
@@ -2552,8 +2702,22 @@
           "active": {
             "$ref": "#/components/schemas/activeRange"
           },
-          "IAURPercentRate": {
-            "type": "number"
+          "currentProductAmounts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "productId": {
+                  "type": "string"
+                },
+                "drawdownAmount": {
+                  "type": "string"
+                },
+                "claimedAmount": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -2568,7 +2732,7 @@
             "$ref": "../models/individualMeta.v1.json"
           },
           "data": {
-            "$ref": "#/components/schemas/lenderTypeResponse"
+            "$ref": "#/components/schemas/lenderTypeData"
           },
           "links": {
             "type": "object",
@@ -2588,15 +2752,15 @@
             "items": {
               "anyOf": [
                 {
-                  "$ref": "#/components/schemas/bandingResponse"
+                  "$ref": "#/components/schemas/bandingData"
                 }
               ]
             }
           }
         }
       },
-      "lenderTypeResponse": {
-        "title": "lenderTypeResponse",
+      "lenderTypeData": {
+        "title": "lenderTypeData",
         "type": "object",
         "x-tags": [
           "Misc Models"
@@ -2618,7 +2782,8 @@
           "attributes": {
             "$ref": "#/components/schemas/lenderTypeAttributes"
           }
-        }
+        },
+        "description": ""
       },
       "lenderTypeAttributes": {
         "title": "lenderTypeAttributes",
@@ -2664,7 +2829,7 @@
             "$ref": "../models/individualMeta.v1.json"
           },
           "data": {
-            "$ref": "#/components/schemas/bandingResponse"
+            "$ref": "#/components/schemas/bandingData"
           },
           "links": {
             "type": "object",
@@ -2685,8 +2850,8 @@
           }
         }
       },
-      "bandingResponse": {
-        "title": "bandingResponse",
+      "bandingData": {
+        "title": "bandingData",
         "type": "object",
         "x-tags": [
           "Misc Models"
@@ -2793,7 +2958,7 @@
             "$ref": "../models/individualMeta.v1.json"
           },
           "data": {
-            "$ref": "#/components/schemas/userResponse"
+            "$ref": "#/components/schemas/userData"
           },
           "links": {
             "type": "object",
@@ -2814,8 +2979,8 @@
           }
         }
       },
-      "userResponse": {
-        "title": "userResponse",
+      "userData": {
+        "title": "userData",
         "type": "object",
         "properties": {
           "id": {
@@ -2873,6 +3038,15 @@
             "format": "email"
           }
         }
+      },
+      "accreditedProductData": {
+        "title": "approvedProductData",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        }
       }
     }
   },
@@ -2882,6 +3056,9 @@
     },
     {
       "name": "Lender Types"
+    },
+    {
+      "name": "Accredited Products"
     }
   ]
 }
