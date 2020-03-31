@@ -2371,6 +2371,18 @@
           },
           "facilityTotalFixedFee": {
             "type": "boolean"
+          },
+          "facilityTypes": {
+            "type": "array",
+            "enum": [
+              "\"Term Loan\"",
+              "\"Asset Finance\"",
+              "Invoice Finance",
+              "Revolving Credit"
+            ],
+            "items": {
+              "type": "string"
+            }
           }
         }
       },
@@ -2378,9 +2390,6 @@
         "title": "ruleSetAttributes",
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string"
-          },
           "IAURPercent": {
             "type": "number"
           },
