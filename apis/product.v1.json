@@ -2611,7 +2611,7 @@
           "maxBorrowerTurnover": {
             "type": "number"
           },
-          "maxBorrrowerTradingActivityTurnoverGenerated": {
+          "maxPercentOfTurnoverGeneratedByTradingActivity": {
             "type": "number"
           }
         }
