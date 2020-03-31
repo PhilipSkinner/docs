@@ -634,17 +634,12 @@
           "links": {
             "type": "object",
             "properties": {
-              "self": {
-                "type": "string",
-                "format": "uri"
-              },
               "guarantees": {
                 "type": "string",
                 "format": "uri"
               },
-              "inLifeEvent": {
-                "type": "string",
-                "format": "uri"
+              "products": {
+                "type": "string"
               }
             }
           },
@@ -714,6 +709,34 @@
                     }
                   }
                 }
+              },
+              "productUsed": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "product": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    }
+                  }
+                }
+              },
+              "ruleSetUsed": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "ruleSet": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    }
+                  }
+                }
               }
             }
           },
@@ -721,6 +744,10 @@
             "type": "object",
             "properties": {
               "inLifeEvents": {
+                "type": "string",
+                "format": "uri"
+              },
+              "self": {
                 "type": "string",
                 "format": "uri"
               }
