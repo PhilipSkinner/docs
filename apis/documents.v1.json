@@ -902,41 +902,6 @@
                 "format": "uri"
               }
             }
-          },
-          "included": {
-            "type": "array",
-            "items": {
-              "anyOf": [
-                {
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "documentType"
-                      ]
-                    },
-                    "id": {
-                      "type": "string"
-                    },
-                    "attributes": {
-                      "type": "object",
-                      "properties": {
-                        "name": {
-                          "type": "string"
-                        },
-                        "targetMimeType": {
-                          "type": "string"
-                        },
-                        "targetFileExtension": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
-                }
-              ],
-              "type": "object"
-            }
           }
         }
       },
@@ -970,30 +935,14 @@
               "self": {
                 "type": "string",
                 "format": "uri"
-              }
-            }
-          },
-          "relationships": {
-            "type": "object",
-            "properties": {
-              "documentType": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "type": {
-                        "type": "string",
-                        "enum": [
-                          "documentType"
-                        ]
-                      }
-                    }
-                  }
-                }
+              },
+              "guaranteeDocuments": {
+                "type": "string",
+                "format": "uri"
+              },
+              "lenderDocuments": {
+                "type": "string",
+                "format": "uri"
               }
             }
           }
@@ -1025,9 +974,6 @@
             "format": "date-time",
             "description": "Not to be sent on POST/PUT/PATCH."
           },
-          "documentType": {
-            "type": "string"
-          },
           "lenderRef": {
             "type": "string"
           },
@@ -1041,10 +987,6 @@
               "available",
               "archived"
             ]
-          },
-          "blobUrl": {
-            "type": "string",
-            "format": "uri"
           },
           "fileDetails": {
             "type": "object",
@@ -1064,6 +1006,10 @@
               "size": {
                 "type": "integer",
                 "description": "Size of the file in bytes."
+              },
+              "blobUrl": {
+                "type": "string",
+                "format": "uri"
               }
             }
           },
