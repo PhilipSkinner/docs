@@ -1094,7 +1094,7 @@
                 "type": "string",
                 "format": "uri"
               },
-              "envelopes": {
+              "documentRequests": {
                 "type": "string",
                 "format": "uri"
               },
@@ -1113,7 +1113,7 @@
         }
       },
       "documentRequestData": {
-        "title": "envelopeResponse",
+        "title": "documentRequestData",
         "type": "object",
         "x-tags": [
           "Misc Models"
@@ -1138,7 +1138,7 @@
         }
       },
       "documentRequestAttributes": {
-        "title": "envelopeAttributes",
+        "title": "documentRequestAttributes",
         "type": "object",
         "x-tags": [
           "Envelopes"
