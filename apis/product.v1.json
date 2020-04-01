@@ -93,7 +93,9 @@
           {
             "schema": {
               "type": "array",
-              "items":{"type":"string"}
+              "items": {
+                "type": "string"
+              }
             },
             "in": "query",
             "name": "productid",
@@ -1753,6 +1755,280 @@
           }
         ]
       }
+    },
+    "/programmes/{programmeId}/principalPurposes": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "programmeId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-programmes-programmeId-principalPurposes",
+        "description": "Get principal purposes for a programme",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Post principal purpose",
+        "operationId": "post-programmes-programmeId-principalPurposes",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "add a new principal purpose",
+        "tags": [
+          "Principal Purpose"
+        ]
+      }
+    },
+    "/programmes/{programmeId}/principlePurpose/{principalPurposeId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "programmeId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "principalPurposeId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "GET Principal Purpose",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/principalPurpose"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "operationId": "get-programmes-programmeId-principlePurpose-principalPurposeId",
+        "description": "Get all principle purpose"
+      },
+      "delete": {
+        "summary": "",
+        "operationId": "delete-programmes-programmeId-principlePurpose-principalPurposeId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "description": "Delete Principal Purpose",
+        "tags": [
+          "Principal Purpose"
+        ],
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ]
+      }
+    },
+    "/programmes/{programmeId}/questions": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "programmeId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [
+          "Questions"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../models/paginationMeta.v1.json"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": ""
+                      }
+                    },
+                    "links": {
+                      "$ref": "../models/paginationLinks.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-programmes-programmeId-questions",
+        "description": "Get all questions",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "POST Question",
+        "operationId": "post-programmes-programmeId-questions",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "add new question",
+        "tags": [
+          "Questions"
+        ]
+      }
+    },
+    "/programmes/{programmeId}/questions/{questionId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "programmeId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "questionId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [
+          "Questions"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/question"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-programmes-programmeId-questions-questionId",
+        "description": "Get a question",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ]
+      },
+      "put": {
+        "summary": "PUT Question",
+        "operationId": "put-programmes-programmeId-questions-questionId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Update a question",
+        "tags": [
+          "Questions"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/questionData"
+              }
+            }
+          },
+          "description": ""
+        }
+      },
+      "delete": {
+        "summary": "DELETE Question",
+        "operationId": "delete-programmes-programmeId-questions-questionId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "tags": [
+          "Questions"
+        ],
+        "description": "Delete question"
+      }
     }
   },
   "components": {
@@ -1850,12 +2126,12 @@
                   "paymentFrequency": {
                     "type": "array",
                     "enum": [
-                      "\"Monthly\"",
-                      "\"Quarterly\"",
-                      "\"Yearly\"",
-                      "\"Weekly\"",
-                      "\"Bullet - Interest Only\"",
-                      "\"Seasonal\""
+                      "Monthly",
+                      "Quarterly",
+                      "Yearly",
+                      "Weekly",
+                      "Bullet - Interest Only",
+                      "Seasonal"
                     ],
                     "uniqueItems": true,
                     "items": {
@@ -1865,8 +2141,8 @@
                   "repaymentTypeOptions": {
                     "type": "array",
                     "enum": [
-                      "\"fixedRepaymentAmount\"",
-                      "\"fixedTerm\""
+                      "fixedRepaymentAmount",
+                      "fixedTerm"
                     ],
                     "uniqueItems": true,
                     "items": {
@@ -1878,8 +2154,9 @@
                   },
                   "principalPurposeOptions": {
                     "type": "array",
+                    "uniqueItems": true,
                     "items": {
-                      "$ref": "#/components/schemas/principalPurpose"
+                      "type": "string"
                     }
                   },
                   "facilityCalculator": {
@@ -2116,6 +2393,10 @@
               }
             }
           }
+        },
+        "description": "",
+        "x-examples": {
+          "example-1": {}
         }
       },
       "sicCodeData": {
@@ -2169,8 +2450,11 @@
               "$ref": "#/components/schemas/facilityRule"
             }
           },
-          "sicCode": {
-            "type": "string"
+          "sicCodesStartingWith": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         }
       },
@@ -2390,6 +2674,9 @@
       "ruleSetAttributes": {
         "title": "ruleSetAttributes",
         "type": "object",
+        "x-tags": [
+          "attributes"
+        ],
         "properties": {
           "IAURPercent": {
             "type": "number"
@@ -2446,10 +2733,18 @@
               "$ref": "#/components/schemas/sicCodeRule"
             }
           },
-          "stateAidRules": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/stateAidRule"
+          "stateAid": {
+            "type": "object",
+            "properties": {
+              "stateAidPeriodInMonths": {
+                "type": "integer"
+              },
+              "stateAidRules": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/stateAidRule"
+                }
+              }
             }
           },
           "principalPurposeRules": {
@@ -2489,18 +2784,6 @@
           },
           "activeRange": {
             "$ref": "#/components/schemas/activityRange"
-          }
-        }
-      },
-      "principalPurpose": {
-        "title": "principalPurpose",
-        "type": "object",
-        "properties": {
-          "description": {
-            "type": "string"
-          },
-          "id": {
-            "type": "string"
           }
         }
       },
@@ -2630,7 +2913,7 @@
         "title": "principalPurposeRule",
         "type": "object",
         "properties": {
-          "principalPurposeIds": {
+          "principalPurposes": {
             "type": "array",
             "items": {
               "type": "string"
@@ -2638,6 +2921,71 @@
           },
           "drawDownPercentLimitPerFiscalYear": {
             "type": "number"
+          }
+        }
+      },
+      "principalPurpose": {
+        "title": "principalPurpose",
+        "type": "object",
+        "properties": {
+          "meta": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/principalPurposeData"
+          },
+          "links": {
+            "type": "string"
+          }
+        },
+        "description": ""
+      },
+      "principalPurposeData": {
+        "title": "principalPurposeData",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/principalPurposeAttributes"
+          }
+        }
+      },
+      "principalPurposeAttributes": {
+        "title": "principalPurposeAttributes",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "question": {
+        "title": "question",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/questionData"
+          },
+          "type": {
+            "type": "string"
+          }
+        },
+        "description": ""
+      },
+      "questionData": {
+        "title": "questionData",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/questionField"
           }
         }
       }
@@ -2658,6 +3006,12 @@
     },
     {
       "name": "SIC Codes"
+    },
+    {
+      "name": "Principal Purpose"
+    },
+    {
+      "name": "Questions"
     }
   ]
 }

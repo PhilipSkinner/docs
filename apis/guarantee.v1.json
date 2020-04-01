@@ -1142,12 +1142,6 @@
                 "type": "boolean"
               }
             }
-          },
-          "ruleSet": {
-            "$ref": "../models/objectPointer.v1.json"
-          },
-          "product": {
-            "$ref": "../models/objectPointer.v1.json"
           }
         }
       },
