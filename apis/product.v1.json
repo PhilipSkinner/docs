@@ -92,7 +92,8 @@
           },
           {
             "schema": {
-              "type": "array"
+              "type": "array",
+              "items":{"type":"string"}
             },
             "in": "query",
             "name": "productid",
