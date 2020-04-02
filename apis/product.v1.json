@@ -2245,61 +2245,29 @@
             "type": "object",
             "properties": {
               "facilityType": {
+                "type": "string",
+                "enum": [
+                  "Asset Finance",
+                  "Invoice Finance",
+                  "Term Loan",
+                  "Revolving Credit"
+                ]
+              },
+              "assetFinance": {
+                "$ref": "#/components/schemas/assetFinance"
+              },
+              "facilityCalculator": {
+                "type": "string",
+                "enum": [
+                  "Include Interest",
+                  "Exclude Interest"
+                ]
+              },
+              "lenderDrawDownContribution": {
                 "type": "object",
                 "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "lenderDrawDownContribution": {
-                    "type": "object",
-                    "properties": {
-                      "IAUR-Percent-Applies": {
-                        "type": "boolean"
-                      }
-                    }
-                  },
-                  "paymentFrequency": {
-                    "type": "array",
-                    "enum": [
-                      "Monthly",
-                      "Quarterly",
-                      "Yearly",
-                      "Weekly",
-                      "Bullet - Interest Only",
-                      "Seasonal"
-                    ],
-                    "uniqueItems": true,
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "repaymentTypeOptions": {
-                    "type": "array",
-                    "enum": [
-                      "fixedRepaymentAmount",
-                      "fixedTerm"
-                    ],
-                    "uniqueItems": true,
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "assetFinance": {
-                    "$ref": "#/components/schemas/assetFinance"
-                  },
-                  "principalPurposeOptions": {
-                    "type": "array",
-                    "uniqueItems": true,
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "facilityCalculator": {
-                    "type": "string",
-                    "enum": [
-                      "Include Interest",
-                      "Exclude Interest"
-                    ]
+                  "IAUR-Percent-Applies": {
+                    "type": "boolean"
                   }
                 }
               },
@@ -2722,7 +2690,13 @@
         "title": "questionField",
         "type": "object",
         "properties": {
+          "label": {
+            "type": "string"
+          },
           "fieldName": {
+            "type": "string"
+          },
+          "fieldText": {
             "type": "string"
           },
           "helpText": {
@@ -2731,20 +2705,14 @@
           "fieldType": {
             "type": "string"
           },
+          "required": {
+            "type": "boolean"
+          },
           "responseOptionValues": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/questionResponseOption"
             }
-          },
-          "required": {
-            "type": "boolean"
-          },
-          "label": {
-            "type": "string"
-          },
-          "fieldText": {
-            "type": "string"
           }
         }
       },
@@ -2753,6 +2721,9 @@
         "type": "object",
         "properties": {
           "responseValue": {
+            "type": "string"
+          },
+          "responseLabel": {
             "type": "string"
           }
         }
