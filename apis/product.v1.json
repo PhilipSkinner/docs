@@ -1907,7 +1907,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": ""
+                        "$ref": "#/components/schemas/questionData"
                       }
                     },
                     "links": {
@@ -3106,18 +3106,21 @@
       "question": {
         "title": "question",
         "type": "object",
+        "description": "",
         "properties": {
           "id": {
             "type": "string"
           },
+          "type": {
+            "type": "string",
+            "enum": [
+              "questionField"
+            ]
+          },
           "data": {
             "$ref": "#/components/schemas/questionData"
-          },
-          "type": {
-            "type": "string"
           }
-        },
-        "description": ""
+        }
       },
       "questionData": {
         "title": "questionData",
