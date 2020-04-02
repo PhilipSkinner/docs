@@ -752,6 +752,20 @@
                     }
                   }
                 }
+              },
+              "directDebitMandate": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "mandate": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    }
+                  }
+                }
               }
             }
           },
@@ -779,6 +793,9 @@
           },
           "amount": {
             "type": "integer"
+          },
+          "monthsFromStart": {
+            "type": "number"
           }
         },
         "required": [
@@ -975,6 +992,20 @@
               },
               "paymentFrequency": {
                 "type": "string"
+              },
+              "term": {
+                "type": "object",
+                "properties": {
+                  "years": {
+                    "type": "integer"
+                  },
+                  "months": {
+                    "type": "integer"
+                  },
+                  "totalMonths": {
+                    "type": "integer"
+                  }
+                }
               }
             }
           },
@@ -988,6 +1019,9 @@
                 "type": "number"
               },
               "name": {
+                "type": "string"
+              },
+              "lenderApplicationReference": {
                 "type": "string"
               }
             }
@@ -1021,7 +1055,7 @@
               "companyTurnover": {
                 "type": "number"
               },
-              "turnoverAboveFiftyPercent": {
+              "tradingActivityTurnoverGreaterThanAllowed": {
                 "type": "boolean"
               },
               "tradingStartDate": {
@@ -1029,15 +1063,6 @@
                 "format": "date"
               },
               "tradingPostcode": {
-                "type": "string"
-              },
-              "bankAccount": {
-                "type": "integer"
-              },
-              "bankSortCode": {
-                "type": "integer"
-              },
-              "lenderApplicationReference": {
                 "type": "string"
               }
             }
@@ -1066,6 +1091,9 @@
                 "endDate": {
                   "type": "string",
                   "format": "date"
+                },
+                "numberOfMonths": {
+                  "type": "integer"
                 }
               }
             }
@@ -1076,7 +1104,7 @@
               "calculatedAmount": {
                 "type": "number"
               },
-              "applicantMinimusStateAidPastThreeYears": {
+              "underStateAidLimit": {
                 "type": "boolean"
               }
             }
@@ -1161,16 +1189,6 @@
               }
             }
           },
-          "documents": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          "feePaymentSchedule": {
-            "$ref": "../models/objectPointer.v1.json"
-          },
           "dataProtection": {
             "type": "object",
             "properties": {
@@ -1193,7 +1211,7 @@
           "applicationComplete": {
             "type": "object",
             "properties": {
-              "CompletedDate": {
+              "completedDate": {
                 "type": "string",
                 "format": "date-time"
               }
