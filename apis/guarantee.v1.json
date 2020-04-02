@@ -662,17 +662,18 @@
             "type": "string",
             "format": "uuid"
           },
-          "type": {
-            "type": "string",
-            "enum": [
-              "guarantee"
-            ]
-          },
-          "etag": {
-            "type": "string"
-          },
-          "attributes": {
-            "$ref": "#/components/schemas/guaranteeAttributes"
+          "links": {
+            "type": "object",
+            "properties": {
+              "inLifeEvents": {
+                "type": "string",
+                "format": "uri"
+              },
+              "self": {
+                "type": "string",
+                "format": "uri"
+              }
+            }
           },
           "relationships": {
             "type": "object",
@@ -684,7 +685,7 @@
                   "links": {
                     "type": "object",
                     "properties": {
-                      "\"self\"": {
+                      "self": {
                         "type": "string",
                         "format": "uri"
                       }
@@ -737,21 +738,94 @@
                     }
                   }
                 }
+              },
+              "lender": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    }
+                  }
+                }
               }
+            }
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/guaranteeAttributes"
+          },
+          "etag": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "guarantee"
+            ]
+          }
+        }
+      },
+      "drawDown": {
+        "title": "drawDown",
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "amount": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "date",
+          "amount"
+        ]
+      },
+      "inLifeEvent": {
+        "title": "inLifeEvent",
+        "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
+        "description": "represents the potential guarantee message response to an in life event change on a guarantee.",
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "../models/error.v1.json"
             }
           },
           "links": {
             "type": "object",
             "properties": {
-              "inLifeEvents": {
+              "self": {
                 "type": "string",
                 "format": "uri"
               },
-              "self": {
+              "guarantees": {
+                "type": "string",
+                "format": "uri"
+              },
+              "inLifeEvent": {
+                "type": "string",
+                "format": "uri"
+              },
+              "currentGuarantee": {
                 "type": "string",
                 "format": "uri"
               }
             }
+          },
+          "data": {
+            "$ref": "#/components/schemas/guaranteeData"
+          },
+          "meta": {
+            "$ref": "../models/individualMeta.v1.json"
           }
         }
       },
@@ -839,7 +913,7 @@
               "interest": {
                 "type": "object",
                 "properties": {
-                  "type": {
+                  "interestType": {
                     "type": "string",
                     "enum": [
                       "fixed",
@@ -898,14 +972,17 @@
                     }
                   }
                 }
+              },
+              "paymentFrequency": {
+                "type": "string"
               }
             }
           },
           "lenderInformation": {
             "type": "object",
             "properties": {
-              "lenderId": {
-                "$ref": "../models/objectPointer.v1.json"
+              "lenderRef": {
+                "type": "string"
               },
               "sortCode": {
                 "type": "number"
@@ -959,6 +1036,9 @@
               },
               "bankSortCode": {
                 "type": "integer"
+              },
+              "lenderApplicationReference": {
+                "type": "string"
               }
             }
           },
@@ -1142,66 +1222,6 @@
                 "type": "boolean"
               }
             }
-          }
-        }
-      },
-      "drawDown": {
-        "title": "drawDown",
-        "type": "object",
-        "properties": {
-          "date": {
-            "type": "string",
-            "format": "date"
-          },
-          "amount": {
-            "type": "integer"
-          }
-        },
-        "required": [
-          "date",
-          "amount"
-        ]
-      },
-      "inLifeEvent": {
-        "title": "inLifeEvent",
-        "type": "object",
-        "x-tags": [
-          "Misc Models"
-        ],
-        "description": "represents the potential guarantee message response to an in life event change on a guarantee.",
-        "properties": {
-          "errors": {
-            "type": "array",
-            "items": {
-              "$ref": "../models/error.v1.json"
-            }
-          },
-          "links": {
-            "type": "object",
-            "properties": {
-              "self": {
-                "type": "string",
-                "format": "uri"
-              },
-              "guarantees": {
-                "type": "string",
-                "format": "uri"
-              },
-              "inLifeEvent": {
-                "type": "string",
-                "format": "uri"
-              },
-              "currentGuarantee": {
-                "type": "string",
-                "format": "uri"
-              }
-            }
-          },
-          "data": {
-            "$ref": "#/components/schemas/guaranteeData"
-          },
-          "meta": {
-            "$ref": "../models/individualMeta.v1.json"
           }
         }
       }
