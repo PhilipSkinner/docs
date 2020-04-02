@@ -2722,7 +2722,7 @@
         "title": "questionField",
         "type": "object",
         "properties": {
-          "fieldCode": {
+          "fieldName": {
             "type": "string"
           },
           "helpText": {
