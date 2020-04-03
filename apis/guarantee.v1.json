@@ -875,6 +875,9 @@
           "facilityDetails": {
             "type": "object",
             "properties": {
+              "facilityType": {
+                "type": "string"
+              },
               "assetFinanceDetails": {
                 "type": "object",
                 "properties": {
@@ -927,6 +930,20 @@
                   }
                 }
               },
+              "invoiceFinance": {
+                "type": "object",
+                "properties": {
+                  "grossBookDebt": {
+                    "type": "number"
+                  },
+                  "supportedLimit": {
+                    "type": "number"
+                  },
+                  "guaranteePrePaymentAmount": {
+                    "type": "number"
+                  }
+                }
+              },
               "interest": {
                 "type": "object",
                 "properties": {
@@ -951,8 +968,45 @@
               "repaymentType": {
                 "type": "string"
               },
-              "facilityType": {
+              "paymentFrequency": {
                 "type": "string"
+              },
+              "seasonalMonths": {
+                "type": "array",
+                "enum": [
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5",
+                  "6",
+                  "7",
+                  "8",
+                  "9",
+                  "10",
+                  "11",
+                  "12"
+                ],
+                "items": {
+                  "type": "integer"
+                }
+              },
+              "term": {
+                "type": "object",
+                "properties": {
+                  "years": {
+                    "type": "integer"
+                  },
+                  "months": {
+                    "type": "integer"
+                  },
+                  "totalMonths": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "frequencyPaymentAmount": {
+                "type": "number"
               },
               "repayments": {
                 "type": "array",
@@ -987,23 +1041,6 @@
                     "balance": {
                       "type": "number"
                     }
-                  }
-                }
-              },
-              "paymentFrequency": {
-                "type": "string"
-              },
-              "term": {
-                "type": "object",
-                "properties": {
-                  "years": {
-                    "type": "integer"
-                  },
-                  "months": {
-                    "type": "integer"
-                  },
-                  "totalMonths": {
-                    "type": "integer"
                   }
                 }
               }

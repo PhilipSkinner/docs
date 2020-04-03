@@ -2253,9 +2253,6 @@
                   "Revolving Credit"
                 ]
               },
-              "assetFinance": {
-                "$ref": "#/components/schemas/assetFinance"
-              },
               "facilityCalculator": {
                 "type": "string",
                 "enum": [
@@ -2725,27 +2722,6 @@
           },
           "responseLabel": {
             "type": "string"
-          }
-        }
-      },
-      "assetFinance": {
-        "title": "assetFinance",
-        "type": "object",
-        "properties": {
-          "baloonAmountAllowed": {
-            "type": "boolean"
-          },
-          "agreementTypes": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "assetCategory": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
           }
         }
       },
