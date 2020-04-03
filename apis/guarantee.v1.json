@@ -911,7 +911,7 @@
                       "coverPercent": {
                         "type": "number"
                       },
-                      "totalGuaranteesFacilityAmount": {
+                      "totalGuaranteeFacilityAmount": {
                         "type": "number"
                       }
                     },
@@ -927,6 +927,9 @@
                   },
                   "agreementType": {
                     "type": "string"
+                  },
+                  "netYieldPercent": {
+                    "type": "number"
                   }
                 }
               },
