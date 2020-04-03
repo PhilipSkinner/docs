@@ -2245,26 +2245,31 @@
             "type": "object",
             "properties": {
               "facilityType": {
-                "type": "string",
-                "enum": [
-                  "Asset Finance",
-                  "Invoice Finance",
-                  "Term Loan",
-                  "Revolving Credit"
-                ]
-              },
-              "facilityCalculator": {
-                "type": "string",
-                "enum": [
-                  "Include Interest",
-                  "Exclude Interest"
-                ]
-              },
-              "lenderDrawDownContribution": {
                 "type": "object",
                 "properties": {
-                  "IAUR-Percent-Applies": {
-                    "type": "boolean"
+                  "name": {
+                    "type": "string",
+                    "enum": [
+                      "Asset Finance",
+                      "Invoice Finance",
+                      "Term Loan",
+                      "Revolving Credit"
+                    ]
+                  },
+                  "lenderDrawDownContribution": {
+                    "type": "object",
+                    "properties": {
+                      "IAUR-Percent-Applies": {
+                        "type": "boolean"
+                      }
+                    }
+                  },
+                  "facilityRepaymentCalculator": {
+                    "type": "string",
+                    "enum": [
+                      "Include Interest",
+                      "Exclude Interest"
+                    ]
                   }
                 }
               },

@@ -947,6 +947,20 @@
                   }
                 }
               },
+              "revolvingCredit": {
+                "type": "object",
+                "properties": {
+                  "overDraft": {
+                    "type": "boolean"
+                  },
+                  "existingFacilityLimit": {
+                    "type": "number"
+                  },
+                  "efgValue": {
+                    "type": "number"
+                  }
+                }
+              },
               "interest": {
                 "type": "object",
                 "properties": {
