@@ -474,7 +474,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/ruleSet"
+                        "$ref": "#/components/schemas/ruleSetData"
                       }
                     },
                     "links": {
@@ -1756,13 +1756,21 @@
         ]
       }
     },
-    "/programmes/{programmeId}/principalPurposes": {
+    "/programmes/{programmeId}/assetcategories/{assetcategoryId}": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
           "name": "programmeId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "assetcategoryId",
           "in": "path",
           "required": true
         }
@@ -1776,13 +1784,33 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "$ref": "#/components/schemas/assetCategory"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
                   "type": "object",
                   "properties": {
-                    "meta": {
-                      "type": "string"
-                    },
                     "data": {
-                      "type": "string"
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "attributes": {
+                          "type": "object",
+                          "properties": {
+                            "description": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
                     }
                   }
                 }
@@ -1790,86 +1818,8 @@
             }
           }
         },
-        "operationId": "get-programmes-programmeId-principalPurposes",
-        "description": "Get principal purposes for a programme",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ]
-      },
-      "post": {
-        "summary": "Post principal purpose",
-        "operationId": "post-programmes-programmeId-principalPurposes",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "description": "add a new principal purpose",
-        "tags": [
-          "Principal Purpose"
-        ]
-      }
-    },
-    "/programmes/{programmeId}/principlePurpose/{principalPurposeId}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "programmeId",
-          "in": "path",
-          "required": true
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "principalPurposeId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "GET Principal Purpose",
-        "tags": [],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/principalPurpose"
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        },
-        "operationId": "get-programmes-programmeId-principlePurpose-principalPurposeId",
-        "description": "Get all principle purpose"
-      },
-      "delete": {
-        "summary": "",
-        "operationId": "delete-programmes-programmeId-principlePurpose-principalPurposeId",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        },
-        "description": "Delete Principal Purpose",
-        "tags": [
-          "Principal Purpose"
-        ],
+        "operationId": "get-programmes-programmeId-assetcategories-assetcategoryId",
+        "description": "Get Asset Category",
         "security": [
           {
             "Bearer token": []
@@ -1877,7 +1827,7 @@
         ]
       }
     },
-    "/programmes/{programmeId}/questions": {
+    "/programme/{programmeId}/assetcategories": {
       "parameters": [
         {
           "schema": {
@@ -1891,7 +1841,7 @@
       "get": {
         "summary": "Your GET endpoint",
         "tags": [
-          "Questions"
+          "Asset Category"
         ],
         "responses": {
           "200": {
@@ -1907,7 +1857,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/questionData"
+                        "$ref": ""
                       }
                     },
                     "links": {
@@ -1919,8 +1869,8 @@
             }
           }
         },
-        "operationId": "get-programmes-programmeId-questions",
-        "description": "Get all questions",
+        "operationId": "get-programme-programmeId-assetcategories",
+        "description": "get asset categories",
         "security": [
           {
             "Bearer token": []
@@ -1928,17 +1878,17 @@
         ]
       },
       "post": {
-        "summary": "POST Question",
-        "operationId": "post-programmes-programmeId-questions",
+        "summary": "POST AssetCategory",
+        "operationId": "post-programme-programmeId-assetcategories",
         "responses": {
           "200": {
             "description": "OK"
           }
         },
-        "description": "add new question",
         "tags": [
-          "Questions"
-        ]
+          "Asset Category"
+        ],
+        "description": "Add new asset Category"
       }
     },
     "/programmes/{programmeId}/questions/{questionId}": {
@@ -2030,7 +1980,7 @@
         "description": "Delete question"
       }
     },
-    "/programme/{programmeId}/assetcategories": {
+    "/programmes/{programmeId}/questions": {
       "parameters": [
         {
           "schema": {
@@ -2044,7 +1994,7 @@
       "get": {
         "summary": "Your GET endpoint",
         "tags": [
-          "Asset Category"
+          "Questions"
         ],
         "responses": {
           "200": {
@@ -2060,7 +2010,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": ""
+                        "$ref": "#/components/schemas/questionData"
                       }
                     },
                     "links": {
@@ -2072,8 +2022,8 @@
             }
           }
         },
-        "operationId": "get-programme-programmeId-assetcategories",
-        "description": "get asset categories",
+        "operationId": "get-programmes-programmeId-questions",
+        "description": "Get all questions",
         "security": [
           {
             "Bearer token": []
@@ -2081,20 +2031,20 @@
         ]
       },
       "post": {
-        "summary": "POST AssetCategory",
-        "operationId": "post-programme-programmeId-assetcategories",
+        "summary": "POST Question",
+        "operationId": "post-programmes-programmeId-questions",
         "responses": {
           "200": {
             "description": "OK"
           }
         },
+        "description": "add new question",
         "tags": [
-          "Asset Category"
-        ],
-        "description": "Add new asset Category"
+          "Questions"
+        ]
       }
     },
-    "/programmes/{programmeId}/assetcategories/{assetcategoryId}": {
+    "/programmes/{programmeId}/principlePurpose/{principalPurposeId}": {
       "parameters": [
         {
           "schema": {
@@ -2108,7 +2058,64 @@
           "schema": {
             "type": "string"
           },
-          "name": "assetcategoryId",
+          "name": "principalPurposeId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "GET Principal Purpose",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/principalPurpose"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "operationId": "get-programmes-programmeId-principlePurpose-principalPurposeId",
+        "description": "Get all principle purpose"
+      },
+      "delete": {
+        "summary": "",
+        "operationId": "delete-programmes-programmeId-principlePurpose-principalPurposeId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "description": "Delete Principal Purpose",
+        "tags": [
+          "Principal Purpose"
+        ],
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ]
+      }
+    },
+    "/programmes/{programmeId}/principalPurposes": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "programmeId",
           "in": "path",
           "required": true
         }
@@ -2122,33 +2129,13 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/assetCategory"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
                   "type": "object",
                   "properties": {
+                    "meta": {
+                      "type": "string"
+                    },
                     "data": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string"
-                        },
-                        "attributes": {
-                          "type": "object",
-                          "properties": {
-                            "description": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
+                      "type": "string"
                     }
                   }
                 }
@@ -2156,56 +2143,31 @@
             }
           }
         },
-        "operationId": "get-programmes-programmeId-assetcategories-assetcategoryId",
-        "description": "Get Asset Category",
+        "operationId": "get-programmes-programmeId-principalPurposes",
+        "description": "Get principal purposes for a programme",
         "security": [
           {
             "Bearer token": []
           }
+        ]
+      },
+      "post": {
+        "summary": "Post principal purpose",
+        "operationId": "post-programmes-programmeId-principalPurposes",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "add a new principal purpose",
+        "tags": [
+          "Principal Purpose"
         ]
       }
     }
   },
   "components": {
     "schemas": {
-      "productData": {
-        "title": "productData",
-        "type": "object",
-        "x-tags": [
-          "Misc Models"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "product"
-            ]
-          },
-          "etag": {
-            "type": "string"
-          },
-          "attributes": {
-            "$ref": "#/components/schemas/productAttributes"
-          },
-          "links": {
-            "type": "object",
-            "properties": {
-              "self": {
-                "type": "string",
-                "format": "uuid"
-              },
-              "guaranteesResource": {
-                "type": "string",
-                "format": "uuid"
-              }
-            }
-          }
-        }
-      },
       "productAttributes": {
         "title": "productAttributes",
         "type": "object",
@@ -2499,36 +2461,10 @@
             }
           }
         },
-        "description": "",
         "x-examples": {
           "example-1": {}
-        }
-      },
-      "sicCodeData": {
-        "title": "sicCodeResponse",
-        "type": "object",
-        "x-tags": [
-          "Misc Models"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "minLength": 6,
-            "maxLength": 6
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "sicCode"
-            ]
-          },
-          "etag": {
-            "type": "string"
-          },
-          "attributes": {
-            "$ref": "#/components/schemas/sicCodeAttributes"
-          }
-        }
+        },
+        "description": ""
       },
       "sicCodeAttributes": {
         "title": "sicCodeAttributes",
@@ -2612,52 +2548,6 @@
           }
         }
       },
-      "programmeData": {
-        "title": "programmeResponse",
-        "type": "object",
-        "x-tags": [
-          "Misc Models"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "programme"
-            ]
-          },
-          "etag": {
-            "type": "string"
-          },
-          "attributes": {
-            "$ref": "#/components/schemas/programmeAttributes"
-          },
-          "relationships": {
-            "type": "object",
-            "properties": {
-              "currentRuleSet": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "type": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
       "programmeAttributes": {
         "title": "programmeAttributes",
         "type": "object",
@@ -2692,29 +2582,29 @@
         "title": "questionField",
         "type": "object",
         "properties": {
-          "label": {
-            "type": "string"
-          },
-          "fieldName": {
-            "type": "string"
-          },
-          "fieldText": {
-            "type": "string"
-          },
           "helpText": {
             "type": "string"
           },
           "fieldType": {
             "type": "string"
           },
-          "required": {
-            "type": "boolean"
-          },
           "responseOptionValues": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/questionResponseOption"
             }
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "label": {
+            "type": "string"
+          },
+          "fieldText": {
+            "type": "string"
+          },
+          "fieldName": {
+            "type": "string"
           }
         }
       },
@@ -2761,9 +2651,6 @@
       "ruleSetAttributes": {
         "title": "ruleSetAttributes",
         "type": "object",
-        "x-tags": [
-          "attributes"
-        ],
         "properties": {
           "IAURPercent": {
             "type": "number"
@@ -2820,20 +2707,6 @@
               "$ref": "#/components/schemas/sicCodeRule"
             }
           },
-          "stateAid": {
-            "type": "object",
-            "properties": {
-              "stateAidPeriodInMonths": {
-                "type": "integer"
-              },
-              "stateAidRules": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/stateAidRule"
-                }
-              }
-            }
-          },
           "principalPurposeRules": {
             "type": "array",
             "items": {
@@ -2871,8 +2744,41 @@
           },
           "activeRange": {
             "$ref": "#/components/schemas/activityRange"
+          },
+          "stateAid": {
+            "type": "object",
+            "properties": {
+              "stateAidPeriodInMonths": {
+                "type": "integer"
+              },
+              "stateAidRules": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/stateAidRule"
+                }
+              }
+            }
           }
-        }
+        },
+        "x-tags": [
+          "attributes"
+        ]
+      },
+      "principalPurpose": {
+        "title": "principalPurpose",
+        "type": "object",
+        "properties": {
+          "links": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/principalPurposeData"
+          },
+          "meta": {
+            "type": "string"
+          }
+        },
+        "description": ""
       },
       "stateAidRule": {
         "title": "stateAidRule",
@@ -2947,28 +2853,6 @@
           }
         }
       },
-      "ruleSetData": {
-        "title": "ruleSetData",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "ruleSet"
-            ]
-          },
-          "etag": {
-            "type": "string"
-          },
-          "attributes": {
-            "$ref": "#/components/schemas/ruleSetAttributes"
-          }
-        }
-      },
       "documentType": {
         "title": "documentType",
         "type": "object",
@@ -3000,58 +2884,59 @@
         "title": "principalPurposeRule",
         "type": "object",
         "properties": {
+          "drawDownPercentLimitPerFiscalYear": {
+            "type": "number"
+          },
           "principalPurposes": {
             "type": "array",
             "items": {
               "type": "string"
             }
-          },
-          "drawDownPercentLimitPerFiscalYear": {
-            "type": "number"
           }
         }
       },
-      "principalPurpose": {
-        "title": "principalPurpose",
+      "assetCategoryAttributes": {
+        "title": "assetCategoryAttributes",
         "type": "object",
         "properties": {
-          "meta": {
-            "type": "string"
-          },
-          "data": {
-            "$ref": "#/components/schemas/principalPurposeData"
-          },
-          "links": {
+          "description": {
             "type": "string"
           }
-        },
-        "description": ""
+        }
       },
-      "principalPurposeData": {
-        "title": "principalPurposeData",
+      "assetCategoryData": {
+        "title": "assetCategoryData",
         "type": "object",
         "properties": {
           "id": {
             "type": "string"
           },
           "attributes": {
-            "$ref": "#/components/schemas/principalPurposeAttributes"
+            "$ref": "#/components/schemas/assetCategoryAttributes"
           },
           "type": {
-            "type": "string",
-            "enum": [
-              "principalPurpose"
-            ]
+            "type": "string"
           }
         }
       },
-      "principalPurposeAttributes": {
-        "title": "principalPurposeAttributes",
+      "assetCategory": {
+        "title": "assetCategory",
         "type": "object",
         "properties": {
-          "description": {
-            "type": "string",
-            "minLength": 2
+          "data": {
+            "$ref": "#/components/schemas/assetCategoryData"
+          }
+        }
+      },
+      "questionData": {
+        "title": "questionData",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/questionField"
           }
         }
       },
@@ -3074,48 +2959,163 @@
           }
         }
       },
-      "questionData": {
-        "title": "questionData",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "attributes": {
-            "$ref": "#/components/schemas/questionField"
-          }
-        }
-      },
-      "assetCategory": {
-        "title": "assetCategory",
-        "type": "object",
-        "properties": {
-          "data": {
-            "$ref": "#/components/schemas/assetCategoryData"
-          }
-        }
-      },
-      "assetCategoryData": {
-        "title": "assetCategoryData",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "attributes": {
-            "$ref": "#/components/schemas/assetCategoryAttributes"
-          },
-          "type": {
-            "type": "string"
-          }
-        }
-      },
-      "assetCategoryAttributes": {
-        "title": "assetCategoryAttributes",
+      "principalPurposeAttributes": {
+        "title": "principalPurposeAttributes",
         "type": "object",
         "properties": {
           "description": {
+            "type": "string",
+            "minLength": 2
+          }
+        }
+      },
+      "principalPurposeData": {
+        "title": "principalPurposeData",
+        "type": "object",
+        "properties": {
+          "id": {
             "type": "string"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/principalPurposeAttributes"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "principalPurpose"
+            ]
+          }
+        }
+      },
+      "ruleSetData": {
+        "title": "ruleSetData",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "ruleSet"
+            ]
+          },
+          "etag": {
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/ruleSetAttributes"
+          }
+        }
+      },
+      "programmeData": {
+        "title": "programmeResponse",
+        "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "programme"
+            ]
+          },
+          "etag": {
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/programmeAttributes"
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "currentRuleSet": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "sicCodeData": {
+        "title": "sicCodeResponse",
+        "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 6,
+            "maxLength": 6
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "sicCode"
+            ]
+          },
+          "etag": {
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/sicCodeAttributes"
+          }
+        }
+      },
+      "productData": {
+        "title": "productData",
+        "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "product"
+            ]
+          },
+          "etag": {
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/productAttributes"
+          },
+          "links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "guaranteesResource": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
           }
         }
       }
