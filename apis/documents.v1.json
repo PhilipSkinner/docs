@@ -247,7 +247,7 @@
         }
       ],
       "get": {
-        "summary": "Get a single envelope document",
+        "summary": "Get a single document",
         "tags": [
           "Documents"
         ],
@@ -658,7 +658,7 @@
         }
       ],
       "get": {
-        "summary": "Fetch a Document request",
+        "summary": "Get a Document request",
         "tags": [
           "Envelopes"
         ],
@@ -732,8 +732,8 @@
         "description": "Fetch a single document request. This request also returns all documents referenced in the request within the included section.\n\nRequires the role document_reader to access."
       },
       "delete": {
-        "summary": "Delete an envelope",
-        "operationId": "delete-envelope-envelopeId",
+        "summary": "Delete a document request",
+        "operationId": "delete-documentRequest-documentRequestId",
         "responses": {
           "204": {
             "description": "No Content"
@@ -856,7 +856,7 @@
         }
       ],
       "get": {
-        "summary": "Your GET endpoint",
+        "summary": "GET documentType",
         "tags": [],
         "responses": {
           "200": {
@@ -897,14 +897,6 @@
           "links": {
             "type": "object",
             "properties": {
-              "self": {
-                "type": "string",
-                "format": "uri"
-              },
-              "envelope": {
-                "type": "string",
-                "format": "uri"
-              },
               "documents": {
                 "type": "string",
                 "format": "uri"
@@ -919,6 +911,7 @@
         "x-tags": [
           "Misc Models"
         ],
+        "description": "",
         "properties": {
           "id": {
             "type": "string",
@@ -935,9 +928,25 @@
           },
           "attributes": {
             "$ref": "#/components/schemas/documentAttributes"
+          },
+          "links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "type": "string",
+                "format": "uri"
+              },
+              "guaranteeDocuments": {
+                "type": "string",
+                "format": "uri"
+              },
+              "lenderDocuments": {
+                "type": "string",
+                "format": "uri"
+              }
+            }
           }
-        },
-        "description": ""
+        }
       },
       "documentAttributes": {
         "title": "documentAttributes",
@@ -965,9 +974,6 @@
             "format": "date-time",
             "description": "Not to be sent on POST/PUT/PATCH."
           },
-          "documentType": {
-            "type": "string"
-          },
           "lenderRef": {
             "type": "string"
           },
@@ -981,10 +987,6 @@
               "available",
               "archived"
             ]
-          },
-          "blobUrl": {
-            "type": "string",
-            "format": "uri"
           },
           "fileDetails": {
             "type": "object",
@@ -1004,6 +1006,10 @@
               "size": {
                 "type": "integer",
                 "description": "Size of the file in bytes."
+              },
+              "blobUrl": {
+                "type": "string",
+                "format": "uri"
               }
             }
           },
@@ -1034,7 +1040,7 @@
                 "type": "string",
                 "format": "uri"
               },
-              "envelopes": {
+              "documentRequests": {
                 "type": "string",
                 "format": "uri"
               },
@@ -1053,7 +1059,7 @@
         }
       },
       "documentRequestData": {
-        "title": "envelopeResponse",
+        "title": "documentRequestData",
         "type": "object",
         "x-tags": [
           "Misc Models"
@@ -1078,7 +1084,7 @@
         }
       },
       "documentRequestAttributes": {
-        "title": "envelopeAttributes",
+        "title": "documentRequestAttributes",
         "type": "object",
         "x-tags": [
           "Envelopes"
@@ -1145,9 +1151,6 @@
           "type": {
             "type": "string"
           },
-          "etag": {
-            "type": "string"
-          },
           "attributes": {
             "$ref": "#/components/schemas/documentTypeAttributes"
           }
@@ -1170,6 +1173,24 @@
           "updatedDate": {
             "type": "string",
             "format": "date-time"
+          },
+          "name": {
+            "type": "string"
+          },
+          "templateSourceUri": {
+            "type": "string"
+          },
+          "uriReferenceOnly": {
+            "type": "boolean"
+          },
+          "targetMimeType": {
+            "type": "string"
+          },
+          "targetFileExt": {
+            "type": "string"
+          },
+          "documentQueueName": {
+            "type": "string"
           }
         }
       }

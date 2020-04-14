@@ -35,7 +35,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/guaranteeResponse"
+                        "$ref": "#/components/schemas/guaranteeData"
                       }
                     },
                     "links": {
@@ -108,7 +108,7 @@
       },
       "post": {
         "summary": "Create a guarantee",
-        "operationId": "post-lender-lenderId-guarantees",
+        "operationId": "post-guarantees",
         "responses": {
           "201": {
             "description": "Created",
@@ -565,6 +565,55 @@
           }
         ]
       }
+    },
+    "/guarantee/{guaranteeId}/inLifeEvents": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "guaranteeId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "In Life Events",
+        "operationId": "post-guarantee-guaranteeId-inLifeEvents",
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inLifeEvent"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "412": {
+            "description": "Precondition Failed"
+          },
+          "422": {
+            "description": "Unprocessable Entity (WebDAV)"
+          }
+        },
+        "tags": [
+          "Guarantees"
+        ],
+        "description": "This endpoint allows the client to try changes before comitting them to guarantee. Changes will be validated and returned with any errors. Clients should not comit changes to the guarantee resource until the in life event response returns no errors. In life events are not currently saved.",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -580,18 +629,17 @@
             "$ref": "../models/individualMeta.v1.json"
           },
           "data": {
-            "$ref": "#/components/schemas/guaranteeResponse"
+            "$ref": "#/components/schemas/guaranteeData"
           },
           "links": {
             "type": "object",
             "properties": {
-              "self": {
-                "type": "string",
-                "format": "uri"
-              },
               "guarantees": {
                 "type": "string",
                 "format": "uri"
+              },
+              "products": {
+                "type": "string"
               }
             }
           },
@@ -603,8 +651,8 @@
           }
         }
       },
-      "guaranteeResponse": {
-        "title": "guaranteeResponse",
+      "guaranteeData": {
+        "title": "guaranteeData",
         "type": "object",
         "x-tags": [
           "Misc Models"
@@ -614,17 +662,18 @@
             "type": "string",
             "format": "uuid"
           },
-          "type": {
-            "type": "string",
-            "enum": [
-              "guarantee"
-            ]
-          },
-          "etag": {
-            "type": "string"
-          },
-          "attributes": {
-            "$ref": "#/components/schemas/guaranteeAttributes"
+          "links": {
+            "type": "object",
+            "properties": {
+              "inLifeEvents": {
+                "type": "string",
+                "format": "uri"
+              },
+              "self": {
+                "type": "string",
+                "format": "uri"
+              }
+            }
           },
           "relationships": {
             "type": "object",
@@ -636,7 +685,7 @@
                   "links": {
                     "type": "object",
                     "properties": {
-                      "\"self\"": {
+                      "self": {
                         "type": "string",
                         "format": "uri"
                       }
@@ -661,8 +710,139 @@
                     }
                   }
                 }
+              },
+              "productUsed": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "product": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    }
+                  }
+                }
+              },
+              "ruleSetUsed": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "ruleSet": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    }
+                  }
+                }
+              },
+              "lender": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    }
+                  }
+                }
+              },
+              "directDebitMandate": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "mandate": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    }
+                  }
+                }
               }
             }
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/guaranteeAttributes"
+          },
+          "etag": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "guarantee"
+            ]
+          }
+        }
+      },
+      "drawDown": {
+        "title": "drawDown",
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "amount": {
+            "type": "integer"
+          },
+          "monthsFromStart": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "date",
+          "amount"
+        ]
+      },
+      "inLifeEvent": {
+        "title": "inLifeEvent",
+        "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
+        "description": "represents the potential guarantee message response to an in life event change on a guarantee.",
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "../models/error.v1.json"
+            }
+          },
+          "links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "type": "string",
+                "format": "uri"
+              },
+              "guarantees": {
+                "type": "string",
+                "format": "uri"
+              },
+              "inLifeEvent": {
+                "type": "string",
+                "format": "uri"
+              },
+              "currentGuarantee": {
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/guaranteeData"
+          },
+          "meta": {
+            "$ref": "../models/individualMeta.v1.json"
           }
         }
       },
@@ -695,6 +875,9 @@
           "facilityDetails": {
             "type": "object",
             "properties": {
+              "facilityType": {
+                "type": "string"
+              },
               "assetFinanceDetails": {
                 "type": "object",
                 "properties": {
@@ -728,7 +911,7 @@
                       "coverPercent": {
                         "type": "number"
                       },
-                      "totalGuaranteesFacilityAmount": {
+                      "totalGuaranteeFacilityAmount": {
                         "type": "number"
                       }
                     },
@@ -744,13 +927,44 @@
                   },
                   "agreementType": {
                     "type": "string"
+                  },
+                  "netYieldPercent": {
+                    "type": "number"
+                  }
+                }
+              },
+              "invoiceFinance": {
+                "type": "object",
+                "properties": {
+                  "grossBookDebt": {
+                    "type": "number"
+                  },
+                  "supportedLimit": {
+                    "type": "number"
+                  },
+                  "guaranteePrePaymentAmount": {
+                    "type": "number"
+                  }
+                }
+              },
+              "revolvingCredit": {
+                "type": "object",
+                "properties": {
+                  "overDraft": {
+                    "type": "boolean"
+                  },
+                  "existingFacilityLimit": {
+                    "type": "number"
+                  },
+                  "efgValue": {
+                    "type": "number"
                   }
                 }
               },
               "interest": {
                 "type": "object",
                 "properties": {
-                  "type": {
+                  "interestType": {
                     "type": "string",
                     "enum": [
                       "fixed",
@@ -771,8 +985,45 @@
               "repaymentType": {
                 "type": "string"
               },
-              "facilityType": {
+              "paymentFrequency": {
                 "type": "string"
+              },
+              "seasonalMonths": {
+                "type": "array",
+                "enum": [
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5",
+                  "6",
+                  "7",
+                  "8",
+                  "9",
+                  "10",
+                  "11",
+                  "12"
+                ],
+                "items": {
+                  "type": "integer"
+                }
+              },
+              "term": {
+                "type": "object",
+                "properties": {
+                  "years": {
+                    "type": "integer"
+                  },
+                  "months": {
+                    "type": "integer"
+                  },
+                  "totalMonths": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "frequencyPaymentAmount": {
+                "type": "number"
               },
               "repayments": {
                 "type": "array",
@@ -815,13 +1066,16 @@
           "lenderInformation": {
             "type": "object",
             "properties": {
-              "lenderId": {
-                "$ref": "../models/objectPointer.v1.json"
+              "lenderRef": {
+                "type": "string"
               },
               "sortCode": {
                 "type": "number"
               },
               "name": {
+                "type": "string"
+              },
+              "lenderApplicationReference": {
                 "type": "string"
               }
             }
@@ -855,7 +1109,7 @@
               "companyTurnover": {
                 "type": "number"
               },
-              "turnoverAboveFiftyPercent": {
+              "tradingActivityTurnoverGreaterThanAllowed": {
                 "type": "boolean"
               },
               "tradingStartDate": {
@@ -864,12 +1118,6 @@
               },
               "tradingPostcode": {
                 "type": "string"
-              },
-              "bankAccount": {
-                "type": "integer"
-              },
-              "bankSortCode": {
-                "type": "integer"
               }
             }
           },
@@ -897,6 +1145,9 @@
                 "endDate": {
                   "type": "string",
                   "format": "date"
+                },
+                "numberOfMonths": {
+                  "type": "integer"
                 }
               }
             }
@@ -907,7 +1158,7 @@
               "calculatedAmount": {
                 "type": "number"
               },
-              "applicantMinimusStateAidPastThreeYears": {
+              "underStateAidLimit": {
                 "type": "boolean"
               }
             }
@@ -992,16 +1243,6 @@
               }
             }
           },
-          "documents": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          "feePaymentSchedule": {
-            "$ref": "../models/objectPointer.v1.json"
-          },
           "dataProtection": {
             "type": "object",
             "properties": {
@@ -1024,7 +1265,7 @@
           "applicationComplete": {
             "type": "object",
             "properties": {
-              "CompletedDate": {
+              "completedDate": {
                 "type": "string",
                 "format": "date-time"
               }
@@ -1045,33 +1286,16 @@
               "guaranteedDate": {
                 "type": "string",
                 "format": "date-time"
+              },
+              "signedInformationDeclaration": {
+                "type": "boolean"
+              },
+              "guaranteeFeePaymentCanBeMade": {
+                "type": "boolean"
               }
             }
-          },
-          "ruleSet": {
-            "$ref": "../models/objectPointer.v1.json"
-          },
-          "product": {
-            "$ref": "../models/objectPointer.v1.json"
           }
         }
-      },
-      "drawDown": {
-        "title": "drawDown",
-        "type": "object",
-        "properties": {
-          "date": {
-            "type": "string",
-            "format": "date"
-          },
-          "amount": {
-            "type": "integer"
-          }
-        },
-        "required": [
-          "date",
-          "amount"
-        ]
       }
     },
     "securitySchemes": {
