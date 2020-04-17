@@ -2819,9 +2819,14 @@
       "lenderRule": {
         "title": "lenderRule",
         "type": "object",
+        "description": "",
         "properties": {
-          "lenderType": {
-            "type": "string"
+          "lendingCategory": {
+            "type": "string",
+            "enum": [
+              "small",
+              "large"
+            ]
           },
           "claimLimit-Percent-Of-Drawdown": {
             "type": "number"
