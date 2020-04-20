@@ -102,7 +102,7 @@
             "description": "Supports multiple values."
           }
         ],
-        "description": "Fetch a paginated list of all products.\n\nRequires the products_reader role to access."
+        "description": "Fetch a paginated list of all products.\n\nRequires the products_reader permission to access."
       },
       "post": {
         "summary": "Create a product",
@@ -173,7 +173,7 @@
           },
           "description": ""
         },
-        "description": "Create a new product.\n\nRequires the products_writer role to access.",
+        "description": "Create a new product.\n\nRequires the products_writer permission to access.",
         "tags": [
           "Products"
         ]
@@ -269,7 +269,7 @@
             "name": "rulesetId"
           }
         ],
-        "description": "Fetches a single product, including its currently active set of rules.\n\nRequires the product_reader role to access."
+        "description": "Fetches a single product, including its currently active set of rules.\n\nRequires the product_reader permission to access."
       },
       "put": {
         "summary": "Update a product",
@@ -377,7 +377,7 @@
         "tags": [
           "Products"
         ],
-        "description": "Updates a products definition.\n\nRequires the products_writer role to access."
+        "description": "Updates a products definition.\n\nRequires the products_writer permission to access."
       },
       "delete": {
         "summary": "Delete a product",
@@ -448,7 +448,7 @@
             "name": "If-match"
           }
         ],
-        "description": "Deletes a product from the system.\n\nRequires the product_remover role to access.",
+        "description": "Deletes a product from the system.\n\nRequires the product_remover permission to access.",
         "tags": [
           "Products"
         ]
@@ -512,7 +512,7 @@
             "Bearer token": []
           }
         ],
-        "description": "Get a paginated list of all rule sets in the system for a programme. Can use a date to search for the active rule sets.\n\nRequires the product_reader role to access.",
+        "description": "Get a paginated list of all rule sets in the system for a programme. Can use a date to search for the active rule sets.\n\nRequires the product_reader permission to access.",
         "parameters": [
           {
             "schema": {
@@ -622,7 +622,7 @@
         "tags": [
           "Programmes"
         ],
-        "description": "Create a new rule set.\n\nRequires the product_writer role to access."
+        "description": "Create a new rule set.\n\nRequires the product_writer permission to access."
       },
       "parameters": [
         {
@@ -655,7 +655,7 @@
         }
       ],
       "get": {
-        "summary": "Fetch a programme rule set",
+        "summary": "Get a programme rule set",
         "tags": [
           "Programmes"
         ],
@@ -726,7 +726,7 @@
             "name": "If-match"
           }
         ],
-        "description": "Fetch a single rule set from a programme.\n\nRequires the product_reader role to access."
+        "description": "Get a single rule set for a programme.\n\nRequires the product_reader permission to access."
       },
       "put": {
         "summary": "Update a programme rule",
@@ -1558,7 +1558,7 @@
           }
         },
         "operationId": "get-programmes-programmeId",
-        "description": "Get a single programme.\n\nRequires the products_reader role to access.",
+        "description": "Get a single programme.\n\nRequires the products_reader permission to access.",
         "security": [
           {
             "Bearer token": []
@@ -1776,7 +1776,7 @@
         }
       ],
       "get": {
-        "summary": "Your GET endpoint",
+        "summary": "GET Asset Category",
         "tags": [],
         "responses": {
           "200": {
@@ -1839,7 +1839,7 @@
         }
       ],
       "get": {
-        "summary": "Your GET endpoint",
+        "summary": "GET asset categories",
         "tags": [
           "Asset Category"
         ],
@@ -1878,7 +1878,7 @@
         ]
       },
       "post": {
-        "summary": "POST AssetCategory",
+        "summary": "POST asset category",
         "operationId": "post-programme-programmeId-assetcategories",
         "responses": {
           "200": {
@@ -1911,7 +1911,7 @@
         }
       ],
       "get": {
-        "summary": "Your GET endpoint",
+        "summary": "GET Question",
         "tags": [
           "Questions"
         ],
@@ -2088,7 +2088,7 @@
         "description": "Get all principle purpose"
       },
       "delete": {
-        "summary": "",
+        "summary": "DELETE Principal Purpose",
         "operationId": "delete-programmes-programmeId-principlePurpose-principalPurposeId",
         "responses": {
           "200": {
@@ -2121,7 +2121,7 @@
         }
       ],
       "get": {
-        "summary": "Your GET endpoint",
+        "summary": "GET All Principal Purposes",
         "tags": [],
         "responses": {
           "200": {
@@ -2152,7 +2152,7 @@
         ]
       },
       "post": {
-        "summary": "Post principal purpose",
+        "summary": "Create new principal purpose",
         "operationId": "post-programmes-programmeId-principalPurposes",
         "responses": {
           "200": {
@@ -2651,6 +2651,9 @@
       "ruleSetAttributes": {
         "title": "ruleSetAttributes",
         "type": "object",
+        "x-tags": [
+          "attributes"
+        ],
         "properties": {
           "IAURPercent": {
             "type": "number"
@@ -2662,6 +2665,12 @@
             "type": "number"
           },
           "annualFeePercent": {
+            "type": "number"
+          },
+          "minFacilityAmount": {
+            "type": "number"
+          },
+          "maxFacilityAmount": {
             "type": "number"
           },
           "borrowerDetailRules": {
@@ -2759,10 +2768,7 @@
               }
             }
           }
-        },
-        "x-tags": [
-          "attributes"
-        ]
+        }
       },
       "principalPurpose": {
         "title": "principalPurpose",
@@ -2813,9 +2819,14 @@
       "lenderRule": {
         "title": "lenderRule",
         "type": "object",
+        "description": "",
         "properties": {
-          "lenderType": {
-            "type": "string"
+          "lendingCategory": {
+            "type": "string",
+            "enum": [
+              "small",
+              "large"
+            ]
           },
           "claimLimit-Percent-Of-Drawdown": {
             "type": "number"

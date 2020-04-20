@@ -1554,7 +1554,8 @@
         "summary": "Your GET endpoint",
         "tags": [],
         "responses": {},
-        "operationId": "get-lenders-lenderId"
+        "operationId": "get-lenders-lenderId",
+        "description": ""
       },
       "put": {
         "summary": "",

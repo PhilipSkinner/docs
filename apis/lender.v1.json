@@ -1349,484 +1349,6 @@
         ]
       }
     },
-    "/types/{typeId}/bandings": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "typeId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Get lender type bandings",
-        "tags": [
-          "Lender Types"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "meta": {
-                      "$ref": "../models/paginationMeta.v1.json"
-                    },
-                    "links": {
-                      "$ref": "../models/paginationLinks.v1.json"
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/bandingData"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-type-typeId-bandings",
-        "description": "Fetch a paginated list of all bandings for a lender type.\n\nRequires the lender_reader role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "integer"
-            },
-            "in": "query",
-            "name": "page"
-          },
-          {
-            "schema": {
-              "type": "integer"
-            },
-            "in": "query",
-            "name": "perpage",
-            "description": "Set to -1 to return all bandings."
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "date"
-          }
-        ]
-      },
-      "post": {
-        "summary": "Create a lender type banding",
-        "operationId": "post-type-typeId-bandings",
-        "responses": {
-          "201": {
-            "description": "Created",
-            "headers": {
-              "Location": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Etag": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/banding"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Unprocessable Entity",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Lender Types"
-        ],
-        "description": "Creates a new lender type banding.\n\nRequires the lender_writer role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "X-idempotency-key"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/bandingAttributes"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/types/{typeId}/bandings/{bandingId}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "typeId",
-          "in": "path",
-          "required": true
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "bandingId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Fetch a banding for a lender type",
-        "tags": [
-          "Lender Types"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/banding"
-                }
-              }
-            }
-          },
-          "304": {
-            "description": "Not Modified"
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-type-typeId-bandings-bandingId",
-        "description": "Fetch a single banding for a lender type.\n\nRequires the lender_reader role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match"
-          }
-        ]
-      },
-      "put": {
-        "summary": "Update a lender type banding",
-        "operationId": "put-type-typeId-bandings-bandingId",
-        "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Etag": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/banding"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Unprocessable Entity",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Lender Types"
-        ],
-        "description": "Updates a lender type banding.\n\nRequires the lender_writer role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "X-idempotency-key"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/bandingAttributes"
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "summary": "Delete a lender type banding",
-        "operationId": "delete-type-typeId-bandings-bandingId",
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Lender Types"
-        ],
-        "description": "Deletes a lender type banding.\n\nRequires the lender_remover role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "X-idempotency-key"
-          }
-        ]
-      }
-    },
     "/lenders/{lenderId}/users": {
       "parameters": [
         {
@@ -2332,14 +1854,24 @@
         "description": "Get accredited products for a lender"
       },
       "post": {
-        "summary": "Add Accredited Products",
+        "summary": "Add an Accredited Product",
         "operationId": "post-lenders-lenderId-accreditedProducts",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/lender"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
         },
         "description": "add accredited product to a lender",
@@ -2354,6 +1886,112 @@
         ],
         "tags": [
           "Accredited Products"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/lenderAttributes"
+              }
+            }
+          },
+          "description": ""
+        }
+      }
+    },
+    "/lenders/{lenderId}/accreditedProducts/{accreditedProductId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "lenderId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "accreditedProductId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "GET Accredited Product",
+        "tags": [
+          "Accredited Products"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/accreditedProductData"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/accreditedProductData"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-lenders-lenderId-accreditedProducts-accreditedProductId",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],        
+        "description": "Get a Lender accredited product by id"
+      },
+      "delete": {
+        "summary": "Delete Accredited Product",
+        "operationId": "delete-lenders-lenderId-accreditedProducts-accreditedProductId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "description": "Delete Accredited Product from a Lender Account",
+        "tags": [
+          "Accredited Products"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "if-match"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-idempotency-key"
+          }
         ]
       }
     }
@@ -2385,6 +2023,14 @@
               "lenders": {
                 "type": "string",
                 "format": "uri"
+              },
+              "allocations": {
+                "type": "string",
+                "format": "uri"
+              },
+              "lenderTypes": {
+                "type": "string",
+                "format": "uri"
               }
             }
           },
@@ -2410,39 +2056,11 @@
                 {
                   "type": "array",
                   "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "type": {
-                        "type": "string",
-                        "enum": [
-                          "accreditedProduct"
-                        ]
-                      },
-                      "attributes": {
-                        "type": "object",
-                        "properties": {
-                          "accreditationDate": {
-                            "type": "string"
-                          },
-                          "productName": {
-                            "type": "string"
-                          }
-                        }
-                      },
-                      "links": {
-                        "type": "object",
-                        "properties": {
-                          "product": {
-                            "type": "string",
-                            "format": "uri"
-                          }
-                        }
-                      }
-                    }
+                    "$ref": "#/components/schemas/accreditedProductData"
                   }
+                },
+                {
+                  "$ref": "#/components/schemas/allocationData"
                 }
               ]
             }
@@ -2537,6 +2155,78 @@
                     }
                   }
                 }
+              },
+              "currentAllocation": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    }
+                  }
+                }
+              },
+              "lenderType": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "lenderType"
+                        ]
+                      }
+                    }
+                  },
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    }
+                  }
+                }
+              },
+              "expertUsers": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "user"
+                          ]
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           },
@@ -2594,26 +2284,19 @@
               }
             }
           },
-          "sortCode": {
-            "type": "string"
-          },
           "reference": {
             "type": "string"
           },
-          "originalReference": {
-            "type": "string"
-          },
-          "products": {
-            "type": "array",
-            "items": {
-              "$ref": "../models/objectPointer.v1.json"
+          "lenderBankAccount": {
+            "type": "object",
+            "properties": {
+              "sortCode": {
+                "type": "string"
+              },
+              "accountNumber": {
+                "type": "string"
+              }
             }
-          },
-          "accountNumber": {
-            "type": "string"
-          },
-          "parentLender": {
-            "$ref": "../models/objectPointer.v1.json"
           }
         }
       },
@@ -2702,6 +2385,19 @@
           "active": {
             "$ref": "#/components/schemas/activeRange"
           },
+          "lendingCategory": {
+            "type": "string",
+            "enum": [
+              "small",
+              "large"
+            ]
+          },
+          "claimLimitThisPeriod": {
+            "type": "number"
+          },
+          "drawdownLimitThisPeriod": {
+            "type": "number"
+          },
           "currentProductAmounts": {
             "type": "array",
             "items": {
@@ -2746,16 +2442,6 @@
                 "format": "uri"
               }
             }
-          },
-          "included": {
-            "type": "array",
-            "items": {
-              "anyOf": [
-                {
-                  "$ref": "#/components/schemas/bandingData"
-                }
-              ]
-            }
           }
         }
       },
@@ -2791,6 +2477,7 @@
         "x-tags": [
           "Lender Types"
         ],
+        "description": "",
         "properties": {
           "createdDate": {
             "type": "string",
@@ -2811,128 +2498,15 @@
             "description": "Not to be sent on POST/PUT/PATCH."
           },
           "name": {
-            "type": "string"
-          },
-          "defaultMaxAnnualLenderGuaranteeLimit": {
-            "type": "integer"
-          }
-        }
-      },
-      "banding": {
-        "title": "banding",
-        "type": "object",
-        "x-tags": [
-          "Misc Models"
-        ],
-        "properties": {
-          "meta": {
-            "$ref": "../models/individualMeta.v1.json"
-          },
-          "data": {
-            "$ref": "#/components/schemas/bandingData"
-          },
-          "links": {
-            "type": "object",
-            "properties": {
-              "self": {
-                "type": "string",
-                "format": "uri"
-              },
-              "bandings": {
-                "type": "string",
-                "format": "uri"
-              },
-              "type": {
-                "type": "string",
-                "format": "uri"
-              }
-            }
-          }
-        }
-      },
-      "bandingData": {
-        "title": "bandingData",
-        "type": "object",
-        "x-tags": [
-          "Misc Models"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "type": {
             "type": "string",
             "enum": [
-              "banding"
+              "Large bank",
+              "Challenger",
+              "Asset Finance",
+              "Invoice Finance",
+              "Smaller bank",
+              "Other"
             ]
-          },
-          "etag": {
-            "type": "string"
-          },
-          "attributes": {
-            "$ref": "#/components/schemas/bandingAttributes"
-          }
-        }
-      },
-      "bandingAttributes": {
-        "title": "bandingAttributes",
-        "type": "object",
-        "x-tags": [
-          "Lender Types"
-        ],
-        "properties": {
-          "createdDate": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Not to be sent on POST/PUT/PATCH."
-          },
-          "createdBy": {
-            "type": "string",
-            "description": "Not to be sent on POST/PUT/PATCH."
-          },
-          "updatedDate": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Not to be sent on POST/PUT/PATCH."
-          },
-          "updatedBy": {
-            "type": "string",
-            "description": "Not to be sent on POST/PUT/PATCH."
-          },
-          "active": {
-            "$ref": "#/components/schemas/activeRange"
-          },
-          "products": {
-            "type": "array",
-            "items": {
-              "$ref": "../models/objectPointer.v1.json"
-            }
-          },
-          "iAurApplies": {
-            "type": "boolean"
-          },
-          "drawDownClaimLimits": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "annualLendingTotal": {
-                  "type": "object",
-                  "properties": {
-                    "moreThan": {
-                      "type": "integer"
-                    },
-                    "lessThan": {
-                      "type": "integer"
-                    }
-                  }
-                },
-                "percentage": {
-                  "type": "number"
-                }
-              }
-            }
           }
         }
       },
@@ -3040,11 +2614,37 @@
         }
       },
       "accreditedProductData": {
-        "title": "approvedProductData",
+        "title": "accreditedProductData",
         "type": "object",
         "properties": {
           "id": {
             "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "accreditedProduct"
+            ]
+          },
+          "attributes": {
+            "type": "object",
+            "properties": {
+              "productName": {
+                "type": "string"
+              },
+              "accreditationDate": {
+                "type": "string"
+              }
+            }
+          },
+          "links": {
+            "type": "object",
+            "properties": {
+              "product": {
+                "type": "string",
+                "format": "uri"
+              }
+            }
           }
         }
       }

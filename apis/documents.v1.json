@@ -122,7 +122,7 @@
         "description": "Gets a paginated list of all documents.\n\nRequires the document_reader role to access."
       },
       "post": {
-        "summary": "Add a document to an envelope",
+        "summary": "Create a new document",
         "operationId": "post-documents",
         "responses": {
           "201": {
@@ -231,7 +231,7 @@
             }
           }
         },
-        "description": "Create a document and add it to the envelope.\n\nCan either be a request to generate a document of a specific type or the operation may contain a multipart payload that contains the binary document.\n\nIf the request is multipart then the JSON payload must be sent under the name of \"payload\" and the document binary must be sent under the name \"document\".\n\nRequires the role of document_writer to access."
+        "description": "Create a new document.\n\nCan either be a request to generate a document of a specific type or the operation may contain a multipart payload that contains the binary document.\n\nIf the request is multipart then the JSON payload must be sent under the name of \"payload\" and the document binary must be sent under the name \"document\".\n\nRequires the permission of document_writer to access."
       },
       "parameters": []
     },
