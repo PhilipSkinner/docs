@@ -175,7 +175,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/lenderAttributes"
+                "$ref": "#/components/schemas/lender"
               }
             }
           }
@@ -643,7 +643,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/allocationAttributes"
+                "$ref": "#/components/schemas/allocation"
               }
             }
           }
@@ -837,7 +837,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/allocationAttributes"
+                "$ref": "#/components/schemas/allocation"
               }
             }
           }
@@ -1743,7 +1743,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/userAttributes"
+                "$ref": "#/components/schemas/user"
               }
             }
           }
@@ -1844,7 +1844,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/accreditedProductData"
+                  "$ref": "#/components/schemas/accreditedProduct"
                 }
               }
             }
@@ -1891,7 +1891,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/lenderAttributes"
+                "$ref": "#/components/schemas/accreditedProduct"
               }
             }
           },
@@ -1931,24 +1931,32 @@
                 "schema": {
                   "$ref": "#/components/schemas/accreditedProductData"
                 }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              },
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
               }
             }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "401": {
             "description": "Unauthorized"
           },
           "403": {
             "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/accreditedProductData"
-                }
-              }
-            }
           }
         },
         "operationId": "get-lenders-lenderId-accreditedProducts-accreditedProductId",
@@ -1956,7 +1964,7 @@
           {
             "Bearer token": []
           }
-        ],        
+        ],
         "description": "Get a Lender accredited product by id"
       },
       "delete": {
@@ -2645,6 +2653,15 @@
                 "format": "uri"
               }
             }
+          }
+        }
+      },
+      "accreditedProduct": {
+        "title": "accreditedProduct",
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/accreditedProductData"
           }
         }
       }

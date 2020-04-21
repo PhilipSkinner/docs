@@ -274,9 +274,34 @@
             "type": "string"
           }
         }
-      ]
+      ],
+      "post": {
+        "summary": "Create new fee schedule",
+        "operationId": "post-feeSchedule-scheduleId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        },
+        "description": "Creates a new fee schedule from the facility payment profile information"
+      }
     },
-    "/feeSchedule/{scheduleId}/facility": {
+    "/feeSchedule/{scheduleId}/scheduleRequest": {
       "get": {
         "tags": [
           "FeePaymentSchedule"
@@ -1321,7 +1346,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ]
       },
       "get": {
         "summary": "",
@@ -1352,7 +1382,12 @@
             }
           }
         },
-        "description": "Links to mandate Id"
+        "description": "Links to mandate Id",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ]
       }
     },
     "/mandates": {
@@ -1408,7 +1443,12 @@
           }
         },
         "operationId": "get-mandates",
-        "description": "Throws 422 when lender does not have an API key set."
+        "description": "Throws 422 when lender does not have an API key set.",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ]
       },
       "post": {
         "summary": "",
@@ -1417,7 +1457,12 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ]
       }
     },
     "/mandates/{mandateId}": {
@@ -1522,24 +1567,33 @@
         }
       }
     },
-    "/lenders": {
+    "/lenderCollectionAccounts": {
       "get": {
-        "summary": "Your GET endpoint",
+        "summary": "Get All Lender Collection Accounts",
         "tags": [],
-        "responses": {},
-        "operationId": "get-lenders"
-      },
-      "post": {
-        "summary": "",
-        "operationId": "post-lenders",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
           }
-        }
-      }
+        },
+        "operationId": "get-lenderallocationaccounts",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ]
+      },
+      "parameters": []
     },
-    "/lenders/{lenderId}": {
+    "/lenderCollectionAccounts/{lenderId}": {
       "parameters": [
         {
           "name": "lenderId",
@@ -1551,29 +1605,67 @@
         }
       ],
       "get": {
-        "summary": "Your GET endpoint",
+        "summary": "Get Lender Collection Account",
         "tags": [],
-        "responses": {},
-        "operationId": "get-lenders-lenderId",
-        "description": ""
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "undefined": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": ""
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-lendercollectionaccounts-lenderId",
+        "description": "Gets the lender collection account details. ",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ]
       },
       "put": {
-        "summary": "",
-        "operationId": "put-lenders-lenderId",
+        "summary": "Create or Update  Lender Collection Account",
+        "operationId": "put-lendercollectionaccounts-lenderId",
         "responses": {
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "description": "Creates or updates a lender collection record. This record allows the service to access the collection API on behalf of the lender.",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ]
       },
       "delete": {
         "summary": "",
-        "operationId": "delete-lenders-lenderId",
+        "operationId": "delete-lendercollectionaccounts-lenderId",
         "responses": {
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ]
       }
     }
   },
@@ -1596,11 +1688,13 @@
           }
         }
       },
-      "FeeScheduleAttributes": {
+      "feeScheduleAttributes": {
         "type": "object",
         "properties": {
-          "submissionId": {
-            "format": "uuid",
+          "guaranteeRef": {
+            "type": "string"
+          },
+          "feePayment": {
             "type": "string"
           }
         }
@@ -1616,28 +1710,7 @@
           }
         }
       },
-      "FacilityRequestAttributes": {
-        "type": "object",
-        "properties": {
-          "endDate": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "startDate": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "lenderId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "submissionId": {
-            "format": "uuid",
-            "type": "string"
-          }
-        }
-      },
-      "EventAttributes": {
+      "facilityEvent": {
         "type": "object",
         "properties": {
           "date": {
@@ -1710,7 +1783,7 @@
           }
         }
       },
-      "FeeRequest": {
+      "feeScheduleRequest": {
         "type": "object",
         "properties": {
           "facility": {
@@ -1731,52 +1804,32 @@
           }
         }
       },
-      "FacilityRequest": {
+      "facilityRequestAttributes": {
         "type": "object",
+        "title": "",
         "properties": {
-          "submissionId": {
+          "guaranteeId": {
             "type": "string"
           },
           "lenderId": {
             "type": "string"
           },
           "startDate": {
-            "type": "string"
+            "type": "string",
+            "format": "date"
           },
           "endDate": {
-            "type": "string"
-          }
-        }
-      },
-      "EventRequest": {
-        "type": "object",
-        "properties": {
-          "date": {
-            "type": "string"
+            "type": "string",
+            "format": "date"
           },
-          "amount": {
-            "format": "double",
-            "type": "number"
-          },
-          "annotation": {
-            "type": "string"
-          }
-        }
-      },
-      "SimpleObjectExample_ResourceBase_FeeScheduleAttributes_": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "$ref": "#/components/schemas/ResourceBase_FeeScheduleAttributes_"
-          },
-          "links": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
+          "facilityEvents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/facilityEvent"
             }
           },
-          "meta": {
-            "$ref": "../models/individualMeta.v1.json"
+          "startingBalance": {
+            "type": "string"
           }
         }
       },
@@ -1810,31 +1863,6 @@
         },
         "description": ""
       },
-      "SimpleObjectExample_ResourceBase_FacilityRequestAttributes_": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "$ref": "#/components/schemas/ResourceBase_FacilityRequestAttributes_"
-          },
-          "links": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "properties": {
-              "self": {
-                "type": "string"
-              },
-              "feeSchedule": {
-                "type": "string"
-              }
-            }
-          },
-          "meta": {
-            "$ref": "../models/individualMeta.v1.json"
-          }
-        }
-      },
       "ResourceBase_FacilityRequestAttributes_": {
         "type": "object",
         "properties": {
@@ -1844,36 +1872,8 @@
           "attributes": {
             "$ref": "#/components/schemas/FacilityRequestAttributes"
           },
-          "relationships": {
-            "type": "object",
-            "additionalProperties": {
-              "uniqueItems": false,
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/Relationship"
-              }
-            }
-          },
           "scheduleId": {
             "type": "string"
-          }
-        }
-      },
-      "SimpleObjectExample_List_ResourceBase_EventAttributes_": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ResourceBase_EventAttributes_"
-            }
-          },
-          "links": {
-            "$ref": "../models/paginationLinks.v1.json"
-          },
-          "meta": {
-            "$ref": "../models/paginationMeta.v1.json"
           }
         }
       },
@@ -1901,52 +1901,6 @@
           }
         }
       },
-      "SimpleObjectExample_ResourceBase_EventAttributes_": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "$ref": "#/components/schemas/ResourceBase_EventAttributes_"
-          },
-          "links": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "properties": {
-              "self": {
-                "type": "string"
-              },
-              "events": {
-                "type": "string"
-              },
-              "feeSchedule": {
-                "type": "string"
-              }
-            }
-          },
-          "meta": {
-            "$ref": "../models/individualMeta.v1.json"
-          }
-        }
-      },
-      "SimpleObjectExample_List_ResourceBase_FeeAttributes_": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ResourceBase_FeeAttributes_"
-            }
-          },
-          "links": {
-            "$ref": "../models/paginationMeta.v1.json"
-          },
-          "meta": {
-            "$ref": "../models/paginationMeta.v1.json"
-          }
-        }
-      },
       "ResourceBase_FeeAttributes_": {
         "type": "object",
         "properties": {
@@ -1971,28 +1925,128 @@
           }
         }
       },
-      "SimpleObjectExample_ResourceBase_FeeAttributes_": {
+      "lenderCollectionAccount": {
+        "title": "lenderCollectionAccount",
         "type": "object",
         "properties": {
-          "data": {
-            "$ref": "#/components/schemas/ResourceBase_FeeAttributes_"
-          },
           "meta": {
-            "$ref": "../models/individualMeta.v1.json"
+            "$ref": ""
+          },
+          "data": {
+            "$ref": ""
           },
           "links": {
             "type": "object",
             "properties": {
               "self": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
-              "fees": {
-                "type": "string"
-              },
-              "feeSchedule": {
-                "type": "string"
+              "lenderCollectionAccounts": {
+                "type": "string",
+                "format": "uri"
               }
             }
+          }
+        }
+      },
+      "feeSchedule": {
+        "title": "feeSchedule",
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "../models/individualMeta.v1.json"
+          },
+          "data": {
+            "$ref": "#/components/schemas/feeScheduleData"
+          },
+          "links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "guarantee": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "feeScheduleData": {
+        "title": "feeScheduleData",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "etag": {
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/feeScheduleAttributes"
+          }
+        }
+      },
+      "feeCollection": {
+        "title": "feeCollection",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "facilityRequest": {
+        "title": "facilityRequest",
+        "type": "object",
+        "properties": {
+          "meta": {
+            "type": "string"
+          },
+          "data": {
+            "type": "string"
+          },
+          "links": {
+            "type": "string"
+          }
+        }
+      },
+      "facilityRequestData": {
+        "title": "facilityRequestData",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/facilityRequestAttributes"
+          },
+          "": {
+            "type": "string"
           }
         }
       }
