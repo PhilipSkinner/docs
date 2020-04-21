@@ -375,7 +375,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/guaranteeAttributes"
+                "$ref": "#/components/schemas/guarantee"
               }
             }
           }
@@ -482,7 +482,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/guaranteeAttributes"
+                "$ref": "#/components/schemas/guarantee"
               }
             }
           }
@@ -612,7 +612,16 @@
           {
             "Bearer token": []
           }
-        ]
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/inLifeEvent"
+              }
+            }
+          }
+        }
       }
     }
   },

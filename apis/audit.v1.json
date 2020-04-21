@@ -121,6 +121,20 @@
             },
             "in": "query",
             "name": "scope"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "lenderRef"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "guaranteeRef"
           }
         ],
         "description": "Fetch a paginated list of audit records. Can query by system, event type and scope.\n\nRequires the role of audit_reader to access."

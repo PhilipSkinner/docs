@@ -5,14 +5,12 @@
     "contact": {
       "name": "Philip Skinner",
       "email": "philip.skinner@cds.co.uk"
-    }
+    },
+    "description": "This API provides access to the fee schedule and mandate information of a Guarantee. "
   },
   "paths": {
     "/feeSchedule/{scheduleId}": {
       "get": {
-        "tags": [
-          "FeePaymentSchedule"
-        ],
         "operationId": "get-fee-schedule",
         "parameters": [
           {
@@ -37,7 +35,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SimpleObjectExample_ResourceBase_FeeScheduleAttributes_"
+                  "$ref": "#/components/schemas/feeSchedule"
                 }
               }
             },
@@ -82,6 +80,9 @@
           {
             "Bearer token": []
           }
+        ],
+        "tags": [
+          "Fee Payment Schedule"
         ]
       },
       "put": {
@@ -100,7 +101,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SimpleObjectExample_ResourceBase_FeeScheduleAttributes_"
+                  "$ref": "#/components/schemas/feeSchedule"
                 }
               }
             }
@@ -182,17 +183,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/FeeRequest"
+                "$ref": "#/components/schemas/feeSchedule"
               }
             }
           }
         },
         "tags": [
-          "FeePaymentSchedule"
+          "Fee Payment Schedule"
         ]
       },
       "delete": {
-        "summary": "",
+        "summary": "Delete Fee Schedule",
         "operationId": "delete-feeSchedule-id",
         "responses": {
           "204": {
@@ -262,7 +263,7 @@
           }
         ],
         "tags": [
-          "FeePaymentSchedule"
+          "Fee Payment Schedule"
         ]
       },
       "parameters": [
@@ -281,6 +282,18 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
         },
         "security": [
@@ -292,21 +305,20 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {}
+                "$ref": "#/components/schemas/feeSchedule"
               }
             }
           }
         },
-        "description": "Creates a new fee schedule from the facility payment profile information"
+        "description": "Creates a new fee schedule from the facility re-payment profile information in the fee schedule request. This should be included in the post.",
+        "tags": [
+          "Fee Payment Schedule"
+        ]
       }
     },
-    "/feeSchedule/{scheduleId}/scheduleRequest": {
+    "/feeSchedule/{scheduleId}/feeScheduleRequest": {
       "get": {
-        "tags": [
-          "FeePaymentSchedule"
-        ],
-        "operationId": "get-schedule-facility",
+        "operationId": "get-fee-schedule-request",
         "parameters": [
           {
             "name": "scheduleId",
@@ -330,7 +342,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SimpleObjectExample_ResourceBase_FacilityRequestAttributes_"
+                  "$ref": "#/components/schemas/feeScheduleRequest"
                 }
               }
             },
@@ -373,118 +385,15 @@
             }
           }
         },
-        "description": "Fetch the facility for a fee schedule.\n\nRequires the feeschedule_reader role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ]
-      },
-      "put": {
-        "summary": "Update fee schedule facility",
-        "operationId": "put-feeSchedule-id-facility",
-        "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Etag": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SimpleObjectExample_ResourceBase_FacilityRequestAttributes_"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Unprocessable Entity",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "description": "Update a feeschedules facility details.\n\nRequires the feeschedule_writer role to access.",
+        "description": "Fetch the facility for a fee schedule.\n\nRequires the feeschedule_reader permission to access.",
         "security": [
           {
             "Bearer token": []
           }
         ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "X-idempotency-key"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/FacilityRequestAttributes"
-              }
-            }
-          }
-        },
+        "summary": "Get fee Schedule Request",
         "tags": [
-          "FeePaymentSchedule"
+          "Fee Payment Schedule"
         ]
       },
       "parameters": [
@@ -498,199 +407,7 @@
         }
       ]
     },
-    "/feeSchedule/{scheduleId}/events": {
-      "get": {
-        "tags": [
-          "FeePaymentSchedule"
-        ],
-        "operationId": "get-schedule-events",
-        "parameters": [
-          {
-            "name": "scheduleId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SimpleObjectExample_List_ResourceBase_EventAttributes_"
-                }
-              }
-            },
-            "headers": {
-              "Etag": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Get fee schedule events",
-        "description": "Get the events for a fee schedule.\n\nRequires the feeschedule_reader role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ]
-      },
-      "post": {
-        "summary": "Add event to schedule",
-        "operationId": "post-feeSchedule-id-events",
-        "responses": {
-          "201": {
-            "description": "Created",
-            "headers": {
-              "Etag": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Location": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SimpleObjectExample_ResourceBase_EventAttributes_"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Unprocessable Entity",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "FeePaymentSchedule"
-        ],
-        "description": "Add a new event onto the fee payment schedule.\n\nRequires the feepayment_writer role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "X-idempotency-key"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/EventAttributes"
-              }
-            }
-          },
-          "description": ""
-        }
-      },
+    "/feeSchedule/{scheduleId}/facilityEvents": {
       "parameters": [
         {
           "name": "scheduleId",
@@ -700,25 +417,83 @@
             "type": "string"
           }
         }
-      ]
-    },
-    "/feeSchedule/{scheduleId}/events/{eventId}": {
+      ],
       "get": {
-        "tags": [
-          "FeePaymentSchedule"
+        "summary": "Get Facility Events",
+        "operationId": "get-fee-schedule-schedule-id-facility-events",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../models/paginationMeta.v1.json"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/facilityEventData"
+                      }
+                    },
+                    "links": {
+                      "$ref": "../models/paginationLinks.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": ""
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../models/paginationMeta.v1.json"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/facilityEventData"
+                      }
+                    },
+                    "links": {
+                      "$ref": "../models/paginationLinks.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer token": []
+          }
         ],
-        "operationId": "get-schedule-single-event",
+        "description": "Get Facility Events used to determin the fee payment schedule",
+        "tags": [
+          "Facility Events"
+        ]
+      }
+    },
+    "/feeSchedule/{scheduleId}/facilityEvents/{facilityEventId}": {
+      "get": {
+        "operationId": "get-schedule-single-facility-event",
         "parameters": [
           {
             "name": "scheduleId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "eventId",
             "in": "path",
             "required": true,
             "schema": {
@@ -739,7 +514,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SimpleObjectExample_ResourceBase_EventAttributes_"
+                  "$ref": "#/components/schemas/facilityEvent"
                 }
               }
             },
@@ -785,195 +560,15 @@
             }
           }
         },
-        "description": "Get a single event on a fee schedule.\n\nRequires the feeschedule_reader role to access.",
+        "description": "Get a single event on a fee schedule.\n\nRequires the feeschedule_reader permission to access.",
         "summary": "Get an event",
         "security": [
           {
             "Bearer token": []
           }
-        ]
-      },
-      "put": {
-        "summary": "Update an event",
-        "operationId": "put-feeSchedule-id-events-eventId",
-        "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Etag": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SimpleObjectExample_ResourceBase_EventAttributes_"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Unprocessable Entity",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
+        ],
         "tags": [
-          "FeePaymentSchedule"
-        ],
-        "description": "Updates an event on a feeschedule.\n\nRequires the feeschedule_writer role to access.",
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "X-idempotency-key"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match"
-          }
-        ],
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/EventAttributes"
-              }
-            }
-          },
-          "description": ""
-        }
-      },
-      "delete": {
-        "summary": "Delete an event",
-        "operationId": "delete-feeSchedule-id-events-eventId",
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "headers": {}
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "FeePaymentSchedule"
-        ],
-        "description": "Remove an event from a fee schedule.\n\nRequires the feeschedule_writer role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "X-idempotency-key"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match"
-          }
+          "Fee Payment Schedule"
         ]
       },
       "parameters": [
@@ -986,20 +581,17 @@
           }
         },
         {
-          "name": "eventId",
-          "in": "path",
-          "required": true,
           "schema": {
             "type": "string"
-          }
+          },
+          "name": "facilityEventId",
+          "in": "path",
+          "required": true
         }
       ]
     },
     "/feeSchedule/{scheduleId}/fees": {
       "get": {
-        "tags": [
-          "FeePaymentSchedule"
-        ],
         "operationId": "get-schedule-fees",
         "parameters": [
           {
@@ -1017,7 +609,21 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SimpleObjectExample_List_ResourceBase_FeeAttributes_"
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../models/paginationMeta.v1.json"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/fee"
+                      }
+                    },
+                    "links": {
+                      "$ref": "../models/paginationLinks.v1.json"
+                    }
+                  }
                 }
               }
             }
@@ -1059,116 +665,10 @@
           {
             "Bearer token": []
           }
+        ],
+        "tags": [
+          "Fee Payment Schedule"
         ]
-      },
-      "post": {
-        "summary": "Add a fee",
-        "operationId": "post-feeSchedule-id-fees",
-        "responses": {
-          "201": {
-            "description": "Created",
-            "headers": {
-              "Etag": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Location": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SimpleObjectExample_ResourceBase_FeeScheduleAttributes_"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Unprocessable Entity",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "description": "Adds a fee onto the schedule.\n\nRequires the feeschedule_writer role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "X-idempotency-key"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/FeeAttributes"
-              }
-            }
-          }
-        }
       },
       "parameters": [
         {
@@ -1183,9 +683,6 @@
     },
     "/feeSchedule/{scheduleId}/fees/{feeId}": {
       "get": {
-        "tags": [
-          "FeePaymentSchedule"
-        ],
         "operationId": "GetScheduleFees",
         "parameters": [
           {
@@ -1221,7 +718,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SimpleObjectExample_ResourceBase_FeeAttributes_"
+                  "$ref": ""
                 }
               }
             }
@@ -1249,25 +746,25 @@
               }
             }
           }
-        }
+        },
+        "summary": "Get a fee collection record",
+        "description": "Get a fee collection record for this fee schedule",
+        "tags": [
+          "Fee Payment Schedule"
+        ]
       },
       "put": {
-        "summary": "",
-        "operationId": "put-feeSchedule-id-fees-feeId",
+        "summary": "Update a fee collection record",
+        "operationId": "put-fee-ScheduleId-fees-feeId",
         "responses": {
           "200": {
             "description": "OK"
           }
-        }
-      },
-      "delete": {
-        "summary": "",
-        "operationId": "delete-feeSchedule-id-fees-feeId",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
+        },
+        "description": "Update a fee collection record in this fee payment schedule",
+        "tags": [
+          "Fee Payment Schedule"
+        ]
       },
       "parameters": [
         {
@@ -1289,72 +786,8 @@
       ]
     },
     "/feeSchedule": {
-      "post": {
-        "tags": [
-          "FeePaymentSchedule"
-        ],
-        "operationId": "CreateFeePayment",
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Bearer token",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "default": "Bearer "
-            }
-          }
-        ],
-        "responses": {
-          "422": {
-            "description": "Client Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/FeeRequest"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/FeeRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/FeeRequest"
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ]
-      },
       "get": {
-        "summary": "",
+        "summary": "Get Fee Payment Schedules",
         "operationId": "get-feeSchedule",
         "responses": {
           "200": {
@@ -1370,7 +803,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/SimpleObjectExample_ResourceBase_FeeScheduleAttributes_"
+                        "$ref": ""
                       }
                     },
                     "links": {
@@ -1387,82 +820,88 @@
           {
             "Bearer token": []
           }
+        ],
+        "tags": [
+          "Fee Payment Schedule"
         ]
       }
     },
     "/mandates": {
       "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "meta": {
-                      "$ref": "../models/paginationMeta.v1.json"
-                    },
-                    "links": {
-                      "$ref": "../models/paginationLinks.v1.json"
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "type": {
-                            "type": "string"
-                          },
-                          "id": {
-                            "type": "string"
-                          },
-                          "attributes": {
-                            "type": "object",
-                            "properties": {
-                              "sortCode": {
-                                "type": "string"
-                              },
-                              "accountNumber": {
-                                "type": "string"
-                              },
-                              "externalId": {
-                                "type": "string"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
+        "summary": "Get all Mandates",
+        "tags": [
+          "Mandate"
+        ],
         "operationId": "get-mandates",
         "description": "Throws 422 when lender does not have an API key set.",
         "security": [
           {
             "Bearer token": []
           }
-        ]
-      },
-      "post": {
-        "summary": "",
-        "operationId": "post-mandates",
+        ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../models/paginationMeta.v1.json"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/mandateData"
+                      }
+                    },
+                    "links": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new mandate",
+        "operationId": "post-mandates",
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/mandate"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity"
           }
         },
         "security": [
           {
             "Bearer token": []
           }
-        ]
+        ],
+        "tags": [
+          "Mandate"
+        ],
+        "description": "Create a new mandate for a fee collection",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/mandate"
+              }
+            }
+          }
+        }
       }
     },
     "/mandates/{mandateId}": {
@@ -1477,100 +916,95 @@
         }
       ],
       "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
+        "summary": "Get a mandate by id",
+        "tags": [
+          "Mandate"
+        ],
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "*/*": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string"
-                        },
-                        "type": {
-                          "type": "string"
-                        },
-                        "attributes": {
-                          "type": "object",
-                          "properties": {
-                            "status": {
-                              "type": "string",
-                              "enum": [
-                                "new",
-                                "pending",
-                                "failed",
-                                "amend",
-                                "resubmit",
-                                "cancel",
-                                "cancelled",
-                                "deleted",
-                                "live"
-                              ]
-                            },
-                            "history": {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "properties": {
-                                  "date": {
-                                    "type": "string"
-                                  },
-                                  "eventType": {
-                                    "type": "string"
-                                  },
-                                  "description": {
-                                    "type": "string"
-                                  },
-                                  "status": {
-                                    "type": "string"
-                                  }
-                                }
-                              }
-                            },
-                            "lastChecked": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/mandate"
                 }
               }
             }
           }
         },
-        "operationId": "get-mandates-mandateId"
+        "operationId": "get-mandates-mandateId",
+        "description": "Gets a mandate by the id supplied. ",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ]
       },
       "put": {
-        "summary": "",
+        "summary": "Update a mandate",
         "operationId": "put-mandates-mandateId",
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/mandate"
+                }
+              }
+            }
           }
-        }
+        },
+        "tags": [
+          "Mandate"
+        ],
+        "description": "Updates a mandate ",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ]
       },
       "delete": {
-        "summary": "",
+        "summary": "Delete a mandate",
         "operationId": "delete-mandates-mandateId",
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
-        }
+        },
+        "tags": [
+          "Mandate"
+        ],
+        "description": "Delete a mandate by id. Note - this will remove the mandate and the fee collection profile from the fee collection system. The fee collection will still be accessable via the API but will be in a state of suspended.",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ]
       }
     },
     "/lenderCollectionAccounts": {
       "get": {
         "summary": "Get All Lender Collection Accounts",
-        "tags": [],
+        "tags": [
+          "Lender Collection Account"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -1578,7 +1012,20 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "properties": {}
+                  "properties": {
+                    "meta": {
+                      "$ref": "../models/paginationMeta.v1.json"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/lenderCollectionAccount"
+                      }
+                    },
+                    "links": {
+                      "$ref": "../models/paginationLinks.v1.json"
+                    }
+                  }
                 }
               }
             }
@@ -1589,7 +1036,8 @@
           {
             "Bearer token": []
           }
-        ]
+        ],
+        "description": "Get all Lender Collection Accounts"
       },
       "parameters": []
     },
@@ -1606,7 +1054,9 @@
       ],
       "get": {
         "summary": "Get Lender Collection Account",
-        "tags": [],
+        "tags": [
+          "Lender Collection Account"
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -1619,15 +1069,6 @@
           },
           "401": {
             "description": "Unauthorized"
-          },
-          "undefined": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": ""
-                }
-              }
-            }
           }
         },
         "operationId": "get-lendercollectionaccounts-lenderId",
@@ -1651,10 +1092,13 @@
           {
             "Bearer token": []
           }
+        ],
+        "tags": [
+          "Lender Collection Account"
         ]
       },
       "delete": {
-        "summary": "",
+        "summary": "Delete Lender Collection Account",
         "operationId": "delete-lendercollectionaccounts-lenderId",
         "responses": {
           "200": {
@@ -1665,6 +1109,10 @@
           {
             "Bearer token": []
           }
+        ],
+        "description": "Delete a Lender Collection Account",
+        "tags": [
+          "Lender Collection Account"
         ]
       }
     }
@@ -1677,40 +1125,36 @@
       }
     },
     "schemas": {
-      "SourceInformation": {
-        "type": "object",
-        "properties": {
-          "pointer": {
-            "type": "string"
-          },
-          "parameter": {
-            "type": "string"
-          }
-        }
-      },
       "feeScheduleAttributes": {
         "type": "object",
         "properties": {
           "guaranteeRef": {
             "type": "string"
           },
-          "feePayment": {
-            "type": "string"
-          }
-        }
-      },
-      "Relationship": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string"
+          "feeCollections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/feeAttributes"
+            }
           },
-          "scheduleId": {
+          "changeAttributes": {
+            "$ref": "../models/changeAttributes.v1.json"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "created",
+              "published",
+              "suspended"
+            ]
+          },
+          "lenderRef": {
             "type": "string"
           }
-        }
+        },
+        "description": ""
       },
-      "facilityEvent": {
+      "facilityEventAttributes": {
         "type": "object",
         "properties": {
           "date": {
@@ -1724,17 +1168,18 @@
           "annotation": {
             "type": "string"
           }
-        }
+        },
+        "title": ""
       },
-      "FeeAttributes": {
+      "feeAttributes": {
         "type": "object",
         "description": "",
         "properties": {
-          "balance": {
+          "facilityBalance": {
             "format": "double",
             "type": "number"
           },
-          "date": {
+          "collectionDate": {
             "format": "date-time",
             "type": "string"
           },
@@ -1783,28 +1228,7 @@
           }
         }
       },
-      "feeScheduleRequest": {
-        "type": "object",
-        "properties": {
-          "facility": {
-            "$ref": "#/components/schemas/FacilityRequest"
-          },
-          "events": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EventRequest"
-            }
-          },
-          "scheduleId": {
-            "type": "string"
-          },
-          "requestedOn": {
-            "type": "string"
-          }
-        }
-      },
-      "facilityRequestAttributes": {
+      "feeScheduleRequestAttributes": {
         "type": "object",
         "title": "",
         "properties": {
@@ -1814,11 +1238,11 @@
           "lenderId": {
             "type": "string"
           },
-          "startDate": {
+          "facilityStartDate": {
             "type": "string",
             "format": "date"
           },
-          "endDate": {
+          "facilityEndDate": {
             "type": "string",
             "format": "date"
           },
@@ -1830,98 +1254,10 @@
           },
           "startingBalance": {
             "type": "string"
-          }
-        }
-      },
-      "ResourceBase_FeeScheduleAttributes_": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string"
           },
-          "attributes": {
-            "$ref": "#/components/schemas/FeeScheduleAttributes"
-          },
-          "relationships": {
-            "type": "object",
-            "additionalProperties": {
-              "uniqueItems": false,
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/Relationship"
-              }
-            },
-            "properties": {
-              "mandate": {
-                "$ref": "../models/objectPointer.v1.json"
-              }
-            }
-          },
-          "scheduleId": {
-            "type": "string"
-          }
-        },
-        "description": ""
-      },
-      "ResourceBase_FacilityRequestAttributes_": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string"
-          },
-          "attributes": {
-            "$ref": "#/components/schemas/FacilityRequestAttributes"
-          },
-          "scheduleId": {
-            "type": "string"
-          }
-        }
-      },
-      "ResourceBase_EventAttributes_": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string"
-          },
-          "attributes": {
-            "$ref": "#/components/schemas/EventAttributes"
-          },
-          "relationships": {
-            "type": "object",
-            "additionalProperties": {
-              "uniqueItems": false,
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/Relationship"
-              }
-            }
-          },
-          "scheduleId": {
-            "type": "string"
-          }
-        }
-      },
-      "ResourceBase_FeeAttributes_": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string"
-          },
-          "attributes": {
-            "$ref": "#/components/schemas/FeeAttributes"
-          },
-          "relationships": {
-            "type": "object",
-            "additionalProperties": {
-              "uniqueItems": false,
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/Relationship"
-              }
-            }
-          },
-          "scheduleId": {
-            "type": "string"
+          "requestedDate": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       },
@@ -1969,23 +1305,14 @@
               }
             }
           },
-          "relationships": {
-            "type": "object",
-            "properties": {
-              "guarantee": {
-                "type": "object",
-                "properties": {
-                  "links": {
-                    "type": "object",
-                    "properties": {
-                      "self": {
-                        "type": "string",
-                        "format": "uri"
-                      }
-                    }
-                  }
+          "included": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/feeScheduleRequest"
                 }
-              }
+              ]
             }
           }
         }
@@ -2005,35 +1332,112 @@
           },
           "attributes": {
             "$ref": "#/components/schemas/feeScheduleAttributes"
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "guarantee": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "related": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    }
+                  }
+                }
+              },
+              "mandate": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "related": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "feeScheduleRequest": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "feeScheduleRequest"
+                        ]
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "lender": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "related": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
-      "feeCollection": {
+      "fee": {
         "title": "feeCollection",
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string"
+          "meta": {
+            "$ref": "../models/individualMeta.v1.json"
+          },
+          "data": {
+            "$ref": "#/components/schemas/feeData"
+          },
+          "links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "type": "string",
+                "format": "uri"
+              }
+            }
           }
         }
       },
-      "facilityRequest": {
-        "title": "facilityRequest",
+      "feeScheduleRequest": {
+        "title": "feeScheduleRequest",
         "type": "object",
         "properties": {
           "meta": {
             "type": "string"
           },
           "data": {
-            "type": "string"
+            "$ref": "#/components/schemas/feeScheduleRequestData"
           },
           "links": {
             "type": "string"
           }
         }
       },
-      "facilityRequestData": {
-        "title": "facilityRequestData",
+      "feeScheduleRequestData": {
+        "title": "feeScheduleRequestData",
         "type": "object",
         "properties": {
           "id": {
@@ -2043,16 +1447,249 @@
             "type": "string"
           },
           "attributes": {
-            "$ref": "#/components/schemas/facilityRequestAttributes"
-          },
-          "": {
+            "$ref": "#/components/schemas/feeScheduleRequestAttributes"
+          }
+        }
+      },
+      "feeData": {
+        "title": "feeData",
+        "type": "object",
+        "properties": {
+          "id": {
             "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/feeAttributes"
+          }
+        }
+      },
+      "facilityEvent": {
+        "title": "facilityEvent",
+        "type": "object",
+        "properties": {
+          "meta": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/facilityEventData"
+          },
+          "links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "facilityEventData": {
+        "title": "facilityEventData",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "facilityEvent"
+            ]
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/facilityEventAttributes"
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "feeScheduleRequest": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "feeScheduleRequest"
+                        ]
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "feeSchedule": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "related": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "mandate": {
+        "title": "mandate",
+        "type": "object",
+        "x-tags": [
+          "Mandate"
+        ],
+        "properties": {
+          "meta": {
+            "$ref": "../models/individualMeta.v1.json"
+          },
+          "data": {
+            "$ref": "#/components/schemas/mandateData"
+          },
+          "links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "mandateData": {
+        "title": "mandateData",
+        "type": "object",
+        "x-tags": [
+          "Mandate"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "mandate"
+            ]
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/mandateAttributes"
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "feeSchedule": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "related": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    }
+                  }
+                }
+              },
+              "guarantee": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "related": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "mandateAttributes": {
+        "title": "mandateAttributes",
+        "type": "object",
+        "x-tags": [
+          "Mandate"
+        ],
+        "description": "",
+        "properties": {
+          "lenderRef": {
+            "type": "string"
+          },
+          "borrowerBankAccount": {
+            "type": "object",
+            "properties": {
+              "sortCode": {
+                "type": "string",
+                "maxLength": 6
+              },
+              "bankAccount": {
+                "type": "string"
+              },
+              "accountHoldersName": {
+                "type": "string"
+              },
+              "addressLine1": {
+                "type": "string"
+              },
+              "addressline2": {
+                "type": "string"
+              },
+              "addressline3": {
+                "type": "string"
+              },
+              "postcode": {
+                "type": "string"
+              }
+            }
+          },
+          "directDebitReference": {
+            "type": "string"
+          },
+          "guaranteeRef": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "submitted",
+              "suspended"
+            ]
           }
         }
       }
     }
   },
   "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "Fee Payment Schedule"
+    },
+    {
+      "name": "Facility Events"
+    },
+    {
+      "name": "Mandate"
+    },
+    {
+      "name": "Lender Collection Account"
+    }
+  ],
   "servers": [
     {
       "url": "http://localhost:3000",
