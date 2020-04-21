@@ -368,7 +368,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/lenderAttributes"
+                "$ref": "#/components/schemas/lender"
               }
             }
           }
@@ -1074,7 +1074,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/lenderTypeAttributes"
+                "$ref": "#/components/schemas/lenderType"
               }
             }
           }
@@ -1268,7 +1268,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/lenderTypeAttributes"
+                "$ref": "#/components/schemas/lenderType"
               }
             }
           }
@@ -1542,7 +1542,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/userAttributes"
+                "$ref": "#/components/schemas/user"
               }
             }
           }
@@ -1862,7 +1862,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/lender"
+                  "$ref": "#/components/schemas/accreditedProduct"
                 }
               }
             }
