@@ -1142,17 +1142,14 @@
         "type": "object",
         "description": "",
         "properties": {
+          "changeAttributes": {
+            "$ref": "../models/changeAttributes.v1.json"
+          },
           "guaranteeRef": {
             "type": "string"
           },
-          "feeCollections": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/feeAttributes"
-            }
-          },
-          "changeAttributes": {
-            "$ref": "../models/changeAttributes.v1.json"
+          "lenderRef": {
+            "type": "string"
           },
           "status": {
             "type": "string",
@@ -1163,27 +1160,34 @@
               "submitted"
             ]
           },
-          "lenderRef": {
-            "type": "string"
+          "feeCollections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/feeAttributes"
+            }
           }
         }
       },
       "facilityEventAttributes": {
         "type": "object",
+        "title": "",
         "properties": {
           "date": {
-            "format": "date-time",
-            "type": "string"
+            "type": "string",
+            "format": "date-time"
           },
           "amount": {
             "format": "double",
             "type": "number"
           },
-          "annotation": {
-            "type": "string"
+          "eventType": {
+            "type": "string",
+            "enum": [
+              "Draw-Down",
+              "Facility Payment"
+            ]
           }
-        },
-        "title": ""
+        }
       },
       "feeAttributes": {
         "type": "object",
@@ -1267,11 +1271,11 @@
           "facilityEvents": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/facilityEvent"
+              "$ref": "#/components/schemas/facilityEventAttributes"
             }
           },
           "startingBalance": {
-            "type": "string"
+            "type": "number"
           },
           "requestedDate": {
             "type": "string",
@@ -1476,12 +1480,18 @@
             "type": "string"
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "feeScheduleRequest"
+            ]
           },
           "attributes": {
             "$ref": "#/components/schemas/feeScheduleRequestAttributes"
           }
-        }
+        },
+        "required": [
+          "type"
+        ]
       },
       "feeData": {
         "title": "feeData",
