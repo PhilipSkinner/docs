@@ -9,7 +9,7 @@
     "description": "This API provides access to the fee schedule and mandate information of a Guarantee. "
   },
   "paths": {
-    "/feeSchedule/{scheduleId}": {
+    "/feeSchedules/{scheduleId}": {
       "get": {
         "operationId": "get-fee-schedule",
         "parameters": [
@@ -306,6 +306,9 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/feeSchedule"
+              },
+              "examples": {
+                "example-1": {}
               }
             }
           }
@@ -316,7 +319,7 @@
         ]
       }
     },
-    "/feeSchedule/{scheduleId}/feeScheduleRequest": {
+    "/feeSchedules/{scheduleId}/feeScheduleRequest": {
       "get": {
         "operationId": "get-fee-schedule-request",
         "parameters": [
@@ -407,7 +410,7 @@
         }
       ]
     },
-    "/feeSchedule/{scheduleId}/facilityEvents": {
+    "/feeSchedules/{scheduleId}/facilityEvents": {
       "parameters": [
         {
           "name": "scheduleId",
@@ -488,7 +491,7 @@
         ]
       }
     },
-    "/feeSchedule/{scheduleId}/facilityEvents/{facilityEventId}": {
+    "/feeSchedules/{scheduleId}/facilityEvents/{facilityEventId}": {
       "get": {
         "operationId": "get-schedule-single-facility-event",
         "parameters": [
@@ -590,7 +593,7 @@
         }
       ]
     },
-    "/feeSchedule/{scheduleId}/fees": {
+    "/feeSchedules/{scheduleId}/fees": {
       "get": {
         "operationId": "get-schedule-fees",
         "parameters": [
@@ -681,7 +684,7 @@
         }
       ]
     },
-    "/feeSchedule/{scheduleId}/fees/{feeId}": {
+    "/feeSchedules/{scheduleId}/fees/{feeId}": {
       "get": {
         "operationId": "GetScheduleFees",
         "parameters": [
@@ -785,7 +788,7 @@
         }
       ]
     },
-    "/feeSchedule": {
+    "/feeSchedules": {
       "get": {
         "summary": "Get Fee Payment Schedules",
         "operationId": "get-feeSchedule",
@@ -823,8 +826,18 @@
         ],
         "tags": [
           "Fee Payment Schedule"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "status"
+          }
         ]
-      }
+      },
+      "parameters": []
     },
     "/mandates": {
       "get": {
@@ -1127,6 +1140,7 @@
     "schemas": {
       "feeScheduleAttributes": {
         "type": "object",
+        "description": "",
         "properties": {
           "guaranteeRef": {
             "type": "string"
@@ -1144,15 +1158,15 @@
             "type": "string",
             "enum": [
               "created",
-              "published",
-              "suspended"
+              "suspended",
+              "awaitingSubmission",
+              "submitted"
             ]
           },
           "lenderRef": {
             "type": "string"
           }
-        },
-        "description": ""
+        }
       },
       "facilityEventAttributes": {
         "type": "object",
@@ -1259,7 +1273,11 @@
             "type": "string",
             "format": "date-time"
           }
-        }
+        },
+        "x-examples": {
+          "example-1": {}
+        },
+        "description": ""
       },
       "lenderCollectionAccount": {
         "title": "lenderCollectionAccount",
@@ -1269,7 +1287,7 @@
             "$ref": ""
           },
           "data": {
-            "$ref": ""
+            "$ref": "#/components/schemas/lenderCollectionAccountData"
           },
           "links": {
             "type": "object",
@@ -1315,17 +1333,25 @@
               ]
             }
           }
-        }
+        },
+        "required": [
+          "data",
+          "included"
+        ]
       },
       "feeScheduleData": {
         "title": "feeScheduleData",
         "type": "object",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "feeSchedule"
+            ]
           },
           "etag": {
             "type": "string"
@@ -1672,6 +1698,39 @@
             ]
           }
         }
+      },
+      "lenderCollectionAccountData": {
+        "title": "lenderCollectionAccountData",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/lenderCollectionAccountAttributes"
+          }
+        }
+      },
+      "lenderCollectionAccountAttributes": {
+        "title": "lenderCollectionAccountAttributes",
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "apikey": {
+            "type": "string"
+          }
+        },
+        "x-tags": [
+          "Lender Collection Account"
+        ]
       }
     }
   },
