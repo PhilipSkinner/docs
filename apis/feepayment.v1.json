@@ -1245,11 +1245,15 @@
       "feeScheduleRequestAttributes": {
         "type": "object",
         "title": "",
+        "x-examples": {
+          "example-1": {}
+        },
+        "description": "",
         "properties": {
-          "guaranteeId": {
+          "guaranteeRef": {
             "type": "string"
           },
-          "lenderId": {
+          "lenderRef": {
             "type": "string"
           },
           "facilityStartDate": {
@@ -1272,12 +1276,14 @@
           "requestedDate": {
             "type": "string",
             "format": "date-time"
+          },
+          "mandateRef": {
+            "type": "string"
+          },
+          "guaranteeStatus": {
+            "type": "string"
           }
-        },
-        "x-examples": {
-          "example-1": {}
-        },
-        "description": ""
+        }
       },
       "lenderCollectionAccount": {
         "title": "lenderCollectionAccount",
