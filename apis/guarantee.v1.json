@@ -1194,12 +1194,10 @@
               "type": "object",
               "properties": {
                 "from": {
-                  "type": "string",
-                  "format": "date"
+                  "type": "string"
                 },
                 "to": {
-                  "type": "string",
-                  "format": "date"
+                  "type": "string"
                 },
                 "transitionDate": {
                   "type": "string",
