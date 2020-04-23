@@ -99,7 +99,7 @@
             "description": "Set to -1 to retrieve all items."
           }
         ],
-        "description": "Fetches a paginated list of guarantees.\n\nRequires the guarantee_reader role to access.",
+        "description": "Fetches a paginated list of guarantees.\n\nRequires the guarantee_reader role to access..",
         "security": [
           {
             "Bearer token": []
@@ -1029,15 +1029,15 @@
                   "totalMonths": {
                     "type": "integer"
                   },
-                  "startDate": {
-                    "type": "string",
-                    "format": "date-time",
-                    "description": "Calculated based on first drawdown or today + 1 day if no drawdown present."
-                  },
                   "maturityDate": {
                     "type": "string",
                     "format": "date-time",
                     "description": "calculated based on startDate + term.totalMonths"
+                  },
+                  "startDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Calculated based on first drawdown or today + 1 day if no drawdown present."
                   }
                 }
               },
