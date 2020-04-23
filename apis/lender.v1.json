@@ -1929,7 +1929,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/accreditedProductData"
+                  "$ref": "#/components/schemas/accreditedProduct"
                 }
               },
               "application/xml": {
