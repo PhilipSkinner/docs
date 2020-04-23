@@ -99,7 +99,7 @@
             "description": "Set to -1 to retrieve all items."
           }
         ],
-        "description": "Fetches a paginated list of guarantees.\n\nRequires the guarantee_reader role to access..",
+        "description": "Fetches a paginated list of guarantees.\n\nRequires the guarantee_reader role to access.",
         "security": [
           {
             "Bearer token": []
