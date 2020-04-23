@@ -2630,6 +2630,14 @@
           "to": {
             "type": "string",
             "format": "date-time"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Active",
+              "Inactive"
+            ],
+            "description": "Active or Inactive - only one ruleset should ever be active within the same date range."
           }
         }
       },
