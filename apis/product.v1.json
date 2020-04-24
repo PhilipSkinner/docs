@@ -31,7 +31,22 @@
                   "type": "object",
                   "properties": {
                     "meta": {
-                      "$ref": "../models/facilityMeta.v1.json"
+                      "type": "object",
+                      "properties": {
+                        "paging": {
+                          "$ref": "../models/paginationMeta.v1.json"
+                        },
+                        "sorting": {
+                          "type": "array",
+                          "enum": [
+                            "+facilityType",
+                            "-facilityType"
+                          ],
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
                     },
                     "links": {
                       "$ref": "../models/paginationLinks.v1.json"
