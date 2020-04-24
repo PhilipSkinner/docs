@@ -1851,7 +1851,12 @@
           }
         },
         "operationId": "get-lenders-lenderId-accreditedProducts",
-        "description": "Get accredited products for a lender"
+        "description": "Get accredited products for a lender",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ]
       },
       "post": {
         "summary": "Add an Accredited Product",

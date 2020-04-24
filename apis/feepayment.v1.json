@@ -846,7 +846,7 @@
           "Mandate"
         ],
         "operationId": "get-mandates",
-        "description": "Throws 422 when lender does not have an API key set.",
+        "description": "",
         "security": [
           {
             "Bearer token": []
@@ -877,7 +877,16 @@
               }
             }
           }
-        }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "guranteeRef"
+          }
+        ]
       },
       "post": {
         "summary": "Create a new mandate",
@@ -905,7 +914,7 @@
         "tags": [
           "Mandate"
         ],
-        "description": "Create a new mandate for a fee collection",
+        "description": "Create a new mandate for a fee collection.\nThrows 422 when lender does not have an API key set.",
         "requestBody": {
           "content": {
             "application/json": {
