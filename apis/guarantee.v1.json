@@ -118,6 +118,27 @@
             },
             "in": "query",
             "name": "sort"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "businessLegalName"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "guaranteeRef"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "lenderApplicationRef"
           }
         ],
         "description": "Fetches a paginated list of guarantees.\n\nRequires the guarantee_reader role to access.",
@@ -902,6 +923,10 @@
             "format": "date-time",
             "description": "Not to be sent in POST/PUT/PATCH."
           },
+          "guaranteeRef": {
+            "type": "string",
+            "description": "This is the internaly generated guarantee reference number. This can be used by a client for searching a guarantee."
+          },
           "facilityDetails": {
             "type": "object",
             "properties": {
@@ -1110,7 +1135,8 @@
             "type": "object",
             "properties": {
               "lenderRef": {
-                "type": "string"
+                "type": "string",
+                "description": "This is a reference to the lender ref in the lender service, not the lender loan facility reference!"
               },
               "sortCode": {
                 "type": "number"
@@ -1119,7 +1145,8 @@
                 "type": "string"
               },
               "lenderApplicationReference": {
-                "type": "string"
+                "type": "string",
+                "description": "This is the lenders facility application reference. This is used as an external reference to for this guarantee application.   "
               }
             }
           },
