@@ -1846,7 +1846,21 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/accreditedProduct"
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../models/paginationMeta.v1.json"
+                    },
+                    "links": {
+                      "$ref": "../models/paginationLinks.v1.json"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/accreditedProductData"
+                      }
+                    }
+                  }
                 }
               }
             }
