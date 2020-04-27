@@ -175,7 +175,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/lenderAttributes"
+                "$ref": "#/components/schemas/lender"
               }
             }
           }
@@ -368,7 +368,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/lenderAttributes"
+                "$ref": "#/components/schemas/lender"
               }
             }
           }
@@ -643,7 +643,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/allocationAttributes"
+                "$ref": "#/components/schemas/allocation"
               }
             }
           }
@@ -837,7 +837,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/allocationAttributes"
+                "$ref": "#/components/schemas/allocation"
               }
             }
           }
@@ -1074,7 +1074,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/lenderTypeAttributes"
+                "$ref": "#/components/schemas/lenderType"
               }
             }
           }
@@ -1268,7 +1268,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/lenderTypeAttributes"
+                "$ref": "#/components/schemas/lenderType"
               }
             }
           }
@@ -1542,7 +1542,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/userAttributes"
+                "$ref": "#/components/schemas/user"
               }
             }
           }
@@ -1743,7 +1743,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/userAttributes"
+                "$ref": "#/components/schemas/user"
               }
             }
           }
@@ -1837,21 +1837,95 @@
       ],
       "get": {
         "summary": "GET Accredited Products",
-        "tags": [],
+        "tags": [
+          "Accredited Products"
+        ],
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/accreditedProductData"
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../models/paginationMeta.v1.json"
+                    },
+                    "links": {
+                      "$ref": "../models/paginationLinks.v1.json"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/accreditedProductData"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
                 }
               }
             }
           }
         },
         "operationId": "get-lenders-lenderId-accreditedProducts",
-        "description": "Get accredited products for a lender"
+        "description": "Get accredited products for a lender",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "page"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "perpage",
+            "description": "Set to -1 to return all users."
+          }
+        ]
       },
       "post": {
         "summary": "Add an Accredited Product",
@@ -1862,16 +1936,31 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/lender"
+                  "$ref": "#/components/schemas/accreditedProduct"
                 }
               }
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                }
+              }
+            }
           },
           "403": {
-            "description": "Forbidden"
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/errorResponse.v1.json"
+                },
+                "examples": {}
+              }
+            }
           }
         },
         "description": "add accredited product to a lender",
@@ -1891,7 +1980,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/lenderAttributes"
+                "$ref": "#/components/schemas/accreditedProduct"
               }
             }
           },
@@ -1929,26 +2018,34 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/accreditedProductData"
+                  "$ref": "#/components/schemas/accreditedProduct"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              },
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
                 }
               }
             }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "401": {
             "description": "Unauthorized"
           },
           "403": {
             "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/accreditedProductData"
-                }
-              }
-            }
           }
         },
         "operationId": "get-lenders-lenderId-accreditedProducts-accreditedProductId",
@@ -1956,7 +2053,7 @@
           {
             "Bearer token": []
           }
-        ],        
+        ],
         "description": "Get a Lender accredited product by id"
       },
       "delete": {
@@ -2223,6 +2320,20 @@
                         "id": {
                           "type": "string"
                         }
+                      }
+                    }
+                  }
+                }
+              },
+              "users": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "related": {
+                        "type": "string",
+                        "format": "uri"
                       }
                     }
                   }
@@ -2645,6 +2756,15 @@
                 "format": "uri"
               }
             }
+          }
+        }
+      },
+      "accreditedProduct": {
+        "title": "accreditedProduct",
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/accreditedProductData"
           }
         }
       }

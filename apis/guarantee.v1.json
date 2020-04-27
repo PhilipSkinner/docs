@@ -30,7 +30,18 @@
                   "type": "object",
                   "properties": {
                     "meta": {
-                      "$ref": "../models/paginationMeta.v1.json"
+                      "type": "object",
+                      "properties": {
+                        "paging": {
+                          "$ref": "../models/paginationMeta.v1.json"
+                        },
+                        "sorting": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
                     },
                     "data": {
                       "type": "array",
@@ -97,6 +108,37 @@
             "in": "query",
             "name": "pagesize",
             "description": "Set to -1 to retrieve all items."
+          },
+          {
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "in": "query",
+            "name": "sort"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "businessLegalName"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "guaranteeRef"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "lenderApplicationRef"
           }
         ],
         "description": "Fetches a paginated list of guarantees.\n\nRequires the guarantee_reader role to access.",
@@ -185,7 +227,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/guaranteeAttributes"
+                "$ref": "#/components/schemas/guarantee"
               }
             }
           }
@@ -375,7 +417,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/guaranteeAttributes"
+                "$ref": "#/components/schemas/guarantee"
               }
             }
           }
@@ -482,7 +524,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/guaranteeAttributes"
+                "$ref": "#/components/schemas/guarantee"
               }
             }
           }
@@ -612,7 +654,16 @@
           {
             "Bearer token": []
           }
-        ]
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/inLifeEvent"
+              }
+            }
+          }
+        }
       }
     }
   },
@@ -872,11 +923,21 @@
             "format": "date-time",
             "description": "Not to be sent in POST/PUT/PATCH."
           },
+          "guaranteeRef": {
+            "type": "string",
+            "description": "This is the internaly generated guarantee reference number. This can be used by a client for searching a guarantee."
+          },
           "facilityDetails": {
             "type": "object",
             "properties": {
               "facilityType": {
                 "type": "string"
+              },
+              "facilityTotalAmount": {
+                "type": "number"
+              },
+              "facilityCurrentBalance": {
+                "type": "number"
               },
               "assetFinanceDetails": {
                 "type": "object",
@@ -976,9 +1037,6 @@
                   }
                 }
               },
-              "facilityTotalAmount": {
-                "type": "number"
-              },
               "principalPurpose": {
                 "type": "string"
               },
@@ -1019,6 +1077,16 @@
                   },
                   "totalMonths": {
                     "type": "integer"
+                  },
+                  "startDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Calculated based on first drawdown or today + 1 day if no drawdown present."
+                  },
+                  "maturityDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "calculated based on startDate + term.totalMonths"
                   }
                 }
               },
@@ -1067,7 +1135,8 @@
             "type": "object",
             "properties": {
               "lenderRef": {
-                "type": "string"
+                "type": "string",
+                "description": "This is a reference to the lender ref in the lender service, not the lender loan facility reference!"
               },
               "sortCode": {
                 "type": "number"
@@ -1076,7 +1145,8 @@
                 "type": "string"
               },
               "lenderApplicationReference": {
-                "type": "string"
+                "type": "string",
+                "description": "This is the lenders facility application reference. This is used as an external reference to for this guarantee application.   "
               }
             }
           },
@@ -1185,12 +1255,10 @@
               "type": "object",
               "properties": {
                 "from": {
-                  "type": "string",
-                  "format": "date"
+                  "type": "string"
                 },
                 "to": {
-                  "type": "string",
-                  "format": "date"
+                  "type": "string"
                 },
                 "transitionDate": {
                   "type": "string",

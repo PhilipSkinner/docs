@@ -31,7 +31,22 @@
                   "type": "object",
                   "properties": {
                     "meta": {
-                      "$ref": "../models/facilityMeta.v1.json"
+                      "type": "object",
+                      "properties": {
+                        "paging": {
+                          "$ref": "../models/paginationMeta.v1.json"
+                        },
+                        "sorting": {
+                          "type": "array",
+                          "enum": [
+                            "+facilityType",
+                            "-facilityType"
+                          ],
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
                     },
                     "links": {
                       "$ref": "../models/paginationLinks.v1.json"
@@ -167,7 +182,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/productAttributes"
+                "$ref": "#/components/schemas/product"
               }
             }
           },
@@ -191,7 +206,7 @@
         }
       ],
       "get": {
-        "summary": "Fetch a product",
+        "summary": "Get a product",
         "tags": [
           "Products"
         ],
@@ -368,7 +383,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/productAttributes"
+                "$ref": "#/components/schemas/product"
               }
             }
           },
@@ -615,7 +630,8 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/ruleSet"
-              }
+              },
+              "examples": {}
             }
           }
         },
@@ -1071,7 +1087,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/sicCodeAttributes"
+                "$ref": "#/components/schemas/sicCode"
               }
             }
           },
@@ -1265,7 +1281,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/sicCodeAttributes"
+                "$ref": "#/components/schemas/sicCode"
               }
             }
           }
@@ -1485,7 +1501,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/programmeAttributes"
+                "$ref": "#/components/schemas/programme"
               }
             }
           }
@@ -1675,7 +1691,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/programmeAttributes"
+                "$ref": "#/components/schemas/programme"
               }
             }
           }
@@ -1882,13 +1898,46 @@
         "operationId": "post-programme-programmeId-assetcategories",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/assetCategory"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
         },
         "tags": [
           "Asset Category"
         ],
-        "description": "Add new asset Category"
+        "description": "Add new asset Category",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/assetCategory"
+              }
+            }
+          }
+        }
       }
     },
     "/programmes/{programmeId}/questions/{questionId}": {
@@ -1941,6 +1990,15 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
         },
         "description": "Update a question",
@@ -1951,7 +2009,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/questionData"
+                "$ref": "#/components/schemas/question"
               }
             }
           },
@@ -2035,13 +2093,46 @@
         "operationId": "post-programmes-programmeId-questions",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/question"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
         },
         "description": "add new question",
         "tags": [
           "Questions"
-        ]
+        ],
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/question"
+              }
+            }
+          }
+        }
       }
     },
     "/programmes/{programmeId}/principlePurpose/{principalPurposeId}": {
@@ -2132,10 +2223,13 @@
                   "type": "object",
                   "properties": {
                     "meta": {
-                      "type": "string"
+                      "$ref": "../models/paginationMeta.v1.json"
                     },
                     "data": {
-                      "type": "string"
+                      "$ref": "#/components/schemas/principalPurposeData"
+                    },
+                    "links": {
+                      "$ref": "../models/paginationLinks.v1.json"
                     }
                   }
                 }
@@ -2156,13 +2250,54 @@
         "operationId": "post-programmes-programmeId-principalPurposes",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/principalPurpose"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/principalPurpose"
+                }
+              }
+            }
           }
         },
         "description": "add a new principal purpose",
         "tags": [
           "Principal Purpose"
-        ]
+        ],
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/principalPurpose"
+              }
+            }
+          },
+          "description": ""
+        }
       }
     }
   },
@@ -2238,7 +2373,7 @@
               "questions": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/questionField"
+                  "$ref": "#/components/schemas/questionAttributes"
                 }
               }
             }
@@ -2249,7 +2384,7 @@
               "questions": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/questionField"
+                  "$ref": "#/components/schemas/questionAttributes"
                 }
               }
             }
@@ -2260,7 +2395,7 @@
               "questions": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/questionField"
+                  "$ref": "#/components/schemas/questionAttributes"
                 }
               }
             }
@@ -2271,7 +2406,7 @@
               "questions": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/questionField"
+                  "$ref": "#/components/schemas/questionAttributes"
                 }
               }
             }
@@ -2282,7 +2417,7 @@
               "questions": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/questionField"
+                  "$ref": "#/components/schemas/questionAttributes"
                 }
               }
             }
@@ -2293,7 +2428,7 @@
               "questions": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/questionField"
+                  "$ref": "#/components/schemas/questionAttributes"
                 }
               }
             }
@@ -2310,7 +2445,7 @@
               "questions": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/questionField"
+                  "$ref": "#/components/schemas/questionAttributes"
                 }
               }
             }
@@ -2321,7 +2456,7 @@
               "questions": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/questionField"
+                  "$ref": "#/components/schemas/questionAttributes"
                 }
               }
             }
@@ -2332,7 +2467,7 @@
               "questions": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/questionField"
+                  "$ref": "#/components/schemas/questionAttributes"
                 }
               }
             }
@@ -2343,7 +2478,7 @@
               "questions": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/questionField"
+                  "$ref": "#/components/schemas/questionAttributes"
                 }
               }
             }
@@ -2354,7 +2489,7 @@
               "questions": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/questionField"
+                  "$ref": "#/components/schemas/questionAttributes"
                 }
               }
             }
@@ -2365,7 +2500,7 @@
               "questions": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/questionField"
+                  "$ref": "#/components/schemas/questionAttributes"
                 }
               }
             }
@@ -2376,7 +2511,7 @@
               "questions": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/questionField"
+                  "$ref": "#/components/schemas/questionAttributes"
                 }
               }
             }
@@ -2510,6 +2645,14 @@
           "to": {
             "type": "string",
             "format": "date-time"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Active",
+              "Inactive"
+            ],
+            "description": "Active or Inactive - only one ruleset should ever be active within the same date range."
           }
         }
       },
@@ -2530,10 +2673,12 @@
             "type": "object",
             "properties": {
               "self": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "programmes": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "ruleSets": {
                 "type": "string"
@@ -2578,7 +2723,7 @@
           }
         }
       },
-      "questionField": {
+      "questionAttributes": {
         "title": "questionField",
         "type": "object",
         "properties": {
@@ -2773,6 +2918,7 @@
       "principalPurpose": {
         "title": "principalPurpose",
         "type": "object",
+        "description": "",
         "properties": {
           "links": {
             "type": "string"
@@ -2783,8 +2929,7 @@
           "meta": {
             "type": "string"
           }
-        },
-        "description": ""
+        }
       },
       "stateAidRule": {
         "title": "stateAidRule",
@@ -2944,10 +3089,14 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           "attributes": {
-            "$ref": "#/components/schemas/questionField"
+            "$ref": "#/components/schemas/questionAttributes"
+          },
+          "type": {
+            "type": "string"
           }
         }
       },
@@ -2956,17 +3105,14 @@
         "type": "object",
         "description": "",
         "properties": {
-          "id": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "questionField"
-            ]
-          },
           "data": {
             "$ref": "#/components/schemas/questionData"
+          },
+          "meta": {
+            "type": "string"
+          },
+          "links": {
+            "type": "string"
           }
         }
       },

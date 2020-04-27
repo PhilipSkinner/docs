@@ -1,0 +1,24 @@
+{
+  "title": "changeAttributes",
+  "type": "object",
+  "properties": {
+          "createdBy": {
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Not to be sent on POST/PUT/PATCH."
+          },
+          "updatedBy": {
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
+          },
+          "updatedDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Not to be sent on POST/PUT/PATCH."
+          }
+  }
+}

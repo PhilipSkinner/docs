@@ -226,7 +226,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/documentAttributes"
+                "$ref": "#/components/schemas/document"
               }
             }
           }
@@ -595,7 +595,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/documentRequestAttributes"
+                "$ref": "#/components/schemas/documentRequest"
               }
             }
           },
