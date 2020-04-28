@@ -74,7 +74,7 @@
             }
           }
         },
-        "description": "Retieve a single fee schedule.\n\nRequires the feeschedule_reader role to access.",
+        "description": "Retieve a single fee schedule.\n\nRequires the feeschedule_reader permission to access.",
         "summary": "Get a fee schedule",
         "security": [
           {
@@ -846,10 +846,19 @@
           "Mandate"
         ],
         "operationId": "get-mandates",
-        "description": "",
+        "description": "get all mandates",
         "security": [
           {
             "Bearer token": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "guranteeRef"
           }
         ],
         "responses": {
@@ -870,23 +879,23 @@
                       }
                     },
                     "links": {
-                      "type": "string"
+                      "$ref": "../models/paginationLinks.v1.json"
                     }
                   }
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
           }
-        },
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "guranteeRef"
-          }
-        ]
+        }
       },
       "post": {
         "summary": "Create a new mandate",

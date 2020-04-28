@@ -699,6 +699,19 @@
             "items": {
               "$ref": "../models/error.v1.json"
             }
+          },
+          "includes": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "items": {
+                    "$ref": "#/components/schemas/guaranteeDocument"
+                  }
+                }
+              ],
+              "type": "array"
+            }
           }
         }
       },
@@ -752,11 +765,29 @@
                     "properties": {
                       "offerDocuments": {
                         "type": "string",
+                        "description": "Been renamed to documents. Reason - Not all documents will be offer documents.",
                         "format": "uri"
                       },
                       "feePaymentScheduleDocument": {
                         "type": "string",
                         "format": "uri"
+                      }
+                    }
+                  },
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "guaranteeDocument"
+                          ]
+                        }
                       }
                     }
                   }
@@ -1360,6 +1391,47 @@
               },
               "guaranteeFeePaymentCanBeMade": {
                 "type": "boolean"
+              }
+            }
+          }
+        }
+      },
+      "guaranteeDocument": {
+        "title": "guaranteeDocument",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "guaranteeDocument"
+            ]
+          },
+          "attributes": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              }
+            }
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "document": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "related": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
               }
             }
           }
