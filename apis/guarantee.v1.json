@@ -762,6 +762,7 @@
                 "properties": {
                   "links": {
                     "type": "object",
+                    "deprecated": true,
                     "properties": {
                       "offerDocuments": {
                         "type": "string",
