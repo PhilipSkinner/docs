@@ -2543,10 +2543,6 @@
                 "type": "string",
                 "format": "uri"
               },
-              "programme": {
-                "type": "string",
-                "format": "uri"
-              },
               "ruleSet": {
                 "type": "string",
                 "format": "uri"
@@ -2563,6 +2559,9 @@
               "anyOf": [
                 {
                   "$ref": "#/components/schemas/ruleSetData"
+                },
+                {
+                  "$ref": "#/components/schemas/programmeData"
                 }
               ]
             }
@@ -3006,6 +3005,9 @@
                 "format": "uri"
               }
             }
+          },
+          "errors": {
+            "type": "string"
           }
         }
       },
@@ -3271,6 +3273,39 @@
               "guaranteesResource": {
                 "type": "string",
                 "format": "uuid"
+              }
+            }
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "programme": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "programme"
+                        ]
+                      }
+                    }
+                  },
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "related": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    }
+                  }
+                }
               }
             }
           }
