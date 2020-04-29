@@ -139,6 +139,13 @@
             },
             "in": "query",
             "name": "lenderApplicationRef"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "currentStatus"
           }
         ],
         "description": "Fetches a paginated list of guarantees.\n\nRequires the guarantee_reader role to access.",
@@ -1278,7 +1285,8 @@
               "repaid",
               "auto_removed",
               "removed",
-              "noclaim"
+              "noclaim",
+              "offer_requested"
             ]
           },
           "statusHistory": {
