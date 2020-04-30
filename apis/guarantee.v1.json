@@ -703,6 +703,10 @@
               "sicCodes": {
                 "type": "string",
                 "format": "uri"
+              },
+              "self": {
+                "type": "string",
+                "format": "uri"
               }
             }
           },
