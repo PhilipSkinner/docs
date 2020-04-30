@@ -697,7 +697,12 @@
                 "format": "uri"
               },
               "products": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
+              },
+              "sicCodes": {
+                "type": "string",
+                "format": "uri"
               }
             }
           },
@@ -738,7 +743,8 @@
             "properties": {
               "inLifeEvents": {
                 "type": "string",
-                "format": "uri"
+                "format": "uri",
+                "description": "This resource link can be use this to check changes without saving."
               },
               "self": {
                 "type": "string",
@@ -761,15 +767,31 @@
                         "format": "uri"
                       }
                     }
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "feePaymentProfile"
+                        ]
+                      }
+                    }
                   }
                 }
               },
               "documents": {
                 "type": "object",
+                "description": "system generated.",
                 "properties": {
                   "links": {
                     "type": "object",
                     "deprecated": true,
+                    "description": "system generated - not included in POST or PUT",
                     "properties": {
                       "offerDocuments": {
                         "type": "string",
@@ -803,6 +825,7 @@
               },
               "productUsed": {
                 "type": "object",
+                "description": "",
                 "properties": {
                   "links": {
                     "type": "object",
@@ -810,6 +833,21 @@
                       "product": {
                         "type": "string",
                         "format": "uri"
+                      }
+                    }
+                  },
+                  "data": {
+                    "type": "object",
+                    "description": "included on POST and PUT",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "product"
+                        ]
                       }
                     }
                   }
@@ -826,6 +864,20 @@
                         "format": "uri"
                       }
                     }
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "ruleset"
+                        ]
+                      }
+                    }
                   }
                 }
               },
@@ -840,6 +892,18 @@
                         "format": "uri"
                       }
                     }
+                  },
+                  "data": {
+                    "type": "object",
+                    "description": "Lender relation is optional. The lender will be obtained from the claim in the bearer token.  ",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      }
+                    }
                   }
                 }
               },
@@ -849,7 +913,47 @@
                   "links": {
                     "type": "object",
                     "properties": {
-                      "mandate": {
+                      "related": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    }
+                  },
+                  "data": {
+                    "type": "object",
+                    "description": "A reference to the mandate should be provided on a PUT",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "mandate"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "applicationSicCode": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "related": {
                         "type": "string",
                         "format": "uri"
                       }
@@ -1213,7 +1317,7 @@
                 "type": "string"
               },
               "sicCode": {
-                "$ref": "../models/objectPointer.v1.json"
+                "type": "string"
               },
               "companyTurnover": {
                 "type": "number"
