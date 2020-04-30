@@ -1053,7 +1053,14 @@
           "included": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/documentData"
+              "anyOf": [
+                {
+                  "items": {
+                    "$ref": "#/components/schemas/documentData"
+                  }
+                }
+              ],
+              "type": "array"
             }
           }
         }
@@ -1080,6 +1087,114 @@
           },
           "attributes": {
             "$ref": "#/components/schemas/documentRequestAttributes"
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "sourceData": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "string"
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "guarantee": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "related": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "guarantee"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "lender": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "related": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "type": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "lender"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "documents": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "document"
+                          ]
+                        }
+                      }
+                    },
+                    "links": {
+                      "type": "object",
+                      "properties": {
+                        "related": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -1108,15 +1223,11 @@
             "format": "date-time",
             "description": "Not to be sent on POST/PUT/PATCH."
           },
-          "scope": {
-            "type": "array",
-            "items": {
-              "$ref": "../models/objectPointer.v1.json"
-            }
+          "name": {
+            "type": "string"
           },
-          "data": {
-            "type": "object",
-            "description": "Can be of any structure, these are the values required for the document templates."
+          "requestData": {
+            "type": "string"
           }
         }
       },
