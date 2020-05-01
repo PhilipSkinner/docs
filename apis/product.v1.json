@@ -38,12 +38,12 @@
                         },
                         "sorting": {
                           "type": "array",
-                          "enum": [
-                            "+facilityType",
-                            "-facilityType"
-                          ],
                           "items": {
-                            "type": "string"
+                            "type": "string",
+                            "enum": [
+                              "+facilityType",
+                              "-facilityType"
+                            ]
                           }
                         }
                       }
@@ -965,8 +965,7 @@
                     }
                   }
                 },
-                "examples": {
-                  "example-1": {}
+                "examples": {                  
                 }
               }
             }
@@ -1772,7 +1771,7 @@
         ]
       }
     },
-    "/programmes/{programmeId}/assetcategories/{assetcategoryId}": {
+    "/programmes/{programmeId}/principalPurposes": {
       "parameters": [
         {
           "schema": {
@@ -1781,18 +1780,10 @@
           "name": "programmeId",
           "in": "path",
           "required": true
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "assetcategoryId",
-          "in": "path",
-          "required": true
         }
       ],
       "get": {
-        "summary": "GET Asset Category",
+        "summary": "GET All Principal Purposes",
         "tags": [],
         "responses": {
           "200": {
@@ -1800,33 +1791,16 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/assetCategory"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
                   "type": "object",
                   "properties": {
+                    "meta": {
+                      "$ref": "../models/paginationMeta.v1.json"
+                    },
                     "data": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string"
-                        },
-                        "attributes": {
-                          "type": "object",
-                          "properties": {
-                            "description": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
+                      "$ref": "#/components/schemas/principalPurposeData"
+                    },
+                    "links": {
+                      "$ref": "../models/paginationLinks.v1.json"
                     }
                   }
                 }
@@ -1834,8 +1808,62 @@
             }
           }
         },
-        "operationId": "get-programmes-programmeId-assetcategories-assetcategoryId",
-        "description": "Get Asset Category",
+        "operationId": "get-programmes-programmeId-principalPurposes",
+        "description": "Get principal purposes for a programme",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Create new principal purpose",
+        "operationId": "post-programmes-programmeId-principalPurposes",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/principalPurpose"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/principalPurpose"
+                }
+              }
+            }
+          }
+        },
+        "description": "add a new principal purpose",
+        "tags": [
+          "Principal Purpose"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/principalPurpose"
+              }
+            }
+          },
+          "description": ""
+        },
         "security": [
           {
             "Bearer token": []
@@ -1843,7 +1871,72 @@
         ]
       }
     },
-    "/programme/{programmeId}/assetcategories": {
+    "/programmes/{programmeId}/principlePurpose/{principalPurposeId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "programmeId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "principalPurposeId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "GET Principal Purpose",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/principalPurpose"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "operationId": "get-programmes-programmeId-principlePurpose-principalPurposeId",
+        "description": "Get all principle purpose"
+      },
+      "delete": {
+        "summary": "DELETE Principal Purpose",
+        "operationId": "delete-programmes-programmeId-principlePurpose-principalPurposeId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "description": "Delete Principal Purpose",
+        "tags": [
+          "Principal Purpose"
+        ],
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ]
+      }
+    },
+    "/programmes/{programmeId}/questions": {
       "parameters": [
         {
           "schema": {
@@ -1855,9 +1948,9 @@
         }
       ],
       "get": {
-        "summary": "GET asset categories",
+        "summary": "Your GET endpoint",
         "tags": [
-          "Asset Category"
+          "Questions"
         ],
         "responses": {
           "200": {
@@ -1873,7 +1966,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": ""
+                        "$ref": "#/components/schemas/questionData"
                       }
                     },
                     "links": {
@@ -1885,8 +1978,8 @@
             }
           }
         },
-        "operationId": "get-programme-programmeId-assetcategories",
-        "description": "get asset categories",
+        "operationId": "get-programmes-programmeId-questions",
+        "description": "Get all questions",
         "security": [
           {
             "Bearer token": []
@@ -1894,15 +1987,15 @@
         ]
       },
       "post": {
-        "summary": "POST asset category",
-        "operationId": "post-programme-programmeId-assetcategories",
+        "summary": "POST Question",
+        "operationId": "post-programmes-programmeId-questions",
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/assetCategory"
+                  "$ref": "#/components/schemas/question"
                 }
               }
             }
@@ -1920,24 +2013,24 @@
             "description": "Forbidden"
           }
         },
+        "description": "add new question",
         "tags": [
-          "Asset Category"
-        ],
-        "description": "Add new asset Category",
-        "security": [
-          {
-            "Bearer token": []
-          }
+          "Questions"
         ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/assetCategory"
+                "$ref": "#/components/schemas/question"
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ]
       }
     },
     "/programmes/{programmeId}/questions/{questionId}": {
@@ -2038,7 +2131,7 @@
         "description": "Delete question"
       }
     },
-    "/programmes/{programmeId}/questions": {
+    "/programme/{programmeId}/assetcategories": {
       "parameters": [
         {
           "schema": {
@@ -2050,9 +2143,9 @@
         }
       ],
       "get": {
-        "summary": "Your GET endpoint",
+        "summary": "GET asset categories",
         "tags": [
-          "Questions"
+          "Asset Category"
         ],
         "responses": {
           "200": {
@@ -2068,7 +2161,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/questionData"
+                        "$ref": ""
                       }
                     },
                     "links": {
@@ -2080,8 +2173,8 @@
             }
           }
         },
-        "operationId": "get-programmes-programmeId-questions",
-        "description": "Get all questions",
+        "operationId": "get-programme-programmeId-assetcategories",
+        "description": "get asset categories",
         "security": [
           {
             "Bearer token": []
@@ -2089,15 +2182,15 @@
         ]
       },
       "post": {
-        "summary": "POST Question",
-        "operationId": "post-programmes-programmeId-questions",
+        "summary": "POST asset category",
+        "operationId": "post-programme-programmeId-assetcategories",
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/question"
+                  "$ref": "#/components/schemas/assetCategory"
                 }
               }
             }
@@ -2115,84 +2208,19 @@
             "description": "Forbidden"
           }
         },
-        "description": "add new question",
         "tags": [
-          "Questions"
+          "Asset Category"
         ],
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
+        "description": "Add new asset Category",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/question"
+                "$ref": "#/components/schemas/assetCategory"
               }
             }
           }
-        }
-      }
-    },
-    "/programmes/{programmeId}/principlePurpose/{principalPurposeId}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "programmeId",
-          "in": "path",
-          "required": true
         },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "principalPurposeId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "GET Principal Purpose",
-        "tags": [],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/principalPurpose"
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        },
-        "operationId": "get-programmes-programmeId-principlePurpose-principalPurposeId",
-        "description": "Get all principle purpose"
-      },
-      "delete": {
-        "summary": "DELETE Principal Purpose",
-        "operationId": "delete-programmes-programmeId-principlePurpose-principalPurposeId",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        },
-        "description": "Delete Principal Purpose",
-        "tags": [
-          "Principal Purpose"
-        ],
         "security": [
           {
             "Bearer token": []
@@ -2200,7 +2228,7 @@
         ]
       }
     },
-    "/programmes/{programmeId}/principalPurposes": {
+    "/programmes/{programmeId}/assetcategories/{assetcategoryId}": {
       "parameters": [
         {
           "schema": {
@@ -2209,10 +2237,18 @@
           "name": "programmeId",
           "in": "path",
           "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "assetcategoryId",
+          "in": "path",
+          "required": true
         }
       ],
       "get": {
-        "summary": "GET All Principal Purposes",
+        "summary": "GET Asset Category",
         "tags": [],
         "responses": {
           "200": {
@@ -2220,16 +2256,33 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "$ref": "#/components/schemas/assetCategory"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
                   "type": "object",
                   "properties": {
-                    "meta": {
-                      "$ref": "../models/paginationMeta.v1.json"
-                    },
                     "data": {
-                      "$ref": "#/components/schemas/principalPurposeData"
-                    },
-                    "links": {
-                      "$ref": "../models/paginationLinks.v1.json"
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "attributes": {
+                          "type": "object",
+                          "properties": {
+                            "description": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
                     }
                   }
                 }
@@ -2237,72 +2290,89 @@
             }
           }
         },
-        "operationId": "get-programmes-programmeId-principalPurposes",
-        "description": "Get principal purposes for a programme",
+        "operationId": "get-programmes-programmeId-assetcategories-assetcategoryId",
+        "description": "Get Asset Category",
         "security": [
           {
             "Bearer token": []
           }
         ]
-      },
-      "post": {
-        "summary": "Create new principal purpose",
-        "operationId": "post-programmes-programmeId-principalPurposes",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/principalPurpose"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/principalPurpose"
-                }
-              }
-            }
-          }
-        },
-        "description": "add a new principal purpose",
-        "tags": [
-          "Principal Purpose"
-        ],
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/principalPurpose"
-              }
-            }
-          },
-          "description": ""
-        }
       }
     }
   },
   "components": {
     "schemas": {
+      "productData": {
+        "title": "productData",
+        "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "product"
+            ]
+          },
+          "etag": {
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/productAttributes"
+          },
+          "links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "guaranteesResource": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "programme": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "programme"
+                        ]
+                      }
+                    }
+                  },
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "related": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "productAttributes": {
         "title": "productAttributes",
         "type": "object",
@@ -2595,10 +2665,36 @@
             }
           }
         },
+        "description": "",
         "x-examples": {
           "example-1": {}
-        },
-        "description": ""
+        }
+      },
+      "sicCodeData": {
+        "title": "sicCodeResponse",
+        "type": "object",
+        "x-tags": [
+          "Misc Models"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 6,
+            "maxLength": 6
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "sicCode"
+            ]
+          },
+          "etag": {
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/sicCodeAttributes"
+          }
+        }
       },
       "sicCodeAttributes": {
         "title": "sicCodeAttributes",
@@ -2692,482 +2788,6 @@
           }
         }
       },
-      "programmeAttributes": {
-        "title": "programmeAttributes",
-        "type": "object",
-        "x-tags": [
-          "Programmes"
-        ],
-        "properties": {
-          "createdBy": {
-            "type": "string",
-            "description": "Not to be sent on POST/PUT/PATCH."
-          },
-          "createdDate": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Not to be sent on POST/PUT/PATCH."
-          },
-          "updatedBy": {
-            "type": "string",
-            "description": "Not to be sent on POST/PUT/PATCH."
-          },
-          "updatedDate": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Not to be sent on POST/PUT/PATCH."
-          },
-          "name": {
-            "type": "string"
-          }
-        }
-      },
-      "questionAttributes": {
-        "title": "questionField",
-        "type": "object",
-        "properties": {
-          "helpText": {
-            "type": "string"
-          },
-          "fieldType": {
-            "type": "string"
-          },
-          "responseOptionValues": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/questionResponseOption"
-            }
-          },
-          "required": {
-            "type": "boolean"
-          },
-          "label": {
-            "type": "string"
-          },
-          "fieldText": {
-            "type": "string"
-          },
-          "fieldName": {
-            "type": "string"
-          }
-        }
-      },
-      "questionResponseOption": {
-        "title": "questionResponseOption",
-        "type": "object",
-        "properties": {
-          "responseValue": {
-            "type": "string"
-          },
-          "responseLabel": {
-            "type": "string"
-          }
-        }
-      },
-      "guaranteeFeeRule": {
-        "title": "facilityFeeRule",
-        "type": "object",
-        "properties": {
-          "amountUsedForfeeCalc": {
-            "type": "string",
-            "enum": [
-              "\"Facility Guaranteed Amount\"",
-              "\"Facility Outstanding Balance\"\""
-            ]
-          },
-          "facilityTotalFixedFee": {
-            "type": "boolean"
-          },
-          "facilityTypes": {
-            "type": "array",
-            "enum": [
-              "\"Term Loan\"",
-              "\"Asset Finance\"",
-              "Invoice Finance",
-              "Revolving Credit"
-            ],
-            "items": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "ruleSetAttributes": {
-        "title": "ruleSetAttributes",
-        "type": "object",
-        "x-tags": [
-          "attributes"
-        ],
-        "properties": {
-          "IAURPercent": {
-            "type": "number"
-          },
-          "euroBaseExchangeRate": {
-            "type": "number"
-          },
-          "euroExchangeInterestRate": {
-            "type": "number"
-          },
-          "annualFeePercent": {
-            "type": "number"
-          },
-          "minFacilityAmount": {
-            "type": "number"
-          },
-          "maxFacilityAmount": {
-            "type": "number"
-          },
-          "borrowerDetailRules": {
-            "$ref": "#/components/schemas/borrowerDetailRules"
-          },
-          "facilityRules": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "facilityTypes": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "facilityLimits": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/facilityRule"
-                  }
-                }
-              }
-            }
-          },
-          "paymentFeeRules": {
-            "type": "object",
-            "properties": {
-              "annualFeePercent": {
-                "type": "number"
-              },
-              "guaranteeFeeRules": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/guaranteeFeeRule"
-                }
-              }
-            }
-          },
-          "sicCodeRules": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/sicCodeRule"
-            }
-          },
-          "principalPurposeRules": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/principalPurposeRule"
-            }
-          },
-          "ineligibleSicCodes": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "lenderRules": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/lenderRule"
-            }
-          },
-          "productLenderLimitedDrawDownContribution": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "facilityTypes": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "IAURPercentApplies": {
-                  "type": "boolean"
-                }
-              }
-            }
-          },
-          "activeRange": {
-            "$ref": "#/components/schemas/activityRange"
-          },
-          "stateAid": {
-            "type": "object",
-            "properties": {
-              "stateAidPeriodInMonths": {
-                "type": "integer"
-              },
-              "stateAidRules": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/stateAidRule"
-                }
-              }
-            }
-          }
-        }
-      },
-      "principalPurpose": {
-        "title": "principalPurpose",
-        "type": "object",
-        "description": "",
-        "properties": {
-          "links": {
-            "type": "string"
-          },
-          "data": {
-            "$ref": "#/components/schemas/principalPurposeData"
-          },
-          "meta": {
-            "type": "string"
-          }
-        }
-      },
-      "stateAidRule": {
-        "title": "stateAidRule",
-        "type": "object",
-        "properties": {
-          "currency": {
-            "type": "string"
-          },
-          "maxStateAidAmount": {
-            "type": "number"
-          }
-        }
-      },
-      "facilityRule": {
-        "title": "facilityRule",
-        "type": "object",
-        "properties": {
-          "maxTermMonths": {
-            "type": "integer"
-          },
-          "minTermMonths": {
-            "type": "integer"
-          },
-          "maxFacilityAmount": {
-            "type": "number"
-          },
-          "minFacilityAmount": {
-            "type": "number"
-          }
-        }
-      },
-      "lenderRule": {
-        "title": "lenderRule",
-        "type": "object",
-        "description": "",
-        "properties": {
-          "lendingCategory": {
-            "type": "string",
-            "enum": [
-              "small",
-              "large"
-            ]
-          },
-          "claimLimit-Percent-Of-Drawdown": {
-            "type": "number"
-          },
-          "annualDrawDown-LessThan-Amount": {
-            "type": "number"
-          },
-          "annualDrawDown-MoreThan-Amount": {
-            "type": "number"
-          }
-        }
-      },
-      "ruleSet": {
-        "title": "ruleSet",
-        "type": "object",
-        "properties": {
-          "meta": {
-            "$ref": ""
-          },
-          "data": {
-            "$ref": "#/components/schemas/ruleSetData"
-          },
-          "links": {
-            "type": "object",
-            "properties": {
-              "self": {
-                "type": "string",
-                "format": "uri"
-              },
-              "rulesets": {
-                "type": "string",
-                "format": "uri"
-              }
-            }
-          },
-          "errors": {
-            "type": "string"
-          }
-        }
-      },
-      "documentType": {
-        "title": "documentType",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          }
-        }
-      },
-      "borrowerDetailRules": {
-        "title": "borrowerDetailRules",
-        "type": "object",
-        "properties": {
-          "maxBorrowerTurnover": {
-            "type": "number"
-          },
-          "maxPercentOfTurnoverGeneratedByTradingActivity": {
-            "type": "number"
-          }
-        }
-      },
-      "principalPurposeRule": {
-        "title": "principalPurposeRule",
-        "type": "object",
-        "properties": {
-          "drawDownPercentLimitPerFiscalYear": {
-            "type": "number"
-          },
-          "principalPurposes": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "assetCategoryAttributes": {
-        "title": "assetCategoryAttributes",
-        "type": "object",
-        "properties": {
-          "description": {
-            "type": "string"
-          }
-        }
-      },
-      "assetCategoryData": {
-        "title": "assetCategoryData",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "attributes": {
-            "$ref": "#/components/schemas/assetCategoryAttributes"
-          },
-          "type": {
-            "type": "string"
-          }
-        }
-      },
-      "assetCategory": {
-        "title": "assetCategory",
-        "type": "object",
-        "properties": {
-          "data": {
-            "$ref": "#/components/schemas/assetCategoryData"
-          }
-        }
-      },
-      "questionData": {
-        "title": "questionData",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "attributes": {
-            "$ref": "#/components/schemas/questionAttributes"
-          },
-          "type": {
-            "type": "string"
-          }
-        }
-      },
-      "question": {
-        "title": "question",
-        "type": "object",
-        "description": "",
-        "properties": {
-          "data": {
-            "$ref": "#/components/schemas/questionData"
-          },
-          "meta": {
-            "type": "string"
-          },
-          "links": {
-            "type": "string"
-          }
-        }
-      },
-      "principalPurposeAttributes": {
-        "title": "principalPurposeAttributes",
-        "type": "object",
-        "properties": {
-          "description": {
-            "type": "string",
-            "minLength": 2
-          }
-        }
-      },
-      "principalPurposeData": {
-        "title": "principalPurposeData",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "attributes": {
-            "$ref": "#/components/schemas/principalPurposeAttributes"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "principalPurpose"
-            ]
-          }
-        }
-      },
-      "ruleSetData": {
-        "title": "ruleSetData",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "ruleSet"
-            ]
-          },
-          "etag": {
-            "type": "string"
-          },
-          "attributes": {
-            "$ref": "#/components/schemas/ruleSetAttributes"
-          }
-        }
-      },
       "programmeData": {
         "title": "programmeResponse",
         "type": "object",
@@ -3214,38 +2834,282 @@
           }
         }
       },
-      "sicCodeData": {
-        "title": "sicCodeResponse",
+      "programmeAttributes": {
+        "title": "programmeAttributes",
         "type": "object",
         "x-tags": [
-          "Misc Models"
+          "Programmes"
         ],
         "properties": {
-          "id": {
+          "createdBy": {
             "type": "string",
-            "minLength": 6,
-            "maxLength": 6
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
-          "type": {
+          "createdDate": {
             "type": "string",
-            "enum": [
-              "sicCode"
-            ]
+            "format": "date-time",
+            "description": "Not to be sent on POST/PUT/PATCH."
           },
-          "etag": {
+          "updatedBy": {
+            "type": "string",
+            "description": "Not to be sent on POST/PUT/PATCH."
+          },
+          "updatedDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Not to be sent on POST/PUT/PATCH."
+          },
+          "name": {
             "type": "string"
-          },
-          "attributes": {
-            "$ref": "#/components/schemas/sicCodeAttributes"
           }
         }
       },
-      "productData": {
-        "title": "productData",
+      "questionResponseOption": {
+        "title": "questionResponseOption",
+        "type": "object",
+        "properties": {
+          "responseValue": {
+            "type": "string"
+          },
+          "responseLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "guaranteeFeeRule": {
+        "title": "facilityFeeRule",
+        "type": "object",
+        "properties": {
+          "amountUsedForfeeCalc": {
+            "type": "string",
+            "enum": [
+              "Facility Guaranteed Amount",
+              "Facility Outstanding Balance"
+            ]
+          },
+          "facilityTotalFixedFee": {
+            "type": "boolean"
+          },
+          "facilityTypes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Invoice Finance",
+                "Term Loan",
+                "Invoice Finance",
+                "Revolving Credit"
+              ]
+            }
+          }
+        }
+      },
+      "ruleSetAttributes": {
+        "title": "ruleSetAttributes",
         "type": "object",
         "x-tags": [
-          "Misc Models"
+          "attributes"
         ],
+        "properties": {
+          "IAURPercent": {
+            "type": "number"
+          },
+          "euroBaseExchangeRate": {
+            "type": "number"
+          },
+          "euroExchangeInterestRate": {
+            "type": "number"
+          },
+          "annualFeePercent": {
+            "type": "number"
+          },
+          "borrowerDetailRules": {
+            "$ref": "#/components/schemas/borrowerDetailRules"
+          },
+          "facilityRules": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "facilityTypes": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "facilityLimits": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/facilityRule"
+                  }
+                }
+              }
+            }
+          },
+          "paymentFeeRules": {
+            "type": "object",
+            "properties": {
+              "annualFeePercent": {
+                "type": "number"
+              },
+              "guaranteeFeeRules": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/guaranteeFeeRule"
+                }
+              }
+            }
+          },
+          "sicCodeRules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/sicCodeRule"
+            }
+          },
+          "stateAid": {
+            "type": "object",
+            "properties": {
+              "stateAidPeriodInMonths": {
+                "type": "integer"
+              },
+              "stateAidRules": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/stateAidRule"
+                }
+              }
+            }
+          },
+          "principalPurposeRules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/principalPurposeRule"
+            }
+          },
+          "ineligibleSicCodes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "lenderRules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/lenderRule"
+            }
+          },
+          "productLenderLimitedDrawDownContribution": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "facilityTypes": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "IAURPercentApplies": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "activeRange": {
+            "$ref": "#/components/schemas/activityRange"
+          },
+          "maxFacilityAmount": {
+            "type": "number"
+          },
+          "minFacilityAmount": {
+            "type": "number"
+          }
+        }
+      },
+      "stateAidRule": {
+        "title": "stateAidRule",
+        "type": "object",
+        "properties": {
+          "currency": {
+            "type": "string"
+          },
+          "maxStateAidAmount": {
+            "type": "number"
+          }
+        }
+      },
+      "facilityRule": {
+        "title": "facilityRule",
+        "type": "object",
+        "properties": {
+          "maxTermMonths": {
+            "type": "integer"
+          },
+          "minTermMonths": {
+            "type": "integer"
+          },
+          "maxFacilityAmount": {
+            "type": "number"
+          },
+          "minFacilityAmount": {
+            "type": "number"
+          }
+        }
+      },
+      "lenderRule": {
+        "title": "lenderRule",
+        "type": "object",
+        "properties": {
+          "claimLimit-Percent-Of-Drawdown": {
+            "type": "number"
+          },
+          "annualDrawDown-LessThan-Amount": {
+            "type": "number"
+          },
+          "annualDrawDown-MoreThan-Amount": {
+            "type": "number"
+          },
+          "lendingCategory": {
+            "type": "string",
+            "enum": [
+              "small",
+              "large"
+            ]
+          }
+        },
+        "description": ""
+      },
+      "ruleSet": {
+        "title": "ruleSet",
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": ""
+          },
+          "data": {
+            "$ref": "#/components/schemas/ruleSetData"
+          },
+          "links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "type": "string",
+                "format": "uri"
+              },
+              "rulesets": {
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "errors": {
+            "type": "string"
+          }
+        }
+      },
+      "ruleSetData": {
+        "title": "ruleSetData",
+        "type": "object",
         "properties": {
           "id": {
             "type": "string",
@@ -3254,60 +3118,195 @@
           "type": {
             "type": "string",
             "enum": [
-              "product"
+              "ruleSet"
             ]
           },
           "etag": {
             "type": "string"
           },
           "attributes": {
-            "$ref": "#/components/schemas/productAttributes"
+            "$ref": "#/components/schemas/ruleSetAttributes"
+          }
+        }
+      },
+      "documentType": {
+        "title": "documentType",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "borrowerDetailRules": {
+        "title": "borrowerDetailRules",
+        "type": "object",
+        "properties": {
+          "maxBorrowerTurnover": {
+            "type": "number"
+          },
+          "maxPercentOfTurnoverGeneratedByTradingActivity": {
+            "type": "number"
+          }
+        }
+      },
+      "principalPurposeRule": {
+        "title": "principalPurposeRule",
+        "type": "object",
+        "properties": {
+          "principalPurposes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "drawDownPercentLimitPerFiscalYear": {
+            "type": "number"
+          }
+        }
+      },
+      "principalPurpose": {
+        "title": "principalPurpose",
+        "type": "object",
+        "properties": {
+          "meta": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/principalPurposeData"
           },
           "links": {
-            "type": "object",
-            "properties": {
-              "self": {
-                "type": "string",
-                "format": "uuid"
-              },
-              "guaranteesResource": {
-                "type": "string",
-                "format": "uuid"
-              }
+            "type": "string"
+          }
+        },
+        "description": ""
+      },
+      "principalPurposeData": {
+        "title": "principalPurposeData",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/principalPurposeAttributes"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "principalPurpose"
+            ]
+          }
+        }
+      },
+      "principalPurposeAttributes": {
+        "title": "principalPurposeAttributes",
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "minLength": 2
+          }
+        }
+      },
+      "question": {
+        "title": "question",
+        "type": "object",
+        "description": "",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/questionData"
+          },
+          "links": {
+            "type": "string"
+          },
+          "meta": {
+            "type": "string"
+          }
+        }
+      },
+      "questionData": {
+        "title": "questionData",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/questionAttributes"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "assetCategory": {
+        "title": "assetCategory",
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/assetCategoryData"
+          }
+        }
+      },
+      "assetCategoryData": {
+        "title": "assetCategoryData",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/assetCategoryAttributes"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "assetCategoryAttributes": {
+        "title": "assetCategoryAttributes",
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "questionAttributes": {
+        "title": "questionField",
+        "type": "object",
+        "properties": {
+          "helpText": {
+            "type": "string"
+          },
+          "fieldType": {
+            "type": "string"
+          },
+          "responseOptionValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/questionResponseOption"
             }
           },
-          "relationships": {
-            "type": "object",
-            "properties": {
-              "programme": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "type": {
-                        "type": "string",
-                        "enum": [
-                          "programme"
-                        ]
-                      }
-                    }
-                  },
-                  "links": {
-                    "type": "object",
-                    "properties": {
-                      "related": {
-                        "type": "string",
-                        "format": "uri"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+          "required": {
+            "type": "boolean"
+          },
+          "label": {
+            "type": "string"
+          },
+          "fieldText": {
+            "type": "string"
+          },
+          "fieldName": {
+            "type": "string"
           }
         }
       }
