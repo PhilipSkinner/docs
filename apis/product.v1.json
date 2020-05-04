@@ -217,6 +217,2280 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/product"
+                },
+                "examples": {
+                  "example-Term-Loan": {
+                    "value": {
+                      "data": {
+                        "attributes": {
+                          "createdBy": "string",
+                          "createdDate": "2020-03-31T15:47:28Z",
+                          "updatedBy": "string",
+                          "updatedDate": "2020-03-31T15:47:28Z",
+                          "name": "Term Loan",
+                          "description": "Term Loan - Enterprise Finance Guarantee",
+                          "dataProtection": {
+                            "questions": [
+                              {
+                                "fieldName": "$.dataProtection.dataProtectionAgreed",
+                                "helpText": "(required)",
+                                "fieldType": "boolean",
+                                "required": true,
+                                "label": "Data Protection and Disclosure Declaration",
+                                "fieldText": "Before proceeding, please confirm that Scheme's signed Data Protection and Disclosure Declaration has been received"
+                              }
+                            ]
+                          },
+                          "applicationDetails": {
+                            "questions": [
+                              {
+                                "label": "Legay Form",
+                                "fieldName": "$.applicationDetails.legalForm",
+                                "helpText": "string",
+                                "fieldType": "string",
+                                "responseOptionValues": [
+                                  [
+                                    {
+                                      "responseValue": "Sole Trader"
+                                    },
+                                    {
+                                      "responseValue": "Partnership"
+                                    },
+                                    {
+                                      "responseValue": "Limited Liability Partnership (LLP)"
+                                    },
+                                    {
+                                      "responseValue": "Private Limited Company (LTD)"
+                                    },
+                                    {
+                                      "responseValue": "Public Limited Company (PLC)"
+                                    },
+                                    {
+                                      "responseValue": "Other"
+                                    }
+                                  ]
+                                ],
+                                "required": true,
+                                "fieldText": ""
+                              },
+                              {
+                                "label": "Company registration number",
+                                "fieldName": "$.applicationDetails.companyRegistrationNumber",
+                                "helpText": "string",
+                                "fieldType": "string",
+                                "required": false,
+                                "fieldText": ""
+                              },
+                              {
+                                "label": "Business legal name",
+                                "fieldName": "$.applicationDetails.businessLegalName",
+                                "helpText": "string",
+                                "fieldType": "string",
+                                "required": true,
+                                "fieldText": ""
+                              },
+                              {
+                                "label": "Business trading name",
+                                "fieldName": "$.applicationDetails.businessTradingName",
+                                "helpText": "string",
+                                "fieldType": "string",
+                                "required": true,
+                                "fieldText": ""
+                              },
+                              {
+                                "label": "Sic code",
+                                "fieldName": "$.applicationDetails.sicCode",
+                                "helpText": "string",
+                                "fieldType": "string",
+                                "required": true,
+                                "fieldText": "Which Standard Indudtrial Classification (SIC) code from the UK SIC 2007 best describes the busness sector in which the guaranteed facility will be used?"
+                              },
+                              {
+                                "label": "Company annual turnover",
+                                "fieldName": "$.applicationDetails.companyTurnover",
+                                "helpText": "string",
+                                "fieldType": "number",
+                                "required": true,
+                                "fieldText": "What is the current (or where none,forcast) annual turnover of the Applicant (or, if the Applicant is a Group Company, the aggregate Group turnover)?"
+                              },
+                              {
+                                "label": "Turnover by trading activity",
+                                "fieldName": "$.applicationDetails.tradingActivityTurnoverGreaterThanAllowed",
+                                "fieldType": "boolean",
+                                "required": true,
+                                "fieldText": "Is (or will) more than 50% of the above turnover be generated by trading activity?"
+                              },
+                              {
+                                "label": "Commencement of trading date",
+                                "fieldName": "$.applicationDetails.tradingStartDate",
+                                "fieldType": "date",
+                                "required": true,
+                                "fieldText": "What is the commencement of trading date of the Applicant business?"
+                              },
+                              {
+                                "label": "Postcode of where the facility will be used",
+                                "fieldName": "$.applicationDetails.tradingPostcode",
+                                "fieldType": "string",
+                                "required": true,
+                                "helpText": "Use the postcode lookup to check you have the correct postcode, you do not need to select an exact address",
+                                "fieldText": ""
+                              }
+                            ]
+                          },
+                          "lenderInformation": {
+                            "questions": [
+                              {
+                                "label": "Sort code",
+                                "fieldName": "$.lenderInformation.sortCode",
+                                "helpText": "string",
+                                "fieldType": "number",
+                                "required": true,
+                                "fieldText": "What is the Sort Code of the bank branch or business centre which originated this application?"
+                              },
+                              {
+                                "label": "Lender reference",
+                                "fieldName": "$.lenderInformation.lenderApplicationReference",
+                                "helpText": "string",
+                                "fieldType": "number",
+                                "required": true,
+                                "fieldText": "Enter your own reference for this application, eg the reference of the loan facility"
+                              }
+                            ]
+                          },
+                          "facilityDetails": {
+                            "facilityType": {
+                              "name": "Term Loan",
+                              "lenderDrawDownContribution": {
+                                "IAUR-Percent-Applies": false
+                              },
+                              "facilityRepaymentCalculator": "Exclude Interest"
+                            },
+                            "questions": [
+                              {
+                                "label": "Facility Total",
+                                "fieldName": "$.facilityDetails.facilityTotalAmount",
+                                "fieldType": "number",
+                                "required": true,
+                                "fieldText": "What is the overall facility to be provided?"
+                              },
+                              {
+                                "label": "Repayment profile",
+                                "fieldName": "$.facilityDetails.repaymentType",
+                                "fieldType": "string",
+                                "required": true,
+                                "fieldText": "Repayment profile",
+                                "responseOptionValues": [
+                                  {
+                                    "responseLabel": "Repayment amount",
+                                    "responseValue": "fixedRepaymentAmount"
+                                  },
+                                  {
+                                    "responseLabel": "Repay to zero",
+                                    "responseValue": "fixedTerm"
+                                  }
+                                ]
+                              },
+                              {
+                                "label": "Payment Frequency",
+                                "fieldName": "$.facilityDetails.paymentFrequency",
+                                "helpText": "string",
+                                "fieldType": "string",
+                                "responseOptionValues": [
+                                  {
+                                    "responseValue": "Bullet - Interest Only"
+                                  },
+                                  {
+                                    "responseValue": "Monthly"
+                                  },
+                                  {
+                                    "responseValue": "Weekly"
+                                  },
+                                  {
+                                    "responseValue": "Yearly"
+                                  },
+                                  {
+                                    "responseValue": "Quarterly"
+                                  },
+                                  {
+                                    "responseValue": "Six-Monthy"
+                                  },
+                                  {
+                                    "responseValue": "Seasonal"
+                                  }
+                                ],
+                                "required": true,
+                                "fieldText": ""
+                              },
+                              {
+                                "label": "Years",
+                                "fieldName": "$.facilityDetails.term.years",
+                                "fieldType": "number",
+                                "required": false
+                              },
+                              {
+                                "label": "Months",
+                                "fieldName": "$.facilityDetails.term.months",
+                                "fieldType": "number",
+                                "required": false
+                              },
+                              {
+                                "label": "Total months",
+                                "fieldName": "$.facilityDetails.term.totalMonths",
+                                "fieldType": "number",
+                                "required": false
+                              },
+                              {
+                                "label": "Fixed Payment amount",
+                                "fieldName": "$.facilityDetails.frequencyPaymentAmount",
+                                "fieldType": "number",
+                                "required": true
+                              },
+                              {
+                                "label": "Principal Purpose",
+                                "fieldName": "$.facilityDetails.principalPurpose",
+                                "fieldText": "What is the principal purpose for which the scheme facility will be used for",
+                                "fieldType": "string",
+                                "required": true,
+                                "responseOptionValues": [
+                                  {
+                                    "responseValue": "Start-up costs"
+                                  },
+                                  {
+                                    "responseValue": "General working capital requirements"
+                                  },
+                                  {
+                                    "responseValue": "Purchasing specific equipment or machinery"
+                                  },
+                                  {
+                                    "responseValue": "Purchasing licences quotas or other entitlements to trade"
+                                  },
+                                  {
+                                    "responseValue": "Research and Development activities"
+                                  },
+                                  {
+                                    "responseValue": "Acquiring another business within the UK"
+                                  },
+                                  {
+                                    "responseValue": "Acquiring another business outside the UK – Ineligible"
+                                  },
+                                  {
+                                    "responseValue": "Expanding an existing business within the UK"
+                                  },
+                                  {
+                                    "responseValue": "Expanding an existing business outside the UK – Ineligible"
+                                  },
+                                  {
+                                    "responseValue": "Financing an export order – Ineligible"
+                                  },
+                                  {
+                                    "responseValue": "Replacing existing internal finance"
+                                  },
+                                  {
+                                    "responseValue": "Replacing existing external finance"
+                                  }
+                                ]
+                              },
+                              {
+                                "label": "Rate",
+                                "fieldName": "$.facilityDetails.interest.interestType",
+                                "fieldType": "string",
+                                "required": true,
+                                "fieldText": "Please indicate whether the interest on this facility is to be charged at a fixed or variable rate",
+                                "responseOptionValues": [
+                                  {
+                                    "responseValue": "Fixed"
+                                  },
+                                  {
+                                    "responseValue": "Variable"
+                                  }
+                                ]
+                              },
+                              {
+                                "label": "Interest rate margin",
+                                "fieldName": "$.facilityDetails.interest.rateMargin",
+                                "fieldType": "number",
+                                "required": true
+                              }
+                            ]
+                          },
+                          "stateAid": {
+                            "questions": [
+                              {
+                                "fieldName": "$.stateAid.underStateAidLimit",
+                                "helpText": "string",
+                                "fieldType": "boolean",
+                                "required": true,
+                                "label": "Applicant's de minimis State aid (past 3 years)",
+                                "fieldText": "Is the total value of the applicant's (or if the Applicant is a Group Company, the relevant Group's) de minimis State aid for the last three years (including that arising from this application) less than 200,000 euro?"
+                              }
+                            ]
+                          },
+                          "fees": {
+                            "questions": [
+                              {
+                                "fieldName": "$.fees.totalFees",
+                                "helpText": "string",
+                                "fieldType": "number",
+                                "required": true,
+                                "label": "Total value of fees",
+                                "fieldText": "Please enter the total value of any arrangement, insurance or other fees (but excluding interest and the EFG Guarantee Fee) the Applicant will be charged in connection with this facility being provided"
+                              }
+                            ]
+                          },
+                          "security": {
+                            "questions": [
+                              {
+                                "fieldName": "$.principalTypeOfAsset.name",
+                                "helpText": "string",
+                                "fieldType": "string",
+                                "required": true,
+                                "label": "Principal type of asset",
+                                "fieldText": "Please select the principal type of asset over which a charge has been taken to provide the partial security",
+                                "responseOptionValues": [
+                                  {
+                                    "responseValue": "Residential Property other than a principal private residence"
+                                  },
+                                  {
+                                    "responseValue": "Commercial Property"
+                                  },
+                                  {
+                                    "responseValue": "Shares and other securities"
+                                  },
+                                  {
+                                    "responseValue": "Cash on deposit"
+                                  },
+                                  {
+                                    "responseValue": "Plant, machinery or other business equipment"
+                                  },
+                                  {
+                                    "responseValue": "Raw materials or stock"
+                                  },
+                                  {
+                                    "responseValue": "Personal vehicle, boat or other asset"
+                                  },
+                                  {
+                                    "responseValue": "Personal life insurance or other policy"
+                                  },
+                                  {
+                                    "responseValue": "Debenture or Floating Charge"
+                                  },
+                                  {
+                                    "responseValue": "Personal Guarantee – Supported"
+                                  },
+                                  {
+                                    "responseValue": "Personal Guarantee – Unsupported"
+                                  },
+                                  {
+                                    "responseValue": "Other"
+                                  }
+                                ]
+                              },
+                              {
+                                "fieldName": "$.principalTypeOfAsset.value",
+                                "fieldType": "number",
+                                "required": true,
+                                "label": "Value of additional security",
+                                "fieldText": "For the purpose of this lending decision, what value is assigned to the additional security taken?"
+                              }
+                            ]
+                          },
+                          "drawDownEvents": {
+                            "questions": [
+                              {
+                                "fieldName": "$.date",
+                                "fieldType": "date",
+                                "required": true,
+                                "label": "Months from Start"
+                              },
+                              {
+                                "fieldName": "$.amount",
+                                "fieldType": "number",
+                                "required": true,
+                                "label": "Amount"
+                              },
+                              {
+                                "fieldName": "$.monthsFromStart",
+                                "fieldType": "integer",
+                                "required": true,
+                                "label": "Months from start"
+                              }
+                            ]
+                          },
+                          "repaymentHolidays": {
+                            "questions": [
+                              {
+                                "fieldName": "$.startDate",
+                                "fieldType": "date",
+                                "required": true,
+                                "label": "Start Date"
+                              },
+                              {
+                                "fieldName": "$.endDate",
+                                "fieldType": "date",
+                                "required": true,
+                                "label": "End Date"
+                              },
+                              {
+                                "fieldName": "$.numberOfMonths",
+                                "fieldType": "integer",
+                                "required": true,
+                                "label": "months"
+                              }
+                            ]
+                          },
+                          "additionalLenderInformation": {
+                            "questions": [
+                              {
+                                "fieldName": "string",
+                                "helpText": "string",
+                                "fieldType": "string",
+                                "responseOptionValues": [
+                                  {
+                                    "responseValue": "string"
+                                  }
+                                ],
+                                "required": true,
+                                "label": "string",
+                                "fieldText": "string"
+                              }
+                            ]
+                          },
+                          "applicationOffered": {
+                            "questions": [
+                              {
+                                "label": "Offer date",
+                                "fieldName": "$.applicationOffered.offeredDate",
+                                "helpText": "",
+                                "fieldType": "date",
+                                "required": true,
+                                "fieldText": "once the facility has been offered to the borrower, please add the date the offer letter was issued."
+                              }
+                            ]
+                          },
+                          "applicationComplete": {
+                            "questions": [
+                              {
+                                "label": "Completed date",
+                                "fieldName": "$.applicationOffered.completedDate",
+                                "helpText": "",
+                                "fieldType": "date",
+                                "required": true,
+                                "fieldText": ""
+                              }
+                            ]
+                          },
+                          "applicationGuaranteed": {
+                            "questions": [
+                              {
+                                "label": "Guaranteed date",
+                                "fieldName": "$.applicationGuaranteed.guaranteedDate",
+                                "fieldType": "date",
+                                "required": true
+                              },
+                              {
+                                "label": "Information declaration",
+                                "fieldName": "$.applicationGuaranteed.signedInformationDeclaration",
+                                "fieldType": "boolean",
+                                "required": true,
+                                "fieldText": "The borrower has signed and returned the information declaration"
+                              },
+                              {
+                                "label": "Guarantee fee payment confirmation",
+                                "fieldName": "$.applicationGuaranteed.guaranteeFeePaymentCanBeMade",
+                                "fieldType": "boolean",
+                                "required": true,
+                                "fieldText": "Confirm borrower ability to make guarantee fee payment"
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      "links": {
+                        "self": "string",
+                        "products": "string",
+                        "programme": "string",
+                        "ruleSet": "string",
+                        "sicCodes": "string"
+                      },
+                      "included": [
+                        {
+                          "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                          "type": "ruleSet",
+                          "etag": "string",
+                          "attributes": {
+                            "IAURPercent": 60,
+                            "euroBaseExchangeRate": 1.25,
+                            "euroExchangeInterestRate": 1.1,
+                            "annualFeePercent": 2,
+                            "minFacilityAmount": 1000,
+                            "maxFacilityAmount": 1200000,
+                            "borrowerDetailRules": {
+                              "maxBorrowerTurnover": 41000000,
+                              "maxPercentOfTurnoverGeneratedByTradingActivity": 50
+                            },
+                            "facilityRules": [
+                              {
+                                "facilityTypes": [
+                                  "Term Loan",
+                                  "Asset Finance"
+                                ],
+                                "facilityLimits": [
+                                  {
+                                    "maxTermMonths": 60,
+                                    "minTermMonths": 3,
+                                    "maxFacilityAmount": 1200000,
+                                    "minFacilityAmount": 600000
+                                  },
+                                  {
+                                    "maxTermMonths": 120,
+                                    "minTermMonths": 3,
+                                    "maxFacilityAmount": 600000,
+                                    "minFacilityAmount": 1000
+                                  }
+                                ]
+                              },
+                              {
+                                "facilityTypes": [
+                                  "Invoice Finance",
+                                  "Revolving Credit"
+                                ],
+                                "facilityLimits": [
+                                  {
+                                    "maxTermMonths": 36,
+                                    "minTermMonths": 3,
+                                    "maxFacilityAmount": 1200000,
+                                    "minFacilityAmount": 1000
+                                  }
+                                ]
+                              }
+                            ],
+                            "paymentFeeRules": {
+                              "annualFeePercent": 2,
+                              "guaranteeFeeRules": [
+                                {
+                                  "facilityTypes": [
+                                    "Term Loan",
+                                    "Asset Finance",
+                                    "Invoice Finance"
+                                  ],
+                                  "amountUsedForfeeCalc": "Facility Outstanding Balance",
+                                  "facilityTotalFixedFee": false
+                                },
+                                {
+                                  "facilityTypes": [
+                                    "Revolving Credit"
+                                  ],
+                                  "amountUsedForfeeCalc": "Facility Guaranteed Amount",
+                                  "facilityTotalFixedFee": true
+                                }
+                              ]
+                            },
+                            "sicCodeRules": [
+                              {
+                                "stateAid": {
+                                  "currency": "euros",
+                                  "maxStateAidAmount": 15000
+                                },
+                                "facilityLimits": [
+                                  {
+                                    "maxTermMonths": 60,
+                                    "minTermMonths": 3,
+                                    "maxFacilityAmount": 90000,
+                                    "minFacilityAmount": 1000
+                                  },
+                                  {
+                                    "maxTermMonths": 120,
+                                    "minTermMonths": 3,
+                                    "maxFacilityAmount": 45000,
+                                    "minFacilityAmount": 1000
+                                  }
+                                ],
+                                "sicCodesStartingWith": [
+                                  "01110",
+                                  "01120",
+                                  "01130",
+                                  "01140",
+                                  "01150",
+                                  "01160",
+                                  "01190",
+                                  "01210",
+                                  "01220",
+                                  "01230",
+                                  "01240",
+                                  "01250",
+                                  "01260",
+                                  "01270",
+                                  "01280",
+                                  "01290",
+                                  "01300",
+                                  "01410",
+                                  "01420",
+                                  "01430",
+                                  "01440",
+                                  "01450",
+                                  "01460",
+                                  "01470",
+                                  "01490",
+                                  "15110",
+                                  "15120",
+                                  "15200",
+                                  "16100",
+                                  "16210",
+                                  "16220",
+                                  "16230",
+                                  "16240",
+                                  "16290"
+                                ]
+                              },
+                              {
+                                "stateAid": {
+                                  "currency": "euros",
+                                  "maxStateAidAmount": 30000
+                                },
+                                "facilityLimits": [
+                                  {
+                                    "maxTermMonths": 60,
+                                    "minTermMonths": 3,
+                                    "maxFacilityAmount": 180000,
+                                    "minFacilityAmount": 1000
+                                  },
+                                  {
+                                    "maxTermMonths": 120,
+                                    "minTermMonths": 3,
+                                    "maxFacilityAmount": 90000,
+                                    "minFacilityAmount": 1000
+                                  }
+                                ],
+                                "sicCodesStartingWith": [
+                                  "03110",
+                                  "03120",
+                                  "03210",
+                                  "03220",
+                                  "10200"
+                                ]
+                              },
+                              {
+                                "stateAid": {
+                                  "currency": "euros",
+                                  "maxStateAidAmount": 100000
+                                },
+                                "facilityLimits": [
+                                  {
+                                    "maxTermMonths": 60,
+                                    "minTermMonths": 3,
+                                    "maxFacilityAmount": 600000,
+                                    "minFacilityAmount": 1000
+                                  },
+                                  {
+                                    "maxTermMonths": 120,
+                                    "minTermMonths": 3,
+                                    "maxFacilityAmount": 300000,
+                                    "minFacilityAmount": 1000
+                                  }
+                                ],
+                                "sicCodesStartingWith": [
+                                  "49410"
+                                ]
+                              }
+                            ],
+                            "stateAid": {
+                              "stateAidPeriodInMonths": 36,
+                              "stateAidRules": [
+                                {
+                                  "currency": "euros",
+                                  "maxStateAidAmount": 200000
+                                }
+                              ]
+                            },
+                            "principalPurposeRules": [
+                              {
+                                "principalPurposes": [
+                                  "Replacing existing internal finance",
+                                  "Replacing existing external finance"
+                                ],
+                                "drawDownPercentLimitPerFiscalYear": 20
+                              }
+                            ],
+                            "ineligibleSicCodes": [
+                              "64191",
+                              "64192",
+                              "65100",
+                              "65200",
+                              "85200",
+                              "85310",
+                              "94100",
+                              "94200",
+                              "94910",
+                              "94920",
+                              "97000",
+                              "98000"
+                            ],
+                            "lenderRules": [
+                              {
+                                "lenderType": "Small",
+                                "claimLimit-Percent-Of-Drawdown": 75,
+                                "annualDrawDown-LessThan-Amount": 125000,
+                                "annualDrawDown-MoreThan-Amount": 0
+                              },
+                              {
+                                "lenderType": "Small",
+                                "claimLimit-Percent-Of-Drawdown": 15,
+                                "annualDrawDown-MoreThan-Amount": 125000
+                              },
+                              {
+                                "lenderType": "Large",
+                                "claimLimit-Percent-Of-Drawdown": 15,
+                                "annualDrawDown-MoreThan-Amount": 0
+                              }
+                            ],
+                            "productLenderLimitedDrawDownContribution": [
+                              {
+                                "facilityTypes": [
+                                  "Invoice Finance"
+                                ],
+                                "IAURPercentApplies": true
+                              }
+                            ],
+                            "activeRange": {
+                              "from": "2020-03-31T16:41:22Z",
+                              "to": "2020-03-31T16:41:22Z"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "example-Asset-Finance": {
+                    "value": {
+                      "data": {
+                        "attributes": {
+                          "createdBy": "string",
+                          "createdDate": "2020-03-31T15:47:28Z",
+                          "updatedBy": "string",
+                          "updatedDate": "2020-03-31T15:47:28Z",
+                          "name": "Asset Finance",
+                          "description": "Asset Finance",
+                          "dataProtection": {
+                            "questions": [
+                              {
+                                "fieldName": "$.dataProtection.dataProtectionAgreed",
+                                "helpText": "(required)",
+                                "fieldType": "boolean",
+                                "required": true,
+                                "label": "Data Protection and Disclosure Declaration",
+                                "fieldText": "Before proceeding, please confirm that Scheme's signed Data Protection and Disclosure Declaration has been received"
+                              }
+                            ]
+                          },
+                          "applicationDetails": {
+                            "questions": [
+                              {
+                                "label": "Legay Form",
+                                "fieldName": "$.applicationDetails.legalForm",
+                                "helpText": "string",
+                                "fieldType": "string",
+                                "responseOptionValues": [
+                                  [
+                                    {
+                                      "responseValue": "Sole Trader"
+                                    },
+                                    {
+                                      "responseValue": "Partnership"
+                                    },
+                                    {
+                                      "responseValue": "Limited Liability Partnership (LLP)"
+                                    },
+                                    {
+                                      "responseValue": "Private Limited Company (LTD)"
+                                    },
+                                    {
+                                      "responseValue": "Public Limited Company (PLC)"
+                                    },
+                                    {
+                                      "responseValue": "Other"
+                                    }
+                                  ]
+                                ],
+                                "required": true,
+                                "fieldText": ""
+                              },
+                              {
+                                "label": "Company registration number",
+                                "fieldName": "$.applicationDetails.companyRegistrationNumber",
+                                "helpText": "string",
+                                "fieldType": "string",
+                                "required": false,
+                                "fieldText": ""
+                              },
+                              {
+                                "label": "Business legal name",
+                                "fieldName": "$.applicationDetails.businessLegalName",
+                                "helpText": "string",
+                                "fieldType": "string",
+                                "required": true,
+                                "fieldText": ""
+                              },
+                              {
+                                "label": "Business trading name",
+                                "fieldName": "$.applicationDetails.businessTradingName",
+                                "helpText": "string",
+                                "fieldType": "string",
+                                "required": true,
+                                "fieldText": ""
+                              },
+                              {
+                                "label": "Sic code",
+                                "fieldName": "$.applicationDetails.sicCode",
+                                "helpText": "string",
+                                "fieldType": "string",
+                                "required": true,
+                                "fieldText": "Which Standard Indudtrial Classification (SIC) code from the UK SIC 2007 best describes the busness sector in which the guaranteed facility will be used?"
+                              },
+                              {
+                                "label": "Company annual turnover",
+                                "fieldName": "$.applicationDetails.companyTurnover",
+                                "helpText": "string",
+                                "fieldType": "number",
+                                "required": true,
+                                "fieldText": "What is the current (or where none,forcast) annual turnover of the Applicant (or, if the Applicant is a Group Company, the aggregate Group turnover)?"
+                              },
+                              {
+                                "label": "Turnover by trading activity",
+                                "fieldName": "$.applicationDetails.tradingActivityTurnoverGreaterThanAllowed",
+                                "fieldType": "boolean",
+                                "required": true,
+                                "fieldText": "Is (or will) more than 50% of the above turnover be generated by trading activity?"
+                              },
+                              {
+                                "label": "Commencement of trading date",
+                                "fieldName": "$.applicationDetails.tradingStartDate",
+                                "fieldType": "date",
+                                "required": true,
+                                "fieldText": "What is the commencement of trading date of the Applicant business?"
+                              },
+                              {
+                                "label": "Postcode of where the facility will be used",
+                                "fieldName": "$.applicationDetails.tradingPostcode",
+                                "fieldType": "string",
+                                "required": true,
+                                "helpText": "Use the postcode lookup to check you have the correct postcode, you do not need to select an exact address",
+                                "fieldText": ""
+                              }
+                            ]
+                          },
+                          "lenderInformation": {
+                            "questions": [
+                              {
+                                "label": "Sort code",
+                                "fieldName": "$.lenderInformation.sortCode",
+                                "helpText": "string",
+                                "fieldType": "number",
+                                "required": true,
+                                "fieldText": "What is the Sort Code of the bank branch or business centre which originated this application?"
+                              },
+                              {
+                                "label": "Lender reference",
+                                "fieldName": "$.lenderInformation.lenderApplicationReference",
+                                "helpText": "string",
+                                "fieldType": "number",
+                                "required": true,
+                                "fieldText": "Enter your own reference for this application, eg the reference of the loan facility"
+                              }
+                            ]
+                          },
+                          "facilityDetails": {
+                            "facilityType": {
+                              "name": "Asset Finance",
+                              "lenderDrawDownContribution": {
+                                "IAUR-Percent-Applies": false
+                              },
+                              "facilityCalculator": "Include Interest"
+                            },
+                            "questions": [
+                              {
+                                "label": "Facility Total",
+                                "fieldName": "$.facilityDetails.facilityTotalAmount",
+                                "fieldType": "number",
+                                "required": true
+                              },
+                              {
+                                "label": "Principal Purpose",
+                                "fieldName": "$.facilityDetails.principalPurpose",
+                                "fieldText": "What is the principal purpose for which the scheme facility will be used for",
+                                "fieldType": "string",
+                                "required": true,
+                                "responseOptionValues": [
+                                  {
+                                    "responseValue": "Purchasing specific equipment or machinery"
+                                  },
+                                  {
+                                    "responseValue": "Purchasing licences quotas or other entitlements to trade"
+                                  }
+                                ]
+                              },
+                              {
+                                "label": "Category",
+                                "fieldName": "$facilityDetails.assetFinanceDetails.details.category",
+                                "fieldText": "What category best describes the asset being aquired / hired",
+                                "fieldType": "string",
+                                "required": true,
+                                "responseOptionValues": [
+                                  {
+                                    "responseValue": "Furniture and fittings"
+                                  },
+                                  {
+                                    "responseValue": "Cars / taxis"
+                                  },
+                                  {
+                                    "responseValue": "Construction equipment (incl scaffolding, portacabins)"
+                                  },
+                                  {
+                                    "responseValue": "Light commercial vehicles"
+                                  },
+                                  {
+                                    "responseValue": "Materials handling"
+                                  },
+                                  {
+                                    "responseValue": "Garage equipment"
+                                  },
+                                  {
+                                    "responseValue": "Engineering equipment"
+                                  },
+                                  {
+                                    "responseValue": "Refrigeration"
+                                  },
+                                  {
+                                    "responseValue": "Catering / cleaning"
+                                  },
+                                  {
+                                    "responseValue": "Hair and beauty equipment"
+                                  },
+                                  {
+                                    "responseValue": "Agricultural / Farming / Livestock"
+                                  },
+                                  {
+                                    "responseValue": "Gymnasium / Sports / Leisure equipment"
+                                  },
+                                  {
+                                    "responseValue": "Vending equipment"
+                                  },
+                                  {
+                                    "responseValue": "Heavy commercial vehicles / Trailers"
+                                  },
+                                  {
+                                    "responseValue": "Buses / Coaches"
+                                  },
+                                  {
+                                    "responseValue": "Cranes"
+                                  },
+                                  {
+                                    "responseValue": "Industrial Plant and Machinery"
+                                  },
+                                  {
+                                    "responseValue": "Computer Equipment / Technology / Telecoms (hardware / software)"
+                                  },
+                                  {
+                                    "responseValue": "Dental / Medical / Optical Equipment / Scientific/ Health / Veterinary"
+                                  },
+                                  {
+                                    "responseValue": "Broadcast and Media equipment"
+                                  },
+                                  {
+                                    "responseValue": "Printing Equipment and Reprography"
+                                  },
+                                  {
+                                    "responseValue": "Other"
+                                  }
+                                ]
+                              },
+                              {
+                                "label": "Cash purchase price",
+                                "fieldName": "$facilityDetails.assetFinanceDetails.details.cashPrice",
+                                "fieldText": "What is the cash purchase price - excluding VAT - of the asset being financed?",
+                                "fieldType": "number",
+                                "required": true
+                              },
+                              {
+                                "label": "Installation costs",
+                                "fieldName": "$facilityDetails.assetFinanceDetails.details.installCost",
+                                "fieldType": "number",
+                                "required": true
+                              },
+                              {
+                                "label": "Deposit value",
+                                "fieldName": "$facilityDetails.assetFinanceDetails.details.deposit",
+                                "fieldText": "What is the value of any deposits?",
+                                "fieldType": "number",
+                                "required": true
+                              },
+                              {
+                                "label": "Part-exchange",
+                                "fieldName": "$facilityDetails.assetFinanceDetails.details.partExchange",
+                                "fieldText": "What is the value of any part-exchange?",
+                                "fieldType": "number",
+                                "required": true
+                              },
+                              {
+                                "label": "Original balance financed",
+                                "fieldName": "$facilityDetails.assetFinanceDetails.details.originalBalance",
+                                "fieldType": "number",
+                                "required": true
+                              },
+                              {
+                                "label": "Lender residual value",
+                                "fieldName": "$facilityDetails.assetFinanceDetails.details.residualValue",
+                                "fieldText": "What is the residual value of the lender of the asset being acquired or hired?",
+                                "fieldType": "number",
+                                "required": true
+                              },
+                              {
+                                "label": "Guarantee cover percentage",
+                                "fieldName": "$facilityDetails.assetFinanceDetails.details.coverPercentage",
+                                "fieldText": "Enter a specific percentage",
+                                "fieldType": "number",
+                                "required": true
+                              },
+                              {
+                                "label": "Total Guaranteed facility",
+                                "fieldName": "$facilityDetails.assetFinanceDetails.details.totalGuaranteeFacilityAmount",
+                                "fieldText": "Enter a specific percentage",
+                                "fieldType": "number",
+                                "required": true
+                              },
+                              {
+                                "label": "",
+                                "fieldName": "$.facilityDetails.assetFinanceDetails.agreementType",
+                                "fieldText": "",
+                                "fieldType": "string",
+                                "required": true,
+                                "responseOptionValues": [
+                                  {
+                                    "responseValue": "Hire Purchase"
+                                  },
+                                  {
+                                    "responseValue": "Finance Lease"
+                                  },
+                                  {
+                                    "responseValue": "Sale and Leaseback"
+                                  }
+                                ]
+                              },
+                              {
+                                "label": "Final balloon payment",
+                                "fieldName": "$facilityDetails.assetFinanceDetails.balloonAmount",
+                                "fieldText": "What is the value of the contractual balloon payment to be made by the Applicant at the end od the finance period?",
+                                "fieldType": "number",
+                                "required": true
+                              },
+                              {
+                                "label": "Fixed net yield",
+                                "fieldName": "$facilityDetails.assetFinanceDetails.netYieldPercent",
+                                "fieldText": "Please enter tge fixed net yield applicable to this facility",
+                                "fieldType": "number",
+                                "required": true
+                              },
+                              {
+                                "label": "Repayment profile",
+                                "fieldName": "$.facilityDetails.repaymentType",
+                                "fieldType": "string",
+                                "required": true,
+                                "fieldText": "Repayment profile",
+                                "responseOptionValues": [
+                                  {
+                                    "responseLabel": "Repay to zero",
+                                    "responseValue": "fixedTerm"
+                                  }
+                                ]
+                              },
+                              {
+                                "label": "Payment Frequency",
+                                "fieldName": "$.facilityDetails.paymentFrequency",
+                                "helpText": "string",
+                                "fieldType": "string",
+                                "responseOptionValues": [
+                                  {
+                                    "responseValue": "Bullet - Interest Only"
+                                  },
+                                  {
+                                    "responseValue": "Monthly"
+                                  },
+                                  {
+                                    "responseValue": "Weekly"
+                                  },
+                                  {
+                                    "responseValue": "Yearly"
+                                  },
+                                  {
+                                    "responseValue": "Quarterly"
+                                  },
+                                  {
+                                    "responseValue": "Six-Monthy"
+                                  }
+                                ],
+                                "required": true,
+                                "fieldText": ""
+                              },
+                              {
+                                "label": "Years",
+                                "fieldName": "$.facilityDetails.term.years",
+                                "fieldType": "number",
+                                "required": false
+                              },
+                              {
+                                "label": "Months",
+                                "fieldName": "$.facilityDetails.term.months",
+                                "fieldType": "number",
+                                "required": false
+                              },
+                              {
+                                "label": "Total months",
+                                "fieldName": "$.facilityDetails.term.totalMonths",
+                                "fieldType": "number",
+                                "required": false
+                              }
+                            ]
+                          },
+                          "stateAid": {
+                            "questions": [
+                              {
+                                "fieldName": "$.stateAid.underStateAidLimit",
+                                "helpText": "string",
+                                "fieldType": "boolean",
+                                "required": true,
+                                "label": "Applicant's de minimis State aid (past 3 years)",
+                                "fieldText": "Is the total value of the applicant's (or if the Applicant is a Group Company, the relevant Group's) de minimis State aid for the last three years (including that arising from this application) less than 200,000 euro?"
+                              }
+                            ]
+                          },
+                          "fees": {
+                            "questions": [
+                              {
+                                "fieldName": "$.fees.totalFees",
+                                "helpText": "string",
+                                "fieldType": "number",
+                                "required": true,
+                                "label": "Total value of fees",
+                                "fieldText": "Please enter the total value of any arrangement, insurance or other fees (but excluding interest and the EFG Guarantee Fee) the Applicant will be charged in connection with this facility being provided"
+                              }
+                            ]
+                          },
+                          "security": {
+                            "questions": [
+                              {
+                                "fieldName": "$.principalTypeOfAsset.name",
+                                "helpText": "string",
+                                "fieldType": "string",
+                                "required": true,
+                                "label": "Principal type of asset",
+                                "fieldText": "Please select the principal type of asset over which a charge has been taken to provide the partial security",
+                                "responseOptionValues": [
+                                  {
+                                    "responseValue": "Residential Property other than a principal private residence"
+                                  },
+                                  {
+                                    "responseValue": "Commercial Property"
+                                  },
+                                  {
+                                    "responseValue": "Shares and other securities"
+                                  },
+                                  {
+                                    "responseValue": "Cash on deposit"
+                                  },
+                                  {
+                                    "responseValue": "Plant, machinery or other business equipment"
+                                  },
+                                  {
+                                    "responseValue": "Raw materials or stock"
+                                  },
+                                  {
+                                    "responseValue": "Personal vehicle, boat or other asset"
+                                  },
+                                  {
+                                    "responseValue": "Personal life insurance or other policy"
+                                  },
+                                  {
+                                    "responseValue": "Debenture or Floating Charge"
+                                  },
+                                  {
+                                    "responseValue": "Personal Guarantee – Supported"
+                                  },
+                                  {
+                                    "responseValue": "Personal Guarantee – Unsupported"
+                                  },
+                                  {
+                                    "responseValue": "Other"
+                                  }
+                                ]
+                              },
+                              {
+                                "fieldName": "$.principalTypeOfAsset.value",
+                                "fieldType": "number",
+                                "required": true,
+                                "label": "Value of additional security",
+                                "fieldText": "For the purpose of this lending decision, what value is assigned to the additional security taken?"
+                              }
+                            ]
+                          },
+                          "drawDownEvents": {
+                            "questions": [
+                              {
+                                "fieldName": "$.date",
+                                "fieldType": "date",
+                                "required": true,
+                                "label": "Months from Start"
+                              },
+                              {
+                                "fieldName": "$.amount",
+                                "fieldType": "number",
+                                "required": true,
+                                "label": "Amount"
+                              },
+                              {
+                                "fieldName": "$.monthsFromStart",
+                                "fieldType": "integer",
+                                "required": true,
+                                "label": "Months from start"
+                              }
+                            ]
+                          },
+                          "repaymentHolidays": {
+                            "questions": [
+                              {
+                                "fieldName": "$.startDate",
+                                "fieldType": "date",
+                                "required": true,
+                                "label": "Start Date"
+                              },
+                              {
+                                "fieldName": "$.endDate",
+                                "fieldType": "date",
+                                "required": true,
+                                "label": "End Date"
+                              },
+                              {
+                                "fieldName": "$.numberOfMonths",
+                                "fieldType": "integer",
+                                "required": true,
+                                "label": "months"
+                              }
+                            ]
+                          },
+                          "additionalLenderInformation": {
+                            "questions": [
+                              {
+                                "fieldName": "string",
+                                "helpText": "string",
+                                "fieldType": "string",
+                                "responseOptionValues": [
+                                  {
+                                    "responseValue": "string"
+                                  }
+                                ],
+                                "required": true,
+                                "label": "string",
+                                "fieldText": "string"
+                              }
+                            ]
+                          },
+                          "applicationOffered": {
+                            "questions": [
+                              {
+                                "label": "Offer date",
+                                "fieldName": "$.applicationOffered.offeredDate",
+                                "helpText": "",
+                                "fieldType": "date",
+                                "required": true,
+                                "fieldText": "once the facility has been offered to the borrower, please add the date the offer letter was issued."
+                              }
+                            ]
+                          },
+                          "applicationComplete": {
+                            "questions": [
+                              {
+                                "label": "Completed date",
+                                "fieldName": "$.applicationOffered.completedDate",
+                                "helpText": "",
+                                "fieldType": "date",
+                                "required": true,
+                                "fieldText": ""
+                              }
+                            ]
+                          },
+                          "applicationGuaranteed": {
+                            "questions": [
+                              {
+                                "label": "Guaranteed date",
+                                "fieldName": "$.applicationGuaranteed.guaranteedDate",
+                                "fieldType": "date",
+                                "required": true
+                              },
+                              {
+                                "label": "Information declaration",
+                                "fieldName": "$.applicationGuaranteed.signedInformationDeclaration",
+                                "fieldType": "boolean",
+                                "required": true,
+                                "fieldText": "The borrower has signed and returned the information declaration"
+                              },
+                              {
+                                "label": "Guarantee fee payment confirmation",
+                                "fieldName": "$.applicationGuaranteed.guaranteeFeePaymentCanBeMade",
+                                "fieldType": "boolean",
+                                "required": true,
+                                "fieldText": "Confirm borrower ability to make guarantee fee payment"
+                              }
+                            ]
+                          }
+                        },
+                        "relationships": {}
+                      },
+                      "links": {},
+                      "includes": {}
+                    }
+                  },
+                  "example-Invoice-Finance": {
+                    "value": {
+                      "data": {
+                        "attributes": {
+                          "createdBy": "string",
+                          "createdDate": "2020-03-31T15:47:28Z",
+                          "updatedBy": "string",
+                          "updatedDate": "2020-03-31T15:47:28Z",
+                          "name": "string",
+                          "description": "string",
+                          "dataProtection": {
+                            "questions": [
+                              {
+                                "fieldName": "$.dataProtection.dataProtectionAgreed",
+                                "helpText": "(required)",
+                                "fieldType": "boolean",
+                                "required": true,
+                                "label": "Data Protection and Disclosure Declaration",
+                                "fieldText": "Before proceeding, please confirm that Scheme's signed Data Protection and Disclosure Declaration has been received"
+                              }
+                            ]
+                          },
+                          "applicationDetails": {
+                            "questions": [
+                              {
+                                "label": "Legay Form",
+                                "fieldName": "$.applicationDetails.legalForm",
+                                "helpText": "string",
+                                "fieldType": "string",
+                                "responseOptionValues": [
+                                  [
+                                    {
+                                      "responseValue": "Sole Trader"
+                                    },
+                                    {
+                                      "responseValue": "Partnership"
+                                    },
+                                    {
+                                      "responseValue": "Limited Liability Partnership (LLP)"
+                                    },
+                                    {
+                                      "responseValue": "Private Limited Company (LTD)"
+                                    },
+                                    {
+                                      "responseValue": "Public Limited Company (PLC)"
+                                    },
+                                    {
+                                      "responseValue": "Other"
+                                    }
+                                  ]
+                                ],
+                                "required": true,
+                                "fieldText": ""
+                              },
+                              {
+                                "label": "Company registration number",
+                                "fieldName": "$.applicationDetails.companyRegistrationNumber",
+                                "helpText": "string",
+                                "fieldType": "string",
+                                "required": false,
+                                "fieldText": ""
+                              },
+                              {
+                                "label": "Business legal name",
+                                "fieldName": "$.applicationDetails.businessLegalName",
+                                "helpText": "string",
+                                "fieldType": "string",
+                                "required": true,
+                                "fieldText": ""
+                              },
+                              {
+                                "label": "Business trading name",
+                                "fieldName": "$.applicationDetails.businessTradingName",
+                                "helpText": "string",
+                                "fieldType": "string",
+                                "required": true,
+                                "fieldText": ""
+                              },
+                              {
+                                "label": "Sic code",
+                                "fieldName": "$.applicationDetails.sicCode",
+                                "helpText": "string",
+                                "fieldType": "string",
+                                "required": true,
+                                "fieldText": "Which Standard Indudtrial Classification (SIC) code from the UK SIC 2007 best describes the busness sector in which the guaranteed facility will be used?"
+                              },
+                              {
+                                "label": "Company annual turnover",
+                                "fieldName": "$.applicationDetails.companyTurnover",
+                                "helpText": "string",
+                                "fieldType": "number",
+                                "required": true,
+                                "fieldText": "What is the current (or where none,forcast) annual turnover of the Applicant (or, if the Applicant is a Group Company, the aggregate Group turnover)?"
+                              },
+                              {
+                                "label": "Turnover by trading activity",
+                                "fieldName": "$.applicationDetails.tradingActivityTurnoverGreaterThanAllowed",
+                                "fieldType": "boolean",
+                                "required": true,
+                                "fieldText": "Is (or will) more than 50% of the above turnover be generated by trading activity?"
+                              },
+                              {
+                                "label": "Commencement of trading date",
+                                "fieldName": "$.applicationDetails.tradingStartDate",
+                                "fieldType": "date",
+                                "required": true,
+                                "fieldText": "What is the commencement of trading date of the Applicant business?"
+                              },
+                              {
+                                "label": "Postcode of where the facility will be used",
+                                "fieldName": "$.applicationDetails.tradingPostcode",
+                                "fieldType": "string",
+                                "required": true,
+                                "helpText": "Use the postcode lookup to check you have the correct postcode, you do not need to select an exact address",
+                                "fieldText": ""
+                              }
+                            ]
+                          },
+                          "lenderInformation": {
+                            "questions": [
+                              {
+                                "label": "Sort code",
+                                "fieldName": "$.lenderInformation.sortCode",
+                                "helpText": "string",
+                                "fieldType": "number",
+                                "required": true,
+                                "fieldText": "What is the Sort Code of the bank branch or business centre which originated this application?"
+                              },
+                              {
+                                "label": "Lender reference",
+                                "fieldName": "$.lenderInformation.lenderApplicationReference",
+                                "helpText": "string",
+                                "fieldType": "number",
+                                "required": true,
+                                "fieldText": "Enter your own reference for this application, eg the reference of the loan facility"
+                              }
+                            ]
+                          },
+                          "facilityDetails": {
+                            "facilityType": {
+                              "name": "Invoice Finance",
+                              "lenderDrawDownContribution": {
+                                "IAUR-Percent-Applies": true
+                              },
+                              "facilityRepaymentCalculator": "Exclude Interest"
+                            },
+                            "questions": [
+                              {
+                                "label": "Principal Purpose",
+                                "fieldName": "$.facilityDetails.principalPurpose",
+                                "fieldText": "What is the principal purpose for which the scheme facility will be used for",
+                                "fieldType": "string",
+                                "required": true,
+                                "responseOptionValues": [
+                                  {
+                                    "responseValue": "Start-up costs"
+                                  },
+                                  {
+                                    "responseValue": "General working capital requirements"
+                                  },
+                                  {
+                                    "responseValue": "Purchasing specific equipment or machinery"
+                                  },
+                                  {
+                                    "responseValue": "Purchasing licences quotas or other entitlements to trade"
+                                  },
+                                  {
+                                    "responseValue": "Research and Development activities"
+                                  },
+                                  {
+                                    "responseValue": "Acquiring another business within the UK"
+                                  },
+                                  {
+                                    "responseValue": "Acquiring another business outside the UK – Ineligible"
+                                  },
+                                  {
+                                    "responseValue": "Expanding an existing business within the UK"
+                                  },
+                                  {
+                                    "responseValue": "Expanding an existing business outside the UK – Ineligible"
+                                  },
+                                  {
+                                    "responseValue": "Financing an export order – Ineligible"
+                                  },
+                                  {
+                                    "responseValue": "Replacing existing internal finance"
+                                  },
+                                  {
+                                    "responseValue": "Replacing existing external finance"
+                                  }
+                                ]
+                              },
+                              {
+                                "label": "Gross Book Debt",
+                                "fieldName": "$.facilityDetails.invoiceFinance.grossBookDebt",
+                                "fieldText": "In £ value terms what is 100% of the Gross Book Debt?",
+                                "fieldType": "number",
+                                "required": true
+                              },
+                              {
+                                "label": "Supported limit",
+                                "fieldName": "$.facilityDetails.invoiceFinance.supportedLimit",
+                                "fieldText": "What limit can be supported under standard commercial credit policy without EFG",
+                                "fieldType": "number",
+                                "required": true
+                              },
+                              {
+                                "label": "Guarantee pre-payment amount",
+                                "fieldName": "$.facilityDetails.invoiceFinance.guaranteePrePaymentAmount",
+                                "fieldText": "or 0% of Gross Book Debt",
+                                "fieldType": "number",
+                                "required": true
+                              },
+                              {
+                                "label": "Repayment profile",
+                                "fieldName": "$.facilityDetails.repaymentType",
+                                "fieldType": "string",
+                                "required": true,
+                                "fieldText": "Repayment profile",
+                                "responseOptionValues": [
+                                  {
+                                    "responseLabel": "Repay to zero",
+                                    "responseValue": "fixedTerm"
+                                  }
+                                ]
+                              },
+                              {
+                                "label": "Payment Frequency",
+                                "fieldName": "$.facilityDetails.paymentFrequency",
+                                "helpText": "string",
+                                "fieldType": "string",
+                                "responseOptionValues": [
+                                  {
+                                    "responseValue": "Bullet - Interest Only"
+                                  },
+                                  {
+                                    "responseValue": "Monthly"
+                                  },
+                                  {
+                                    "responseValue": "Weekly"
+                                  },
+                                  {
+                                    "responseValue": "Yearly"
+                                  },
+                                  {
+                                    "responseValue": "Quarterly"
+                                  },
+                                  {
+                                    "responseValue": "Six-Monthy"
+                                  }
+                                ],
+                                "required": true,
+                                "fieldText": ""
+                              },
+                              {
+                                "label": "Years",
+                                "fieldName": "$.facilityDetails.term.years",
+                                "fieldType": "number",
+                                "required": false
+                              },
+                              {
+                                "label": "Months",
+                                "fieldName": "$.facilityDetails.term.months",
+                                "fieldType": "number",
+                                "required": false
+                              },
+                              {
+                                "label": "Total months",
+                                "fieldName": "$.facilityDetails.term.totalMonths",
+                                "fieldType": "number",
+                                "required": false
+                              }
+                            ]
+                          },
+                          "stateAid": {
+                            "questions": [
+                              {
+                                "fieldName": "$.stateAid.underStateAidLimit",
+                                "helpText": "string",
+                                "fieldType": "boolean",
+                                "required": true,
+                                "label": "Applicant's de minimis State aid (past 3 years)",
+                                "fieldText": "Is the total value of the applicant's (or if the Applicant is a Group Company, the relevant Group's) de minimis State aid for the last three years (including that arising from this application) less than 200,000 euro?"
+                              }
+                            ]
+                          },
+                          "fees": {
+                            "questions": [
+                              {
+                                "fieldName": "$.fees.totalFees",
+                                "helpText": "string",
+                                "fieldType": "number",
+                                "required": true,
+                                "label": "Total value of fees",
+                                "fieldText": "Please enter the total value of any arrangement, insurance or other fees (but excluding interest and the EFG Guarantee Fee) the Applicant will be charged in connection with this facility being provided"
+                              }
+                            ]
+                          },
+                          "security": {
+                            "questions": [
+                              {
+                                "fieldName": "$.principalTypeOfAsset.name",
+                                "helpText": "string",
+                                "fieldType": "string",
+                                "required": true,
+                                "label": "Principal type of asset",
+                                "fieldText": "Please select the principal type of asset over which a charge has been taken to provide the partial security",
+                                "responseOptionValues": [
+                                  {
+                                    "responseValue": "Residential Property other than a principal private residence"
+                                  },
+                                  {
+                                    "responseValue": "Commercial Property"
+                                  },
+                                  {
+                                    "responseValue": "Shares and other securities"
+                                  },
+                                  {
+                                    "responseValue": "Cash on deposit"
+                                  },
+                                  {
+                                    "responseValue": "Plant, machinery or other business equipment"
+                                  },
+                                  {
+                                    "responseValue": "Raw materials or stock"
+                                  },
+                                  {
+                                    "responseValue": "Personal vehicle, boat or other asset"
+                                  },
+                                  {
+                                    "responseValue": "Personal life insurance or other policy"
+                                  },
+                                  {
+                                    "responseValue": "Debenture or Floating Charge"
+                                  },
+                                  {
+                                    "responseValue": "Personal Guarantee – Supported"
+                                  },
+                                  {
+                                    "responseValue": "Personal Guarantee – Unsupported"
+                                  },
+                                  {
+                                    "responseValue": "Other"
+                                  }
+                                ]
+                              },
+                              {
+                                "fieldName": "$.principalTypeOfAsset.value",
+                                "fieldType": "number",
+                                "required": true,
+                                "label": "Value of additional security",
+                                "fieldText": "For the purpose of this lending decision, what value is assigned to the additional security taken?"
+                              }
+                            ]
+                          },
+                          "drawDownEvents": {
+                            "questions": [
+                              {
+                                "fieldName": "$.date",
+                                "fieldType": "date",
+                                "required": true,
+                                "label": "Months from Start"
+                              },
+                              {
+                                "fieldName": "$.amount",
+                                "fieldType": "number",
+                                "required": true,
+                                "label": "Amount"
+                              },
+                              {
+                                "fieldName": "$.monthsFromStart",
+                                "fieldType": "integer",
+                                "required": true,
+                                "label": "Months from start"
+                              }
+                            ]
+                          },
+                          "repaymentHolidays": {
+                            "questions": [
+                              {
+                                "fieldName": "$.startDate",
+                                "fieldType": "date",
+                                "required": true,
+                                "label": "Start Date"
+                              },
+                              {
+                                "fieldName": "$.endDate",
+                                "fieldType": "date",
+                                "required": true,
+                                "label": "End Date"
+                              },
+                              {
+                                "fieldName": "$.numberOfMonths",
+                                "fieldType": "integer",
+                                "required": true,
+                                "label": "months"
+                              }
+                            ]
+                          },
+                          "additionalLenderInformation": {
+                            "questions": [
+                              {
+                                "fieldName": "string",
+                                "helpText": "string",
+                                "fieldType": "string",
+                                "responseOptionValues": [
+                                  {
+                                    "responseValue": "string"
+                                  }
+                                ],
+                                "required": true,
+                                "label": "string",
+                                "fieldText": "string"
+                              }
+                            ]
+                          },
+                          "applicationOffered": {
+                            "questions": [
+                              {
+                                "label": "Offer date",
+                                "fieldName": "$.applicationOffered.offeredDate",
+                                "helpText": "",
+                                "fieldType": "date",
+                                "required": true,
+                                "fieldText": "once the facility has been offered to the borrower, please add the date the offer letter was issued."
+                              }
+                            ]
+                          },
+                          "applicationComplete": {
+                            "questions": [
+                              {
+                                "label": "Completed date",
+                                "fieldName": "$.applicationOffered.completedDate",
+                                "helpText": "",
+                                "fieldType": "date",
+                                "required": true,
+                                "fieldText": ""
+                              }
+                            ]
+                          },
+                          "applicationGuaranteed": {
+                            "questions": [
+                              {
+                                "label": "Guaranteed date",
+                                "fieldName": "$.applicationGuaranteed.guaranteedDate",
+                                "fieldType": "date",
+                                "required": true
+                              },
+                              {
+                                "label": "Information declaration",
+                                "fieldName": "$.applicationGuaranteed.signedInformationDeclaration",
+                                "fieldType": "boolean",
+                                "required": true,
+                                "fieldText": "The borrower has signed and returned the information declaration"
+                              },
+                              {
+                                "label": "Guarantee fee payment confirmation",
+                                "fieldName": "$.applicationGuaranteed.guaranteeFeePaymentCanBeMade",
+                                "fieldType": "boolean",
+                                "required": true,
+                                "fieldText": "Confirm borrower ability to make guarantee fee payment"
+                              }
+                            ]
+                          }
+                        },
+                        "relationships": {}
+                      },
+                      "links": {},
+                      "includes": {}
+                    }
+                  },
+                  "example-Revolving-Credit": {
+                    "value": {
+                      "data": {
+                        "type": "product",
+                        "id": "",
+                        "attributes": {
+                          "createdBy": "string",
+                          "createdDate": "2020-03-31T15:47:28Z",
+                          "updatedBy": "string",
+                          "updatedDate": "2020-03-31T15:47:28Z",
+                          "name": "Revolving Credit",
+                          "description": "Revolving Credit - Enterprise Finance Guarantee",
+                          "dataProtection": {
+                            "questions": [
+                              {
+                                "fieldName": "$.dataProtection.dataProtectionAgreed",
+                                "helpText": "(required)",
+                                "fieldType": "boolean",
+                                "required": true,
+                                "label": "Data Protection and Disclosure Declaration",
+                                "fieldText": "Before proceeding, please confirm that Scheme's signed Data Protection and Disclosure Declaration has been received"
+                              }
+                            ]
+                          },
+                          "applicationDetails": {
+                            "questions": [
+                              {
+                                "label": "Legay Form",
+                                "fieldName": "$.applicationDetails.legalForm",
+                                "helpText": "string",
+                                "fieldType": "string",
+                                "responseOptionValues": [
+                                  [
+                                    {
+                                      "responseValue": "Sole Trader"
+                                    },
+                                    {
+                                      "responseValue": "Partnership"
+                                    },
+                                    {
+                                      "responseValue": "Limited Liability Partnership (LLP)"
+                                    },
+                                    {
+                                      "responseValue": "Private Limited Company (LTD)"
+                                    },
+                                    {
+                                      "responseValue": "Public Limited Company (PLC)"
+                                    },
+                                    {
+                                      "responseValue": "Other"
+                                    }
+                                  ]
+                                ],
+                                "required": true,
+                                "fieldText": ""
+                              },
+                              {
+                                "label": "Company registration number",
+                                "fieldName": "$.applicationDetails.companyRegistrationNumber",
+                                "helpText": "string",
+                                "fieldType": "string",
+                                "required": false,
+                                "fieldText": ""
+                              },
+                              {
+                                "label": "Business legal name",
+                                "fieldName": "$.applicationDetails.businessLegalName",
+                                "helpText": "string",
+                                "fieldType": "string",
+                                "required": true,
+                                "fieldText": ""
+                              },
+                              {
+                                "label": "Business trading name",
+                                "fieldName": "$.applicationDetails.businessTradingName",
+                                "helpText": "string",
+                                "fieldType": "string",
+                                "required": true,
+                                "fieldText": ""
+                              },
+                              {
+                                "label": "Sic code",
+                                "fieldName": "$.applicationDetails.sicCode",
+                                "helpText": "string",
+                                "fieldType": "string",
+                                "required": true,
+                                "fieldText": "Which Standard Indudtrial Classification (SIC) code from the UK SIC 2007 best describes the busness sector in which the guaranteed facility will be used?"
+                              },
+                              {
+                                "label": "Company annual turnover",
+                                "fieldName": "$.applicationDetails.companyTurnover",
+                                "helpText": "string",
+                                "fieldType": "number",
+                                "required": true,
+                                "fieldText": "What is the current (or where none,forcast) annual turnover of the Applicant (or, if the Applicant is a Group Company, the aggregate Group turnover)?"
+                              },
+                              {
+                                "label": "Turnover by trading activity",
+                                "fieldName": "$.applicationDetails.tradingActivityTurnoverGreaterThanAllowed",
+                                "fieldType": "boolean",
+                                "required": true,
+                                "fieldText": "Is (or will) more than 50% of the above turnover be generated by trading activity?"
+                              },
+                              {
+                                "label": "Commencement of trading date",
+                                "fieldName": "$.applicationDetails.tradingStartDate",
+                                "fieldType": "date",
+                                "required": true,
+                                "fieldText": "What is the commencement of trading date of the Applicant business?"
+                              },
+                              {
+                                "label": "Postcode of where the facility will be used",
+                                "fieldName": "$.applicationDetails.tradingPostcode",
+                                "fieldType": "string",
+                                "required": true,
+                                "helpText": "Use the postcode lookup to check you have the correct postcode, you do not need to select an exact address",
+                                "fieldText": ""
+                              }
+                            ]
+                          },
+                          "lenderInformation": {
+                            "questions": [
+                              {
+                                "label": "Sort code",
+                                "fieldName": "$.lenderInformation.sortCode",
+                                "helpText": "string",
+                                "fieldType": "number",
+                                "required": true,
+                                "fieldText": "What is the Sort Code of the bank branch or business centre which originated this application?"
+                              },
+                              {
+                                "label": "Lender reference",
+                                "fieldName": "$.lenderInformation.lenderApplicationReference",
+                                "helpText": "string",
+                                "fieldType": "number",
+                                "required": true,
+                                "fieldText": "Enter your own reference for this application, eg the reference of the loan facility"
+                              }
+                            ]
+                          },
+                          "facilityDetails": {
+                            "facilityType": {
+                              "name": "Revolving Credit",
+                              "lenderDrawDownContribution": {
+                                "IAUR-Percent-Applies": false
+                              },
+                              "facilityRepaymentCalculator": "Exclude Interest"
+                            },
+                            "questions": [
+                              {
+                                "label": "Principal Purpose",
+                                "fieldName": "$.facilityDetails.principalPurpose",
+                                "fieldText": "What is the principal purpose for which the scheme facility will be used for",
+                                "fieldType": "string",
+                                "required": true,
+                                "responseOptionValues": [
+                                  {
+                                    "responseValue": "Start-up costs"
+                                  },
+                                  {
+                                    "responseValue": "General working capital requirements"
+                                  },
+                                  {
+                                    "responseValue": "Purchasing specific equipment or machinery"
+                                  },
+                                  {
+                                    "responseValue": "Purchasing licences quotas or other entitlements to trade"
+                                  },
+                                  {
+                                    "responseValue": "Research and Development activities"
+                                  },
+                                  {
+                                    "responseValue": "Acquiring another business within the UK"
+                                  },
+                                  {
+                                    "responseValue": "Acquiring another business outside the UK – Ineligible"
+                                  },
+                                  {
+                                    "responseValue": "Expanding an existing business within the UK"
+                                  },
+                                  {
+                                    "responseValue": "Expanding an existing business outside the UK – Ineligible"
+                                  },
+                                  {
+                                    "responseValue": "Financing an export order – Ineligible"
+                                  },
+                                  {
+                                    "responseValue": "Replacing existing internal finance"
+                                  },
+                                  {
+                                    "responseValue": "Replacing existing external finance"
+                                  }
+                                ]
+                              },
+                              {
+                                "label": "Overdraft confirmation",
+                                "fieldName": "$.facilityDetails.revolvingCredit.overDraft",
+                                "fieldType": "boolean",
+                                "fieldText": "This is an overdraft",
+                                "required": false
+                              },
+                              {
+                                "label": "Facility Total",
+                                "fieldName": "$.facilityDetails.facilityTotalAmount",
+                                "fieldType": "number",
+                                "required": true,
+                                "fieldText": "Total overall facility to be provided"
+                              },
+                              {
+                                "label": "Current facility limit",
+                                "fieldName": "$.facilityDetails.revolvingCredit.existingFacilityLimit",
+                                "fieldType": "number",
+                                "required": true,
+                                "fieldText": "The limit of the Applicant's current facility (prior to the granting of the EFG facility"
+                              },
+                              {
+                                "label": "EFG Value",
+                                "fieldName": "$.facilityDetails.revolvingCredit.efgValue",
+                                "fieldType": "number",
+                                "required": true,
+                                "fieldText": "What is the value of the EFG facility being applied for?"
+                              },
+                              {
+                                "label": "Repayment profile",
+                                "fieldName": "$.facilityDetails.repaymentType",
+                                "fieldType": "string",
+                                "required": true,
+                                "responseOptionValues": [
+                                  {
+                                    "responseLabel": "Term",
+                                    "responseValue": "fixedTerm"
+                                  }
+                                ]
+                              },
+                              {
+                                "label": "Years",
+                                "fieldName": "$.facilityDetails.term.years",
+                                "fieldType": "number",
+                                "required": false
+                              },
+                              {
+                                "label": "Months",
+                                "fieldName": "$.facilityDetails.term.months",
+                                "fieldType": "number",
+                                "required": false
+                              },
+                              {
+                                "label": "Total months",
+                                "fieldName": "$.facilityDetails.term.totalMonths",
+                                "fieldType": "number",
+                                "required": false
+                              },
+                              {
+                                "label": "Rate",
+                                "fieldName": "$.facilityDetails.interest.interestType",
+                                "fieldType": "string",
+                                "required": true,
+                                "fieldText": "Please indicate whether the interest on this facility is to be charged at a fixed or variable rate",
+                                "responseOptionValues": [
+                                  {
+                                    "responseValue": "Fixed"
+                                  },
+                                  {
+                                    "responseValue": "Variable"
+                                  }
+                                ]
+                              },
+                              {
+                                "label": "Interest rate margin",
+                                "fieldName": "$.facilityDetails.interest.rateMargin",
+                                "fieldType": "number",
+                                "fieldText": "Please enter the interest rate margin applicable to this facility",
+                                "required": true
+                              }
+                            ]
+                          },
+                          "stateAid": {
+                            "questions": [
+                              {
+                                "fieldName": "$.stateAid.underStateAidLimit",
+                                "helpText": "string",
+                                "fieldType": "boolean",
+                                "required": true,
+                                "label": "Applicant's de minimis State aid (past 3 years)",
+                                "fieldText": "Is the total value of the applicant's (or if the Applicant is a Group Company, the relevant Group's) de minimis State aid for the last three years (including that arising from this application) less than 200,000 euro?"
+                              }
+                            ]
+                          },
+                          "fees": {
+                            "questions": [
+                              {
+                                "fieldName": "$.fees.totalFees",
+                                "helpText": "string",
+                                "fieldType": "number",
+                                "required": true,
+                                "label": "Total value of fees",
+                                "fieldText": "Please enter the total value of any arrangement, insurance or other fees (but excluding interest and the EFG Guarantee Fee) the Applicant will be charged in connection with this facility being provided"
+                              }
+                            ]
+                          },
+                          "security": {
+                            "questions": [
+                              {
+                                "fieldName": "$.principalTypeOfAsset.name",
+                                "helpText": "string",
+                                "fieldType": "string",
+                                "required": true,
+                                "label": "Principal type of asset",
+                                "fieldText": "Please select the principal type of asset over which a charge has been taken to provide the partial security",
+                                "responseOptionValues": [
+                                  {
+                                    "responseValue": "Residential Property other than a principal private residence"
+                                  },
+                                  {
+                                    "responseValue": "Commercial Property"
+                                  },
+                                  {
+                                    "responseValue": "Shares and other securities"
+                                  },
+                                  {
+                                    "responseValue": "Cash on deposit"
+                                  },
+                                  {
+                                    "responseValue": "Plant, machinery or other business equipment"
+                                  },
+                                  {
+                                    "responseValue": "Raw materials or stock"
+                                  },
+                                  {
+                                    "responseValue": "Personal vehicle, boat or other asset"
+                                  },
+                                  {
+                                    "responseValue": "Personal life insurance or other policy"
+                                  },
+                                  {
+                                    "responseValue": "Debenture or Floating Charge"
+                                  },
+                                  {
+                                    "responseValue": "Personal Guarantee – Supported"
+                                  },
+                                  {
+                                    "responseValue": "Personal Guarantee – Unsupported"
+                                  },
+                                  {
+                                    "responseValue": "Other"
+                                  }
+                                ]
+                              },
+                              {
+                                "fieldName": "$.principalTypeOfAsset.value",
+                                "fieldType": "number",
+                                "required": true,
+                                "label": "Value of additional security",
+                                "fieldText": "For the purpose of this lending decision, what value is assigned to the additional security taken?"
+                              }
+                            ]
+                          },
+                          "drawDownEvents": {
+                            "questions": [
+                              {
+                                "fieldName": "$.date",
+                                "fieldType": "date",
+                                "required": true,
+                                "label": "Months from Start"
+                              },
+                              {
+                                "fieldName": "$.amount",
+                                "fieldType": "number",
+                                "required": true,
+                                "label": "Amount"
+                              },
+                              {
+                                "fieldName": "$.monthsFromStart",
+                                "fieldType": "integer",
+                                "required": true,
+                                "label": "Months from start"
+                              }
+                            ]
+                          },
+                          "repaymentHolidays": {
+                            "questions": [
+                              {
+                                "fieldName": "$.startDate",
+                                "fieldType": "date",
+                                "required": true,
+                                "label": "Start Date"
+                              },
+                              {
+                                "fieldName": "$.endDate",
+                                "fieldType": "date",
+                                "required": true,
+                                "label": "End Date"
+                              },
+                              {
+                                "fieldName": "$.numberOfMonths",
+                                "fieldType": "integer",
+                                "required": true,
+                                "label": "months"
+                              }
+                            ]
+                          },
+                          "additionalLenderInformation": {
+                            "questions": [
+                              {
+                                "fieldName": "string",
+                                "helpText": "string",
+                                "fieldType": "string",
+                                "responseOptionValues": [
+                                  {
+                                    "responseValue": "string"
+                                  }
+                                ],
+                                "required": true,
+                                "label": "string",
+                                "fieldText": "string"
+                              }
+                            ]
+                          },
+                          "applicationOffered": {
+                            "questions": [
+                              {
+                                "label": "Offer date",
+                                "fieldName": "$.applicationOffered.offeredDate",
+                                "helpText": "",
+                                "fieldType": "date",
+                                "required": true,
+                                "fieldText": "once the facility has been offered to the borrower, please add the date the offer letter was issued."
+                              }
+                            ]
+                          },
+                          "applicationComplete": {
+                            "questions": [
+                              {
+                                "label": "Completed date",
+                                "fieldName": "$.applicationOffered.completedDate",
+                                "helpText": "",
+                                "fieldType": "date",
+                                "required": true,
+                                "fieldText": ""
+                              }
+                            ]
+                          },
+                          "applicationGuaranteed": {
+                            "questions": [
+                              {
+                                "label": "Guaranteed date",
+                                "fieldName": "$.applicationGuaranteed.guaranteedDate",
+                                "fieldType": "date",
+                                "required": true
+                              },
+                              {
+                                "label": "Information declaration",
+                                "fieldName": "$.applicationGuaranteed.signedInformationDeclaration",
+                                "fieldType": "boolean",
+                                "required": true,
+                                "fieldText": "The borrower has signed and returned the information declaration"
+                              },
+                              {
+                                "label": "Guarantee fee payment confirmation",
+                                "fieldName": "$.applicationGuaranteed.guaranteeFeePaymentCanBeMade",
+                                "fieldType": "boolean",
+                                "required": true,
+                                "fieldText": "Confirm borrower ability to make guarantee fee payment"
+                              }
+                            ]
+                          }
+                        },
+                        "relationships": {}
+                      },
+                      "links": {},
+                      "includes": {}
+                    }
+                  }
                 }
               }
             },
@@ -689,6 +2963,264 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ruleSet"
+                },
+                "examples": {
+                  "example-RuleSet": {
+                    "value": {
+                      "meta": null,
+                      "data": {
+                        "id": "2698fa3e-8ded-11ea-bc55-0242ac130003",
+                        "type": "ruleSet",
+                        "etag": "1",
+                        "attributes": {
+                          "IAURPercent": 60,
+                          "euroBaseExchangeRate": 1.25,
+                          "euroExchangeInterestRate": 1.1,
+                          "annualFeePercent": 2,
+                          "minFacilityAmount": 1000,
+                          "maxFacilityAmount": 1200000,
+                          "borrowerDetailRules": {
+                            "maxBorrowerTurnover": 41000000,
+                            "maxPercentOfTurnoverGeneratedByTradingActivity": 50
+                          },
+                          "facilityRules": [
+                            {
+                              "facilityTypes": [
+                                "Term Loan",
+                                "Asset Finance"
+                              ],
+                              "facilityLimits": [
+                                {
+                                  "maxTermMonths": 60,
+                                  "minTermMonths": 3,
+                                  "maxFacilityAmount": 1200000,
+                                  "minFacilityAmount": 600000
+                                },
+                                {
+                                  "maxTermMonths": 120,
+                                  "minTermMonths": 3,
+                                  "maxFacilityAmount": 600000,
+                                  "minFacilityAmount": 1000
+                                }
+                              ]
+                            },
+                            {
+                              "facilityTypes": [
+                                "Invoice Finance",
+                                "Revolving Credit"
+                              ],
+                              "facilityLimits": [
+                                {
+                                  "maxTermMonths": 36,
+                                  "minTermMonths": 3,
+                                  "maxFacilityAmount": 1200000,
+                                  "minFacilityAmount": 1000
+                                }
+                              ]
+                            }
+                          ],
+                          "paymentFeeRules": {
+                            "annualFeePercent": 2,
+                            "guaranteeFeeRules": [
+                              {
+                                "facilityTypes": [
+                                  "Term Loan",
+                                  "Asset Finance",
+                                  "Invoice Finance"
+                                ],
+                                "amountUsedForfeeCalc": "Facility Outstanding Balance",
+                                "facilityTotalFixedFee": false
+                              },
+                              {
+                                "facilityTypes": [
+                                  "Revolving Credit"
+                                ],
+                                "amountUsedForfeeCalc": "Facility Guaranteed Amount",
+                                "facilityTotalFixedFee": true
+                              }
+                            ]
+                          },
+                          "sicCodeRules": [
+                            {
+                              "stateAid": {
+                                "currency": "euros",
+                                "maxStateAidAmount": 15000
+                              },
+                              "facilityLimits": [
+                                {
+                                  "maxTermMonths": 60,
+                                  "minTermMonths": 3,
+                                  "maxFacilityAmount": 90000,
+                                  "minFacilityAmount": 1000
+                                },
+                                {
+                                  "maxTermMonths": 120,
+                                  "minTermMonths": 3,
+                                  "maxFacilityAmount": 45000,
+                                  "minFacilityAmount": 1000
+                                }
+                              ],
+                              "sicCodesStartingWith": [
+                                "01110",
+                                "01120",
+                                "01130",
+                                "01140",
+                                "01150",
+                                "01160",
+                                "01190",
+                                "01210",
+                                "01220",
+                                "01230",
+                                "01240",
+                                "01250",
+                                "01260",
+                                "01270",
+                                "01280",
+                                "01290",
+                                "01300",
+                                "01410",
+                                "01420",
+                                "01430",
+                                "01440",
+                                "01450",
+                                "01460",
+                                "01470",
+                                "01490",
+                                "15110",
+                                "15120",
+                                "15200",
+                                "16100",
+                                "16210",
+                                "16220",
+                                "16230",
+                                "16240",
+                                "16290"
+                              ]
+                            },
+                            {
+                              "stateAid": {
+                                "currency": "euros",
+                                "maxStateAidAmount": 30000
+                              },
+                              "facilityLimits": [
+                                {
+                                  "maxTermMonths": 60,
+                                  "minTermMonths": 3,
+                                  "maxFacilityAmount": 180000,
+                                  "minFacilityAmount": 1000
+                                },
+                                {
+                                  "maxTermMonths": 120,
+                                  "minTermMonths": 3,
+                                  "maxFacilityAmount": 90000,
+                                  "minFacilityAmount": 1000
+                                }
+                              ],
+                              "sicCodesStartingWith": [
+                                "03110",
+                                "03120",
+                                "03210",
+                                "03220",
+                                "10200"
+                              ]
+                            },
+                            {
+                              "stateAid": {
+                                "currency": "euros",
+                                "maxStateAidAmount": 100000
+                              },
+                              "facilityLimits": [
+                                {
+                                  "maxTermMonths": 60,
+                                  "minTermMonths": 3,
+                                  "maxFacilityAmount": 600000,
+                                  "minFacilityAmount": 1000
+                                },
+                                {
+                                  "maxTermMonths": 120,
+                                  "minTermMonths": 3,
+                                  "maxFacilityAmount": 300000,
+                                  "minFacilityAmount": 1000
+                                }
+                              ],
+                              "sicCodesStartingWith": [
+                                "49410"
+                              ]
+                            }
+                          ],
+                          "stateAid": {
+                            "stateAidPeriodInMonths": 36,
+                            "stateAidRules": [
+                              {
+                                "currency": "euros",
+                                "maxStateAidAmount": 200000
+                              }
+                            ]
+                          },
+                          "principalPurposeRules": [
+                            {
+                              "principalPurposes": [
+                                "Replacing existing internal finance",
+                                "Replacing existing external finance"
+                              ],
+                              "drawDownPercentLimitPerFiscalYear": 20
+                            }
+                          ],
+                          "ineligibleSicCodes": [
+                            "64191",
+                            "64192",
+                            "65100",
+                            "65200",
+                            "85200",
+                            "85310",
+                            "94100",
+                            "94200",
+                            "94910",
+                            "94920",
+                            "97000",
+                            "98000"
+                          ],
+                          "lenderRules": [
+                            {
+                              "lenderType": "Small",
+                              "claimLimit-Percent-Of-Drawdown": 75,
+                              "annualDrawDown-LessThan-Amount": 125000,
+                              "annualDrawDown-MoreThan-Amount": 0
+                            },
+                            {
+                              "lenderType": "Small",
+                              "claimLimit-Percent-Of-Drawdown": 15,
+                              "annualDrawDown-MoreThan-Amount": 125000
+                            },
+                            {
+                              "lenderType": "Large",
+                              "claimLimit-Percent-Of-Drawdown": 15,
+                              "annualDrawDown-MoreThan-Amount": 0
+                            }
+                          ],
+                          "productLenderLimitedDrawDownContribution": [
+                            {
+                              "facilityTypes": [
+                                "Invoice Finance"
+                              ],
+                              "IAURPercentApplies": true
+                            }
+                          ],
+                          "activeRange": {
+                            "from": "2020-03-31T16:41:22Z",
+                            "to": "2020-03-31T16:41:22Z"
+                          }
+                        },
+                        "links": {
+                          "self": "http://example.com/programmes/a761772a-8dfe-11ea-bc55-0242ac130003/rulesets/2698fa3e-8ded-11ea-bc55-0242ac130003"
+                        }
+                      },
+                      "links": {
+                        "rulesets": "http://example.com/programmes/a761772a-8dfe-11ea-bc55-0242ac130003/rulesets",
+                        "programmes": "http://example.com/programmes"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -965,8 +3497,7 @@
                     }
                   }
                 },
-                "examples": {                  
-                }
+                "examples": {}
               }
             }
           },
@@ -3126,8 +5657,22 @@
           },
           "attributes": {
             "$ref": "#/components/schemas/ruleSetAttributes"
+          },
+          "links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "type": "string",
+                "format": "uri"
+              }
+            }
           }
-        }
+        },
+        "x-tags": [
+          "Products",
+          "Programmes"
+        ],
+        "description": ""
       },
       "documentType": {
         "title": "documentType",
