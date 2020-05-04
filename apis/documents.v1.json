@@ -1053,14 +1053,14 @@
           "included": {
             "type": "array",
             "items": {
+              "type": "array",
               "anyOf": [
                 {
                   "items": {
                     "$ref": "#/components/schemas/documentData"
                   }
                 }
-              ],
-              "type": "array"
+              ]
             }
           }
         }
@@ -1223,10 +1223,10 @@
             "format": "date-time",
             "description": "Not to be sent on POST/PUT/PATCH."
           },
-          "name": {
+          "requestData": {
             "type": "string"
           },
-          "requestData": {
+          "name": {
             "type": "string"
           }
         }

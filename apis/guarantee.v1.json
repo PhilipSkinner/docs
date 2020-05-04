@@ -30,7 +30,6 @@
                   "type": "object",
                   "properties": {
                     "meta": {
-                      "type": "object",
                       "properties": {
                         "paging": {
                           "$ref": "../models/paginationMeta.v1.json"
@@ -41,7 +40,8 @@
                             "type": "string"
                           }
                         }
-                      }
+                      },
+                      "type": "object"
                     },
                     "data": {
                       "type": "array",
@@ -700,11 +700,11 @@
                 "type": "string",
                 "format": "uri"
               },
-              "sicCodes": {
+              "self": {
                 "type": "string",
                 "format": "uri"
               },
-              "self": {
+              "sicCodes": {
                 "type": "string",
                 "format": "uri"
               }
@@ -790,23 +790,22 @@
               },
               "documents": {
                 "type": "object",
-                "description": "system generated.",
                 "properties": {
                   "links": {
                     "type": "object",
-                    "deprecated": true,
-                    "description": "system generated - not included in POST or PUT",
                     "properties": {
                       "offerDocuments": {
                         "type": "string",
-                        "description": "Been renamed to documents. Reason - Not all documents will be offer documents.",
-                        "format": "uri"
+                        "format": "uri",
+                        "description": "Been renamed to documents. Reason - Not all documents will be offer documents."
                       },
                       "feePaymentScheduleDocument": {
                         "type": "string",
                         "format": "uri"
                       }
-                    }
+                    },
+                    "description": "system generated - not included in POST or PUT",
+                    "deprecated": true
                   },
                   "data": {
                     "type": "array",
@@ -825,11 +824,11 @@
                       }
                     }
                   }
-                }
+                },
+                "description": "system generated."
               },
               "productUsed": {
                 "type": "object",
-                "description": "",
                 "properties": {
                   "links": {
                     "type": "object",
@@ -855,7 +854,8 @@
                       }
                     }
                   }
-                }
+                },
+                "description": ""
               },
               "ruleSetUsed": {
                 "type": "object",
@@ -1070,21 +1070,11 @@
             "format": "date-time",
             "description": "Not to be sent in POST/PUT/PATCH."
           },
-          "guaranteeRef": {
-            "type": "string",
-            "description": "This is the internaly generated guarantee reference number. This can be used by a client for searching a guarantee."
-          },
           "facilityDetails": {
             "type": "object",
             "properties": {
               "facilityType": {
                 "type": "string"
-              },
-              "facilityTotalAmount": {
-                "type": "number"
-              },
-              "facilityCurrentBalance": {
-                "type": "number"
               },
               "assetFinanceDetails": {
                 "type": "object",
@@ -1184,6 +1174,9 @@
                   }
                 }
               },
+              "facilityTotalAmount": {
+                "type": "number"
+              },
               "principalPurpose": {
                 "type": "string"
               },
@@ -1225,15 +1218,15 @@
                   "totalMonths": {
                     "type": "integer"
                   },
-                  "startDate": {
-                    "type": "string",
-                    "format": "date-time",
-                    "description": "Calculated based on first drawdown or today + 1 day if no drawdown present."
-                  },
                   "maturityDate": {
                     "type": "string",
                     "format": "date-time",
                     "description": "calculated based on startDate + term.totalMonths"
+                  },
+                  "startDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Calculated based on first drawdown or today + 1 day if no drawdown present."
                   }
                 }
               },
@@ -1275,6 +1268,9 @@
                     }
                   }
                 }
+              },
+              "facilityCurrentBalance": {
+                "type": "number"
               }
             }
           },
@@ -1510,6 +1506,10 @@
                 "type": "boolean"
               }
             }
+          },
+          "guaranteeRef": {
+            "type": "string",
+            "description": "This is the internaly generated guarantee reference number. This can be used by a client for searching a guarantee."
           }
         }
       },
