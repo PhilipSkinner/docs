@@ -945,6 +945,48 @@
                 "format": "uri"
               }
             }
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "documentType": {
+                "type": "object",
+                "required": [
+                  "data"
+                ],
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "self": {
+                        "type": "string"
+                      },
+                      "related": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "type"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "required": [
+              "documentType"
+            ]
           }
         }
       },
@@ -1051,17 +1093,21 @@
             }
           },
           "included": {
-            "type": "array",
-            "items": {
-              "type": "array",
-              "anyOf": [
-                {
-                  "items": {
-                    "$ref": "#/components/schemas/documentData"
-                  }
+            "anyOf": [
+              {
+                "items": {
+                  "anyOf": [
+                    {
+                      "items": {
+                        "$ref": "#/components/schemas/documentData"
+                      }
+                    }
+                  ],
+                  "type": "array"
                 }
-              ]
-            }
+              }
+            ],
+            "type": "array"
           }
         }
       },
@@ -1196,6 +1242,9 @@
               }
             }
           }
+        },
+        "x-examples": {
+          "example-1": {}
         }
       },
       "documentRequestAttributes": {
