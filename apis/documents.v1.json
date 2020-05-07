@@ -7,7 +7,7 @@
       "name": "Philip Skinner",
       "email": "philip.skinner@cds.co.uk"
     },
-    "description": "Manages the creation of envelopes and documents.\n\nEvery document belongs in an envelope, and an envelope can contain more than 1 document.\n\nThis API fronts the async process that will generate the binary for a document, or the API may be used to insert pregenerated binary documents.\n\nThe following roles are required to access this API:\n\n* documents_reader\n* documents_writer\n* documents_remover"
+    "description": "Manages the creation of document types and documents.\n\nEvery document belongs to an document Type.\n\nThis API fronts the async process that will generate the binary for a document, or the API may be used to insert pregenerated binary documents.\n\nThe following permissions are required to access this API:\n\n* documents_reader\n* documents_writer\n* documents_remover"
   },
   "servers": [
     {
@@ -113,7 +113,10 @@
           },
           {
             "schema": {
-              "type": "array"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             },
             "in": "query",
             "name": "documentId"
@@ -134,6 +137,11 @@
                 }
               },
               "Etag": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Idempotency-Key": {
                 "schema": {
                   "type": "string"
                 }
@@ -435,7 +443,7 @@
         "tags": [
           "Documents"
         ],
-        "description": "Updates a document within the envelope.\n\nCan contain the binary blob of the document.\n\nIf the request is multipart then the JSON payload must be sent under the name of \"payload\" and the document binary must be sent under the name \"document\".\n\nRequires the role of document_writer to access."
+        "description": "Updates a document.\n\nCan contain the binary blob of the document.\n\nIf the request is multipart then the JSON payload must be sent under the name of \"payload\" and the document binary must be sent under the name \"document\".\n\nRequires the permission of document_writer to access."
       },
       "delete": {
         "summary": "Delete a document",
@@ -516,7 +524,7 @@
         "tags": [
           "Documents"
         ],
-        "description": "Hard deletes a document from an envelope, including the binary.\n\nRequires a role of document_remover to access."
+        "description": "Hard deletes a document, including the binary.\n\nRequires a permission of document_remover to access."
       }
     },
     "/documentRequests": {
@@ -527,7 +535,7 @@
           "201": {
             "description": "Created",
             "headers": {
-              "Etag": {
+              "ETag": {
                 "schema": {
                   "type": "string"
                 }
@@ -602,7 +610,7 @@
           "description": ""
         },
         "tags": [
-          "Envelopes"
+          "Document Request"
         ],
         "description": "Creates a new document request to create documents.\n\nRequires the role document_writer to access."
       },
@@ -660,7 +668,7 @@
       "get": {
         "summary": "Get a Document request",
         "tags": [
-          "Envelopes"
+          "Document Request"
         ],
         "responses": {
           "200": {
@@ -729,7 +737,7 @@
             "name": "If-match"
           }
         ],
-        "description": "Fetch a single document request. This request also returns all documents referenced in the request within the included section.\n\nRequires the role document_reader to access."
+        "description": "Fetch a single document request. This request also returns all documents referenced in the request within the included section.\n\nRequires the permission document_reader to access."
       },
       "delete": {
         "summary": "Delete a document request",
@@ -790,10 +798,10 @@
             "name": "If-match"
           }
         ],
+        "description": "Deletes an document request and all documents held within it.\n\nRequires the permission document_remover to access.",
         "tags": [
-          "Envelopes"
-        ],
-        "description": "Deletes an envelope and all documents held within it.\n\nRequires the role document_remover to access."
+          "Document Request"
+        ]
       }
     },
     "/documenttypes": {
@@ -1068,6 +1076,7 @@
           "Misc Models"
         ],
         "description": "",
+        "x-examples": {},
         "properties": {
           "meta": {
             "$ref": "../models/individualMeta.v1.json"
@@ -1096,14 +1105,7 @@
             "anyOf": [
               {
                 "items": {
-                  "anyOf": [
-                    {
-                      "items": {
-                        "$ref": "#/components/schemas/documentData"
-                      }
-                    }
-                  ],
-                  "type": "array"
+                  "$ref": "#/components/schemas/documentData"
                 }
               }
             ],
@@ -1117,6 +1119,7 @@
         "x-tags": [
           "Misc Models"
         ],
+        "x-examples": {},
         "properties": {
           "id": {
             "type": "string",
@@ -1125,7 +1128,7 @@
           "type": {
             "type": "string",
             "enum": [
-              "envelope"
+              "documentRequest"
             ]
           },
           "etag": {
@@ -1141,7 +1144,12 @@
                 "type": "object",
                 "properties": {
                   "links": {
-                    "type": "string"
+                    "type": "object",
+                    "properties": {
+                      "related": {
+                        "type": "string"
+                      }
+                    }
                   },
                   "data": {
                     "type": "object",
@@ -1242,16 +1250,13 @@
               }
             }
           }
-        },
-        "x-examples": {
-          "example-1": {}
         }
       },
       "documentRequestAttributes": {
         "title": "documentRequestAttributes",
         "type": "object",
         "x-tags": [
-          "Envelopes"
+          "Document Request"
         ],
         "properties": {
           "createdBy": {
@@ -1367,7 +1372,7 @@
       "name": "Documents"
     },
     {
-      "name": "Envelopes"
+      "name": "Document Request"
     }
   ]
 }

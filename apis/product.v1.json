@@ -3182,18 +3182,18 @@
                           ],
                           "lenderRules": [
                             {
-                              "lenderType": "Small",
+                              "lendingCategory": "Small",
                               "claimLimit-Percent-Of-Drawdown": 75,
                               "annualDrawDown-LessThan-Amount": 125000,
                               "annualDrawDown-MoreThan-Amount": 0
                             },
                             {
-                              "lenderType": "Small",
+                              "lendingCategory": "Small",
                               "claimLimit-Percent-Of-Drawdown": 15,
                               "annualDrawDown-MoreThan-Amount": 125000
                             },
                             {
-                              "lenderType": "Large",
+                              "lendingCategory": "Large",
                               "claimLimit-Percent-Of-Drawdown": 15,
                               "annualDrawDown-MoreThan-Amount": 0
                             }
@@ -5155,17 +5155,14 @@
             }
           },
           "included": {
-            "type": "array",
-            "items": {
-              "anyOf": [
-                {
-                  "$ref": "#/components/schemas/ruleSetData"
-                },
-                {
-                  "$ref": "#/components/schemas/programmeData"
-                }
-              ]
-            }
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ruleSetData"
+              },
+              {
+                "$ref": "#/components/schemas/programme"
+              }
+            ]
           }
         }
       },
