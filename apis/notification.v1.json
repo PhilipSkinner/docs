@@ -301,8 +301,7 @@
             "in": "header",
             "name": "If-match"
           }
-        ],
-        "requestBody": {}
+        ]
       },
       "parameters": [
         {

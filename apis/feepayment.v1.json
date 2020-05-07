@@ -373,22 +373,6 @@
         "operationId": "GetScheduleFees",
         "parameters": [
           {
-            "name": "scheduleId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "feeId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "Authorization",
             "in": "header",
             "description": "Bearer token",
@@ -405,7 +389,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": ""
+                  "$ref": "#/components/schemas/fee"
                 }
               }
             }
@@ -476,14 +460,7 @@
       "get": {
         "operationId": "get-schedule-fees",
         "parameters": [
-          {
-            "name": "scheduleId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
+
         ],
         "responses": {
           "200": {
@@ -567,14 +544,6 @@
       "get": {
         "operationId": "get-schedule-single-facility-event",
         "parameters": [
-          {
-            "name": "scheduleId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
           {
             "schema": {
               "type": "string"
@@ -751,14 +720,6 @@
         "operationId": "get-fee-schedule-request",
         "parameters": [
           {
-            "name": "scheduleId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "schema": {
               "type": "string"
             },
@@ -841,14 +802,6 @@
       "get": {
         "operationId": "get-fee-schedule",
         "parameters": [
-          {
-            "name": "scheduleId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
           {
             "in": "header",
             "name": "If-match",
