@@ -713,18 +713,15 @@
               "$ref": "../models/error.v1.json"
             }
           },
-          "includes": {
-            "type": "array",
-            "items": {
-              "anyOf": [
-                {
-                  "items": {
-                    "$ref": "#/components/schemas/guaranteeDocument"
-                  }
+          "included": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/guaranteeDocument"
                 }
-              ],
-              "type": "array"
-            }
+              }
+            ],
+            "type": "array"
           },
           "data": {
             "$ref": "#/components/schemas/guaranteeData"
@@ -737,6 +734,7 @@
         "x-tags": [
           "Misc Models"
         ],
+        "description": "",
         "properties": {
           "id": {
             "type": "string",
@@ -982,8 +980,7 @@
           "attributes": {
             "$ref": "#/components/schemas/guaranteeAttributes"
           }
-        },
-        "description": ""
+        }
       },
       "drawDown": {
         "title": "drawDown",
@@ -1223,21 +1220,7 @@
                   "type": "object",
                   "properties": {
                     "name": {
-                      "type": "string",
-                      "enum": [
-                        "Residential Property other than a principal private residence",
-                        "Commercial Property",
-                        "Shares and other securities",
-                        "Cash on deposit",
-                        "Plant, machinery or other business equipment",
-                        "Raw materials or stock",
-                        "Personal vehicle, boat or other asset",
-                        "Personal life insurance or other policy",
-                        "Debenture or Floating Charge",
-                        "Personal Guarantee – Supported",
-                        "Personal Guarantee – Unsupported",
-                        "Other"
-                      ]
+                      "type": "string"
                     },
                     "value": {
                       "type": "number"
