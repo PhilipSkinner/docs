@@ -5451,6 +5451,11 @@
           "annualFeePercent": {
             "type": "number"
           },
+          "guaranteedFacilityPercent": {
+            "type": "number",
+            "maximum": 100,
+            "minimum": 0
+          },
           "borrowerDetailRules": {
             "$ref": "#/components/schemas/borrowerDetailRules"
           },
