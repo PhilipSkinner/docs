@@ -323,20 +323,17 @@
               "type": "string"
             },
             "in": "header",
-            "name": "If-match"
+            "name": "If-Match"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "ETag"
           }
         ],
-        "description": "Fetches a single document within an envelope.\n\nRequires the role documents_reader to access.",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {}
-              }
-            }
-          }
-        }
+        "description": "Fetches a single document within an envelope.\n\nRequires the role documents_reader to access."
       },
       "put": {
         "summary": "Update a document",
@@ -810,7 +807,28 @@
         "tags": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../models/paginationMeta.v1.json"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/documentTypeData"
+                      }
+                    },
+                    "links": {
+                      "$ref": "../models/paginationLinks.v1.json"
+                    }
+                  }
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -829,26 +847,6 @@
             "name": "Etag"
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "meta": {
-                    "$ref": "../models/paginationMeta.v1.json"
-                  },
-                  "data": {
-                    "$ref": "#/components/schemas/documentTypeData"
-                  },
-                  "links": {
-                    "$ref": "../models/paginationLinks.v1.json"
-                  }
-                }
-              }
-            }
-          }
-        },
         "description": "Get all document types"
       }
     },
@@ -868,20 +866,17 @@
         "tags": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/documentType"
+                }
+              }
+            }
           }
         },
         "operationId": "get-documentTypes-documentTypeId",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/documentType"
-              }
-            }
-          },
-          "description": "Get a document type by id"
-        },
         "description": "Get a document type by Id"
       }
     }
