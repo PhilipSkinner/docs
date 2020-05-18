@@ -29,27 +29,45 @@
       "detail": "Could not parse value."
     }
   },
-  "description": "",
+  "description": "json APi error Object",
   "properties": {
     "status": {
-      "type": "integer"
+      "type": "string",
+      "description": "the HTTP status code applicable to this problem"
     },
     "title": {
-      "type": "string"
+      "type": "string",
+      "description": "A short human readable summary of the problem. Should not change from one occurance to the another."
     },
     "detail": {
-      "type": "string"
+      "type": "string",
+      "description": "Human readable explanation of this instance of the problem."
     },
     "source": {
       "type": "object",
+      "description": "Cause of the problem.",
       "properties": {
         "parameter": {
-          "type": "string"
+          "type": "string",
+          "description": "indicates which query parameter caused the error."
         },
         "pointer": {
-          "type": "string"
+          "type": "string",
+          "description": "pointer to the data attribute that caused this error."
         }
       }
+    },
+    "id": {
+      "type": "string",
+      "description": "unique identifier for this occurance of the problem"
+    },
+    "code": {
+      "type": "string",
+      "description": "Application specific error code."
+    },
+    "meta": {
+      "type": "string",
+      "description": "Non standard meta information about the error"
     }
   }
 }

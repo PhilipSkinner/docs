@@ -30,7 +30,6 @@
                   "type": "object",
                   "properties": {
                     "meta": {
-                      "type": "object",
                       "properties": {
                         "paging": {
                           "$ref": "../models/paginationMeta.v1.json"
@@ -41,7 +40,8 @@
                             "type": "string"
                           }
                         }
-                      }
+                      },
+                      "type": "object"
                     },
                     "data": {
                       "type": "array",
@@ -139,6 +139,13 @@
             },
             "in": "query",
             "name": "lenderApplicationRef"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "currentStatus"
           }
         ],
         "description": "Fetches a paginated list of guarantees.\n\nRequires the guarantee_reader role to access.",
@@ -679,9 +686,6 @@
           "meta": {
             "$ref": "../models/individualMeta.v1.json"
           },
-          "data": {
-            "$ref": "#/components/schemas/guaranteeData"
-          },
           "links": {
             "type": "object",
             "properties": {
@@ -690,7 +694,16 @@
                 "format": "uri"
               },
               "products": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
+              },
+              "self": {
+                "type": "string",
+                "format": "uri"
+              },
+              "sicCodes": {
+                "type": "string",
+                "format": "uri"
               }
             }
           },
@@ -699,6 +712,19 @@
             "items": {
               "$ref": "../models/error.v1.json"
             }
+          },
+          "included": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/guaranteeDocument"
+                }
+              }
+            ],
+            "type": "array"
+          },
+          "data": {
+            "$ref": "#/components/schemas/guaranteeData"
           }
         }
       },
@@ -708,6 +734,7 @@
         "x-tags": [
           "Misc Models"
         ],
+        "description": "",
         "properties": {
           "id": {
             "type": "string",
@@ -718,7 +745,8 @@
             "properties": {
               "inLifeEvents": {
                 "type": "string",
-                "format": "uri"
+                "format": "uri",
+                "description": "This resource link can be use this to check changes without saving."
               },
               "self": {
                 "type": "string",
@@ -739,6 +767,23 @@
                       "self": {
                         "type": "string",
                         "format": "uri"
+                      },
+                      "related": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "feePaymentProfile"
+                        ]
                       }
                     }
                   }
@@ -746,17 +791,38 @@
               },
               "documents": {
                 "type": "object",
+                "description": "system generated.",
                 "properties": {
                   "links": {
                     "type": "object",
+                    "description": "system generated - not included in POST or PUT",
+                    "deprecated": true,
                     "properties": {
                       "offerDocuments": {
                         "type": "string",
-                        "format": "uri"
+                        "format": "uri",
+                        "description": "Been renamed to documents. Reason - Not all documents will be offer documents."
                       },
                       "feePaymentScheduleDocument": {
                         "type": "string",
                         "format": "uri"
+                      }
+                    }
+                  },
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "guaranteeDocument"
+                          ]
+                        }
                       }
                     }
                   }
@@ -764,6 +830,7 @@
               },
               "productUsed": {
                 "type": "object",
+                "description": "",
                 "properties": {
                   "links": {
                     "type": "object",
@@ -771,6 +838,21 @@
                       "product": {
                         "type": "string",
                         "format": "uri"
+                      }
+                    }
+                  },
+                  "data": {
+                    "type": "object",
+                    "description": "included on POST and PUT",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "product"
+                        ]
                       }
                     }
                   }
@@ -787,6 +869,20 @@
                         "format": "uri"
                       }
                     }
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "ruleset"
+                        ]
+                      }
+                    }
                   }
                 }
               },
@@ -801,6 +897,18 @@
                         "format": "uri"
                       }
                     }
+                  },
+                  "data": {
+                    "type": "object",
+                    "description": "Lender relation is optional. The lender will be obtained from the claim in the bearer token.  ",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      }
+                    }
                   }
                 }
               },
@@ -810,7 +918,47 @@
                   "links": {
                     "type": "object",
                     "properties": {
-                      "mandate": {
+                      "related": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    }
+                  },
+                  "data": {
+                    "type": "object",
+                    "description": "A reference to the mandate should be provided on a PUT",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "mandate"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "applicationSicCode": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "related": {
                         "type": "string",
                         "format": "uri"
                       }
@@ -820,9 +968,6 @@
               }
             }
           },
-          "attributes": {
-            "$ref": "#/components/schemas/guaranteeAttributes"
-          },
           "etag": {
             "type": "string"
           },
@@ -831,6 +976,9 @@
             "enum": [
               "guarantee"
             ]
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/guaranteeAttributes"
           }
         }
       },
@@ -923,6 +1071,225 @@
             "format": "date-time",
             "description": "Not to be sent in POST/PUT/PATCH."
           },
+          "lenderInformation": {
+            "type": "object",
+            "properties": {
+              "lenderRef": {
+                "type": "string",
+                "description": "This is a reference to the lender ref in the lender service, not the lender loan facility reference!"
+              },
+              "sortCode": {
+                "type": "number"
+              },
+              "name": {
+                "type": "string"
+              },
+              "lenderApplicationReference": {
+                "type": "string",
+                "description": "This is the lenders facility application reference. This is used as an external reference to for this guarantee application.   "
+              }
+            }
+          },
+          "applicationDetails": {
+            "type": "object",
+            "properties": {
+              "legalForm": {
+                "type": "string",
+                "enum": [
+                  "Sole Trader",
+                  "Partnership",
+                  "Limited Liability Partnership (LLP)",
+                  "Private Limited Company (LTD)",
+                  "Public Limited Company (PLC)",
+                  "Other"
+                ]
+              },
+              "companyRegistrationNumber": {
+                "type": "string"
+              },
+              "businessLegalName": {
+                "type": "string"
+              },
+              "businessTradingName": {
+                "type": "string"
+              },
+              "sicCode": {
+                "type": "string"
+              },
+              "companyTurnover": {
+                "type": "number"
+              },
+              "tradingActivityTurnoverGreaterThanAllowed": {
+                "type": "boolean"
+              },
+              "tradingStartDate": {
+                "type": "string",
+                "format": "date"
+              },
+              "tradingPostcode": {
+                "type": "string"
+              }
+            }
+          },
+          "predictedDrawDowns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/drawDown"
+            }
+          },
+          "drawDownEvents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/drawDown"
+            }
+          },
+          "repaymentHolidays": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "startDate": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "endDate": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "numberOfMonths": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "stateAid": {
+            "type": "object",
+            "properties": {
+              "calculatedAmount": {
+                "type": "number"
+              },
+              "underStateAidLimit": {
+                "type": "boolean"
+              }
+            }
+          },
+          "currentStatus": {
+            "type": "string",
+            "default": "ineligible",
+            "enum": [
+              "ineligible",
+              "eligible",
+              "offered",
+              "auto_cancelled",
+              "guaranteed",
+              "lender_demand",
+              "repaid",
+              "auto_removed",
+              "removed",
+              "noclaim",
+              "offer_requested"
+            ]
+          },
+          "statusHistory": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "from": {
+                  "type": "string"
+                },
+                "to": {
+                  "type": "string"
+                },
+                "transitionDate": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "security": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "principalTypeOfAsset": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "fees": {
+            "type": "object",
+            "properties": {
+              "totalFees": {
+                "type": "number"
+              }
+            }
+          },
+          "dataProtection": {
+            "type": "object",
+            "properties": {
+              "dataProtectionAgreed": {
+                "type": "boolean"
+              }
+            }
+          },
+          "additionalLenderInformation": {
+            "type": "object",
+            "properties": {
+              "Information": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "applicationComplete": {
+            "type": "object",
+            "properties": {
+              "completedDate": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          },
+          "applicationOffered": {
+            "type": "object",
+            "properties": {
+              "offeredDate": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          },
+          "applicationGuaranteed": {
+            "type": "object",
+            "properties": {
+              "guaranteedDate": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "signedInformationDeclaration": {
+                "type": "boolean"
+              },
+              "guaranteeFeePaymentCanBeMade": {
+                "type": "boolean"
+              }
+            }
+          },
           "guaranteeRef": {
             "type": "string",
             "description": "This is the internaly generated guarantee reference number. This can be used by a client for searching a guarantee."
@@ -935,6 +1302,86 @@
               },
               "facilityTotalAmount": {
                 "type": "number"
+              },
+              "principalPurpose": {
+                "type": "string"
+              },
+              "repaymentType": {
+                "type": "string"
+              },
+              "paymentFrequency": {
+                "type": "string"
+              },
+              "seasonalMonths": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 12
+                }
+              },
+              "term": {
+                "type": "object",
+                "properties": {
+                  "years": {
+                    "type": "integer"
+                  },
+                  "months": {
+                    "type": "integer"
+                  },
+                  "totalMonths": {
+                    "type": "integer"
+                  },
+                  "maturityDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "calculated based on startDate + term.totalMonths"
+                  },
+                  "startDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Calculated based on first drawdown or today + 1 day if no drawdown present."
+                  }
+                }
+              },
+              "frequencyPaymentAmount": {
+                "type": "number"
+              },
+              "repayments": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "date": {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "amount": {
+                      "type": "number"
+                    },
+                    "balance": {
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              "expectedRepayments": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "date": {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "amount": {
+                      "type": "number"
+                    },
+                    "balance": {
+                      "type": "number"
+                    }
+                  }
+                }
               },
               "facilityCurrentBalance": {
                 "type": "number"
@@ -1036,330 +1483,47 @@
                     "type": "number"
                   }
                 }
-              },
-              "principalPurpose": {
-                "type": "string"
-              },
-              "repaymentType": {
-                "type": "string"
-              },
-              "paymentFrequency": {
-                "type": "string"
-              },
-              "seasonalMonths": {
-                "type": "array",
-                "enum": [
-                  "1",
-                  "2",
-                  "3",
-                  "4",
-                  "5",
-                  "6",
-                  "7",
-                  "8",
-                  "9",
-                  "10",
-                  "11",
-                  "12"
-                ],
-                "items": {
-                  "type": "integer"
-                }
-              },
-              "term": {
-                "type": "object",
-                "properties": {
-                  "years": {
-                    "type": "integer"
-                  },
-                  "months": {
-                    "type": "integer"
-                  },
-                  "totalMonths": {
-                    "type": "integer"
-                  },
-                  "startDate": {
-                    "type": "string",
-                    "format": "date-time",
-                    "description": "Calculated based on first drawdown or today + 1 day if no drawdown present."
-                  },
-                  "maturityDate": {
-                    "type": "string",
-                    "format": "date-time",
-                    "description": "calculated based on startDate + term.totalMonths"
-                  }
-                }
-              },
-              "frequencyPaymentAmount": {
-                "type": "number"
-              },
-              "repayments": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "date": {
-                      "type": "string",
-                      "format": "date"
-                    },
-                    "amount": {
-                      "type": "number"
-                    },
-                    "balance": {
-                      "type": "number"
-                    }
-                  }
-                }
-              },
-              "expectedRepayments": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "date": {
-                      "type": "string",
-                      "format": "date"
-                    },
-                    "amount": {
-                      "type": "number"
-                    },
-                    "balance": {
-                      "type": "number"
-                    }
-                  }
-                }
               }
             }
+          }
+        }
+      },
+      "guaranteeDocument": {
+        "title": "guaranteeDocument",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
           },
-          "lenderInformation": {
-            "type": "object",
-            "properties": {
-              "lenderRef": {
-                "type": "string",
-                "description": "This is a reference to the lender ref in the lender service, not the lender loan facility reference!"
-              },
-              "sortCode": {
-                "type": "number"
-              },
-              "name": {
-                "type": "string"
-              },
-              "lenderApplicationReference": {
-                "type": "string",
-                "description": "This is the lenders facility application reference. This is used as an external reference to for this guarantee application.   "
-              }
-            }
-          },
-          "applicationDetails": {
-            "type": "object",
-            "properties": {
-              "legalForm": {
-                "type": "string",
-                "enum": [
-                  "Sole Trader",
-                  "Partnership",
-                  "Limited Liability Partnership (LLP)",
-                  "Private Limited Company (LTD)",
-                  "Public Limited Company (PLC)",
-                  "Other"
-                ]
-              },
-              "companyRegistrationNumber": {
-                "type": "string"
-              },
-              "businessLegalName": {
-                "type": "string"
-              },
-              "businessTradingName": {
-                "type": "string"
-              },
-              "sicCode": {
-                "$ref": "../models/objectPointer.v1.json"
-              },
-              "companyTurnover": {
-                "type": "number"
-              },
-              "tradingActivityTurnoverGreaterThanAllowed": {
-                "type": "boolean"
-              },
-              "tradingStartDate": {
-                "type": "string",
-                "format": "date"
-              },
-              "tradingPostcode": {
-                "type": "string"
-              }
-            }
-          },
-          "predictedDrawDowns": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/drawDown"
-            }
-          },
-          "drawDownEvents": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/drawDown"
-            }
-          },
-          "repaymentHolidays": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "startDate": {
-                  "type": "string",
-                  "format": "date"
-                },
-                "endDate": {
-                  "type": "string",
-                  "format": "date"
-                },
-                "numberOfMonths": {
-                  "type": "integer"
-                }
-              }
-            }
-          },
-          "stateAid": {
-            "type": "object",
-            "properties": {
-              "calculatedAmount": {
-                "type": "number"
-              },
-              "underStateAidLimit": {
-                "type": "boolean"
-              }
-            }
-          },
-          "currentStatus": {
+          "type": {
             "type": "string",
-            "default": "ineligible",
             "enum": [
-              "ineligible",
-              "eligible",
-              "offered",
-              "auto_cancelled",
-              "guaranteed",
-              "lender_demand",
-              "repaid",
-              "auto_removed",
-              "removed",
-              "noclaim"
+              "guaranteeDocument"
             ]
           },
-          "statusHistory": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "from": {
-                  "type": "string"
-                },
-                "to": {
-                  "type": "string"
-                },
-                "transitionDate": {
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "by": {
-                  "type": "string"
-                }
+          "attributes": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
               }
             }
           },
-          "security": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "principalTypeOfAsset": {
-                  "type": "object",
-                  "properties": {
-                    "name": {
-                      "type": "string",
-                      "enum": [
-                        "Residential Property other than a principal private residence",
-                        "Commercial Property",
-                        "Shares and other securities",
-                        "Cash on deposit",
-                        "Plant, machinery or other business equipment",
-                        "Raw materials or stock",
-                        "Personal vehicle, boat or other asset",
-                        "Personal life insurance or other policy",
-                        "Debenture or Floating Charge",
-                        "Personal Guarantee – Supported",
-                        "Personal Guarantee – Unsupported",
-                        "Other"
-                      ]
-                    },
-                    "value": {
-                      "type": "number"
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "document": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "related": {
+                        "type": "string"
+                      }
                     }
                   }
                 }
-              }
-            }
-          },
-          "fees": {
-            "type": "object",
-            "properties": {
-              "totalFees": {
-                "type": "number"
-              }
-            }
-          },
-          "dataProtection": {
-            "type": "object",
-            "properties": {
-              "dataProtectionAgreed": {
-                "type": "boolean"
-              }
-            }
-          },
-          "additionalLenderInformation": {
-            "type": "object",
-            "properties": {
-              "Information": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "applicationComplete": {
-            "type": "object",
-            "properties": {
-              "completedDate": {
-                "type": "string",
-                "format": "date-time"
-              }
-            }
-          },
-          "applicationOffered": {
-            "type": "object",
-            "properties": {
-              "offeredDate": {
-                "type": "string",
-                "format": "date-time"
-              }
-            }
-          },
-          "applicationGuaranteed": {
-            "type": "object",
-            "properties": {
-              "guaranteedDate": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "signedInformationDeclaration": {
-                "type": "boolean"
-              },
-              "guaranteeFeePaymentCanBeMade": {
-                "type": "boolean"
               }
             }
           }
