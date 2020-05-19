@@ -30,6 +30,7 @@
                   "type": "object",
                   "properties": {
                     "meta": {
+                      "type": "object",
                       "properties": {
                         "paging": {
                           "$ref": "../models/paginationMeta.v1.json"
@@ -40,8 +41,7 @@
                             "type": "string"
                           }
                         }
-                      },
-                      "type": "object"
+                      }
                     },
                     "data": {
                       "type": "array",
@@ -686,6 +686,9 @@
           "meta": {
             "$ref": "../models/individualMeta.v1.json"
           },
+          "data": {
+            "$ref": "#/components/schemas/guaranteeData"
+          },
           "links": {
             "type": "object",
             "properties": {
@@ -697,11 +700,11 @@
                 "type": "string",
                 "format": "uri"
               },
-              "self": {
+              "sicCodes": {
                 "type": "string",
                 "format": "uri"
               },
-              "sicCodes": {
+              "self": {
                 "type": "string",
                 "format": "uri"
               }
@@ -722,9 +725,6 @@
               }
             ],
             "type": "array"
-          },
-          "data": {
-            "$ref": "#/components/schemas/guaranteeData"
           }
         }
       },
@@ -734,7 +734,6 @@
         "x-tags": [
           "Misc Models"
         ],
-        "description": "",
         "properties": {
           "id": {
             "type": "string",
@@ -791,12 +790,9 @@
               },
               "documents": {
                 "type": "object",
-                "description": "system generated.",
                 "properties": {
                   "links": {
                     "type": "object",
-                    "description": "system generated - not included in POST or PUT",
-                    "deprecated": true,
                     "properties": {
                       "offerDocuments": {
                         "type": "string",
@@ -807,7 +803,9 @@
                         "type": "string",
                         "format": "uri"
                       }
-                    }
+                    },
+                    "deprecated": true,
+                    "description": "system generated - not included in POST or PUT"
                   },
                   "data": {
                     "type": "array",
@@ -826,11 +824,11 @@
                       }
                     }
                   }
-                }
+                },
+                "description": "system generated."
               },
               "productUsed": {
                 "type": "object",
-                "description": "",
                 "properties": {
                   "links": {
                     "type": "object",
@@ -856,7 +854,8 @@
                       }
                     }
                   }
-                }
+                },
+                "description": ""
               },
               "ruleSetUsed": {
                 "type": "object",
@@ -968,6 +967,9 @@
               }
             }
           },
+          "attributes": {
+            "$ref": "#/components/schemas/guaranteeAttributes"
+          },
           "etag": {
             "type": "string"
           },
@@ -976,11 +978,9 @@
             "enum": [
               "guarantee"
             ]
-          },
-          "attributes": {
-            "$ref": "#/components/schemas/guaranteeAttributes"
           }
-        }
+        },
+        "description": ""
       },
       "drawDown": {
         "title": "drawDown",
@@ -988,7 +988,7 @@
         "properties": {
           "date": {
             "type": "string",
-            "format": "date"
+            "format": "date-time"
           },
           "amount": {
             "type": "integer"
@@ -1000,7 +1000,8 @@
         "required": [
           "date",
           "amount"
-        ]
+        ],
+        "description": ""
       },
       "inLifeEvent": {
         "title": "inLifeEvent",
@@ -1071,6 +1072,202 @@
             "format": "date-time",
             "description": "Not to be sent in POST/PUT/PATCH."
           },
+          "guaranteeRef": {
+            "type": "string",
+            "description": "This is the internaly generated guarantee reference number. This can be used by a client for searching a guarantee."
+          },
+          "facilityDetails": {
+            "type": "object",
+            "properties": {
+              "facilityType": {
+                "type": "string"
+              },
+              "facilityTotalAmount": {
+                "type": "number"
+              },
+              "facilityCurrentBalance": {
+                "type": "number"
+              },
+              "assetFinanceDetails": {
+                "type": "object",
+                "properties": {
+                  "balloonAmount": {
+                    "type": "number"
+                  },
+                  "details": {
+                    "type": "object",
+                    "properties": {
+                      "category": {
+                        "type": "string"
+                      },
+                      "cashPrice": {
+                        "type": "number"
+                      },
+                      "installCost": {
+                        "type": "number"
+                      },
+                      "deposit": {
+                        "type": "number"
+                      },
+                      "partExchange": {
+                        "type": "number"
+                      },
+                      "originalBalance": {
+                        "type": "number"
+                      },
+                      "residualValue": {
+                        "type": "number"
+                      },
+                      "coverPercent": {
+                        "type": "number"
+                      },
+                      "totalGuaranteeFacilityAmount": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "category",
+                      "cashPrice",
+                      "installCost",
+                      "deposit",
+                      "partExchange",
+                      "residualValue",
+                      "coverPercent"
+                    ]
+                  },
+                  "agreementType": {
+                    "type": "string"
+                  },
+                  "netYieldPercent": {
+                    "type": "number"
+                  }
+                }
+              },
+              "invoiceFinance": {
+                "type": "object",
+                "properties": {
+                  "grossBookDebt": {
+                    "type": "number"
+                  },
+                  "supportedLimit": {
+                    "type": "number"
+                  },
+                  "guaranteePrePaymentAmount": {
+                    "type": "number"
+                  }
+                }
+              },
+              "revolvingCredit": {
+                "type": "object",
+                "properties": {
+                  "overDraft": {
+                    "type": "boolean"
+                  },
+                  "existingFacilityLimit": {
+                    "type": "number"
+                  },
+                  "efgValue": {
+                    "type": "number"
+                  }
+                }
+              },
+              "interest": {
+                "type": "object",
+                "properties": {
+                  "interestType": {
+                    "type": "string",
+                    "enum": [
+                      "fixed",
+                      "variable"
+                    ]
+                  },
+                  "rateMargin": {
+                    "type": "number"
+                  }
+                }
+              },
+              "principalPurpose": {
+                "type": "string"
+              },
+              "repaymentType": {
+                "type": "string"
+              },
+              "paymentFrequency": {
+                "type": "string"
+              },
+              "seasonalMonths": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "maximum": 12,
+                  "minimum": 1
+                }
+              },
+              "term": {
+                "type": "object",
+                "properties": {
+                  "years": {
+                    "type": "integer"
+                  },
+                  "months": {
+                    "type": "integer"
+                  },
+                  "totalMonths": {
+                    "type": "integer"
+                  },
+                  "startDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Calculated based on first drawdown or today + 1 day if no drawdown present."
+                  },
+                  "maturityDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "calculated based on startDate + term.totalMonths"
+                  }
+                }
+              },
+              "frequencyPaymentAmount": {
+                "type": "number"
+              },
+              "repayments": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "date": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "amount": {
+                      "type": "number"
+                    },
+                    "balance": {
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              "expectedRepayments": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "date": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "amount": {
+                      "type": "number"
+                    },
+                    "balance": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          },
           "lenderInformation": {
             "type": "object",
             "properties": {
@@ -1124,7 +1321,7 @@
               },
               "tradingStartDate": {
                 "type": "string",
-                "format": "date"
+                "format": "date-time"
               },
               "tradingPostcode": {
                 "type": "string"
@@ -1150,11 +1347,11 @@
               "properties": {
                 "startDate": {
                   "type": "string",
-                  "format": "date"
+                  "format": "date-time"
                 },
                 "endDate": {
                   "type": "string",
-                  "format": "date"
+                  "format": "date-time"
                 },
                 "numberOfMonths": {
                   "type": "integer"
@@ -1287,202 +1484,6 @@
               },
               "guaranteeFeePaymentCanBeMade": {
                 "type": "boolean"
-              }
-            }
-          },
-          "guaranteeRef": {
-            "type": "string",
-            "description": "This is the internaly generated guarantee reference number. This can be used by a client for searching a guarantee."
-          },
-          "facilityDetails": {
-            "type": "object",
-            "properties": {
-              "facilityType": {
-                "type": "string"
-              },
-              "facilityTotalAmount": {
-                "type": "number"
-              },
-              "principalPurpose": {
-                "type": "string"
-              },
-              "repaymentType": {
-                "type": "string"
-              },
-              "paymentFrequency": {
-                "type": "string"
-              },
-              "seasonalMonths": {
-                "type": "array",
-                "items": {
-                  "type": "integer",
-                  "minimum": 1,
-                  "maximum": 12
-                }
-              },
-              "term": {
-                "type": "object",
-                "properties": {
-                  "years": {
-                    "type": "integer"
-                  },
-                  "months": {
-                    "type": "integer"
-                  },
-                  "totalMonths": {
-                    "type": "integer"
-                  },
-                  "maturityDate": {
-                    "type": "string",
-                    "format": "date-time",
-                    "description": "calculated based on startDate + term.totalMonths"
-                  },
-                  "startDate": {
-                    "type": "string",
-                    "format": "date-time",
-                    "description": "Calculated based on first drawdown or today + 1 day if no drawdown present."
-                  }
-                }
-              },
-              "frequencyPaymentAmount": {
-                "type": "number"
-              },
-              "repayments": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "date": {
-                      "type": "string",
-                      "format": "date"
-                    },
-                    "amount": {
-                      "type": "number"
-                    },
-                    "balance": {
-                      "type": "number"
-                    }
-                  }
-                }
-              },
-              "expectedRepayments": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "date": {
-                      "type": "string",
-                      "format": "date"
-                    },
-                    "amount": {
-                      "type": "number"
-                    },
-                    "balance": {
-                      "type": "number"
-                    }
-                  }
-                }
-              },
-              "facilityCurrentBalance": {
-                "type": "number"
-              },
-              "assetFinanceDetails": {
-                "type": "object",
-                "properties": {
-                  "balloonAmount": {
-                    "type": "number"
-                  },
-                  "details": {
-                    "type": "object",
-                    "properties": {
-                      "category": {
-                        "type": "string"
-                      },
-                      "cashPrice": {
-                        "type": "number"
-                      },
-                      "installCost": {
-                        "type": "number"
-                      },
-                      "deposit": {
-                        "type": "number"
-                      },
-                      "partExchange": {
-                        "type": "number"
-                      },
-                      "originalBalance": {
-                        "type": "number"
-                      },
-                      "residualValue": {
-                        "type": "number"
-                      },
-                      "coverPercent": {
-                        "type": "number"
-                      },
-                      "totalGuaranteeFacilityAmount": {
-                        "type": "number"
-                      }
-                    },
-                    "required": [
-                      "category",
-                      "cashPrice",
-                      "installCost",
-                      "deposit",
-                      "partExchange",
-                      "residualValue",
-                      "coverPercent"
-                    ]
-                  },
-                  "agreementType": {
-                    "type": "string"
-                  },
-                  "netYieldPercent": {
-                    "type": "number"
-                  }
-                }
-              },
-              "invoiceFinance": {
-                "type": "object",
-                "properties": {
-                  "grossBookDebt": {
-                    "type": "number"
-                  },
-                  "supportedLimit": {
-                    "type": "number"
-                  },
-                  "guaranteePrePaymentAmount": {
-                    "type": "number"
-                  }
-                }
-              },
-              "revolvingCredit": {
-                "type": "object",
-                "properties": {
-                  "overDraft": {
-                    "type": "boolean"
-                  },
-                  "existingFacilityLimit": {
-                    "type": "number"
-                  },
-                  "efgValue": {
-                    "type": "number"
-                  }
-                }
-              },
-              "interest": {
-                "type": "object",
-                "properties": {
-                  "interestType": {
-                    "type": "string",
-                    "enum": [
-                      "fixed",
-                      "variable"
-                    ]
-                  },
-                  "rateMargin": {
-                    "type": "number"
-                  }
-                }
               }
             }
           }
