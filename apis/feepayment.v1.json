@@ -459,9 +459,7 @@
     "/feeSchedules/{scheduleId}/fees": {
       "get": {
         "operationId": "get-schedule-fees",
-        "parameters": [
-
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Success",
@@ -1156,7 +1154,7 @@
         ],
         "description": "",
         "properties": {
-          "lenderRef": {
+          "lenderApplicationRef": {
             "type": "string"
           },
           "borrowerBankAccount": {
@@ -1235,6 +1233,20 @@
                         "format": "uri"
                       }
                     }
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "feeSchedule"
+                        ]
+                      }
+                    }
                   }
                 }
               },
@@ -1249,6 +1261,53 @@
                         "format": "uri"
                       }
                     }
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "guarantee"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ]
+                  }
+                }
+              },
+              "lender": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "related": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    }
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ]
                   }
                 }
               }
@@ -1534,14 +1593,11 @@
             }
           },
           "included": {
-            "type": "array",
-            "items": {
-              "anyOf": [
-                {
-                  "$ref": "#/components/schemas/feeScheduleRequest"
-                }
-              ]
-            }
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/feeScheduleRequest"
+              }
+            ]
           }
         },
         "required": [
