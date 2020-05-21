@@ -1416,7 +1416,7 @@
               "facilityCurrentBalance": {
                 "type": "number"
               },
-              "assetFinanceDetails": {
+              "assetFinance": {
                 "type": "object",
                 "properties": {
                   "balloonAmount": {

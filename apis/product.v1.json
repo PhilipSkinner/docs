@@ -5222,7 +5222,8 @@
           "attributes": {
             "$ref": "#/components/schemas/sicCodeAttributes"
           }
-        }
+        },
+        "description": ""
       },
       "sicCodeAttributes": {
         "title": "sicCodeAttributes",
