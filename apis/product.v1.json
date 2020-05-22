@@ -4899,6 +4899,28 @@
                     }
                   }
                 }
+              },
+              "documentTypes": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "documentType"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
@@ -5037,12 +5059,6 @@
           "applicationComplete": {
             "type": "object",
             "properties": {
-              "documents": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/documentType"
-                }
-              },
               "questions": {
                 "type": "array",
                 "items": {
