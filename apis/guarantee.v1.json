@@ -635,7 +635,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/inLifeEvent"
+                  "$ref": "#/components/schemas/guarantee"
                 }
               }
             }
@@ -666,7 +666,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/inLifeEvent"
+                "$ref": "#/components/schemas/guarantee"
               }
             }
           }
@@ -716,12 +716,31 @@
           "included": {
             "anyOf": [
               {
+                "type": "array",
                 "items": {
                   "$ref": "#/components/schemas/guaranteeDocument"
                 }
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "attributes": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
               }
-            ],
-            "type": "array"
+            ]
           },
           "data": {
             "$ref": "#/components/schemas/guaranteeData"
@@ -1038,40 +1057,25 @@
         "x-tags": [
           "Misc Models"
         ],
-        "description": "represents the potential guarantee message response to an in life event change on a guarantee.",
+        "description": "represents the in life event change data on a guarantee.",
         "properties": {
-          "errors": {
-            "type": "array",
-            "items": {
-              "$ref": "../models/error.v1.json"
-            }
+          "eventName": {
+            "type": "string"
           },
-          "links": {
-            "type": "object",
-            "properties": {
-              "self": {
-                "type": "string",
-                "format": "uri"
-              },
-              "guarantees": {
-                "type": "string",
-                "format": "uri"
-              },
-              "inLifeEvent": {
-                "type": "string",
-                "format": "uri"
-              },
-              "currentGuarantee": {
-                "type": "string",
-                "format": "uri"
-              }
-            }
+          "attributePointer": {
+            "type": "string"
           },
-          "data": {
-            "$ref": "#/components/schemas/guaranteeData"
+          "originalValue": {
+            "type": "string"
           },
-          "meta": {
-            "$ref": "../models/individualMeta.v1.json"
+          "newValue": {
+            "type": "string"
+          },
+          "dateChanged": {
+            "type": "string"
+          },
+          "affectiveFromDate": {
+            "type": "string"
           }
         }
       },
@@ -1514,6 +1518,12 @@
                   }
                 }
               }
+            }
+          },
+          "inLifeEvents": {
+            "type": "array",
+            "items": {
+              "$ref": ""
             }
           }
         }
