@@ -722,23 +722,7 @@
                 }
               },
               {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "string"
-                  },
-                  "type": {
-                    "type": "string"
-                  },
-                  "attributes": {
-                    "type": "object",
-                    "properties": {
-                      "description": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                }
+                "$ref": "./product.v1.json#/components/schemas/sicCodeData"
               }
             ]
           },
@@ -1567,7 +1551,10 @@
               }
             }
           }
-        }
+        },
+        "required": [
+          "type"
+        ]
       }
     },
     "securitySchemes": {
