@@ -1536,7 +1536,7 @@
           "relationships": {
             "type": "object",
             "properties": {
-              "document": {
+              "documentType": {
                 "type": "object",
                 "properties": {
                   "links": {
@@ -1544,6 +1544,20 @@
                     "properties": {
                       "related": {
                         "type": "string"
+                      }
+                    }
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "documentType"
+                        ]
                       }
                     }
                   }
