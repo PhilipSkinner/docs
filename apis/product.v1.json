@@ -4850,9 +4850,6 @@
               "product"
             ]
           },
-          "etag": {
-            "type": "string"
-          },
           "attributes": {
             "$ref": "#/components/schemas/productAttributes"
           },
@@ -4917,6 +4914,34 @@
                             "documentType"
                           ]
                         }
+                      }
+                    }
+                  }
+                }
+              },
+              "ruleSet": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "ruleSet"
+                        ]
+                      }
+                    }
+                  },
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "related": {
+                        "type": "string",
+                        "format": "uri"
                       }
                     }
                   }
