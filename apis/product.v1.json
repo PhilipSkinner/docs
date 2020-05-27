@@ -5685,6 +5685,11 @@
       "ruleSetData": {
         "title": "ruleSetData",
         "type": "object",
+        "x-tags": [
+          "Products",
+          "Programmes"
+        ],
+        "description": "",
         "properties": {
           "id": {
             "type": "string",
@@ -5710,26 +5715,39 @@
                 "format": "uri"
               }
             }
-          }
-        },
-        "x-tags": [
-          "Products",
-          "Programmes"
-        ],
-        "description": ""
-      },
-      "documentType": {
-        "title": "documentType",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
           },
-          "name": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "programme": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "programme"
+                        ]
+                      }
+                    }
+                  },
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "related": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
