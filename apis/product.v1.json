@@ -5240,11 +5240,12 @@
         }
       },
       "sicCodeData": {
-        "title": "sicCodeResponse",
+        "title": "sicCodeData",
         "type": "object",
         "x-tags": [
           "Misc Models"
         ],
+        "description": "",
         "properties": {
           "id": {
             "type": "string",
@@ -5257,14 +5258,10 @@
               "sicCode"
             ]
           },
-          "etag": {
-            "type": "string"
-          },
           "attributes": {
             "$ref": "#/components/schemas/sicCodeAttributes"
           }
-        },
-        "description": ""
+        }
       },
       "sicCodeAttributes": {
         "title": "sicCodeAttributes",
@@ -5319,7 +5316,8 @@
             ],
             "description": "Active or Inactive - only one ruleset should ever be active within the same date range."
           }
-        }
+        },
+        "description": ""
       },
       "programme": {
         "title": "programme",

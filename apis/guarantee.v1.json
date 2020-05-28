@@ -1046,20 +1046,28 @@
           "eventName": {
             "type": "string"
           },
-          "attributePointer": {
-            "type": "string"
-          },
-          "originalValue": {
-            "type": "string"
-          },
-          "newValue": {
-            "type": "string"
-          },
           "dateChanged": {
             "type": "string"
           },
           "affectiveFromDate": {
             "type": "string"
+          },
+          "changedAttributes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "attributePointer": {
+                  "type": "string"
+                },
+                "originalValue": {
+                  "type": "string"
+                },
+                "newValue": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -1507,7 +1515,7 @@
           "inLifeEvents": {
             "type": "array",
             "items": {
-              "$ref": ""
+              "$ref": "#/components/schemas/inLifeEvent"
             }
           }
         }
