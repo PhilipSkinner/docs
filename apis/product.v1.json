@@ -5161,7 +5161,7 @@
           "inLifeEvents": {
             "type": "array",
             "items": {
-              "$ref": "./guarantee.v1.json#/components/schemas/inLifeEvent"
+              "$ref": "#/components/schemas/inLifeEvent"
             }
           }
         }
