@@ -5157,6 +5157,12 @@
                 }
               }
             }
+          },
+          "inLifeEvents": {
+            "type": "array",
+            "items": {
+              "$ref": "./guarantee.v1.json#/components/schemas/inLifeEvent"
+            }
           }
         }
       },
@@ -5912,6 +5918,39 @@
           },
           "fieldName": {
             "type": "string"
+          }
+        }
+      },
+      "inLifeEvent": {
+        "title": "inLifeEvent",
+        "type": "object",
+        "properties": {
+          "eventType": {
+            "type": "string",
+            "enum": [
+              "delete-repayment-holiday",
+              "add-repayment-holiday",
+              "add-drawdown",
+              "lump-sum-repayment",
+              "change-payment-duration",
+              "change-payment-frequency",
+              "change-fixed-amount-repayment",
+              "change-repayment-profile",
+              "change-facility-amount"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "invalidRepaymentType": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "fixedAmount",
+                "fixedTerm"
+              ]
+            }
           }
         }
       }

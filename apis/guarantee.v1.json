@@ -1043,6 +1043,9 @@
         ],
         "description": "represents the in life event change data on a guarantee.",
         "properties": {
+          "eventType": {
+            "type": "string"
+          },
           "eventName": {
             "type": "string"
           },
