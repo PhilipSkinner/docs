@@ -1203,21 +1203,7 @@
             }
           },
           "currentStatus": {
-            "type": "string",
-            "default": "ineligible",
-            "enum": [
-              "ineligible",
-              "eligible",
-              "offered",
-              "auto_cancelled",
-              "guaranteed",
-              "lender_demand",
-              "repaid",
-              "auto_removed",
-              "removed",
-              "noclaim",
-              "offer_requested"
-            ]
+            "$ref": "#/components/schemas/status"
           },
           "statusHistory": {
             "type": "array",
@@ -1225,10 +1211,10 @@
               "type": "object",
               "properties": {
                 "from": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/status"
                 },
                 "to": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/status"
                 },
                 "transitionDate": {
                   "type": "string",
@@ -1580,6 +1566,24 @@
         "required": [
           "type"
         ]
+      },
+      "status": {
+        "type": "string",
+        "enum": [
+          "ineligible",
+          "eligible",
+          "offered",
+          "auto_cancelled",
+          "guaranteed",
+          "lender_demand",
+          "repaid",
+          "auto_removed",
+          "removed",
+          "noclaim",
+          "offer_requested",
+          "claim"
+        ],
+        "description": ""
       }
     },
     "securitySchemes": {
