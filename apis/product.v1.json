@@ -5951,6 +5951,21 @@
                 "fixedTerm"
               ]
             }
+          },
+          "invalidPaymentFrequencies": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "single",
+                "weekly",
+                "monthly",
+                "quarterly",
+                "yearly",
+                "seasonal",
+                "six-month"
+              ]
+            }
           }
         }
       }
