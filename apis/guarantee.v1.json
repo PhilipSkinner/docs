@@ -767,12 +767,9 @@
                   "links": {
                     "type": "object",
                     "properties": {
-                      "self": {
+                      "related": {
                         "type": "string",
                         "format": "uri"
-                      },
-                      "related": {
-                        "type": "string"
                       }
                     }
                   },
@@ -801,12 +798,7 @@
                     "description": "system generated - not included in POST or PUT",
                     "deprecated": true,
                     "properties": {
-                      "offerDocuments": {
-                        "type": "string",
-                        "format": "uri",
-                        "description": "Been renamed to documents. Reason - Not all documents will be offer documents."
-                      },
-                      "feePaymentScheduleDocument": {
+                      "related": {
                         "type": "string",
                         "format": "uri"
                       }
@@ -838,7 +830,7 @@
                   "links": {
                     "type": "object",
                     "properties": {
-                      "product": {
+                      "related": {
                         "type": "string",
                         "format": "uri"
                       }
@@ -867,7 +859,7 @@
                   "links": {
                     "type": "object",
                     "properties": {
-                      "ruleSet": {
+                      "related": {
                         "type": "string",
                         "format": "uri"
                       }
@@ -895,7 +887,7 @@
                   "links": {
                     "type": "object",
                     "properties": {
-                      "self": {
+                      "related": {
                         "type": "string",
                         "format": "uri"
                       }
@@ -1103,10 +1095,6 @@
           "lenderInformation": {
             "type": "object",
             "properties": {
-              "lenderRef": {
-                "type": "string",
-                "description": "This is a reference to the lender ref in the lender service, not the lender loan facility reference!"
-              },
               "sortCode": {
                 "type": "number"
               },
