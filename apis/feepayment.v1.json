@@ -1314,7 +1314,7 @@
                   }
                 }
               },
-              "FeesCollected": {
+              "feesCollected": {
                 "type": "object",
                 "properties": {
                   "data": {
