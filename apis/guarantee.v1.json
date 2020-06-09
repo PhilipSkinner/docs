@@ -1061,10 +1061,23 @@
                 "newValue": {
                   "type": "string"
                 }
-              }
+              },
+              "required": [
+                "attributePointer"
+              ]
             }
+          },
+          "changedBy": {
+            "type": "string"
           }
-        }
+        },
+        "required": [
+          "eventType",
+          "eventName",
+          "dateChanged",
+          "changedAttributes",
+          "changedBy"
+        ]
       },
       "guaranteeAttributes": {
         "title": "guaranteeAttributes",
