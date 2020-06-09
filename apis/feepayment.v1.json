@@ -368,7 +368,7 @@
       },
       "parameters": []
     },
-    "/feeSchedules/{scheduleId}/fees/{feeId}": {
+    "/feeSchedules/{mandateId}/fees/{feeId}": {
       "get": {
         "operationId": "GetScheduleFees",
         "parameters": [
@@ -439,7 +439,7 @@
       },
       "parameters": [
         {
-          "name": "scheduleId",
+          "name": "feeId",
           "in": "path",
           "required": true,
           "schema": {
@@ -447,16 +447,16 @@
           }
         },
         {
-          "name": "feeId",
-          "in": "path",
-          "required": true,
           "schema": {
             "type": "string"
-          }
+          },
+          "name": "mandateId",
+          "in": "path",
+          "required": true
         }
       ]
     },
-    "/feeSchedules/{scheduleId}/fees": {
+    "/feeSchedules/{mandateId}/fees": {
       "get": {
         "operationId": "get-schedule-fees",
         "parameters": [],
@@ -529,12 +529,12 @@
       },
       "parameters": [
         {
-          "name": "scheduleId",
-          "in": "path",
-          "required": true,
           "schema": {
             "type": "string"
-          }
+          },
+          "name": "mandateId",
+          "in": "path",
+          "required": true
         }
       ]
     },
@@ -1313,6 +1313,25 @@
                     ]
                   }
                 }
+              },
+              "FeesCollected": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
@@ -1343,6 +1362,12 @@
             "anyOf": [
               {
                 "$ref": "#/components/schemas/feeScheduleData"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/feeData"
+                }
               }
             ]
           }
