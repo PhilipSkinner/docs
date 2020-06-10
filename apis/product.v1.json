@@ -5475,6 +5475,9 @@
                 "Revolving Credit"
               ]
             }
+          },
+          "annualFeePercent": {
+            "type": "number"
           }
         }
       },
@@ -5492,9 +5495,6 @@
             "type": "number"
           },
           "euroExchangeInterestRate": {
-            "type": "number"
-          },
-          "annualFeePercent": {
             "type": "number"
           },
           "guaranteedFacilityPercent": {
@@ -5599,23 +5599,6 @@
           },
           "minFacilityAmount": {
             "type": "number"
-          },
-          "collectionFees": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "facilityTypes": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "annualFeePercent": {
-                  "type": "string"
-                }
-              }
-            }
           }
         }
       },
