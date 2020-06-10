@@ -5528,9 +5528,6 @@
           "paymentFeeRules": {
             "type": "object",
             "properties": {
-              "annualFeePercent": {
-                "type": "number"
-              },
               "guaranteeFeeRules": {
                 "type": "array",
                 "items": {
@@ -5602,6 +5599,23 @@
           },
           "minFacilityAmount": {
             "type": "number"
+          },
+          "collectionFees": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "facilityTypes": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "annualFeePercent": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },

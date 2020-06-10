@@ -1813,6 +1813,9 @@
             "items": {
               "$ref": "#/components/schemas/feeAttributes"
             }
+          },
+          "annualFeePercent": {
+            "type": "string"
           }
         }
       }
