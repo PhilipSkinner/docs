@@ -36,7 +36,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/claimResponse"
+                        "$ref": "#/components/schemas/claimData"
                       }
                     },
                     "links": {
@@ -475,7 +475,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/settlementResponse"
+                        "$ref": "#/components/schemas/settlementData"
                       }
                     },
                     "links": {
@@ -981,7 +981,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/recoveryResponse"
+                        "$ref": "#/components/schemas/recoveryData"
                       }
                     },
                     "links": {
@@ -1487,7 +1487,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/statementResponse"
+                        "$ref": "#/components/schemas/statementData"
                       }
                     },
                     "links": {
@@ -1924,7 +1924,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/invoiceResponse"
+                        "$ref": "#/components/schemas/invoiceData"
                       }
                     },
                     "links": {
@@ -2340,1517 +2340,12 @@
           }
         ]
       }
-    },
-    "/invoices/{invoiceId}/settlements": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "invoiceId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Get all settlements in an invoice",
-        "tags": [
-          "Invoices"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "headers": {
-              "Etag": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "meta": {
-                      "$ref": "../models/paginationMeta.v1.json"
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/settlementResponse"
-                      }
-                    },
-                    "links": {
-                      "$ref": "../models/paginationLinks.v1.json"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-invoices-invoiceId-settlements",
-        "description": "Returns a paginated response including settlements for the given invoice.\n\nRequires the claims_reader role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "page"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "perpage"
-          }
-        ]
-      },
-      "post": {
-        "summary": "Add settlement to invoice",
-        "operationId": "post-invoices-invoiceId-settlements",
-        "responses": {
-          "201": {
-            "description": "Created",
-            "headers": {
-              "Etag": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Location": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/settlementResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Unprocessable Entity",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "description": "Add a settlement into an invoice.\n\nRequires the claims_writer role to access.",
-        "tags": [
-          "Invoices"
-        ],
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "X-idempotency-key"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "../models/objectPointer.v1.json"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/invoices/{invoiceId}/settlements/{settlementId}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "invoiceId",
-          "in": "path",
-          "required": true
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "settlementId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Get a settlement on an invoice",
-        "tags": [
-          "Invoices"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "headers": {
-              "Etag": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/settlement"
-                }
-              }
-            }
-          },
-          "304": {
-            "description": "Not Modified"
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                },
-                "examples": {}
-              }
-            }
-          }
-        },
-        "operationId": "get-invoices-invoiceId-settlements-settlementId",
-        "description": "Fetch a single settlement on an invoice.\n\nRequires the claims_reader role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match"
-          }
-        ]
-      },
-      "delete": {
-        "summary": "Remove settlement from invoice",
-        "operationId": "delete-invoices-invoiceId-settlements-settlementId",
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "headers": {
-              "Etag": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "description": "Remove a settlement from an invoice.\n\nRequires the claims_writer role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "X-idempotency-key"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match"
-          }
-        ],
-        "tags": [
-          "Invoices"
-        ]
-      }
-    },
-    "/invoices/{invoiceId}/recoveries/{recoveryId}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "invoiceId",
-          "in": "path",
-          "required": true
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "recoveryId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Get a recovery on an invoice",
-        "tags": [
-          "Invoices"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "headers": {
-              "Etag": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/recovery"
-                }
-              }
-            }
-          },
-          "304": {
-            "description": "Not Modified"
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-invoices-invoiceId-recoveries-recoveryId",
-        "description": "Fetch a single recovery on an invoice.\n\nRequires the claims_reader role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match"
-          }
-        ]
-      },
-      "delete": {
-        "summary": "Remove a recovery from an invoice",
-        "operationId": "delete-invoices-invoiceId-recoveries-recoveryId",
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "headers": {
-              "Etag": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "description": "Removes a recovery from an invoice.\n\nRequires the claims_writer role for access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "X-idempotency-key"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match"
-          }
-        ],
-        "tags": [
-          "Invoices"
-        ]
-      }
-    },
-    "/invoices/{invoiceId}/recoveries": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "invoiceId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Get recoveries on invoice",
-        "tags": [
-          "Invoices"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "headers": {
-              "Etag": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "meta": {
-                      "$ref": "../models/paginationMeta.v1.json"
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/recoveryResponse"
-                      }
-                    },
-                    "links": {
-                      "$ref": "../models/paginationLinks.v1.json"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-invoices-invoiceId-recoveries",
-        "description": "Get a paginated list of all recoveries on an invoice.\n\nRequires the claims_reader role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match"
-          },
-          {
-            "schema": {
-              "type": "number"
-            },
-            "in": "query",
-            "name": "page"
-          },
-          {
-            "schema": {
-              "type": "number"
-            },
-            "in": "query",
-            "name": "perpage"
-          }
-        ]
-      },
-      "post": {
-        "summary": "Add recovery to invoice",
-        "operationId": "post-invoices-invoiceId-recoveries",
-        "responses": {
-          "201": {
-            "description": "Created",
-            "headers": {
-              "Etag": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/recovery"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Unprocessable Entity",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "description": "Adds a recovery into an invoice.\n\nRequires the claims_writer role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "X-idempotency-key"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "../models/objectPointer.v1.json"
-              }
-            }
-          },
-          "description": ""
-        },
-        "tags": [
-          "Invoices"
-        ]
-      }
-    },
-    "/statements/{statementId}/settlements": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "statementId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Get settlements on a statement",
-        "tags": [
-          "Statements"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "headers": {
-              "Etag": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "meta": {
-                      "$ref": "../models/paginationMeta.v1.json"
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/settlementResponse"
-                      }
-                    },
-                    "links": {
-                      "$ref": "../models/paginationMeta.v1.json"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-statements-statementId-settlements",
-        "description": "Gets a paginated list of settlements on a statement.\n\nRequires the claims_reader role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match"
-          },
-          {
-            "schema": {
-              "type": "number"
-            },
-            "in": "query",
-            "name": "page"
-          },
-          {
-            "schema": {
-              "type": "number"
-            },
-            "in": "query",
-            "name": "perpage"
-          }
-        ]
-      },
-      "post": {
-        "summary": "Add a settlement to a statement",
-        "operationId": "post-statements-statementId-settlements",
-        "responses": {
-          "201": {
-            "description": "Created",
-            "headers": {
-              "Etag": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/settlement"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Unprocessable Entity",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "description": "Adds a settlement to a statement.\n\nRequires the claims_writer role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "X-idempotency-key"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "../models/objectPointer.v1.json"
-              }
-            }
-          }
-        },
-        "tags": [
-          "Statements"
-        ]
-      }
-    },
-    "/statements/{statementId}/settlements/{settlementId}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "statementId",
-          "in": "path",
-          "required": true
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "settlementId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Get a settlement on a statement",
-        "tags": [
-          "Statements"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "headers": {
-              "Etag": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/settlement"
-                }
-              }
-            }
-          },
-          "304": {
-            "description": "Not Modified"
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-statements-statementId-settlements-settlementId",
-        "description": "Fetches a single settlement on a statement.\n\nRequires the claims_reader role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match"
-          }
-        ]
-      },
-      "delete": {
-        "summary": "Remove a settlement from a statement",
-        "operationId": "delete-statements-statementId-settlements-settlementId",
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "headers": {
-              "Etag": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "description": "Removes a settlement from a statement.\n\nRequires the claims_writer role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "X-idempotency-key"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match"
-          }
-        ],
-        "tags": [
-          "Statements"
-        ]
-      }
-    },
-    "/statements/{statementId}/recoveries": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "statementId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Get all recoveries on a statement",
-        "tags": [
-          "Statements"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "headers": {
-              "Etag": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "meta": {
-                      "$ref": "../models/paginationMeta.v1.json"
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/recoveryResponse"
-                      }
-                    },
-                    "links": {
-                      "$ref": "../models/paginationLinks.v1.json"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-statements-statementId-recoveries",
-        "description": "Get a paginated list of recoveries on a statement.\n\nRequires the claims_reader role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match"
-          }
-        ]
-      },
-      "post": {
-        "summary": "Add a recovery to a statement",
-        "operationId": "post-statements-statementId-recoveries",
-        "responses": {
-          "201": {
-            "description": "Created",
-            "headers": {
-              "Etag": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/recovery"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Unprocessable Entity",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "description": "Adds a recovery onto a statement.\n\nRequires the claims_writer role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "X-idempotency-key"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "../models/objectPointer.v1.json"
-              }
-            }
-          }
-        },
-        "tags": [
-          "Statements"
-        ]
-      }
-    },
-    "/statements/{statementId}/recoveries/{recoveryId}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "statementId",
-          "in": "path",
-          "required": true
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "recoveryId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Get a recovery on a statement",
-        "tags": [
-          "Statements"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "headers": {
-              "Etag": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/recovery"
-                }
-              }
-            }
-          },
-          "304": {
-            "description": "Not Modified"
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-statements-statementId-recoveries-recoveryId",
-        "description": "Get a single recovery on a statement.\n\nRequires the claims_reader role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match"
-          }
-        ]
-      },
-      "delete": {
-        "summary": "Remove a recovery from a statement",
-        "operationId": "delete-statements-statementId-recoveries-recoveryId",
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "headers": {
-              "Etag": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "description": "Remove a recovery from a statement.\n\nRequires the claims_writer role to access.",
-        "tags": [
-          "Statements"
-        ],
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "X-idempotency-key"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match"
-          }
-        ]
-      }
     }
   },
   "components": {
     "schemas": {
-      "claimResponse": {
-        "title": "claimResponse",
+      "claimData": {
+        "title": "claimData",
         "type": "object",
         "x-tags": [
           "Misc Models"
@@ -3866,11 +2361,93 @@
               "claim"
             ]
           },
-          "etag": {
-            "type": "string"
-          },
           "attributes": {
             "$ref": "#/components/schemas/claimAttributes"
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "lender": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "string"
+                  },
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "related": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "guarantee": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "related": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "product": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "related": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "ruleset": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object"
+                  },
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "related": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -3900,12 +2477,6 @@
             "format": "date-time",
             "description": "Not to be sent on POST/PUT/PATCH."
           },
-          "lender": {
-            "$ref": "../models/objectPointer.v1.json"
-          },
-          "guarantee": {
-            "$ref": "../models/objectPointer.v1.json"
-          },
           "standardProcessesCompleted": {
             "type": "boolean"
           },
@@ -3915,9 +2486,6 @@
           },
           "outstandingCapitalPreRecovery": {
             "type": "number"
-          },
-          "reasonForFailure": {
-            "type": "string"
           },
           "principalPrivateResidenceRecoveries": {
             "type": "boolean"
@@ -3929,7 +2497,15 @@
             "type": "number"
           },
           "currentStatus": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "Requested",
+              "Rejected",
+              "Claimed",
+              "Realised",
+              "AutoRemoved",
+              "Canceled"
+            ]
           },
           "statusHistory": {
             "type": "array",
@@ -3952,14 +2528,6 @@
               }
             }
           },
-          "approved": {
-            "type": "boolean",
-            "description": "Cannot be true at the same time as rejected."
-          },
-          "rejected": {
-            "type": "boolean",
-            "description": "Cannot be true at the same time as approved."
-          },
           "settlementDate": {
             "type": "string",
             "format": "date"
@@ -3975,12 +2543,14 @@
           },
           "approvalComments": {
             "type": "string"
+          },
+          "guaranteeRef": {
+            "type": "string"
+          },
+          "lenderApplicationRef": {
+            "type": "string"
           }
-        },
-        "required": [
-          "lender",
-          "guarantee"
-        ]
+        }
       },
       "claim": {
         "title": "claim",
@@ -3993,7 +2563,7 @@
             "$ref": "../models/individualMeta.v1.json"
           },
           "data": {
-            "$ref": "#/components/schemas/claimResponse"
+            "$ref": "#/components/schemas/claimData"
           },
           "links": {
             "type": "object",
@@ -4007,6 +2577,16 @@
                 "format": "uri"
               }
             }
+          },
+          "included": {
+            "oneOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/settlementData"
+                }
+              }
+            ],
+            "type": "array"
           }
         }
       },
@@ -4075,8 +2655,8 @@
           }
         }
       },
-      "settlementResponse": {
-        "title": "settlementResponse",
+      "settlementData": {
+        "title": "settlementData",
         "type": "object",
         "x-tags": [
           "Misc Models"
@@ -4111,7 +2691,7 @@
             "$ref": "../models/individualMeta.v1.json"
           },
           "data": {
-            "$ref": "#/components/schemas/settlementResponse"
+            "$ref": "#/components/schemas/settlementData"
           },
           "links": {
             "type": "object",
@@ -4143,7 +2723,7 @@
             "$ref": "../models/individualMeta.v1.json"
           },
           "data": {
-            "$ref": "#/components/schemas/recoveryResponse"
+            "$ref": "#/components/schemas/recoveryData"
           },
           "links": {
             "type": "object",
@@ -4156,7 +2736,7 @@
                 "type": "string",
                 "format": "uri"
               },
-              "claim": {
+              "claims": {
                 "type": "string",
                 "format": "uri"
               }
@@ -4164,8 +2744,8 @@
           }
         }
       },
-      "recoveryResponse": {
-        "title": "recoveryResponse",
+      "recoveryData": {
+        "title": "recoveryData",
         "type": "object",
         "x-tags": [
           "Misc Models"
@@ -4186,6 +2766,71 @@
           },
           "attributes": {
             "$ref": "#/components/schemas/recoveryAttributes"
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "guarantees": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "guarantee"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "lender": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "lender"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "claim": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "claim"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -4222,7 +2867,7 @@
             "type": "string",
             "format": "date"
           },
-          "type": {
+          "recoveryType": {
             "type": "string",
             "enum": [
               "EFG Specific",
@@ -4248,19 +2893,7 @@
           "guarantees": {
             "type": "array",
             "items": {
-              "type": "object",
-              "properties": {
-                "amount": {
-                  "type": "number"
-                },
-                "type": {
-                  "type": "string",
-                  "enum": [
-                    "EFG Facility",
-                    "None EFG Facility"
-                  ]
-                }
-              }
+              "type": "string"
             }
           },
           "dateRecieved": {
@@ -4269,6 +2902,13 @@
           },
           "amountReceived": {
             "type": "number"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "registered",
+              "realised"
+            ]
           }
         }
       },
@@ -4283,7 +2923,7 @@
             "$ref": "../models/individualMeta.v1.json"
           },
           "data": {
-            "$ref": "#/components/schemas/invoiceResponse"
+            "$ref": "#/components/schemas/invoiceData"
           },
           "links": {
             "type": "object",
@@ -4300,8 +2940,8 @@
           }
         }
       },
-      "invoiceResponse": {
-        "title": "invoiceResponse",
+      "invoiceData": {
+        "title": "invoiceData",
         "type": "object",
         "x-tags": [
           "Misc Models"
@@ -4317,11 +2957,32 @@
               "invoice"
             ]
           },
-          "etag": {
-            "type": "string"
-          },
           "attributes": {
             "$ref": "#/components/schemas/invoiceAttributes"
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "lender": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "lender"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -4338,23 +2999,43 @@
           "createdDate": {
             "type": "string"
           },
-          "updatedBy": {
-            "type": "string"
-          },
-          "updatedDate": {
-            "type": "string"
-          },
-          "lender": {
-            "$ref": "../models/objectPointer.v1.json"
-          },
           "startDate": {
             "type": "string"
           },
           "endDate": {
             "type": "string"
           },
-          "document": {
-            "$ref": "../models/objectPointer.v1.json"
+          "name": {
+            "type": "string"
+          },
+          "headerRow": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "records": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "footer": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "fieldName": {
+                  "type": "string"
+                },
+                "fieldValue": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -4369,7 +3050,7 @@
             "$ref": "../models/individualMeta.v1.json"
           },
           "data": {
-            "$ref": "#/components/schemas/statementResponse"
+            "$ref": "#/components/schemas/statementData"
           },
           "links": {
             "type": "object",
@@ -4386,8 +3067,8 @@
           }
         }
       },
-      "statementResponse": {
-        "title": "statementResponse",
+      "statementData": {
+        "title": "statementData",
         "type": "object",
         "x-tags": [
           "Misc Models"
@@ -4403,11 +3084,38 @@
               "statement"
             ]
           },
-          "etag": {
-            "type": "string"
-          },
           "attributes": {
             "$ref": "#/components/schemas/statementAttributes"
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "lender": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "related": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -4427,18 +3135,6 @@
             "description": "Not to be sent on POST/PUT/PATCH.",
             "format": "date-time"
           },
-          "updatedBy": {
-            "type": "string",
-            "description": "Not to be sent on POST/PUT/PATCH."
-          },
-          "updatedDate": {
-            "type": "string",
-            "description": "Not to be sent on POST/PUT/PATCH.",
-            "format": "date-time"
-          },
-          "lender": {
-            "$ref": "../models/objectPointer.v1.json"
-          },
           "startDate": {
             "type": "string",
             "format": "date"
@@ -4447,8 +3143,40 @@
             "type": "string",
             "format": "date"
           },
-          "document": {
-            "$ref": "../models/objectPointer.v1.json"
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "Records": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "headerRow": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "footer": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "fieldName": {
+                  "type": "string"
+                },
+                "fieldValue": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       }

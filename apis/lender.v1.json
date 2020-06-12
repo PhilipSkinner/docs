@@ -2408,6 +2408,12 @@
                 "type": "string"
               }
             }
+          },
+          "notificationSubscriptions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/notificationSubscription"
+            }
           }
         }
       },
@@ -2765,6 +2771,34 @@
         "properties": {
           "data": {
             "$ref": "#/components/schemas/accreditedProductData"
+          }
+        }
+      },
+      "notificationSubscription": {
+        "title": "notificationSubscription",
+        "type": "object",
+        "properties": {
+          "eventType": {
+            "type": "string",
+            "enum": [
+              "DrawDown",
+              "MaturityDateApproaching",
+              "OfferDeadlineApproaching",
+              "ClaimDeadlineApproaching",
+              "AutoDeleteDeadlineApproaching"
+            ]
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "emailAddress": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         }
       }
