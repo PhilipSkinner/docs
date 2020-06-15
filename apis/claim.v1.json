@@ -217,12 +217,14 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/claim"
+                },
+                "examples": {
+                  "example-1": {
+                    "value": ""
+                  }
                 }
               }
             }
-          },
-          "304": {
-            "description": "Not Modified"
           },
           "401": {
             "description": "Unauthorized",
@@ -2435,7 +2437,19 @@
                 "type": "object",
                 "properties": {
                   "data": {
-                    "type": "object"
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "format": "uuid"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "ruleSet"
+                        ]
+                      }
+                    }
                   },
                   "links": {
                     "type": "object",
@@ -2558,6 +2572,7 @@
         "x-tags": [
           "Misc Models"
         ],
+        "x-examples": {},
         "properties": {
           "meta": {
             "$ref": "../models/individualMeta.v1.json"
@@ -2579,7 +2594,7 @@
             }
           },
           "included": {
-            "oneOf": [
+            "anyOf": [
               {
                 "items": {
                   "$ref": "#/components/schemas/settlementData"
