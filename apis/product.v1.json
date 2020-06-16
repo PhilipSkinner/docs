@@ -5933,7 +5933,9 @@
               "change-payment-frequency",
               "change-fixed-amount-repayment",
               "change-repayment-profile",
-              "change-facility-amount"
+              "change-facility-amount",
+              "make-lender-demand",
+              "application-detail-change"
             ]
           },
           "name": {

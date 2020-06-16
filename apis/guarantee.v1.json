@@ -1507,6 +1507,21 @@
             "items": {
               "$ref": "#/components/schemas/inLifeEvent"
             }
+          },
+          "lenderDemand": {
+            "type": "object",
+            "properties": {
+              "demandAmount": {
+                "type": "number"
+              },
+              "dateOfDemand": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "outstandingBalance": {
+                "type": "number"
+              }
+            }
           }
         }
       },
