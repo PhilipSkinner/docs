@@ -31,12 +31,23 @@
                   "type": "object",
                   "properties": {
                     "meta": {
-                      "$ref": "../models/paginationMeta.v1.json"
+                      "type": "object",
+                      "properties": {
+                        "paging": {
+                          "$ref": "../models/paginationMeta.v1.json"
+                        },
+                        "sorting": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
                     },
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/claimData"
+                        "$ref": "#/components/schemas/claim"
                       }
                     },
                     "links": {
@@ -68,13 +79,13 @@
             }
           }
         },
-        "operationId": "get-requests",
+        "operationId": "get-claims",
         "security": [
           {
             "Bearer token": []
           }
         ],
-        "description": "Get a paginated list of claims. Can be filtered by scope.\n\nRequires the claims_reader role to access.",
+        "description": "Get a paginated list of claims. Can be filtered by scope.\n\nRequires the read_claim permission to access.",
         "parameters": [
           {
             "schema": {
@@ -96,6 +107,55 @@
             },
             "in": "query",
             "name": "scope"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "startdate"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "enddate"
+          },
+          {
+            "schema": {
+              "type": "array"
+            },
+            "in": "query",
+            "name": "sort"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "businessLegalName"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "guaranteeRef"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "lenderApplicationRef"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "currentStatus"
           }
         ]
       },
@@ -2472,6 +2532,120 @@
                     }
                   }
                 }
+              },
+              "invoices": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "invoice"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "related": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    }
+                  }
+                }
+              },
+              "statements": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "statement"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "settlements": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "settlement"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "related": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "recoveries": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "recovery"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "related": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    }
+                  }
+                }
               }
             }
           }
@@ -2503,14 +2677,23 @@
             "format": "date-time",
             "description": "Not to be sent on POST/PUT/PATCH."
           },
-          "standardProcessesCompleted": {
+          "guaranteeRef": {
+            "type": "string"
+          },
+          "lenderApplicationRef": {
+            "type": "string"
+          },
+          "borrowerName": {
+            "type": "string"
+          },
+          "standardRecoveryProcessesComplete": {
             "type": "boolean"
           },
           "dateOfClaim": {
             "type": "string",
             "format": "date"
           },
-          "outstandingCapitalPreRecovery": {
+          "outstandingCapitalPostRecovery": {
             "type": "number"
           },
           "principalPrivateResidenceRecoveries": {
@@ -2570,11 +2753,32 @@
           "approvalComments": {
             "type": "string"
           },
-          "guaranteeRef": {
-            "type": "string"
+          "reasonForFacilityRepaymentFailure": {
+            "$ref": "#/components/schemas/reasonForFacilityRepaymentFailure"
           },
-          "lenderApplicationRef": {
-            "type": "string"
+          "claimHistory": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "DateOfClaim": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "termTotalMonths": {
+                  "type": "string"
+                },
+                "reasonForFacilityRepaymentFailure": {
+                  "$ref": "#/components/schemas/reasonForFacilityRepaymentFailure"
+                },
+                "claimStatus": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "termTotalMonths": {
+            "type": "integer"
           }
         }
       },
@@ -2610,6 +2814,11 @@
               {
                 "items": {
                   "$ref": "#/components/schemas/settlementData"
+                }
+              },
+              {
+                "items": {
+                  "$ref": "#/components/schemas/recoveryData"
                 }
               }
             ],
@@ -2704,6 +2913,73 @@
           },
           "attributes": {
             "$ref": "#/components/schemas/settlementAttributes"
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "invoices": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "invoice"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "related": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    }
+                  }
+                }
+              },
+              "statements": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "statement"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "related": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -2911,17 +3187,14 @@
           "priorSimultaneousExposureAmount": {
             "type": "number"
           },
-          "subsequentExposure": {
+          "subsequentExposureAmount": {
             "type": "number"
           },
           "personalGuarantee": {
             "type": "boolean"
           },
-          "guarantees": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+          "guaranteeRef": {
+            "type": "string"
           },
           "dateRecieved": {
             "type": "string",
@@ -3206,6 +3479,27 @@
             }
           }
         }
+      },
+      "reasonForFacilityRepaymentFailure": {
+        "type": "string",
+        "title": "reasonForFacilityRepaymentFailure",
+        "enum": [
+          "Loss of market",
+          "Management failure",
+          "Victim of fraud",
+          "Bad debts",
+          "Financial",
+          "Knock on effect from failure of another company",
+          "Failure of new venture - expansion or acquisition",
+          "Other",
+          "Living beyond means",
+          "Relationship breakdown",
+          "Illness/accident/death",
+          "Increase in interest rates on existing debts",
+          "Guarantee liabilities (including liabilities arising in connection with a limited company)",
+          "Loss on the sale of a property"
+        ],
+        "description": ""
       }
     },
     "securitySchemes": {
