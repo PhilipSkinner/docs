@@ -2683,7 +2683,7 @@
           "lenderApplicationRef": {
             "type": "string"
           },
-          "borrowerName": {
+          "businessLegalName": {
             "type": "string"
           },
           "standardRecoveryProcessesComplete": {
@@ -2710,10 +2710,10 @@
             "enum": [
               "Requested",
               "Rejected",
-              "Claimed",
               "Realised",
               "AutoRemoved",
-              "Canceled"
+              "Canceled",
+              "Settled"
             ]
           },
           "statusHistory": {
@@ -2750,7 +2750,7 @@
           "approvedAmount": {
             "type": "number"
           },
-          "approvalComments": {
+          "reviewComments": {
             "type": "string"
           },
           "reasonForFacilityRepaymentFailure": {
@@ -2761,7 +2761,7 @@
             "items": {
               "type": "object",
               "properties": {
-                "DateOfClaim": {
+                "dateOfClaim": {
                   "type": "string",
                   "format": "date-time"
                 },
@@ -2773,12 +2773,21 @@
                 },
                 "claimStatus": {
                   "type": "string"
+                },
+                "rejectionReason": {
+                  "type": "string"
                 }
               }
             }
           },
           "termTotalMonths": {
             "type": "integer"
+          },
+          "lenderName": {
+            "type": "string"
+          },
+          "facilityType": {
+            "type": "string"
           }
         }
       },
@@ -2851,9 +2860,6 @@
             "format": "date-time",
             "description": "Not to be sent on POST/PUT/PATCH."
           },
-          "invoiceId": {
-            "type": "string"
-          },
           "datePaid": {
             "type": "string",
             "format": "date"
@@ -2868,10 +2874,10 @@
             "type": "string",
             "format": "date"
           },
-          "adjustmentValue": {
+          "amountRequested": {
             "type": "string"
           },
-          "adjustmentComments": {
+          "reviewComments": {
             "type": "string"
           },
           "approved": {
@@ -2880,13 +2886,7 @@
           "rejected": {
             "type": "boolean"
           },
-          "approvedAmount": {
-            "type": "number"
-          },
-          "approvalComment": {
-            "type": "string"
-          },
-          "rejectedComment": {
+          "adjustmentComments": {
             "type": "string"
           }
         }
