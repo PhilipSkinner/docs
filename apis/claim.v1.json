@@ -2686,23 +2686,37 @@
           "businessLegalName": {
             "type": "string"
           },
-          "standardRecoveryProcessesComplete": {
+          "lenderName": {
+            "type": "string"
+          },
+          "facilityType": {
+            "type": "string"
+          },
+          "standardRecoveryProcessesCompleted": {
             "type": "boolean"
           },
-          "dateOfClaim": {
+          "claimDate": {
             "type": "string",
             "format": "date"
           },
-          "outstandingCapitalPostRecovery": {
-            "type": "number"
+          "settlementDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "outstandingCapital": {
+            "type": "number",
+            "description": "Outstanding Capital at the time of the claim."
           },
           "principalPrivateResidenceRecoveries": {
             "type": "boolean"
           },
-          "notes": {
+          "submissionNotes": {
             "type": "string"
           },
-          "claimValue": {
+          "claimAmount": {
+            "type": "number"
+          },
+          "settledAmount": {
             "type": "number"
           },
           "currentStatus": {
@@ -2737,18 +2751,8 @@
               }
             }
           },
-          "settlementDate": {
-            "type": "string",
-            "format": "date"
-          },
-          "rejectionReason": {
-            "type": "string"
-          },
           "enhancedAuditRequired": {
             "type": "boolean"
-          },
-          "approvedAmount": {
-            "type": "number"
           },
           "reviewComments": {
             "type": "string"
@@ -2774,7 +2778,7 @@
                 "claimStatus": {
                   "type": "string"
                 },
-                "rejectionReason": {
+                "reviewComments": {
                   "type": "string"
                 }
               }
@@ -2782,12 +2786,6 @@
           },
           "termTotalMonths": {
             "type": "integer"
-          },
-          "lenderName": {
-            "type": "string"
-          },
-          "facilityType": {
-            "type": "string"
           }
         }
       },

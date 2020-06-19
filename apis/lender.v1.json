@@ -2396,23 +2396,23 @@
             }
           },
           "reference": {
-            "type": "string"
-          },
-          "lenderBankAccount": {
-            "type": "object",
-            "properties": {
-              "sortCode": {
-                "type": "string"
-              },
-              "accountNumber": {
-                "type": "string"
-              }
-            }
+            "type": "string",
+            "description": "Lender Reference!"
           },
           "notificationSubscriptions": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/notificationSubscription"
+            }
+          },
+          "originalReference": {
+            "type": "string",
+            "description": "Migrated reference!"
+          },
+          "approvedEmailDomains": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           }
         }
