@@ -1,0 +1,16 @@
+{
+  "title": "contact",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "phoneNumber": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string",
+      "format": "email"
+    }
+  }
+}

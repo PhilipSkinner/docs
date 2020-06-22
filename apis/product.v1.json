@@ -115,6 +115,13 @@
             "in": "query",
             "name": "productid",
             "description": "Supports multiple values."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "include"
           }
         ],
         "description": "Fetch a paginated list of all products.\n\nRequires the products_reader permission to access."
@@ -2556,6 +2563,13 @@
             },
             "in": "query",
             "name": "rulesetId"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "include"
           }
         ],
         "description": "Fetches a single product, including its currently active set of rules.\n\nRequires the product_reader permission to access."
@@ -3970,6 +3984,13 @@
             "in": "query",
             "name": "perpage",
             "description": "Set to -1 to return all results."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "include"
           }
         ]
       },
@@ -4117,6 +4138,13 @@
             },
             "in": "header",
             "name": "If-match"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "include"
           }
         ]
       },
@@ -5935,8 +5963,7 @@
               "change-repayment-profile",
               "change-facility-amount",
               "make-lender-demand",
-              "application-detail-change",
-              "satisfy-lender-demand"
+              "application-detail-change"
             ]
           },
           "name": {

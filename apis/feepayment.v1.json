@@ -59,6 +59,13 @@
             },
             "in": "query",
             "name": "guranteeRef"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "include"
           }
         ],
         "security": [
@@ -139,7 +146,16 @@
             "Bearer token": []
           }
         ],
-        "description": "Gets a mandate by the id supplied. "
+        "description": "Gets a mandate by the id supplied. ",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "include"
+          }
+        ]
       },
       "put": {
         "summary": "Update a mandate",
@@ -363,6 +379,13 @@
             },
             "in": "query",
             "name": "status"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "include"
           }
         ]
       },

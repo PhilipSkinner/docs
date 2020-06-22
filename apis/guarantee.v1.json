@@ -146,6 +146,13 @@
             },
             "in": "query",
             "name": "currentStatus"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "include"
           }
         ],
         "description": "Fetches a paginated list of guarantees.\n\nRequires the guarantee_reader role to access.",
@@ -323,6 +330,13 @@
             },
             "in": "header",
             "name": "If-match"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "include"
           }
         ]
       },

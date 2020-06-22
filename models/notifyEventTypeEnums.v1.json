@@ -1,0 +1,12 @@
+{
+  "type": "string",
+  "title": "notifyEventTypeEnums",
+  "enum": [
+    "drawdown",
+    "maturity-date-approaching",
+    "offer-deadline-approaching",
+    "claim-deadline-approaching",
+    "auto-delete-deadline-approaching"
+  ],
+  "description": "Events that are recognised by the system that lenders can subscribed to for notification"
+}

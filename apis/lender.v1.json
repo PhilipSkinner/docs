@@ -97,6 +97,14 @@
             },
             "in": "query",
             "name": "parentlenderid"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "include",
+            "description": "Anything in the relation section that needs to be included in the response."
           }
         ],
         "description": "Fetch a paginated list of all lenders. Can filter by parent lender ID to fetch all sub lenders.\n\nRequires the lender_reader role to access.",
@@ -264,6 +272,13 @@
             },
             "in": "header",
             "name": "If-match"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "include"
           }
         ]
       },
@@ -918,437 +933,6 @@
         ]
       }
     },
-    "/types": {
-      "get": {
-        "summary": "Get all lender types",
-        "tags": [
-          "Lender Types"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "meta": {
-                      "$ref": "../models/paginationMeta.v1.json"
-                    },
-                    "links": {
-                      "$ref": "../models/paginationLinks.v1.json"
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/lenderTypeData"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-type",
-        "description": "Fetches a paginated list of all lender types.\n\nRequires the lender_reader role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "number"
-            },
-            "in": "query",
-            "name": "page"
-          },
-          {
-            "schema": {
-              "type": "number"
-            },
-            "in": "query",
-            "name": "pagesize",
-            "description": "Set to -1 to retrieve all results."
-          }
-        ]
-      },
-      "post": {
-        "summary": "Create a lender type",
-        "operationId": "post-type",
-        "responses": {
-          "201": {
-            "description": "Created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/lenderType"
-                }
-              }
-            },
-            "headers": {
-              "Location": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Etag": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Unprocessable Entity",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Lender Types"
-        ],
-        "description": "Create a new lender type.\n\nRequires the lender_writer role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "X-idempotency-key"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/lenderType"
-              }
-            }
-          }
-        }
-      },
-      "parameters": []
-    },
-    "/types/{typeId}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "typeId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Get a lender type",
-        "tags": [
-          "Lender Types"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/lenderType"
-                }
-              }
-            },
-            "headers": {
-              "Etag": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "304": {
-            "description": "Not Modified"
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-type-typeId",
-        "description": "Fetches a single lender type.\n\nRequires the lender_reader role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match"
-          }
-        ]
-      },
-      "put": {
-        "summary": "Update a lender type",
-        "operationId": "put-type-typeId",
-        "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Etag": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/lenderType"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Unprocessable Entity",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Lender Types"
-        ],
-        "description": "Updates a lender type record.\n\nRequires the lender_writer role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "X-idempotency-key"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/lenderType"
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "summary": "",
-        "operationId": "delete-type-typeId",
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Lender Types"
-        ],
-        "description": "Delete a lender type.\n\nRequires the lender_remover role to access.",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-match"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "X-idempotency-key"
-          }
-        ]
-      }
-    },
     "/lenders/{lenderId}/users": {
       "parameters": [
         {
@@ -1823,274 +1407,6 @@
           }
         ]
       }
-    },
-    "/lenders/{lenderId}/accreditedProducts": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "lenderId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "GET Accredited Products",
-        "tags": [
-          "Accredited Products"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "meta": {
-                      "$ref": "../models/paginationMeta.v1.json"
-                    },
-                    "links": {
-                      "$ref": "../models/paginationLinks.v1.json"
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/accreditedProductData"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "type": "object",
-                  "properties": {}
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-lenders-lenderId-accreditedProducts",
-        "description": "Get accredited products for a lender",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "integer"
-            },
-            "in": "query",
-            "name": "page"
-          },
-          {
-            "schema": {
-              "type": "integer"
-            },
-            "in": "query",
-            "name": "perpage",
-            "description": "Set to -1 to return all users."
-          }
-        ]
-      },
-      "post": {
-        "summary": "Add an Accredited Product",
-        "operationId": "post-lenders-lenderId-accreditedProducts",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/accreditedProduct"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/errorResponse.v1.json"
-                },
-                "examples": {}
-              }
-            }
-          }
-        },
-        "description": "add accredited product to a lender",
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "X-idempotency-key"
-          }
-        ],
-        "tags": [
-          "Accredited Products"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/accreditedProduct"
-              }
-            }
-          },
-          "description": ""
-        }
-      }
-    },
-    "/lenders/{lenderId}/accreditedProducts/{accreditedProductId}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "lenderId",
-          "in": "path",
-          "required": true
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "accreditedProductId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "GET Accredited Product",
-        "tags": [
-          "Accredited Products"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/accreditedProduct"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "type": "object",
-                  "properties": {}
-                }
-              },
-              "multipart/form-data": {
-                "schema": {
-                  "type": "object",
-                  "properties": {}
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        },
-        "operationId": "get-lenders-lenderId-accreditedProducts-accreditedProductId",
-        "security": [
-          {
-            "Bearer token": []
-          }
-        ],
-        "description": "Get a Lender accredited product by id"
-      },
-      "delete": {
-        "summary": "Delete Accredited Product",
-        "operationId": "delete-lenders-lenderId-accreditedProducts-accreditedProductId",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        },
-        "description": "Delete Accredited Product from a Lender Account",
-        "tags": [
-          "Accredited Products"
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "if-match"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "X-idempotency-key"
-          }
-        ]
-      }
     }
   },
   "components": {
@@ -2132,35 +1448,29 @@
             }
           },
           "included": {
-            "type": "array",
-            "items": {
-              "anyOf": [
-                {
-                  "$ref": "#/components/schemas/lenderTypeData"
-                },
-                {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/userData"
-                  }
-                },
-                {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/lenderData"
-                  }
-                },
-                {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/accreditedProductData"
-                  }
-                },
-                {
-                  "$ref": "#/components/schemas/allocationData"
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/userData"
                 }
-              ]
-            }
+              },
+              {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/lenderData"
+                }
+              },
+              {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/accreditedProductData"
+                }
+              },
+              {
+                "$ref": "#/components/schemas/allocationData"
+              }
+            ]
           }
         }
       },
@@ -2380,21 +1690,6 @@
           "name": {
             "type": "string"
           },
-          "contact": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string"
-              },
-              "phoneNumber": {
-                "type": "string"
-              },
-              "email": {
-                "type": "string",
-                "format": "email"
-              }
-            }
-          },
           "reference": {
             "type": "string",
             "description": "Lender Reference!"
@@ -2413,6 +1708,12 @@
             "type": "array",
             "items": {
               "type": "string"
+            }
+          },
+          "contacts": {
+            "type": "array",
+            "items": {
+              "$ref": "../models/contact.v1.json"
             }
           }
         }
@@ -2524,106 +1825,13 @@
                   "type": "string"
                 },
                 "drawdownAmount": {
-                  "type": "string"
+                  "type": "number"
                 },
                 "claimedAmount": {
-                  "type": "string"
+                  "type": "number"
                 }
               }
             }
-          }
-        }
-      },
-      "lenderType": {
-        "title": "lenderType",
-        "type": "object",
-        "x-tags": [
-          "Misc Models"
-        ],
-        "properties": {
-          "meta": {
-            "$ref": "../models/individualMeta.v1.json"
-          },
-          "data": {
-            "$ref": "#/components/schemas/lenderTypeData"
-          },
-          "links": {
-            "type": "object",
-            "properties": {
-              "self": {
-                "type": "string",
-                "format": "uri"
-              },
-              "types": {
-                "type": "string",
-                "format": "uri"
-              }
-            }
-          }
-        }
-      },
-      "lenderTypeData": {
-        "title": "lenderTypeData",
-        "type": "object",
-        "x-tags": [
-          "Misc Models"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "lenderType"
-            ]
-          },
-          "etag": {
-            "type": "string"
-          },
-          "attributes": {
-            "$ref": "#/components/schemas/lenderTypeAttributes"
-          }
-        },
-        "description": ""
-      },
-      "lenderTypeAttributes": {
-        "title": "lenderTypeAttributes",
-        "type": "object",
-        "x-tags": [
-          "Lender Types"
-        ],
-        "description": "",
-        "properties": {
-          "createdDate": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Not to be sent on POST/PUT/PATCH."
-          },
-          "createdBy": {
-            "type": "string",
-            "description": "Not to be sent on POST/PUT/PATCH."
-          },
-          "updatedDate": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Not to be sent on POST/PUT/PATCH."
-          },
-          "updatedBy": {
-            "type": "string",
-            "description": "Not to be sent on POST/PUT/PATCH."
-          },
-          "name": {
-            "type": "string",
-            "enum": [
-              "Large bank",
-              "Challenger",
-              "Asset Finance",
-              "Invoice Finance",
-              "Smaller bank",
-              "Other"
-            ]
           }
         }
       },
@@ -2662,11 +1870,18 @@
                 "type": "string",
                 "format": "uri"
               },
-              "lender": {
+              "lenders": {
                 "type": "string",
                 "format": "uri"
               }
             }
+          },
+          "included": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/lenderData"
+              }
+            ]
           }
         }
       },
@@ -2684,11 +1899,32 @@
               "user"
             ]
           },
-          "etag": {
-            "type": "string"
-          },
           "attributes": {
             "$ref": "#/components/schemas/userAttributes"
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "lender": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "lender"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -2765,28 +2001,15 @@
           }
         }
       },
-      "accreditedProduct": {
-        "title": "accreditedProduct",
-        "type": "object",
-        "properties": {
-          "data": {
-            "$ref": "#/components/schemas/accreditedProductData"
-          }
-        }
-      },
       "notificationSubscription": {
         "title": "notificationSubscription",
         "type": "object",
         "properties": {
-          "eventType": {
-            "type": "string",
-            "enum": [
-              "DrawDown",
-              "MaturityDateApproaching",
-              "OfferDeadlineApproaching",
-              "ClaimDeadlineApproaching",
-              "AutoDeleteDeadlineApproaching"
-            ]
+          "eventTypes": {
+            "type": "array",
+            "items": {
+              "$ref": "../models/notifyEventTypeEnums.v1.json"
+            }
           },
           "roles": {
             "type": "array",
@@ -2794,7 +2017,7 @@
               "type": "string"
             }
           },
-          "emailAddress": {
+          "emailAddressList": {
             "type": "array",
             "items": {
               "type": "string"
