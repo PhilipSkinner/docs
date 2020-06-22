@@ -2722,12 +2722,12 @@
           "currentStatus": {
             "type": "string",
             "enum": [
-              "Requested",
-              "Rejected",
-              "Realised",
-              "AutoRemoved",
-              "Canceled",
-              "Settled"
+              "requested",
+              "rejected",
+              "realised",
+              "auto-removed",
+              "canceled",
+              "cettled"
             ]
           },
           "statusHistory": {
