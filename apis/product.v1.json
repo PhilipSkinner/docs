@@ -5935,7 +5935,8 @@
               "change-repayment-profile",
               "change-facility-amount",
               "make-lender-demand",
-              "application-detail-change"
+              "application-detail-change",
+              "satisfy-lender-demand"
             ]
           },
           "name": {

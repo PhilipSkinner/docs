@@ -2697,11 +2697,11 @@
           },
           "claimDate": {
             "type": "string",
-            "format": "date"
+            "format": "date-time"
           },
           "settlementDate": {
             "type": "string",
-            "format": "date"
+            "format": "date-time"
           },
           "outstandingCapital": {
             "type": "number",
@@ -2722,12 +2722,12 @@
           "currentStatus": {
             "type": "string",
             "enum": [
-              "Requested",
-              "Rejected",
-              "Realised",
-              "AutoRemoved",
-              "Canceled",
-              "Settled"
+              "requested",
+              "rejected",
+              "realised",
+              "auto-removed",
+              "canceled",
+              "cettled"
             ]
           },
           "statusHistory": {
