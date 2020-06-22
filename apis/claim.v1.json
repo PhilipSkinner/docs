@@ -2697,11 +2697,11 @@
           },
           "claimDate": {
             "type": "string",
-            "format": "date"
+            "format": "date-time"
           },
           "settlementDate": {
             "type": "string",
-            "format": "date"
+            "format": "date-time"
           },
           "outstandingCapital": {
             "type": "number",
