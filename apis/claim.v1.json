@@ -2727,7 +2727,8 @@
               "realised",
               "auto-removed",
               "canceled",
-              "settled"
+              "settled",
+              "recovered"
             ]
           },
           "statusHistory": {

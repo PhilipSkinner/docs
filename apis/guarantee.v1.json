@@ -99,6 +99,13 @@
               "type": "string"
             },
             "in": "query",
+            "name": "updatedDate"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
             "name": "page"
           },
           {
@@ -118,6 +125,13 @@
             },
             "in": "query",
             "name": "sort"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "facilityType"
           },
           {
             "schema": {
@@ -1036,9 +1050,10 @@
           }
         }
       },
-      "drawDown": {
-        "title": "drawDown",
+      "balanceChangeEvent": {
+        "title": "balanceChangeEvent",
         "type": "object",
+        "description": "",
         "properties": {
           "date": {
             "type": "string",
@@ -1049,13 +1064,18 @@
           },
           "monthsFromStart": {
             "type": "number"
+          },
+          "confirmed": {
+            "type": "boolean"
+          },
+          "eventType": {
+            "type": "string"
           }
         },
         "required": [
           "date",
           "amount"
-        ],
-        "description": ""
+        ]
       },
       "inLifeEvent": {
         "title": "inLifeEvent",
@@ -1191,13 +1211,7 @@
               }
             }
           },
-          "predictedDrawDowns": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/drawDown"
-            }
-          },
-          "drawDownEvents": {
+          "BalanceChangeEvents": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/drawDown"
@@ -1344,7 +1358,7 @@
             "type": "object",
             "properties": {
               "facilityType": {
-                "type": "string"
+                "$ref": "../models/facilityTypeEnum.v1.json"
               },
               "facilityTotalAmount": {
                 "type": "number"
@@ -1629,6 +1643,15 @@
           "offer_requested",
           "claim",
           "cancelled"
+        ]
+      },
+      "balanceChangeEventTypeEnum": {
+        "type": "string",
+        "title": "balanceChangeEventTypeEnum",
+        "enum": [
+          "drawdown",
+          "inLifeEventBalanceAdjustment",
+          "lumpSumPayment"
         ]
       }
     },

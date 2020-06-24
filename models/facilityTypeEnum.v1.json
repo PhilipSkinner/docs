@@ -1,0 +1,10 @@
+{
+  "type": "string",
+  "title": "facilityTypeEnum",
+  "enum": [
+    "Asset Finance",
+    "Term Loan",
+    "Invoice Finance",
+    "Revolving Credit"
+  ]
+}
