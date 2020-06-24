@@ -687,7 +687,7 @@
             }
           },
           "notificationType": {
-            "$ref": "../models/notifyEventTypeEnums.v1.json"
+            "$ref": "../models/notifyEventTypeEnum.v1.json"
           },
           "emailList": {
             "type": "array",

@@ -1,6 +1,6 @@
 {
   "type": "string",
-  "title": "notifyEventTypeEnums",
+  "title": "notifyEventTypeEnum",
   "enum": [
     "drawdown",
     "maturity-date-approaching",

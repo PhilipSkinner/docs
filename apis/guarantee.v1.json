@@ -149,10 +149,26 @@
           },
           {
             "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "includeInactive"
+          },
+          {
+            "schema": {
               "type": "string"
             },
             "in": "query",
-            "name": "include"
+            "name": "searchTerm",
+            "description": "General Search Term to search all id and borrower name"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "include",
+            "description": "Used to request whats included in the include section of the response."
           }
         ],
         "description": "Fetches a paginated list of guarantees.\n\nRequires the guarantee_reader role to access.",

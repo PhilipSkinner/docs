@@ -1,0 +1,17 @@
+{
+  "type": "string",
+  "title": "inLifeEventEnum",
+  "enum": [
+    "delete-repayment-holiday",
+    "add-repayment-holiday",
+    "add-drawdown",
+    "lump-sum-repayment",
+    "change-payment-duration",
+    "change-payment-frequency",
+    "change-fixed-amount-repayment",
+    "change-repayment-profile",
+    "change-facility-amount",
+    "make-lender-demand",
+    "application-detail-change"
+  ]
+}
