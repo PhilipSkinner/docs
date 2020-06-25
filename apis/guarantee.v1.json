@@ -186,6 +186,20 @@
             "in": "query",
             "name": "include",
             "description": "Used to request whats included in the include section of the response."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "lenderName"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "lenderAccountInternalReference"
           }
         ],
         "description": "Fetches a paginated list of guarantees.\n\nRequires the guarantee_reader role to access.",

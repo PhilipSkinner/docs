@@ -106,13 +106,6 @@
               "type": "string"
             },
             "in": "query",
-            "name": "scope"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
             "name": "startdate"
           },
           {
@@ -152,10 +145,27 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             },
             "in": "query",
             "name": "currentStatus"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "lenderName"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "lenderAccountInternalReference"
           }
         ]
       },
