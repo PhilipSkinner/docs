@@ -2680,7 +2680,10 @@
           "guaranteeRef": {
             "type": "string"
           },
-          "lenderApplicationRef": {
+          "lenderAccountInternalReference": {
+            "type": "string"
+          },
+          "lenderApplicationReference": {
             "type": "string"
           },
           "businessLegalName": {

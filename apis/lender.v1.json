@@ -96,7 +96,7 @@
               "type": "string"
             },
             "in": "query",
-            "name": "parentlenderid"
+            "name": "name"
           },
           {
             "schema": {
@@ -105,6 +105,21 @@
             "in": "query",
             "name": "include",
             "description": "Anything in the relation section that needs to be included in the response."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "InternalReference"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "originalReference",
+            "description": ""
           }
         ],
         "description": "Fetch a paginated list of all lenders. Can filter by parent lender ID to fetch all sub lenders.\n\nRequires the lender_reader role to access.",
@@ -1407,6 +1422,102 @@
           }
         ]
       }
+    },
+    "/users": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [
+          "Lenders"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "type": "object",
+                      "properties": {
+                        "paging": {
+                          "$ref": "../models/paginationMeta.v1.json"
+                        },
+                        "sorting": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/userData"
+                      }
+                    },
+                    "included": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "406": {
+            "description": "Not Acceptable"
+          }
+        },
+        "operationId": "get-users",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "parentLenderId",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "page"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "pagesize"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "sort"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "include"
+          }
+        ],
+        "description": "Gets all users for all sub lenders of a parent lender account."
+      }
     }
   },
   "components": {
@@ -1690,7 +1801,7 @@
           "name": {
             "type": "string"
           },
-          "reference": {
+          "internalReference": {
             "type": "string",
             "description": "Lender Reference!"
           },
