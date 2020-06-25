@@ -85,7 +85,7 @@
             "Bearer token": []
           }
         ],
-        "description": "Get a paginated list of claims. Can be filtered by scope.\n\nRequires the read_claim permission to access.",
+        "description": "Get a paginated list of claims. Can be filtered by scope.\n\nRequires the read_claim permission.",
         "parameters": [
           {
             "schema": {
