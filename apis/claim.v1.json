@@ -2815,6 +2815,13 @@
           },
           "cancelReason": {
             "type": "string"
+          },
+          "realisedAmount": {
+            "type": "number"
+          },
+          "realisedDate": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       },
@@ -2894,7 +2901,7 @@
           "amountPaid": {
             "type": "number"
           },
-          "isAdjustment": {
+          "adjustment": {
             "type": "boolean"
           },
           "adjustmentDate": {
@@ -2907,14 +2914,11 @@
           "reviewComments": {
             "type": "string"
           },
-          "approved": {
-            "type": "boolean"
-          },
-          "rejected": {
-            "type": "boolean"
-          },
-          "adjustmentComments": {
+          "adjustmentNotes": {
             "type": "string"
+          },
+          "currentStatus": {
+            "$ref": "#/components/schemas/settlementStatusEnum"
           }
         }
       },
@@ -2934,9 +2938,6 @@
             "enum": [
               "settlement"
             ]
-          },
-          "etag": {
-            "type": "string"
           },
           "attributes": {
             "$ref": "#/components/schemas/settlementAttributes"
@@ -3231,7 +3232,8 @@
             "type": "string",
             "enum": [
               "registered",
-              "realised"
+              "realised",
+              "auto-removed"
             ]
           }
         }
@@ -3536,6 +3538,14 @@
           "cancelled",
           "settled",
           "recovered"
+        ]
+      },
+      "settlementStatusEnum": {
+        "type": "string",
+        "title": "settlementStatusEnum",
+        "enum": [
+          "accepted",
+          "rejected"
         ]
       }
     },
