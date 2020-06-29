@@ -162,7 +162,8 @@
               }
             },
             "in": "query",
-            "name": "currentStatus"
+            "name": "currentStatus",
+            "description": "Supports multiple status values in a comma separated list."
           },
           {
             "schema": {

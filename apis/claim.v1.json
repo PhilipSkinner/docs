@@ -151,7 +151,8 @@
               }
             },
             "in": "query",
-            "name": "currentStatus"
+            "name": "currentStatus",
+            "description": "Supports multiple status values in a comma separated list."
           },
           {
             "schema": {
@@ -2718,7 +2719,7 @@
           },
           "outstandingCapital": {
             "type": "number",
-            "description": "Outstanding Capital at the time of the claim."
+            "description": "Outstanding Capital at the time of the claim. (Post Recovery)"
           },
           "principalPrivateResidenceRecoveries": {
             "type": "boolean"
@@ -2794,12 +2795,24 @@
                 },
                 "reviewComments": {
                   "type": "string"
+                },
+                "changedBy": {
+                  "type": "string"
+                },
+                "cancelReason": {
+                  "type": "string"
+                },
+                "submissionNotes": {
+                  "type": "string"
                 }
               }
             }
           },
           "termTotalMonths": {
             "type": "integer"
+          },
+          "cancelReason": {
+            "type": "string"
           }
         }
       },
