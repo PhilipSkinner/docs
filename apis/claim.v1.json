@@ -2734,16 +2734,7 @@
             "type": "number"
           },
           "currentStatus": {
-            "type": "string",
-            "enum": [
-              "requested",
-              "rejected",
-              "realised",
-              "auto-removed",
-              "canceled",
-              "settled",
-              "recovered"
-            ]
+            "$ref": "#/components/schemas/claimStatusEnum"
           },
           "statusHistory": {
             "type": "array",
@@ -2751,10 +2742,10 @@
               "type": "object",
               "properties": {
                 "from": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/claimStatusEnum"
                 },
                 "to": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/claimStatusEnum"
                 },
                 "date": {
                   "type": "string",
@@ -3525,6 +3516,19 @@
           "Loss on the sale of a property"
         ],
         "description": ""
+      },
+      "claimStatusEnum": {
+        "title": "claimStatusEnum",
+        "type": "string",
+        "enum": [
+          "requested",
+          "rejected",
+          "realised",
+          "auto-removed",
+          "cancelled",
+          "settled",
+          "recovered"
+        ]
       }
     },
     "securitySchemes": {
