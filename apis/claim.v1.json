@@ -2478,7 +2478,10 @@
                         "type": "string"
                       },
                       "type": {
-                        "type": "string"
+                        "type": "string",
+                        "enum": [
+                          "guarantee"
+                        ]
                       }
                     }
                   },
@@ -2502,7 +2505,10 @@
                         "type": "string"
                       },
                       "type": {
-                        "type": "string"
+                        "type": "string",
+                        "enum": [
+                          "product"
+                        ]
                       }
                     }
                   },
@@ -2728,10 +2734,12 @@
             "type": "string"
           },
           "claimAmount": {
-            "type": "number"
+            "type": "number",
+            "description": "Requested Amount."
           },
-          "settledAmount": {
-            "type": "number"
+          "settlementAmount": {
+            "type": "number",
+            "description": "Approved or Settled amount."
           },
           "currentStatus": {
             "$ref": "#/components/schemas/claimStatusEnum"
@@ -2771,18 +2779,18 @@
             "items": {
               "type": "object",
               "properties": {
-                "dateOfClaim": {
+                "claimDate": {
                   "type": "string",
                   "format": "date-time"
                 },
                 "termTotalMonths": {
-                  "type": "string"
+                  "type": "integer"
                 },
                 "reasonForFacilityRepaymentFailure": {
                   "$ref": "#/components/schemas/reasonForFacilityRepaymentFailure"
                 },
                 "claimStatus": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/claimStatusEnum"
                 },
                 "reviewComments": {
                   "type": "string"
@@ -2794,6 +2802,9 @@
                   "type": "string"
                 },
                 "submissionNotes": {
+                  "type": "string"
+                },
+                "createdBy": {
                   "type": "string"
                 }
               }
@@ -3080,9 +3091,6 @@
               "recovery"
             ]
           },
-          "etag": {
-            "type": "string"
-          },
           "attributes": {
             "$ref": "#/components/schemas/recoveryAttributes"
           },
@@ -3212,11 +3220,11 @@
           "guaranteeRef": {
             "type": "string"
           },
-          "dateRecieved": {
+          "dateReceived": {
             "type": "string",
             "format": "date"
           },
-          "amountReceived": {
+          "amountRecieved": {
             "type": "number"
           },
           "status": {
