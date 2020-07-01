@@ -2413,6 +2413,66 @@
           }
         ]
       }
+    },
+    "/lenderClaimAccounts/{accountId}": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/lenderClaimAccount"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "operationId": "get-lenderClaimAccount",
+        "security": [
+          {
+            "Bearer token": []
+          }
+        ],
+        "description": "Gets the lenders claim bank account details.\nRequires the read-bank-details permission"
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "accountId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "Add or update a Lender Bank Account",
+        "operationId": "put-lenderBankAccounts-accountId",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Adds or updates a lender bank account",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/lenderClaimAccount"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Claims"
+        ]
+      }
     }
   },
   "components": {
@@ -3263,6 +3323,13 @@
                 "format": "uri"
               }
             }
+          },
+          "included": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/lenderClaimAccount"
+              }
+            ]
           }
         }
       },
@@ -3305,6 +3372,88 @@
                         ]
                       }
                     }
+                  },
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "related": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "lenderClaimAccount": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "lender"
+                        ]
+                      }
+                    }
+                  },
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "related": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "parentLender": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "lender"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "invoiceDocument": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "document"
+                        ]
+                      }
+                    }
+                  },
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "related": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    }
                   }
                 }
               }
@@ -3343,25 +3492,29 @@
           "records": {
             "type": "array",
             "items": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
+              "$ref": "#/components/schemas/reportRow"
             }
           },
           "footer": {
             "type": "array",
             "items": {
-              "type": "object",
-              "properties": {
-                "fieldName": {
-                  "type": "string"
-                },
-                "fieldValue": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/components/schemas/fieldItem"
             }
+          },
+          "headerDetails": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/fieldItem"
+            }
+          },
+          "invoiceType": {
+            "type": "string",
+            "enum": [
+              "claims"
+            ]
+          },
+          "contactDetails": {
+            "$ref": "../models/contact.v1.json"
           }
         }
       },
@@ -3440,6 +3593,34 @@
                     }
                   }
                 }
+              },
+              "statementDocument": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "document"
+                        ]
+                      }
+                    }
+                  },
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "related": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    }
+                  }
+                }
               }
             }
           }
@@ -3451,6 +3632,7 @@
         "x-tags": [
           "Statements"
         ],
+        "description": "",
         "properties": {
           "createdBy": {
             "type": "string",
@@ -3472,16 +3654,18 @@
           "name": {
             "type": "string"
           },
-          "type": {
-            "type": "string"
+          "statementType": {
+            "type": "string",
+            "enum": [
+              "settlements",
+              "claims",
+              "recoveries"
+            ]
           },
           "Records": {
             "type": "array",
             "items": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
+              "$ref": "#/components/schemas/reportRow"
             }
           },
           "headerRow": {
@@ -3490,19 +3674,20 @@
               "type": "string"
             }
           },
-          "footer": {
+          "footerDetails": {
             "type": "array",
             "items": {
-              "type": "object",
-              "properties": {
-                "fieldName": {
-                  "type": "string"
-                },
-                "fieldValue": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/components/schemas/fieldItem"
             }
+          },
+          "headerDetails": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/fieldItem"
+            }
+          },
+          "contactDetails": {
+            "$ref": "../models/contact.v1.json"
           }
         }
       },
@@ -3547,6 +3732,114 @@
           "accepted",
           "rejected"
         ]
+      },
+      "fieldItem": {
+        "title": "fieldItem",
+        "type": "object",
+        "properties": {
+          "fieldName": {
+            "type": "string"
+          },
+          "fieldValue": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "fieldName",
+          "fieldValue"
+        ]
+      },
+      "reportRow": {
+        "title": "reportRow",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "lenderClaimAccount": {
+        "title": "lenderClaimAccount",
+        "type": "object",
+        "description": "",
+        "properties": {
+          "meta": {
+            "$ref": "../models/individualMeta.v1.json"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "lenderBankAccount"
+                ]
+              },
+              "attributes": {
+                "type": "object",
+                "properties": {
+                  "contacts": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "../models/contact.v1.json"
+                    }
+                  },
+                  "bankDetails": {
+                    "$ref": "../models/bankAccount.v1.json"
+                  },
+                  "lender": {
+                    "type": "string"
+                  }
+                }
+              },
+              "relationships": {
+                "type": "object",
+                "properties": {
+                  "lenders": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "lender"
+                              ]
+                            }
+                          }
+                        }
+                      },
+                      "links": {
+                        "type": "object",
+                        "properties": {
+                          "related": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "links": {
+                "type": "string"
+              }
+            }
+          },
+          "links": {
+            "type": "string"
+          },
+          "include": {
+            "type": "string"
+          }
+        }
       }
     },
     "securitySchemes": {
