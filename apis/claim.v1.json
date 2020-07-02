@@ -3744,7 +3744,8 @@
         "title": "settlementStatusEnum",
         "enum": [
           "accepted",
-          "rejected"
+          "rejected",
+          "requested"
         ]
       },
       "fieldItem": {
