@@ -167,6 +167,13 @@
             },
             "in": "query",
             "name": "lenderAccountInternalReference"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "ETag"
           }
         ]
       },
@@ -341,6 +348,13 @@
             },
             "in": "header",
             "name": "If-match"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "ETag"
           }
         ],
         "description": "Fetches a single claim.\n\nRequires the claims_reader role to access."
@@ -1729,7 +1743,7 @@
           "200": {
             "description": "OK",
             "headers": {
-              "Etag": {
+              "ETag": {
                 "schema": {
                   "type": "string"
                 }
@@ -2916,12 +2930,12 @@
             "anyOf": [
               {
                 "items": {
-                  "$ref": "#/components/schemas/settlementData"
+                  "$ref": "#/components/schemas/recoveryData"
                 }
               },
               {
                 "items": {
-                  "$ref": "#/components/schemas/recoveryData"
+                  "$ref": "#/components/schemas/settlementData"
                 }
               }
             ],
@@ -2969,7 +2983,7 @@
             "format": "date"
           },
           "amountRequested": {
-            "type": "string"
+            "type": "number"
           },
           "reviewComments": {
             "type": "string"
