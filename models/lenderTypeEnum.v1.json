@@ -1,0 +1,15 @@
+{
+  "type": "string",
+  "title": "lenderTypeEnum",
+  "enum": [
+    "large-bank",
+    "challenger",
+    "asset-finance",
+    "invoice-finance",
+    "smaller-bank",
+    "other"
+  ],
+  "x-tags": [
+    "Lenders"
+  ]
+}

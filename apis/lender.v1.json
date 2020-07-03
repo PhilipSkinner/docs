@@ -1826,6 +1826,9 @@
             "items": {
               "$ref": "../models/contact.v1.json"
             }
+          },
+          "lenderType": {
+            "$ref": "../models/lenderTypeEnum.v1.json"
           }
         }
       },

@@ -3529,6 +3529,13 @@
           },
           "contactDetails": {
             "$ref": "../models/contact.v1.json"
+          },
+          "invoiceDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "invoiceReference": {
+            "type": "string"
           }
         }
       },
