@@ -492,6 +492,9 @@
           },
           "businessLegalName": {
             "type": "string"
+          },
+          "facilityType": {
+            "$ref": "../models/facilityTypeEnum.v1.json"
           }
         }
       },
