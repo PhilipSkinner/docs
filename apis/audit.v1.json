@@ -464,7 +464,7 @@
           "resourceType": {
             "$ref": "../models/resourceTypeEnum.v1.json"
           },
-          "eventType": {
+          "auditEvent": {
             "$ref": "#/components/schemas/auditEventEnum"
           },
           "eventDetails": {
@@ -476,6 +476,21 @@
             "format": "date-time"
           },
           "createdBy": {
+            "type": "string"
+          },
+          "resourceId": {
+            "type": "string"
+          },
+          "guaranteeRef": {
+            "type": "string"
+          },
+          "lenderAccountInternalReference": {
+            "type": "string"
+          },
+          "lenderApplicationReference": {
+            "type": "string"
+          },
+          "businessLegalName": {
             "type": "string"
           }
         }
