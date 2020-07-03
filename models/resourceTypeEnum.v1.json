@@ -1,0 +1,18 @@
+{
+  "type": "string",
+  "title": "resourceTypeEnum",
+  "enum": [
+        "Guarantee",
+        "FeeSchedule",
+        "Mandate",
+        "Lender",
+        "Product",
+        "Claim",       
+        "Recovery",
+        "Settlement",
+        "Invoice",
+        "RecoveryStatement",
+        "ClaimStatement",
+        "Document"
+  ]
+}

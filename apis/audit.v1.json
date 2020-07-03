@@ -44,7 +44,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/auditResponse"
+                        "$ref": "#/components/schemas/auditData"
                       }
                     }
                   }
@@ -165,7 +165,7 @@
                       }
                     },
                     "data": {
-                      "$ref": "#/components/schemas/auditResponse"
+                      "$ref": "#/components/schemas/auditData"
                     }
                   }
                 }
@@ -178,7 +178,7 @@
                 },
                 "description": "URI of newly created resource."
               },
-              "Etag": {
+              "ETag": {
                 "schema": {
                   "type": "string"
                 }
@@ -234,7 +234,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/auditAttributes"
+                "$ref": "#/components/schemas/auditData"
               }
             }
           },
@@ -287,7 +287,7 @@
                       }
                     },
                     "data": {
-                      "$ref": "#/components/schemas/auditResponse"
+                      "$ref": "#/components/schemas/auditData"
                     }
                   }
                 }
@@ -413,8 +413,8 @@
   },
   "components": {
     "schemas": {
-      "auditResponse": {
-        "title": "auditResponse",
+      "auditData": {
+        "title": "auditData",
         "type": "object",
         "x-tags": [
           "Misc Models"
@@ -426,14 +426,31 @@
           "type": {
             "type": "string",
             "enum": [
-              "auditRecord"
+              "audit"
             ]
           },
           "attributes": {
             "$ref": "#/components/schemas/auditAttributes"
           },
-          "etag": {
-            "type": "string"
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "lenders": {
+                "type": "string"
+              },
+              "guarantees": {
+                "type": "string"
+              },
+              "product": {
+                "type": "string"
+              },
+              "ruleset": {
+                "type": "string"
+              },
+              "programme": {
+                "type": "string"
+              }
+            }
           }
         }
       },
@@ -444,30 +461,36 @@
           "Audit Records"
         ],
         "properties": {
-          "system": {
-            "type": "string"
+          "resourceType": {
+            "$ref": "../models/resourceTypeEnum.v1.json"
           },
           "eventType": {
-            "type": "string"
+            "$ref": "#/components/schemas/auditEventEnum"
           },
-          "details": {
-            "type": "object",
+          "eventDetails": {
+            "type": "string",
             "description": "Can be of any structure."
           },
-          "createdDate": {
+          "eventDate": {
             "type": "string",
             "format": "date-time"
           },
           "createdBy": {
             "type": "string"
-          },
-          "scope": {
-            "type": "array",
-            "items": {
-              "$ref": "../models/objectPointer.v1.json"
-            }
           }
         }
+      },
+      "auditEventEnum": {
+        "type": "string",
+        "title": "auditEventEnum",
+        "enum": [
+          "CreateResource",
+          "UpdateResource",
+          "DeleteResource",
+          "InLifeEvent",
+          "DocumentRequest",
+          "FeeScheduleRequest"
+        ]
       }
     },
     "securitySchemes": {
