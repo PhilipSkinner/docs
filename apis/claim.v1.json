@@ -3289,8 +3289,11 @@
           "subsequentExposureAmount": {
             "type": "number"
           },
-          "personalGuarantee": {
-            "type": "boolean"
+          "personalGuarantees": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/personalGuarantee"
+            }
           },
           "guaranteeRef": {
             "type": "string"
@@ -3860,6 +3863,22 @@
           },
           "include": {
             "type": "string"
+          }
+        }
+      },
+      "personalGuarantee": {
+        "title": "personalGuarantee",
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "number"
+          },
+          "guaranteeType": {
+            "type": "string",
+            "enum": [
+              "efgFacility",
+              "nonEfgFacility"
+            ]
           }
         }
       }
