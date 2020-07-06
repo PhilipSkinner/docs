@@ -3305,7 +3305,7 @@
           "amountRecieved": {
             "type": "number"
           },
-          "status": {
+          "currentStatus": {
             "type": "string",
             "enum": [
               "registered",
