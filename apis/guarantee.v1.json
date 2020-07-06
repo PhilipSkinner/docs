@@ -1113,10 +1113,12 @@
             "type": "string"
           },
           "dateChanged": {
-            "type": "string"
+            "type": "string",
+            "format": "date-time"
           },
           "affectiveFromDate": {
-            "type": "string"
+            "type": "string",
+            "format": "date-time"
           },
           "changedAttributes": {
             "type": "array",
@@ -1668,7 +1670,10 @@
           "offer_requested",
           "claim",
           "cancelled"
-        ]
+        ],
+        "x-examples": {
+          "example-1": {}
+        }
       },
       "balanceChangeEventTypeEnum": {
         "type": "string",
