@@ -3712,6 +3712,9 @@
           },
           "contactDetails": {
             "$ref": "../models/contact.v1.json"
+          },
+          "statementReference": {
+            "type": "string"
           }
         }
       },
