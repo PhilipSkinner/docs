@@ -1710,6 +1710,62 @@
             },
             "in": "header",
             "name": "X-idempotency-key"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "newRecordsOnly"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "includeSettlementAdjustments"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "includeSettled"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "includeRejected"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "saveStatement"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "statementType"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "startDate"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "endDate"
           }
         ],
         "requestBody": {
@@ -2075,7 +2131,7 @@
         ]
       },
       "post": {
-        "summary": "Create an invoice",
+        "summary": "Generate an invoice",
         "operationId": "post-invoices",
         "responses": {
           "201": {
@@ -2134,7 +2190,7 @@
         "tags": [
           "Invoices"
         ],
-        "description": "Create an invoice for a given date range.\n\nRequires the claims_writer role to access.",
+        "description": "Generates an invoice for a given date range.\n\nRequires the CreateInvoice permission.",
         "security": [
           {
             "Bearer token": []
@@ -2147,6 +2203,55 @@
             },
             "in": "header",
             "name": "X-idempotency-key"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "newRecordsOnly"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "includeSettlementAdjustments"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "includeSettled"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "includeRejected"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "saveInvoice"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "startDate"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "endDate"
           }
         ],
         "requestBody": {
@@ -3679,12 +3784,7 @@
             "type": "string"
           },
           "statementType": {
-            "type": "string",
-            "enum": [
-              "settlements",
-              "claims",
-              "recoveries"
-            ]
+            "$ref": "#/components/schemas/statementTypeEnum"
           },
           "Records": {
             "type": "array",
@@ -3881,6 +3981,20 @@
             "enum": [
               "efgFacility",
               "nonEfgFacility"
+            ]
+          }
+        }
+      },
+      "statementTypeEnum": {
+        "title": "statementTypeEnum",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "enum": [
+              "settlements",
+              "claims",
+              "recoveries"
             ]
           }
         }
