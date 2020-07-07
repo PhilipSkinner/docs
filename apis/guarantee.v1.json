@@ -1238,7 +1238,7 @@
               }
             }
           },
-          "BalanceChangeEvents": {
+          "balanceChangeEvents": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/balanceChangeEvent"
