@@ -1727,17 +1727,19 @@
           },
           {
             "schema": {
-              "type": "boolean"
+              "type": "array",
+              "items": {"type":"string"}
             },
             "in": "query",
-            "name": "includeSettled"
+            "name": "includeClaimStatus"
           },
           {
             "schema": {
-              "type": "boolean"
+              "type": "array",
+              "items": {"type":"string"}
             },
             "in": "query",
-            "name": "includeRejected"
+            "name": "includeRecoveryStatus"
           },
           {
             "schema": {
@@ -2223,20 +2225,6 @@
               "type": "boolean"
             },
             "in": "query",
-            "name": "includeSettled"
-          },
-          {
-            "schema": {
-              "type": "boolean"
-            },
-            "in": "query",
-            "name": "includeRejected"
-          },
-          {
-            "schema": {
-              "type": "boolean"
-            },
-            "in": "query",
             "name": "saveInvoice"
           },
           {
@@ -2252,6 +2240,14 @@
             },
             "in": "query",
             "name": "endDate"
+          },
+          {
+            "schema": {
+              "type": "array"
+            },
+            "in": "query",
+            "name": "includeClaimStatus",
+            "description": ""
           }
         ],
         "requestBody": {

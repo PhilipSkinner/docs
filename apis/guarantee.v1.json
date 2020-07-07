@@ -1072,6 +1072,9 @@
         "title": "balanceChangeEvent",
         "type": "object",
         "description": "",
+        "x-tags": [
+          "Guarantees"
+        ],
         "properties": {
           "date": {
             "type": "string",
@@ -1093,9 +1096,6 @@
         "required": [
           "date",
           "amount"
-        ],
-        "x-tags": [
-          "Guarantees"
         ]
       },
       "inLifeEvent": {
