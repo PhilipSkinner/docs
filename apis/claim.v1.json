@@ -1728,7 +1728,9 @@
           {
             "schema": {
               "type": "array",
-              "items": {"type":"string"}
+              "items": {
+                "type": "string"
+              }
             },
             "in": "query",
             "name": "includeClaimStatus"
@@ -1736,7 +1738,9 @@
           {
             "schema": {
               "type": "array",
-              "items": {"type":"string"}
+              "items": {
+                "type": "string"
+              }
             },
             "in": "query",
             "name": "includeRecoveryStatus"
@@ -2667,7 +2671,7 @@
               "type": "string"
             },
             "in": "query",
-            "name": "size"
+            "name": "perpage"
           },
           {
             "schema": {

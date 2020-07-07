@@ -106,21 +106,14 @@
               "type": "string"
             },
             "in": "query",
-            "name": "system"
+            "name": "resourceType"
           },
           {
             "schema": {
               "type": "string"
             },
             "in": "query",
-            "name": "eventtype"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "scope"
+            "name": "auditEvent"
           },
           {
             "schema": {
@@ -135,6 +128,34 @@
             },
             "in": "query",
             "name": "guaranteeRef"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "resourceId"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "facilityType"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "lenderApplicationReference"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "lenderAccountInternalReference"
           }
         ],
         "description": "Fetch a paginated list of audit records. Can query by system, event type and scope.\n\nRequires the role of audit_reader to access."
