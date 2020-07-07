@@ -21,9 +21,9 @@
     }
   ],
   "paths": {
-    "/records": {
+    "/auditEvents": {
       "get": {
-        "summary": "Get audit records",
+        "summary": "Get audit events",
         "tags": [
           "Audit Records"
         ],
@@ -158,7 +158,7 @@
             "name": "lenderAccountInternalReference"
           }
         ],
-        "description": "Fetch a paginated list of audit records. Can query by system, event type and scope.\n\nRequires the role of audit_reader to access."
+        "description": "Fetch a paginated list of audit records. Can query by system, event type and scope.\n\nRequires the permission of ReadAudit to access."
       },
       "post": {
         "summary": "Create an audit record",
@@ -265,21 +265,22 @@
         "tags": [
           "Audit Records"
         ]
-      }
+      },
+      "parameters": []
     },
-    "/records/{recordId}": {
+    "/auditEvents/{auditEventId}": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "recordId",
+          "name": "auditEventId",
           "in": "path",
           "required": true
         }
       ],
       "get": {
-        "summary": "Fetch a single audit record",
+        "summary": "Get a single audit event",
         "tags": [
           "Audit Records"
         ],
@@ -356,13 +357,13 @@
             }
           }
         },
-        "operationId": "get-records-recordId",
+        "operationId": "get-auditevents-auditeventId",
         "security": [
           {
             "Bearer Token": []
           }
         ],
-        "description": "Fetch a single audit record from the system by its recordId.\n\nRequires a role of audit_reader to access.",
+        "description": "Get a single audit event record from the system by its recordId.\n\nRequires a premision of ReadAudit to access.",
         "parameters": [
           {
             "schema": {
