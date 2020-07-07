@@ -475,6 +475,10 @@
             "type": "string",
             "format": "date-time"
           },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
           "createdBy": {
             "type": "string"
           },
