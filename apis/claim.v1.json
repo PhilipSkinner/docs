@@ -3076,6 +3076,12 @@
                 },
                 "createdBy": {
                   "type": "string"
+                },
+                "claimAmount": {
+                  "type": "number"
+                },
+                "facilityAmount": {
+                  "type": "number"
                 }
               }
             }
@@ -3092,6 +3098,9 @@
           "realisedDate": {
             "type": "string",
             "format": "date-time"
+          },
+          "facilityAmount": {
+            "type": "number"
           }
         }
       },

@@ -1489,7 +1489,8 @@
                         "type": "number"
                       },
                       "totalGuaranteeFacilityAmount": {
-                        "type": "number"
+                        "type": "number",
+                        "description": "Not sure if this is just [facilityTotalAmount] duplicated!"
                       }
                     },
                     "required": [
