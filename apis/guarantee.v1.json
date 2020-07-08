@@ -1452,24 +1452,6 @@
                   }
                 }
               },
-              "expectedRepayments": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "date": {
-                      "type": "string",
-                      "format": "date-time"
-                    },
-                    "amount": {
-                      "type": "number"
-                    },
-                    "balance": {
-                      "type": "number"
-                    }
-                  }
-                }
-              },
               "facilityCurrentBalance": {
                 "type": "number"
               },
