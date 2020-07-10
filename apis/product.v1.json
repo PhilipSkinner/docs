@@ -5318,6 +5318,7 @@
       "lenderRule": {
         "title": "lenderRule",
         "type": "object",
+        "description": "",
         "properties": {
           "claimLimit-Percent-Of-Drawdown": {
             "type": "number"
@@ -5335,8 +5336,7 @@
               "large"
             ]
           }
-        },
-        "description": ""
+        }
       },
       "ruleSet": {
         "title": "ruleSet",
