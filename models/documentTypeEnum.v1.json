@@ -1,0 +1,14 @@
+{
+  "type": "string",
+  "title": "documentTypeEnum",
+  "enum": [
+    "state-aid-document",
+    "information-declaration-document",
+    "fee-payment-profile-document",
+    "information-declaration-document",
+    "mandate",
+    "claim-invoice",
+    "claim-statement",
+    "recovery-statement"
+  ]
+}

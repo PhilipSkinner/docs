@@ -5282,6 +5282,9 @@
           },
           "minFacilityAmount": {
             "type": "number"
+          },
+          "changeAttributes": {
+            "$ref": "../models/changeAttributes.v1.json"
           }
         }
       },

@@ -1553,6 +1553,9 @@
                     "type": "number"
                   }
                 }
+              },
+              "guaranteedAmount": {
+                "type": "number"
               }
             }
           },
@@ -1618,7 +1621,7 @@
                     "type": "object",
                     "properties": {
                       "id": {
-                        "type": "string"
+                        "$ref": "../models/documentTypeEnum.v1.json"
                       },
                       "type": {
                         "type": "string",

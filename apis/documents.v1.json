@@ -1306,10 +1306,13 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "string"
+            "$ref": "../models/documentTypeEnum.v1.json"
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "documentType"
+            ]
           },
           "attributes": {
             "$ref": "#/components/schemas/documentTypeAttributes"
