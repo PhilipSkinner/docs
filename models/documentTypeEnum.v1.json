@@ -9,5 +9,6 @@
     "claim-invoice",
     "claim-statement",
     "recovery-statement"
-  ]
+  ],
+  "description": ""
 }

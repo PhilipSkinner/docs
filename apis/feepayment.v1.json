@@ -386,6 +386,13 @@
             },
             "in": "query",
             "name": "include"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "guaranteeId"
           }
         ]
       },
@@ -1349,7 +1356,10 @@
                           "type": "string"
                         },
                         "type": {
-                          "type": "string"
+                          "type": "string",
+                          "enum": [
+                            "fee"
+                          ]
                         }
                       }
                     }
@@ -1480,7 +1490,10 @@
             "type": "string"
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "fee"
+            ]
           },
           "attributes": {
             "$ref": "#/components/schemas/feeAttributes"
@@ -1838,6 +1851,12 @@
             }
           },
           "annualFeePercent": {
+            "type": "string"
+          },
+          "guaranteeId": {
+            "type": "string"
+          },
+          "lenderId": {
             "type": "string"
           }
         }

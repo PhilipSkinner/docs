@@ -5285,6 +5285,23 @@
           },
           "changeAttributes": {
             "$ref": "../models/changeAttributes.v1.json"
+          },
+          "limitOfLenderFacilityTotal": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "facilityTypes": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "../models/facilityTypeEnum.v1.json"
+                  }
+                },
+                "percent": {
+                  "type": "number"
+                }
+              }
+            }
           }
         }
       },

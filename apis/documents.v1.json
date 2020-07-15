@@ -120,9 +120,16 @@
             },
             "in": "query",
             "name": "documentId"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "documentType"
           }
         ],
-        "description": "Gets a paginated list of all documents.\n\nRequires the document_reader role to access."
+        "description": "Gets a paginated list of all documents.\n\nRequires the ReadDocument Permission to access."
       },
       "post": {
         "summary": "Create a new document",
