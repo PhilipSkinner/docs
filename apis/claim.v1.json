@@ -3631,7 +3631,7 @@
                     }
                   }
                 }
-              },              
+              },
               "statements": {
                 "type": "object",
                 "properties": {
@@ -4112,7 +4112,7 @@
           "statementType": {
             "$ref": "#/components/schemas/statementTypeEnum"
           },
-          "Records": {
+          "records": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/reportRow"
@@ -4166,16 +4166,16 @@
         "description": ""
       },
       "claimStatusEnum": {
-        "title": "claimStatusEnum",
         "type": "string",
+        "title": "claimStatusEnum",
         "enum": [
           "requested",
           "rejected",
           "realised",
-          "auto-removed",
           "cancelled",
           "settled",
-          "recovered"
+          "recovered",
+          "auto_removed"
         ]
       },
       "settlementStatusEnum": {

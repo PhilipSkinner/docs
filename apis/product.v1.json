@@ -5185,6 +5185,11 @@
             "maximum": 100,
             "minimum": 0
           },
+          "recoveryPercentPayable": {
+            "type": "number",
+            "maximum": 100,
+            "minimum": 0
+          },
           "borrowerDetailRules": {
             "$ref": "#/components/schemas/borrowerDetailRules"
           },
