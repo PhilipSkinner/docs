@@ -4318,12 +4318,13 @@
           "id": {
             "type": "string",
             "enum": [
-              "settlements",
-              "claims",
-              "recoveries"
+              "recoveries",
+              "claim_report",
+              "claims_settlements"
             ]
           }
-        }
+        },
+        "description": ""
       }
     },
     "securitySchemes": {
