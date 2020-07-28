@@ -1776,7 +1776,8 @@
               "type": "object",
               "properties": {
                 "date": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "date-time"
                 },
                 "eventType": {
                   "type": "string"
@@ -1797,7 +1798,8 @@
             "type": "number"
           },
           "paidDate": {
-            "type": "string"
+            "type": "string",
+            "format": "date-time"
           }
         }
       },
