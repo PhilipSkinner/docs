@@ -3101,6 +3101,10 @@
           },
           "facilityAmount": {
             "type": "number"
+          },
+          "settlementLimit": {
+            "type": "number",
+            "description": "The amount available for a settlement adjustment."
           }
         }
       },
