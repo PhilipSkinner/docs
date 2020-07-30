@@ -1772,6 +1772,13 @@
             },
             "in": "query",
             "name": "endDate"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "lenderId"
           }
         ],
         "requestBody": {
@@ -2215,20 +2222,6 @@
               "type": "boolean"
             },
             "in": "query",
-            "name": "newRecordsOnly"
-          },
-          {
-            "schema": {
-              "type": "boolean"
-            },
-            "in": "query",
-            "name": "includeSettlementAdjustments"
-          },
-          {
-            "schema": {
-              "type": "boolean"
-            },
-            "in": "query",
             "name": "saveInvoice"
           },
           {
@@ -2247,11 +2240,10 @@
           },
           {
             "schema": {
-              "type": "array"
+              "type": "string"
             },
             "in": "query",
-            "name": "includeClaimStatus",
-            "description": ""
+            "name": "lenderId"
           }
         ],
         "requestBody": {

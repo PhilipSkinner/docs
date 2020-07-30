@@ -216,15 +216,15 @@
         ]
       }
     },
-    "/lenderCollectionAccounts/{lenderId}": {
+    "/lenderCollectionAccounts/{Id}": {
       "parameters": [
         {
-          "name": "lenderId",
-          "in": "path",
-          "required": true,
           "schema": {
             "type": "string"
-          }
+          },
+          "name": "Id",
+          "in": "path",
+          "required": true
         }
       ],
       "get": {
@@ -246,7 +246,7 @@
             "description": "Unauthorized"
           }
         },
-        "operationId": "get-lendercollectionaccounts-lenderId",
+        "operationId": "get-lendercollectionaccounts-Id",
         "description": "Gets the lender collection account details. ",
         "security": [
           {
@@ -1230,8 +1230,15 @@
           },
           "changeAttributes": {
             "$ref": "../models/changeAttributes.v1.json"
+          },
+          "lenderAccountInternalReference": {
+            "type": "string",
+            "description": "AKA shortId for rsm2000"
           }
-        }
+        },
+        "required": [
+          "lenderAccountInternalReference"
+        ]
       },
       "mandateData": {
         "title": "mandateData",
@@ -1853,12 +1860,6 @@
             }
           },
           "annualFeePercent": {
-            "type": "string"
-          },
-          "guaranteeId": {
-            "type": "string"
-          },
-          "lenderId": {
             "type": "string"
           }
         }
