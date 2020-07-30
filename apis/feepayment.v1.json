@@ -66,6 +66,13 @@
             },
             "in": "query",
             "name": "include"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "status"
           }
         ],
         "security": [
@@ -1225,7 +1232,8 @@
             "enum": [
               "pending",
               "submitted",
-              "suspended"
+              "suspended",
+              "cancelled"
             ]
           },
           "changeAttributes": {

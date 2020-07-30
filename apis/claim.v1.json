@@ -2164,7 +2164,25 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/invoice"
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/invoiceData"
+                      }
+                    },
+                    "include": {
+                      "anyOf": [
+                        {
+                          "items": {
+                            "$ref": "#/components/schemas/lenderClaimAccount"
+                          }
+                        }
+                      ],
+                      "type": "array"
+                    }
+                  }
                 }
               }
             }
