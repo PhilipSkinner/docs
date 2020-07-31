@@ -1,0 +1,10 @@
+{
+  "type": "string",
+  "title": "repaymentTypeEnum",
+  "enum": [
+    "fixedTerm",
+    "fixedRepaymentAmount",
+    "fixedTerm-InterestOnly",
+    "fixedTerm-Balloon"
+  ]
+}

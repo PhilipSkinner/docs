@@ -1,0 +1,13 @@
+{
+  "type": "string",
+  "title": "repaymentFrequencyEnum",
+  "enum": [
+    "single",
+    "weekly",
+    "monthly",
+    "quarterly",
+    "yearly",
+    "sixMonth",
+    "seasonal"
+  ]
+}

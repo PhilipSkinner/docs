@@ -1394,10 +1394,10 @@
                 "type": "string"
               },
               "repaymentType": {
-                "type": "string"
+                "$ref": "../models/repaymentTypeEnum.v1.json"
               },
               "paymentFrequency": {
-                "type": "string"
+                "$ref": "../models/repaymentFrequencyEnum.v1.json"
               },
               "seasonalMonths": {
                 "type": "array",
