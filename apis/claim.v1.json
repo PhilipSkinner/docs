@@ -1634,6 +1634,23 @@
             },
             "in": "query",
             "name": "lenderid"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "in": "query",
+            "name": "startDate",
+            "description": ""
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "in": "query",
+            "name": "endDate"
           }
         ]
       },
@@ -2140,6 +2157,22 @@
             },
             "in": "query",
             "name": "lenderid"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "in": "query",
+            "name": "startDate"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "in": "query",
+            "name": "endDate"
           }
         ]
       },
