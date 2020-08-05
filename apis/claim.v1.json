@@ -1651,6 +1651,13 @@
             },
             "in": "query",
             "name": "endDate"
+          },
+          {
+            "schema": {
+              "type": "array"
+            },
+            "in": "query",
+            "name": "sort"
           }
         ]
       },
@@ -2173,6 +2180,13 @@
             },
             "in": "query",
             "name": "endDate"
+          },
+          {
+            "schema": {
+              "type": "array"
+            },
+            "in": "query",
+            "name": "sort"
           }
         ]
       },
