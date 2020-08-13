@@ -1195,31 +1195,7 @@
             "type": "string"
           },
           "borrowerBankAccount": {
-            "type": "object",
-            "properties": {
-              "sortCode": {
-                "type": "string",
-                "maxLength": 6
-              },
-              "accountNumber": {
-                "type": "string"
-              },
-              "accountHoldersName": {
-                "type": "string"
-              },
-              "addressLine1": {
-                "type": "string"
-              },
-              "addressline2": {
-                "type": "string"
-              },
-              "addressline3": {
-                "type": "string"
-              },
-              "postcode": {
-                "type": "string"
-              }
-            }
+            "$ref": "../models/bankAccount.v1.json"
           },
           "directDebitReference": {
             "type": "string"
@@ -1242,6 +1218,9 @@
           "lenderAccountInternalReference": {
             "type": "string",
             "description": "AKA shortId for rsm2000"
+          },
+          "borrowerEmailAddress": {
+            "type": "string"
           }
         },
         "required": [

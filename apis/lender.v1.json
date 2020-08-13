@@ -559,7 +559,7 @@
             },
             "in": "query",
             "name": "date",
-            "description": "Date to filter allocations by."
+            "description": "Date to filter allocations by. This will give allocations where startdate is <= date and enddate is >= date. "
           },
           {
             "schema": {
