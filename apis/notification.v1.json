@@ -449,17 +449,8 @@
         ]
       }
     },
-    "/mynotifications/{subjectid}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "subjectid",
-          "in": "path",
-          "required": true
-        }
-      ],
+    "/mynotifications/": {
+      "parameters": [],
       "get": {
         "summary": "Your GET endpoint",
         "tags": [],
@@ -492,44 +483,46 @@
           }
         ],
         "description": "Get all notifications for the user. Bearer token should have a subject id claim. Notifications will be return for the subject id.",
-        "parameters": []
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "subjectId"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query"
+          }
+        ]
       },
-      "put": {
-        "summary": "",
-        "operationId": "put-mynotifications",
+      "delete": {
+        "summary": "Delete My Outstanding Notifications",
+        "operationId": "delete-mynotifications",
         "responses": {
           "200": {
             "description": "OK"
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
           }
         },
-        "description": "Put all user notifications. Bearer token should have a subject id claim. Notifications will be return for the subject id.",
-        "security": [
-          {
-            "Authorization": []
-          }
-        ],
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "array"
             },
-            "in": "header",
-            "name": "ETag"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "If-Match"
+            "in": "query",
+            "name": "notifications"
           }
         ],
-        "tags": [
-          "Notifications"
-        ]
+        "description": "Delete Outstanding Notifications for the current user account where the notification ids match the list of ids passed via the query string param. Subject Id of the current user in the user claims is used to remove the associated notifications. "
       }
     }
   },

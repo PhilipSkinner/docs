@@ -3115,6 +3115,10 @@
           "settlementLimit": {
             "type": "number",
             "description": "The amount available for a settlement adjustment."
+          },
+          "guaranteeOfferedDate": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       },
@@ -3757,6 +3761,10 @@
               "realised",
               "auto-removed"
             ]
+          },
+          "claimBalanceAtTimeOfCreation": {
+            "type": "number",
+            "description": "Snap shot of the total outstanding claimed amount less recoveries at the time the recovery was registered."
           }
         }
       },
@@ -4189,7 +4197,8 @@
           "cancelled",
           "settled",
           "recovered",
-          "auto_removed"
+          "auto_removed",
+          "approved"
         ]
       },
       "settlementStatusEnum": {
@@ -4198,7 +4207,8 @@
         "enum": [
           "accepted",
           "rejected",
-          "requested"
+          "requested",
+          "approved"
         ]
       },
       "fieldItem": {
