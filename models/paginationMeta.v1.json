@@ -13,6 +13,9 @@
     },
     "perPage": {
       "type": "integer"
+    },
+    "totalRecords": {
+      "type": "integer"
     }
   }
 }

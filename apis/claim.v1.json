@@ -4222,9 +4222,10 @@
         "type": "string",
         "title": "settlementStatusEnum",
         "enum": [
-          "accepted",
           "rejected",
-          "requested"
+          "requested",
+          "approved",
+          "settled"
         ]
       },
       "fieldItem": {
