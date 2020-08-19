@@ -1655,7 +1655,8 @@
           "noclaim",
           "offer_requested",
           "claim",
-          "cancelled"
+          "cancelled",
+          "complete"
         ],
         "x-examples": {
           "example-1": {}
