@@ -1579,6 +1579,11 @@
                 "type": "number"
               }
             }
+          },
+          "currentInLifeEventAffectiveFromDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "To be used only when changing a the guarantee in the guaranteed state. This is the current inlife event affective from change."
           }
         }
       },
@@ -1653,9 +1658,9 @@
           "auto_removed",
           "removed",
           "noclaim",
-          "offer_requested",
           "claim",
-          "cancelled"
+          "cancelled",
+          "complete"
         ],
         "x-examples": {
           "example-1": {}
