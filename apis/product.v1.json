@@ -5572,7 +5572,7 @@
           "name": {
             "type": "string"
           },
-          "invalidRepaymentType": {
+          "invalidRepaymentTypes": {
             "type": "array",
             "items": {
               "type": "string",
