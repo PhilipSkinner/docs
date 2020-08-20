@@ -7,7 +7,7 @@
     "monthly",
     "quarterly",
     "yearly",
-    "sixMonth",
-    "seasonal"
+    "seasonal",
+    "sixMonthly"
   ]
 }
