@@ -2976,6 +2976,7 @@
           "Claims"
         ],
         "description": "",
+        "x-examples": {},
         "properties": {
           "createdBy": {
             "type": "string",
@@ -3136,6 +3137,9 @@
           "settlementLimit": {
             "type": "number",
             "description": "The amount available for a settlement adjustment."
+          },
+          "claimBalance": {
+            "type": "number"
           }
         }
       },
