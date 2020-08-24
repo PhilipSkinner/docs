@@ -1226,7 +1226,7 @@
               "companyTurnover": {
                 "type": "number"
               },
-              "tradingActivityTurnoverGreaterThanAllowed": {
+              "tradingActivityTurnoverSufficient": {
                 "type": "boolean"
               },
               "tradingStartDate": {
