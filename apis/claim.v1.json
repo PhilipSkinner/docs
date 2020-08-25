@@ -1647,14 +1647,21 @@
               "type": "string"
             },
             "in": "query",
-            "name": "perpage"
+            "name": "perPage"
           },
           {
             "schema": {
               "type": "string"
             },
             "in": "query",
-            "name": "lenderid"
+            "name": "lenderId"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "statementType"
           }
         ]
       },
@@ -4042,6 +4049,9 @@
               }
             }
           }
+        },
+        "x-examples": {
+          "example-1": {}
         }
       },
       "statementData": {
