@@ -1647,14 +1647,21 @@
               "type": "string"
             },
             "in": "query",
-            "name": "perpage"
+            "name": "perPage"
           },
           {
             "schema": {
               "type": "string"
             },
             "in": "query",
-            "name": "lenderid"
+            "name": "lenderId"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "statementType"
           }
         ]
       },
@@ -2976,6 +2983,7 @@
           "Claims"
         ],
         "description": "",
+        "x-examples": {},
         "properties": {
           "createdBy": {
             "type": "string",
@@ -3136,6 +3144,9 @@
           "settlementLimit": {
             "type": "number",
             "description": "The amount available for a settlement adjustment."
+          },
+          "claimBalance": {
+            "type": "number"
           }
         }
       },
@@ -4038,6 +4049,9 @@
               }
             }
           }
+        },
+        "x-examples": {
+          "example-1": {}
         }
       },
       "statementData": {
