@@ -1946,6 +1946,20 @@
                 }
               }
             }
+          },
+          "currentPrincipalPurposeAmounts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "principalPurpose": {
+                  "type": "string"
+                },
+                "drawdownAmount": {
+                  "type": "number"
+                }
+              }
+            }
           }
         }
       },

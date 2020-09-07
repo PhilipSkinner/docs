@@ -449,7 +449,7 @@
         ]
       }
     },
-    "/mynotifications/": {
+    "/mynotifications": {
       "parameters": [],
       "get": {
         "summary": "Your GET endpoint",
@@ -522,7 +522,10 @@
             "name": "notifications"
           }
         ],
-        "description": "Delete Outstanding Notifications for the current user account where the notification ids match the list of ids passed via the query string param. Subject Id of the current user in the user claims is used to remove the associated notifications. "
+        "description": "Delete Outstanding Notifications for the current user account where the notification ids match the list of ids passed via the query string param. Subject Id of the current user in the user claims is used to remove the associated notifications. ",
+        "tags": [
+          "Notifications"
+        ]
       }
     }
   },
@@ -694,6 +697,9 @@
       "userNotifications": {
         "title": "userNotifications",
         "type": "object",
+        "x-tags": [
+          "Notifications"
+        ],
         "properties": {
           "id": {
             "type": "string"
@@ -799,10 +805,7 @@
             ],
             "type": "array"
           }
-        },
-        "x-tags": [
-          "Notifications"
-        ]
+        }
       }
     }
   },

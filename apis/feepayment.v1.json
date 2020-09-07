@@ -1220,7 +1220,8 @@
             "description": "AKA shortId for rsm2000"
           },
           "borrowerEmailAddress": {
-            "type": "string"
+            "type": "string",
+            "format": "email"
           }
         },
         "required": [
