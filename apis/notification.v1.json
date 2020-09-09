@@ -449,11 +449,22 @@
         ]
       }
     },
-    "/mynotifications": {
-      "parameters": [],
+    "/userNotificationReports/{userId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "userId",
+          "in": "path",
+          "required": true
+        }
+      ],
       "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
+        "summary": "Get User Notification Report",
+        "tags": [
+          "Notifications"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -467,7 +478,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/userNotifications"
+                  "$ref": "#/components/schemas/userNotificationReport"
                 }
               }
             }
@@ -476,21 +487,14 @@
             "description": "Unauthorized"
           }
         },
-        "operationId": "get-mynotifications",
+        "operationId": "get-userNotificationReports",
         "security": [
           {
             "Authorization": []
           }
         ],
-        "description": "Get all notifications for the user. Bearer token should have a subject id claim. Notifications will be return for the subject id.",
+        "description": "Gets a user notificaiton report containing all notifications for the user. Bearer token should have a subject id claim. The notification report will be return for the authorised user using there user id.",
         "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "subjectId"
-          },
           {
             "schema": {
               "type": "string"
@@ -500,7 +504,7 @@
         ]
       },
       "delete": {
-        "summary": "Delete My Outstanding Notifications",
+        "summary": "Delete User Notification Report",
         "operationId": "delete-mynotifications",
         "responses": {
           "200": {
@@ -522,9 +526,128 @@
             "name": "notifications"
           }
         ],
-        "description": "Delete Outstanding Notifications for the current user account where the notification ids match the list of ids passed via the query string param. Subject Id of the current user in the user claims is used to remove the associated notifications. ",
+        "description": "Delete user notification report. ",
         "tags": [
           "Notifications"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "put": {
+        "summary": "Update User Notification Report",
+        "operationId": "put-userNotificationReports",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/userNotificationReport"
+                }
+              }
+            }
+          }
+        },
+        "description": "Users will be able to update the report to indicate which notifications they have seen.",
+        "tags": [
+          "Notifications"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/userNotificationReport"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notificationTypes": {
+      "get": {
+        "summary": "Get Notification Types",
+        "tags": [
+          "Notifications"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/notificationType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-notificationTypes",
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "description": "Gets all notification types"
+      }
+    },
+    "/notificationTypes/{notificationTypeId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "notificationTypeId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get notification type by Id",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/notificationType"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-notificationTypes-notificationTypeId",
+        "description": "Gets a single notification type by the id ",
+        "security": [
+          {
+            "Authorization": []
+          }
         ]
       }
     }
@@ -676,12 +799,6 @@
             "format": "date-time",
             "description": "Not to be sent on POST/PUT/PATCH."
           },
-          "roles": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
           "notificationType": {
             "$ref": "../models/notifyEventTypeEnum.v1.json"
           },
@@ -691,11 +808,35 @@
               "type": "string",
               "format": "email"
             }
+          },
+          "emailSubmitted": {
+            "type": "boolean"
+          },
+          "seen": {
+            "type": "boolean",
+            "description": "Allows users to indicate they have seen the message and it should be removed from their notification report. "
+          },
+          "messageFields": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "fieldName": {
+                  "type": "string"
+                },
+                "fieldValue": {
+                  "type": "string"
+                }
+              }
+            }
           }
-        }
+        },
+        "required": [
+          "seen"
+        ]
       },
-      "userNotifications": {
-        "title": "userNotifications",
+      "userNotificationReport": {
+        "title": "userNotificationReport",
         "type": "object",
         "x-tags": [
           "Notifications"
@@ -705,7 +846,10 @@
             "type": "string"
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "userNotificationReport"
+            ]
           },
           "data": {
             "type": "object",
@@ -751,6 +895,33 @@
                         }
                       }
                     }
+                  },
+                  "user": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "user"
+                            ]
+                          }
+                        }
+                      },
+                      "links": {
+                        "type": "object",
+                        "properties": {
+                          "related": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
                   }
                 }
               }
@@ -768,44 +939,65 @@
             "anyOf": [
               {
                 "items": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string"
-                    },
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "notification"
-                      ]
-                    },
-                    "attributes": {
-                      "type": "object",
-                      "properties": {
-                        "subject": {
-                          "type": "string"
-                        },
-                        "notificationType": {
-                          "type": "string"
-                        }
-                      }
-                    },
-                    "links": {
-                      "type": "object",
-                      "properties": {
-                        "self": {
-                          "type": "string",
-                          "format": "uri"
-                        }
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/notification"
                 }
               }
             ],
             "type": "array"
           }
-        }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "notificationType": {
+        "title": "notificationType",
+        "type": "object",
+        "description": "",
+        "properties": {
+          "id": {
+            "$ref": "../models/notifyEventTypeEnum.v1.json"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "notificationType"
+            ]
+          },
+          "attributes": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "emailDelivery": {
+                "type": "boolean"
+              },
+              "onlineDelivery": {
+                "type": "boolean"
+              },
+              "notifyDays": {
+                "type": "integer"
+              },
+              "defaultBodyText": {
+                "type": "string"
+              },
+              "defaultTitle": {
+                "type": "string"
+              },
+              "messageTemplateFields": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ]
       }
     }
   },
